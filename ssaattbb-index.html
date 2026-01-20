@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSAATTBB Orchestral Score | COSMOS the OPERA</title>
+  <meta name="description" content="Complete SSAATTBB 8-part choral and orchestral score for COSMOS the OPERA with full instrumentation.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg-dark: #0a0a0f; --bg-card: #12121a; --bg-score: #1a1a24; --text-primary: #ffffff; --text-secondary: #a0a0b0; --accent-purple: #9d4edd; --accent-cyan: #00d4ff; --accent-gold: #ffd700; --accent-pink: #ff6b9d; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+    
+    .sheet-nav { background: var(--bg-card); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .sheet-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+    .sheet-nav a { color: var(--text-secondary); text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 15px; font-size: 0.85rem; transition: all 0.3s; }
+    .sheet-nav a:hover { background: rgba(157,78,221,0.2); color: var(--accent-purple); }
+    .sheet-nav a.active { background: rgba(157,78,221,0.3); color: var(--accent-purple); }
+    .sheet-nav a.active-gold { background: rgba(255,215,0,0.3); color: var(--accent-gold); }
+    .sheet-nav a.climax { background: rgba(255,107,157,0.2); color: var(--accent-pink); }
+    .sheet-nav .label { font-weight: 600; font-size: 0.8rem; margin-right: 5px; }
+    .sheet-nav .divider { color: rgba(255,255,255,0.3); margin: 0 5px; }
+    
+    .hero { padding: 60px 20px; text-align: center; background: radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%), var(--bg-dark); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 20px; background: linear-gradient(135deg, #fff, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+    
+    .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    
+    .stats { background: var(--bg-card); border-radius: 15px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1); }
+    .stats h2 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; text-align: center; }
+    .stat-item { padding: 15px; background: rgba(255,255,255,0.03); border-radius: 10px; }
+    .stat-number { font-size: 1.5rem; font-weight: 800; color: var(--accent-cyan); }
+    .stat-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; }
+    
+    .forces { background: var(--bg-card); border-radius: 15px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(255,215,0,0.3); }
+    .forces h2 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+    .forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .force-section h3 { color: var(--accent-cyan); font-size: 1rem; margin-bottom: 10px; }
+    .force-section ul { list-style: none; }
+    .force-section li { color: var(--text-secondary); font-size: 0.85rem; padding: 3px 0; }
+    .force-section li span { color: var(--accent-purple); font-weight: 600; }
+    
+    .acts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
+    .act-card { background: var(--bg-card); border-radius: 15px; padding: 25px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
+    .act-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+    .act-card.act1 { border-left: 4px solid var(--accent-purple); }
+    .act-card.act2 { border-left: 4px solid var(--accent-cyan); }
+    .act-card.act3 { border-left: 4px solid var(--accent-gold); }
+    .act-card h3 { color: var(--accent-gold); margin-bottom: 10px; font-size: 1.2rem; }
+    .act-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; }
+    .act-card ul { list-style: none; margin-bottom: 15px; }
+    .act-card li { color: var(--text-secondary); font-size: 0.85rem; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .act-card li:last-child { border-bottom: none; }
+    .act-card .scene-num { color: var(--accent-cyan); font-weight: 600; margin-right: 8px; }
+    .act-card a.view-btn { display: inline-block; padding: 10px 20px; background: rgba(255, 215, 0, 0.2); color: var(--accent-gold); text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s; }
+    .act-card a.view-btn:hover { background: rgba(255, 215, 0, 0.4); }
+    
+    .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.85rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+    
+    @media (max-width: 768px) { .nav { flex-direction: column; gap: 15px; } .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; } .sheet-nav a { font-size: 0.7rem; padding: 4px 8px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html" class="active">Sheet Music</a>
+    </div>
+  </nav>
+
+  <!-- Sheet Music Navigation -->
+  <div class="sheet-nav">
+    <div class="sheet-nav-inner">
+      <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+      <a href="sheet-music.html">Index</a>
+      <a href="sheet-music-act1-p1.html">I:1-2</a>
+      <a href="sheet-music-act1-p2.html">I:3-5</a>
+      <a href="sheet-music-act2.html">II</a>
+      <a href="sheet-music-act3-p1.html">III:1-2</a>
+      <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+      <span class="divider">|</span>
+      <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+      <a href="ssaattbb-index.html" class="active-gold">Index</a>
+      <a href="ssaattbb-act1.html">Act I</a>
+      <a href="ssaattbb-act2.html">Act II</a>
+      <a href="ssaattbb-act3.html">Act III</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1>🎼 SSAATTBB Orchestral Score</h1>
+    <p class="hero-subtitle">Complete 8-part choral score with full orchestra. Expanded voicing for large ensemble performance.</p>
+  </header>
+
+  <main class="content">
+
+    <!-- Statistics -->
+    <section class="stats">
+      <h2>📊 Score Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Vocal Parts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Soloists</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Acts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Scenes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">~100</div>
+          <div class="stat-label">Minutes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">D6</div>
+          <div class="stat-label">S1 High</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">G1</div>
+          <div class="stat-label">B2 Low</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Forces -->
+    <section class="forces">
+      <h2>🎻 Performance Forces</h2>
+      <div class="forces-grid">
+        <div class="force-section">
+          <h3>Solo Voices</h3>
+          <ul>
+            <li><span>LIGHT</span> — Soprano (C4-C7)</li>
+            <li><span>OBSERVER</span> — Mezzo-Soprano (G3-G5)</li>
+            <li><span>SEEKER</span> — Tenor (C3-C5)</li>
+          </ul>
+        </div>
+        <div class="force-section">
+          <h3>SSAATTBB Chorus</h3>
+          <ul>
+            <li><span>S1</span> — Soprano 1 (C4-D6)</li>
+            <li><span>S2</span> — Soprano 2 (B3-A5)</li>
+            <li><span>A1</span> — Alto 1 (G3-E5)</li>
+            <li><span>A2</span> — Alto 2 (F3-D5)</li>
+            <li><span>T1</span> — Tenor 1 (C3-A4)</li>
+            <li><span>T2</span> — Tenor 2 (B2-G4)</li>
+            <li><span>B1</span> — Bass 1 (G2-E4)</li>
+            <li><span>B2</span> — Bass 2 (D2-C4)</li>
+          </ul>
+        </div>
+        <div class="force-section">
+          <h3>Woodwinds</h3>
+          <ul>
+            <li>3 Flutes (Fl 3 = Piccolo)</li>
+            <li>3 Oboes (Ob 3 = English Horn)</li>
+            <li>3 Clarinets (Cl 3 = Bass Clarinet)</li>
+            <li>3 Bassoons (Bsn 3 = Contrabassoon)</li>
+          </ul>
+        </div>
+        <div class="force-section">
+          <h3>Brass</h3>
+          <ul>
+            <li>4 Horns in F</li>
+            <li>3 Trumpets in C</li>
+            <li>3 Trombones (2 Tenor, 1 Bass)</li>
+            <li>1 Tuba</li>
+          </ul>
+        </div>
+        <div class="force-section">
+          <h3>Percussion (4 players)</h3>
+          <ul>
+            <li>Timpani (4 drums)</li>
+            <li>Bass Drum, Cymbals, Tam-tam, Triangle</li>
+            <li>Glockenspiel, Vibraphone, Tubular Bells</li>
+            <li>Snare Drum, Marimba, Crotales</li>
+          </ul>
+        </div>
+        <div class="force-section">
+          <h3>Keyboards & Strings</h3>
+          <ul>
+            <li>Celesta, Synthesizer</li>
+            <li>2 Harps</li>
+            <li>Violin I (16), Violin II (14)</li>
+            <li>Viola (12), Cello (10), Bass (8)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Act Cards -->
+    <div class="acts-grid">
+      
+      <div class="act-card act1">
+        <h3>🌅 Act I: We Come</h3>
+        <p>The Awakening of Consciousness — ~35 minutes</p>
+        <ul>
+          <li><span class="scene-num">Ov.</span> "Genesis" — Orchestral Overture</li>
+          <li><span class="scene-num">1.</span> "Do You See" — Observer + SSAATTBB</li>
+          <li><span class="scene-num">2.</span> "Look" — Seeker + SSAATTBB</li>
+          <li><span class="scene-num">3.</span> "A Window" — Observer + Women</li>
+          <li><span class="scene-num">4.</span> "I Sing" — Light + Full Chorus</li>
+          <li><span class="scene-num">5.</span> "We Come" — All Forces Finale</li>
+        </ul>
+        <a href="ssaattbb-act1.html" class="view-btn">View Score →</a>
+      </div>
+      
+      <div class="act-card act2">
+        <h3>🌈 Act II: Into</h3>
+        <p>The Exploration of Perception — ~25 minutes</p>
+        <ul>
+          <li><span class="scene-num">Ent.</span> "Prism" — Instrumental Entr'acte</li>
+          <li><span class="scene-num">1.</span> "The Colors" — Light (Coloratura)</li>
+          <li><span class="scene-num">2.</span> "The Waves" — Observer + SSAATTBB</li>
+        </ul>
+        <a href="ssaattbb-act2.html" class="view-btn">View Score →</a>
+      </div>
+      
+      <div class="act-card act3">
+        <h3>☀️ Act III: Beings</h3>
+        <p>The Connection Between Souls — ~40 minutes</p>
+        <ul>
+          <li><span class="scene-num">Pre.</span> "Stellar Dance" — Two Solo Violins</li>
+          <li><span class="scene-num">1.</span> "I the Sun" — Light + Seeker Duet</li>
+          <li><span class="scene-num">2.</span> "My Twin" — Observer Solo</li>
+          <li><span class="scene-num">3.</span> "Feeling Again" — Full SSAATTBB</li>
+          <li><span class="scene-num">4.</span> "You're A Star" — Grand Finale</li>
+        </ul>
+        <a href="ssaattbb-act3.html" class="view-btn">View Score →</a>
+      </div>
+      
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="sheet-nav" style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: none; padding-top: 20px;">
+      <div class="sheet-nav-inner">
+        <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+        <a href="sheet-music.html">Index</a>
+        <a href="sheet-music-act1-p1.html">I:1-2</a>
+        <a href="sheet-music-act1-p2.html">I:3-5</a>
+        <a href="sheet-music-act2.html">II</a>
+        <a href="sheet-music-act3-p1.html">III:1-2</a>
+        <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+        <span class="divider">|</span>
+        <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+        <a href="ssaattbb-index.html" class="active-gold">Index</a>
+        <a href="ssaattbb-act1.html">Act I</a>
+        <a href="ssaattbb-act2.html">Act II</a>
+        <a href="ssaattbb-act3.html">Act III</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+    <a href="index.html">Home</a> | <a href="sheet-music.html">SATB Score</a> | <a href="notation.html">Vocal Resonance Notation</a></p>
+  </footer>
+</body>
+</html>

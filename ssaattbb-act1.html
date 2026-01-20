@@ -38,7 +38,7 @@
     .score-meta { display: flex; gap: 15px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); }
     .score-meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 15px; }
     .score-block { background: var(--bg-score); border-radius: 0 0 10px 10px; padding: 20px; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); border-top: none; }
-    .score-block pre { font-family: 'Courier New', 'Consolas', 'Monaco', monospace; font-size: 11px; line-height: 1.3; color: var(--text-secondary); white-space: pre; margin: 0; }
+    .score-block pre { font-family: 'Courier New', 'Consolas', 'Monaco', monospace; font-size: 11px; line-height: 1.4; color: var(--text-secondary); white-space: pre; margin: 0; }
     .score-annotation { background: rgba(255, 215, 0, 0.1); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary); border-left: 3px solid var(--accent-gold); }
     .score-annotation strong { color: var(--accent-gold); }
     
@@ -108,26 +108,36 @@
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
 ║  DOUBLE BASSES (divisi a4):                                                                  ║
-║    DB 1-2: Low C1 ════════════════════════════════════════════ (pppp, no vibrato)            ║
-║    DB 3-4: C2 harmonic ═══════════════════════════════════════ (enter m.5, pppp)             ║
+║       𝅝~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                             ║
+║       C1 (pppp) - sustained, no vibrato                                                      ║
 ║                                                                                              ║
 ║  SYNTHESIZER: Deep space ambient pad, C drone                                                ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [B] MEASURES 17-32: OVERTONE AWAKENING                                            ppp → pp  ║
+║  [B] MEASURES 17-32: OVERTONE AWAKENING                                            ppp       ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  CELLOS (divisi a4):              VIOLAS (divisi):                                           ║
-║    Vc 1: G2 (m.17)                  Va 1: C4 harmonic (m.25)                                 ║
-║    Vc 2: C3 (m.19)                  Va 2: E4 harmonic (m.27)                                 ║
-║    Vc 3: E3 (m.21)                                                                           ║
-║    Vc 4: G3 (m.23)                HARPS 1 & 2: Harmonic glissandi, C major                   ║
+║  CELLOS (divisi, staggered entries):                                                         ║
+║       m.17   m.19   m.21   m.23                                                              ║
+║       𝅝      𝅝      𝅝      𝅝                                                                 ║
+║       G2     C3     E3     G3                                                                ║
+║       ppp    ppp    ppp    ppp                                                               ║
+║                                                                                              ║
+║  VIOLAS (harmonics):                                                                         ║
+║       m.25        m.27                                                                       ║
+║       𝅝           𝅝                                                                          ║
+║       C4°         E4°                                                                        ║
+║       pp          pp                                                                         ║
+║                                                                                              ║
+║  HARPS 1 & 2: Harmonic glissandi, C major arpeggio (pp)                                      ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [C] MEASURES 33-48: STELLAR SHIMMER                                               pp → mf   ║
+║  [C] MEASURES 33-48: STELLAR SHIMMER                                               pp < mf   ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  VIOLINS I & II (divisi a8 each): Sul ponticello tremolo, building cluster                   ║
+║  VIOLINS I & II (divisi a8, sul ponticello tremolo):                                         ║
+║       C - D - E - F - G - A - B - C (cluster spread)                                         ║
+║                                                                                              ║
 ║  FLUTES 1-3: Flutter tongue on high harmonics                                                ║
 ║  GLOCKENSPIEL & CELESTA: Sparkling ascending figures                                         ║
 ║  TIMPANI: Soft roll on C (pp < mf)                                                           ║
@@ -136,13 +146,12 @@
 ║  [D] MEASURES 49-64: ARRIVAL IN LIGHT                                              fff       ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  FULL STRINGS: C major chord, fff                                                            ║
-║  BRASS: Fanfare - Horns 1-4, Trumpets 1-3, Trombones 1-3                                     ║
-║  TIMPANI: C-G pattern, ff                                                                    ║
-║  TUBULAR BELLS: C5                                                                           ║
-║  TAM-TAM: Soft roll, crescendo                                                               ║
+║  FULL ORCHESTRA:                                                                             ║
+║       𝅝~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ (8 beats)                                              ║
+║       C MAJOR CHORD - fff                                                                    ║
 ║                                                                                              ║
-║  Final chord: C major, fff, 8 beats → Decrescendo to silence                                 ║
+║  Brass fanfare, timpani C-G pattern, Tubular Bells C5, Tam-tam crescendo                     ║
+║  Decrescendo to silence                                                                      ║
 ║                                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
 </pre>
@@ -163,33 +172,46 @@
       <div class="score-block">
 <pre>
 ╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-║  [A] MEASURES 1-12: OPENING QUESTION                                               p → mf    ║
+║  [A] MEASURES 1-16: OPENING QUESTION                                               p → mf    ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  OBSERVER (Mezzo-Soprano):                                                                   ║
-║    m.1-4:  "do you see"           C4 - B3 - A3           p    [O++, H+]                      ║
-║    m.5-8:  "what do you see"      E4 - D4 - C4 - B3      mp   [O++, N+, P+]                  ║
-║    m.9-12: "when you close..."    E4 - F#4 - G#4 - A4 - B4    mp<mf [H++, N+]                ║
+║  OBSERVER (Mezzo-Soprano) [Measure 1-4] p, tenderly:                                         ║
+║       Resonance: [O++, H+]                                                                   ║
+║       ♩    ♩    𝅗𝅥                                                                           ║
+║       do   you  see                                                                          ║
+║       C4   B3   A3                                                                           ║
 ║                                                                                              ║
-║  ORCHESTRA:                                                                                  ║
-║    Vln I (div): A4-E5 sustained (pp)     │  Eng Horn: Echoes motif (pp)                      ║
-║    Vln II (div): C4-G4 sustained (pp)    │  Harp 1: A minor arpeggio                         ║
-║    Celesta: Single C5 on downbeat        │                                                   ║
+║  OBSERVER [Measure 5-8] mp, expanding:                                                       ║
+║       Resonance: [O++, N+, P+]                                                               ║
+║       ♩    ♩    ♩    ♩                                                                       ║
+║       what do   you  see                                                                     ║
+║       E4   D4   C4   B3                                                                      ║
+║                                                                                              ║
+║  OBSERVER [Measure 9-12] mp < mf, ascending:                                                 ║
+║       Resonance: [H++, N+]                                                                   ║
+║       ♩    ♩     ♩     ♩    𝅗𝅥                                                               ║
+║       when you  close your eyes                                                              ║
+║       E4   F#4  G#4   A4   B4                                                                ║
+║                                                                                              ║
+║  ORCHESTRA: Vln I/II sustained pp, Eng Horn echoes, Harp A minor arpeggio, Celesta C5       ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  MEASURES 13-16: CHORUS ENTERS (WAVE EFFECT)                                       pp        ║
+║  [Measure 13-16] CHORUS ENTERS - WAVE EFFECT                                       pp        ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  SSAATTBB (whispered, staggered entries):  Text: "some don't see they sleep"                 ║
+║  SSAATTBB (whispered, staggered entries): "some don't see they sleep"                        ║
 ║                                                                                              ║
-║  m.13 beat 1:  B2  ═══  E2  (whisper)  [P++, C+]                                             ║
-║  m.13 beat 2:  B1  ═══  A2  (whisper)  [P++, C+]                                             ║
-║  m.13 beat 3:  T2  ═══  C3  (whisper)  [P+, M+]                                              ║
-║  m.13 beat 4:  T1  ═══  E3  (whisper)  [P+, M+]                                              ║
-║  m.14 beat 1:  A2  ═══  A3  (whisper)  [P++, H+]                                             ║
-║  m.14 beat 2:  A1  ═══  C4  (whisper)  [P++, H+]                                             ║
-║  m.14 beat 3:  S2  ═══  E4  (whisper)  [P++, H+]                                             ║
-║  m.14 beat 4:  S1  ═══  A4  (whisper)  [P++, H+]                                             ║
+║       m.13 beat 1    beat 2    beat 3    beat 4                                              ║
+║            ♩         ♩         ♩         ♩                                                   ║
+║       B2:  E2        B1: A2    T2: C3    T1: E3                                              ║
+║            (whisper) (whisper) (whisper) (whisper)                                           ║
+║                                                                                              ║
+║       m.14 beat 1    beat 2    beat 3    beat 4                                              ║
+║            ♩         ♩         ♩         ♩                                                   ║
+║       A2:  A3        A1: C4    S2: E4    S1: A4                                              ║
+║            (whisper) (whisper) (whisper) (whisper)                                           ║
+║                                                                                              ║
+║       All parts: pp, Resonance: [P++, H+]                                                    ║
 ║                                                                                              ║
 ║  ORCHESTRA: Strings sul tasto ppp tremolo, Bass Drum soft roll, Synth deep space pad         ║
 ║                                                                                              ║
@@ -197,79 +219,145 @@
 ║  [B] MEASURES 17-32: CONTRAST AND REVELATION                                       p → f     ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  m.17-20: OBSERVER: "some don't see"     C4 - B3 - A3     p   [C+, O+, L+]                   ║
-║  m.21-24: OBSERVER: "they sleep"         G3 (sustained)   pp  [C++, L+]                      ║
+║  OBSERVER [Measure 17-20] p, hushed:                                                         ║
+║       Resonance: [C+, O+, L+]                                                                ║
+║       ♩    ♩     ♩                                                                           ║
+║       some don't see                                                                         ║
+║       C4   B3    A3                                                                          ║
+║                                                                                              ║
+║  OBSERVER [Measure 21-24] pp, sustained:                                                     ║
+║       Resonance: [C++, L+]                                                                   ║
+║       𝅝~~~~~~~~~~~~                                                                          ║
+║       they sleep                                                                             ║
+║       G3 (held 4 beats)                                                                      ║
 ║                                                                                              ║
 ║  SSAATTBB (humming, closed mouths):                                                          ║
-║    S1: E4   S2: C4   A1: A3   A2: E3   T1: C3   T2: A2   B1: E2   B2: A1                     ║
-║    All pp, VRN: [N+, H+, M(R)]                                                               ║
+║       S1   S2   A1   A2   T1   T2   B1   B2                                                  ║
+║       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                                    ║
+║       E4   C4   A3   E3   C3   A2   E2   A1                                                  ║
+║       mm   mm   mm   mm   mm   mm   mm   mm                                                  ║
+║       pp   pp   pp   pp   pp   pp   pp   pp                                                  ║
+║       Resonance: [N+, H+]                                                                    ║
 ║                                                                                              ║
-║  m.25-32: OBSERVER: "what i see is the light"                                                ║
-║    Pitch: C4 - D4 - E4 - F4 - G4 - B♭4    Dynamic: mf < f    VRN: [H+++, N++, O++]           ║
+║  OBSERVER [Measure 25-32] mf < f, revelation:                                                ║
+║       Resonance: [H+++, N++, O++, Ey+]                                                       ║
+║       ♩    ♩   ♩   ♩   𝅗𝅥   𝅝~~~~~~~~~~~~                                                    ║
+║       what i   see is  the  light                                                            ║
+║       C4   D4  E4  F4  G4   B♭4 (hold, vibrato)                                              ║
 ║                                                                                              ║
-║  SSAATTBB (gradual entry on "light" m.29-32):                                                ║
-║    m.29: B2: B♭2  B1: F3     mp [C++]                                                        ║
-║    m.30: T2: D3   T1: F3     mf [M++]                                                        ║
-║    m.31: A2: B♭3  A1: D4     mf [H+]                                                         ║
-║    m.32: S2: F4   S1: B♭4    f  [H++]                                                        ║
-║                                                                                              ║
-║  ORCHESTRA: Horns 1-4 sustain B♭ major, Strings tremolo cresc, Timpani roll B♭ mp<f          ║
+║  SSAATTBB (gradual entry on "light"):                                                        ║
+║       m.29 BASSES:    B2: B♭2 mp    B1: F3 mp     [C++]                                      ║
+║       m.30 TENORS:    T2: D3 mf     T1: F3 mf     [M++]                                      ║
+║       m.31 ALTOS:     A2: B♭3 mf    A1: D4 mf     [H+]                                       ║
+║       m.32 SOPRANOS:  S2: F4 f      S1: B♭4 f     [H++]                                      ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [C] MEASURES 33-44: CLIMAX — "INFINITE STARS"                                     f → ff    ║
+║  [C] MEASURES 33-52: CLIMAX - "INFINITE STARS"                                     f → ff    ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  OBSERVER: "an infinite number of stars swirling around in a cloud"                          ║
-║    Pitch: G4 - A4 - B♭4 - C5 - D5 - E♭5 - F5 - G5 (fermata)                                  ║
-║    Dynamic: f < ff     VRN: [H+++, N++, Oc+, SP(A)]                                          ║
+║  OBSERVER [Measure 33-44] f < ff, expansive:                                                 ║
+║       Resonance: [H+++, N++, Oc+]                                                            ║
+║       ♩   ♩    ♩    ♩   ♩    ♩    ♩   ♩                                                      ║
+║       an  in-  fi-  nite num- ber  of  stars                                                 ║
+║       G4  A4   B♭4  C5  D5   E♭5  F5  G5                                                     ║
+║                                                                                              ║
+║       𝅝~~~~~~~~~~~~~~~~~~ (fermata, 6 beats)                                                 ║
+║       swirling around in a cloud                                                             ║
+║       G5 (wide vibrato)                                                                      ║
+║                                                                                              ║
+║  SSAATTBB - FULL 8-PART TEXTURE:                                                             ║
+║                                                                                              ║
+║       S1 (descant):  G5 → A5 → B♭5 → C6   ff [H+++]   "stars... stars..."                    ║
+║       S2 (melody):   G4 → A4 → B♭4 → G5   f  [H++]    (doubling Observer)                    ║
+║       A1:            E♭4 → F4 → G4 → B♭4  f  [H++]    "swirling..."                          ║
+║       A2:            C4 → D4 → E♭4 → G4   mf [M++]                                           ║
+║       T1:            G3 → A3 → B♭3 → E♭4  f  [M++]    "infinite..."                          ║
+║       T2:            E♭3 → F3 → G3 → C4   mf [M+]                                            ║
+║       B1:            E♭3 → F3 → G3 → A♭3  f  [C++]    "stars..."                             ║
+║       B2 (pedal):    E♭2 → B♭2 → E♭2 → B♭2 f [C+++]                                          ║
+║                                                                                              ║
+║  ORCHESTRA TUTTI: Fl fff scalar, Brass E♭ major ff, Timp E♭-B♭, Strings tremolo              ║
+║                                                                                              ║
+║  OBSERVER [Measure 45-52] p, sudden contrast:                                                ║
+║       Resonance: [C++, P+, L+]                                                               ║
+║       ♩    ♩    ♩    𝅗𝅥                                                                      ║
+║       some see  the  dark                                                                    ║
+║       C4   B3   A3   G3   F3                                                                 ║
+║                                                                                              ║
+║  SSAATTBB (4 parts only - sudden reduction):                                                 ║
+║       A1: C4 p    A2: A3 p    B1: F3 p    B2: C3 p    [S1,S2,T1,T2: TACET]                   ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [D] MEASURES 53-80: DEVELOPMENT                                                   f         ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  OBSERVER [Measure 53-56] f, affirmation:                                                    ║
+║       Resonance: [H+++, O+++, Ey+, B+]                                                       ║
+║       ♩   ♩    ♩    𝅝~~~~~~~~~~~~                                                            ║
+║       i   see  the  light                                                                    ║
+║       C4  E4   G4   C5 (brilliant)                                                           ║
+║                                                                                              ║
+║  SSAATTBB (building 8-part):                                                                 ║
+║       S1:  ♩  ♩  ♩     S2:  ♩  ♩  ♩     A1:  ♩  ♩  ♩     A2:  ♩  ♩  ♩                        ║
+║            C5 D5 E5         G4 A4 B4         E4 F4 G4         C4 D4 E4                       ║
+║       T1:  ♩  ♩  ♩     T2:  ♩  ♩  ♩     B1:  ♩  ♩  ♩     B2:  ♩  ♩  ♩                        ║
+║            G3 A3 B3         E3 F#3 G3        C3 D3 E3         C2 G2 C3                       ║
+║       All parts: f                                                                           ║
+║                                                                                              ║
+║  OBSERVER [Measure 57-72] mp, philosophical:                                                 ║
+║       "some say it is the snow captured by the vacuum that they see                          ║
+║        what is it - the echo of all from the start"                                          ║
+║                                                                                              ║
+║  SSAATTBB (antiphonal):                                                                      ║
+║       HIGH VOICES "what is it":    S1: E5-D5-C5-B4   S2: C5-B4-A4-G4                         ║
+║                                    A1: A4-G4-F4-E4   A2: E4-D4-C4-B3   mp [H++, N+]          ║
+║       LOW VOICES "the echo":       T1: E3-D3-C3      T2: C3-B2-A2                            ║
+║                                    B1: A2-G2-F2      B2: E2-D2-C2      mp [C++, P++]         ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [E] MEASURES 81-108: TRIUMPHANT CONCLUSION                                        ff → fff  ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  OBSERVER [Measure 89-96] f < ff:                                                            ║
+║       Resonance: [H+++, O+++, N++, Ey+]                                                      ║
+║       ♩   ♩    ♩    ♩    ♩    ♩                                                              ║
+║       i   see  the  light and  the  stars                                                    ║
+║       C4  E4   G4   C5   D5   E5                                                             ║
+║                                                                                              ║
+║  SSAATTBB - FULL 8-PART ASCENDING:                                                           ║
+║       S1:  ♩   ♩   ♩   ♩   ♩   𝅝      S2:  ♩   ♩   ♩   ♩   ♩   𝅝                             ║
+║            E5  F5  G5  A5  B5  C6  ff      C5  D5  E5  F5  G5  A5  ff                        ║
+║       A1:  ♩   ♩   ♩   ♩   ♩   𝅝      A2:  ♩   ♩   ♩   ♩   ♩   𝅝                             ║
+║            G4  A4  B4  C5  D5  E5  f       E4  F4  G4  A4  B4  C5  f                         ║
+║       T1:  ♩   ♩   ♩   ♩   ♩   𝅝      T2:  ♩   ♩   ♩   ♩   ♩   𝅝                             ║
+║            C4  D4  E4  F4  G4  A4  f       G3  A3  B3  C4  D4  E4  f                         ║
+║       B1:  ♩   ♩   ♩   ♩   ♩   𝅝      B2:  ♩   ♩   ♩   ♩   ♩   𝅝                             ║
+║            E3  F3  G3  A3  B3  C4  f       C2  D2  E2  F2  G2  A2  f                         ║
+║                                                                                              ║
+║  OBSERVER [Measure 97-108] ff < fff, final climax:                                           ║
+║       Resonance: [H+++, O+++, Oc+++, M+++]                                                   ║
+║       ♩   ♩    ♩    𝅗𝅥     𝅝~~~~~~~~~~~~                                                     ║
+║       i   see  the  uni-   verse                                                             ║
+║       C5  D5   E5   F5     G5 (fermata, 8 beats)                                             ║
 ║                                                                                              ║
 ║  ┌─────────────────────────────────────────────────────────────────────────────────────────┐ ║
-║  │  SSAATTBB FULL 8-PART TEXTURE:                                                          │ ║
-║  │                                                                                         │ ║
-║  │  S1: G5 - A5 - B♭5 - C6  (descant)     ff  [H+++, O+++]  "stars... stars..."            │ ║
-║  │  S2: (doubling Observer melody)        f   [H++, N+]                                    │ ║
-║  │  A1: E♭4 - F4 - G4 - A♭4 - B♭4        f   [H++, M+]     "swirling..."                   │ ║
-║  │  A2: C4 - D4 - E♭4 - F4 - G4          mf  [M++, H+]                                     │ ║
-║  │  T1: G3 - A3 - B♭3 - C4 - D4 - E♭4    f   [M++, O++]    "infinite..."                   │ ║
-║  │  T2: E♭3 - F3 - G3 - A♭3 - B♭3 - C4   mf  [M+, C+]                                      │ ║
-║  │  B1: E♭3 - F3 - G3 - A♭3              f   [C++, P+]     "stars... swirling..."          │ ║
-║  │  B2: E♭2 - B♭2 - E♭2 - B♭2 (pedal)    f   [C+++]                                        │ ║
+║  │  SSAATTBB - MASSIVE C MAJOR CHORD:                                                     │ ║
+║  │                                                                                        │ ║
+║  │       S1   S2   A1   A2   T1   T2   B1   B2                                            │ ║
+║  │       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                               │ ║
+║  │       G5   E5   C5   G4   E4   C4   G3   C2                                            │ ║
+║  │       fff  fff  fff  fff  fff  fff  fff  fff                                           │ ║
+║  │                                                                                        │ ║
+║  │       Hold 8 beats, wide vibrato                                                       │ ║
+║  │       Resonance all: [H+++, O+++, M+++]                                                │ ║
+║  │                                                                                        │ ║
+║  │  ORCHESTRA TUTTI fff: Timpani C-G-C-G, Tam-tam crash, Full brass C major               │ ║
+║  │  Strings tremolo fff, Tubular Bells C                                                  │ ║
+║  │  Gradual diminuendo to silence                                                         │ ║
 ║  └─────────────────────────────────────────────────────────────────────────────────────────┘ ║
-║                                                                                              ║
-║  ORCHESTRA TUTTI fff:                                                                        ║
-║    Fl 1-3: Rapid scalar figures    │  Hn 1-4: Sustained E♭ major                             ║
-║    Ob 1-3: Sustained chord         │  Tpt 1-3: Fanfare figures                               ║
-║    Timpani: E♭-B♭ pattern f        │  Strings: Tremolo                                       ║
-║    Harps: Continuous glissandi     │  Celesta: Rapid ascending                               ║
-║                                                                                              ║
-╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [D] MEASURES 89-108: TRIUMPHANT CONCLUSION                                        f → fff   ║
-╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║                                                                                              ║
-║  OBSERVER: "i see the light and the stars... i see the universe"                             ║
-║    Final: C5 - D5 - E5 - F5 - G5 (8 beats fermata)    ff < fff   [H+++, O+++, Oc+++]         ║
-║                                                                                              ║
-║  SSAATTBB MASSIVE CHORD BUILD (C major):                                                     ║
-║                                                                                              ║
-║    S1: G5 ════════════════════════════════════════════════════  fff                          ║
-║    S2: E5 ════════════════════════════════════════════════════  fff                          ║
-║    A1: C5 ════════════════════════════════════════════════════  fff                          ║
-║    A2: G4 ════════════════════════════════════════════════════  fff                          ║
-║    T1: E4 ════════════════════════════════════════════════════  fff                          ║
-║    T2: C4 ════════════════════════════════════════════════════  fff                          ║
-║    B1: G3 ════════════════════════════════════════════════════  fff                          ║
-║    B2: C2 ════════════════════════════════════════════════════  fff                          ║
-║                                                                                              ║
-║    VRN all: [H+++, O+++, M+++]  Wide vibrato, maximum resonance                              ║
-║    Hold 8 beats, then gradual diminuendo                                                     ║
-║                                                                                              ║
-║  ORCHESTRA TUTTI fff: Timpani C-G-C-G, Tam-tam crash, All brass sustained C major            ║
 ║                                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
 </pre>
-      </div>
-      <div class="score-annotation">
-        <strong>Performance Notes:</strong> The 8-part wave effect at m.13-16 should create a rippling sensation as each voice enters one beat apart. The climax on "infinite stars" requires careful balance—S1 descant should float above but not overpower the Observer's melody.
       </div>
     </section>
 
@@ -279,7 +367,7 @@
         <h3>Scene 2: "Look"</h3>
         <div class="score-meta">
           <span>🎤 Seeker (Tenor) + Light (Soprano)</span>
-          <span>⏱️ Andante con moto ♩=80</span>
+          <span>⏱️ Andante ♩=80</span>
           <span>🔑 E♭ major → G major</span>
           <span>📏 6/8</span>
         </div>
@@ -290,68 +378,202 @@
 ║  [A] MEASURES 1-36: TENOR ARIA                                                     mf        ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  SEEKER (Tenor):                                                                             ║
-║    m.1-6:   "look as far as you can see"                                                     ║
-║             E♭4 - F4 - G4 - A♭4 - B♭4 - C5    mf   [C++, M+] → [H++, O++]                    ║
-║    m.7-12:  "this life is a journey"                                                         ║
-║             B♭4 - A♭4 - G4 - F4 - E♭4 - D4    mp   [M++, P+, SP+]                            ║
-║    m.13-24: "both endless and so brief / both finite and with infinity"                      ║
-║             Building mf < f   [H++, N+, O++]                                                 ║
+║  SEEKER (Tenor) [Measure 1-6] mf, heroic:                                                    ║
+║       Resonance: [C++, M+] → [H++, O++]                                                      ║
+║       𝅗𝅥.       𝄽      𝅗𝅥.   ♩   ♩   ♩    ♩    𝅗𝅥.                                           ║
+║       Look             look  as  far as  you  can  see                                       ║
+║       E♭4              E♭4   F4  G4  A♭4  B♭4  C5                                            ║
 ║                                                                                              ║
-║  SSAATTBB (humming accompaniment, m.25-36):                                                  ║
-║    S1: B♭4 ~~~~   S2: G4 ~~~~   (mm)                                                         ║
-║    A1: E♭4 ~~~~   A2: B♭3 ~~~~  (mm)                                                         ║
-║    T1: G3 ~~~~    T2: E♭3 ~~~~  (mm)                                                         ║
-║    B1: B♭2 ~~~~   B2: E♭2 ~~~~  (mm)                                                         ║
-║    Dynamic: pp   VRN: [N+, H+]                                                               ║
+║  SEEKER [Measure 7-12] mp, contemplative:                                                    ║
+║       Resonance: [M++, P+]                                                                   ║
+║       ♩    ♩    ♩   ♩   𝅗𝅥.                                                                  ║
+║       this life is  a   jour- ney                                                            ║
+║       B♭4  A♭4  G4  F4  E♭4                                                                  ║
 ║                                                                                              ║
-║  ORCHESTRA: Solo Vc counter-melody, Strings flowing 6/8, Harp arpeggios                      ║
+║  SEEKER [Measure 13-24] mf < f, building:                                                    ║
+║       Resonance: [H+, N+] → [H++, O++]                                                       ║
+║       ♩    ♩      ♩    ♩    𝅗𝅥.                                                              ║
+║       both end-   less and  so   brief                                                       ║
+║       G4   A♭4    B♭4  C5   D5                                                               ║
+║                                                                                              ║
+║       ♩    ♩      ♩    ♩      ♩     𝅗𝅥.                                                      ║
+║       both fi-    nite and   with  in-  fin- i- ty                                           ║
+║       E♭5  D5     C5   B♭4    A♭4   G4                                                       ║
+║                                                                                              ║
+║  SEEKER [Measure 25-36] mp, intimate:                                                        ║
+║       Resonance: [H+++, N++, Ey+]                                                            ║
+║       ♩   ♩    ♩     ♩    ♩     ♩                                                            ║
+║       i   have found the  great-est way                                                      ║
+║       G4  A4   B4    C5   D5    E5                                                           ║
+║                                                                                              ║
+║       ♩   ♩    𝅝~~~~~~~~~~~~                                                                 ║
+║       to  see                                                                                ║
+║       F#5 G5   (sustained, ethereal)                                                         ║
+║                                                                                              ║
+║  SSAATTBB enters (humming):                                                                  ║
+║       S1   S2   A1   A2   T1   T2   B1   B2                                                  ║
+║       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                                    ║
+║       B♭4  G4   E♭4  B♭3  G3   E♭3  B♭2  E♭2                                                 ║
+║       mm   mm   mm   mm   mm   mm   mm   mm                                                  ║
+║       pp   pp   pp   pp   pp   pp   pp   pp   Resonance: [N+, H+]                            ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [B] MEASURES 37-48: WAVE EFFECT                                                   mf        ║
+║  [B] MEASURES 37-72: PHILOSOPHICAL DEVELOPMENT                                     mf        ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  SEEKER: "you can only hear the waves that reach the ear"                                    ║
+║  SEEKER [Measure 37-48] mf, wave imagery:                                                    ║
+║       Resonance: [H++, N+]                                                                   ║
+║       ♩   ♩     ♩    ♩    ♩    ♩     ♩     𝅗𝅥.                                               ║
+║       you can   on-  ly   hear the  waves that reach the ear                                 ║
+║       G4  A4    B♭4  C5   D5   E♭5   D5    C5                                                ║
 ║                                                                                              ║
-║  SSAATTBB (staggered "waves" - each entry 2 beats apart):                                    ║
+║  SSAATTBB (wave effect - staggered "waves"):                                                 ║
+║       Wave 1 (m.37): B2: ♩ "waves" E♭2 p                                                     ║
+║       Wave 2 (m.38): B1: ♩ "waves" B♭2 p   T2: ♩ "waves" E♭3 p                               ║
+║       Wave 3 (m.39): T1: ♩ "waves" G3 p    A2: ♩ "waves" B♭3 p                               ║
+║       Wave 4 (m.40): A1: ♩ "waves" E♭4 mp  S2: ♩ "waves" G4 mp                               ║
+║       Wave 5 (m.41): S1: ♩ "waves" B♭4 mf                                                    ║
 ║                                                                                              ║
-║    m.37: B2 "waves" ═══ E♭2   p                                                              ║
-║    m.38: B1 "waves" ═══ B♭2   p     T2 "waves" ═══ E♭3   p                                   ║
-║    m.39: T1 "waves" ═══ G3    p     A2 "waves" ═══ B♭3   p                                   ║
-║    m.40: A1 "waves" ═══ E♭4   mp    S2 "waves" ═══ G4    mp                                  ║
-║    m.41: S1 "waves" ═══ B♭4   mf                                                             ║
+║  SEEKER [Measure 49-60] mf < f, emotional:                                                   ║
+║       Resonance: [H++, O++, Oc+]                                                             ║
+║       ♩   ♩     ♩     ♩   ♩    ♩    ♩     ♩    𝅗𝅥.                                           ║
+║       you can   on-   ly  feel as   much  as   your heart can bleed                          ║
+║       G4  A4    B♭4   C5  D5   E♭5  F5    G5   (climax)                                      ║
 ║                                                                                              ║
-║  ORCHESTRA: Strings wave-like bowing, Flutes rippling figures, Harps glissandi               ║
+║  SSAATTBB (sustained chord, building):                                                       ║
+║       S1   S2   A1   A2   T1   T2   B1   B2                                                  ║
+║       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                                    ║
+║       G5   E5   C5   G4   E4   C4   G3   C3                                                  ║
+║       Dynamic: mf < f   Text: "feel... bleed..."   Resonance: [H++, O++]                     ║
+║                                                                                              ║
+║  SEEKER [Measure 61-72] p, transcendent:                                                     ║
+║       Resonance: [H+++, N++, Ey+]                                                            ║
+║       ♩   ♩     ♩     ♩     ♩      ♩    ♩                                                    ║
+║       i   have  found the   great- est  way  to  see                                         ║
+║       G5  F#5   E5    D5    C5     B4   A4                                                   ║
+║                                                                                              ║
+║       ♩   ♩    ♩    ♩    ♩   ♩    𝅝                                                          ║
+║       is  in   the  eye  of  my   mind                                                       ║
+║       G4  A4   B4   C5   D5  E5   G5                                                         ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [C] MEASURES 61-132: INTIMATE REVELATION                                          p → mf    ║
+║  [C] MEASURES 73-132: CONCLUSION                                                   p → pp    ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  SEEKER: "i have found the greatest way to see is in the eye of my mind"                     ║
-║    Dynamic: p < mp (rubato, freely expressive)    VRN: [H+++, N++, Ey+, M(R)]                ║
+║  SEEKER [Measure 109-132] p > pp, final wisdom:                                              ║
+║       Resonance: [H+, O++] → [M++, C+, P+]                                                   ║
+║       ♩    ♩    ♩     ♩     ♩                                                                ║
+║       i    hope you   find  your  eye                                                        ║
+║       G4   F#4  E4    D4    C4                                                               ║
 ║                                                                                              ║
-║  SSAATTBB: TACET (solo moment)                                                               ║
-║  ORCHESTRA: Celesta only, Solo Vc, Harp harmonics, Synth ethereal pad                        ║
+║       ♩   ♩     ♩     ♩    ♩   ♩    ♩    ♩                                                   ║
+║       you can   on-   ly   look as  far  as  you  can  see                                   ║
+║       B3  C4    D4    E4   F#4 G4   A4   B4  (p > pp)                                        ║
 ║                                                                                              ║
-║  m.109-132: SEEKER: "i hope you find your eye"                                               ║
+║  SSAATTBB (final chord, fading):                                                             ║
+║       S1   S2   A1   A2   T1   T2   B1   B2                                                  ║
+║       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                                    ║
+║       D5   B4   G4   D4   B3   G3   D3   G2                                                  ║
+║       pp   pp   pp   pp   pp   pp   pp   pp                                                  ║
+║       (G major chord, fading to nothing)   Resonance: [H+, M(R)]                             ║
 ║                                                                                              ║
-║  SSAATTBB (final chord, fading - G major):                                                   ║
-║    S1: D5 → pp    S2: B4 → pp    A1: G4 → pp    A2: D4 → pp                                  ║
-║    T1: B3 → pp    T2: G3 → pp    B1: D3 → pp    B2: G2 → pp                                  ║
-║    VRN: [H+, M(R)]  Fading to nothing                                                        ║
+║  ORCHESTRA: Strings diminuendo ppp, Harp G arpeggio, Celesta G5, Silence                     ║
 ║                                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
 </pre>
       </div>
     </section>
 
-    <!-- SCENE 4: I SING (abbreviated) -->
+    <!-- SCENE 3 -->
+    <section class="score-section" id="scene3">
+      <div class="score-header">
+        <h3>Scene 3: "A Window"</h3>
+        <div class="score-meta">
+          <span>🎤 Observer (Mezzo-Soprano)</span>
+          <span>⏱️ Lento ♩=54</span>
+          <span>🔑 F minor → A♭ major</span>
+          <span>📏 4/4</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  [A] MEASURES 1-40: INTROSPECTION                                                  p         ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  OBSERVER (Mezzo) [Measure 1-8] p, introspective:                                            ║
+║       Resonance: [P++, L+, Tg+, O+]                                                          ║
+║       ♩   ♩    ♩    ♩    ♩    𝅗𝅥                                                             ║
+║       my  face is   now  a    win- dow                                                       ║
+║       F4  E♭4  D♭4  C4   B♭3  A♭3                                                            ║
+║                                                                                              ║
+║       ♩   ♩     𝅝                                                                            ║
+║       in  this  world                                                                        ║
+║       G3  F3    (descending, vulnerable)                                                     ║
+║                                                                                              ║
+║  OBSERVER [Measure 9-24] p < mp > p, searching:                                              ║
+║       Resonance: [O++, N+, H+] → [H++, N++]                                                  ║
+║       ♩    ♩      ♩   ♩    ♩     𝅗𝅥                                                          ║
+║       that hangs  here for  a     place                                                      ║
+║       A♭3  B♭3    C4  D♭4  E♭4   F4                                                          ║
+║                                                                                              ║
+║       ♩   ♩     ♩    ♩    ♩    ♩                                                             ║
+║       to  hold  these eyes and  peer                                                         ║
+║       G4  A♭4   B♭4  C5   D♭5  E♭5                                                           ║
+║                                                                                              ║
+║  SSAATTBB enters (m.17, women humming):                                                      ║
+║       S1   S2   A1   A2                                                                      ║
+║       𝅝    𝅝    𝅝    𝅝                                                                       ║
+║       A♭4  F4   D♭4  A♭3                                                                     ║
+║       mm   mm   mm   mm                                                                      ║
+║       pp   pp   pp   pp   Resonance: [N++, H+]                                               ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [B] MEASURES 41-68: MIRROR IMAGERY                                                mp        ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  OBSERVER [Measure 49-60] mp, reflective:                                                    ║
+║       Resonance: [O++, H+, N+]                                                               ║
+║       ♩   ♩      ♩   ♩    ♩      ♩                                                           ║
+║       a   mir-   ror in   a      face  that hangs here                                       ║
+║       A♭4 G4     F4  E♭4  D♭4    C4                                                          ║
+║                                                                                              ║
+║       ♩    ♩   ♩      ♩   ♩     ♩                                                            ║
+║       like a   mir-   ror in    a    frame                                                   ║
+║       B♭3  C4  D♭4    E♭4 F4    G4                                                           ║
+║                                                                                              ║
+║  SSAATTBB (MIRROR EFFECT - inversion):                                                       ║
+║       HIGH VOICES descend:                     LOW VOICES ascend (mirror):                   ║
+║       S1: F5 → E5 → D5 → C5                    T1: F3 → G3 → A3 → B3                         ║
+║       S2: D5 → C5 → B4 → A4                    T2: A3 → B3 → C4 → D4                         ║
+║       A1: A4 → G4 → F4 → E4                    B1: C3 → D3 → E3 → F3                         ║
+║       A2: F4 → E4 → D4 → C4                    B2: F2 → G2 → A2 → B2                         ║
+║       Resonance: [O++, H+] (mirror resonance)                                                ║
+║                                                                                              ║
+║  OBSERVER [Measure 61-68] p > pp, dissolving:                                                ║
+║       Resonance: [P++, H+, M(R)]                                                             ║
+║       ♩     ♩    ♩                                                                           ║
+║       look- ing  for  you                                                                    ║
+║       A♭4   G4   F4   E♭4  D♭4  C4                                                           ║
+║                                                                                              ║
+║  SSAATTBB (voices drop out one by one):                                                      ║
+║       m.61: S1 stops (F5)    m.65: T1 stops (C4)                                             ║
+║       m.62: S2 stops (D5)    m.66: T2 stops (A3)                                             ║
+║       m.63: A1 stops (A4)    m.67: B1 stops (F3)                                             ║
+║       m.64: A2 stops (F4)    m.68: B2 alone: 𝅝 A♭1 ppp → silence                             ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- SCENE 4 -->
     <section class="score-section" id="scene4">
       <div class="score-header">
         <h3>Scene 4: "I Sing"</h3>
         <div class="score-meta">
-          <span>🎤 Light (Soprano) + Full SSAATTBB</span>
-          <span>⏱️ Allegro gioioso ♩=126</span>
+          <span>🎤 SSAATTBB Chorus + Light (Soprano)</span>
+          <span>⏱️ Allegro ♩=126</span>
           <span>🔑 D major</span>
           <span>📏 4/4</span>
         </div>
@@ -359,73 +581,109 @@
       <div class="score-block">
 <pre>
 ╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-║  [A] MEASURES 1-8: GRAND ENTRANCE                                                  fff       ║
+║  [A] MEASURES 1-40: PROCLAMATION                                                   fff       ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  SSAATTBB (homophonic, fff):  Text: "i sing to your soul"                                    ║
+║  SSAATTBB [Measure 1-8] fff, grand entrance (homophonic):                                    ║
+║       Text: "i sing to your soul"                                                            ║
 ║                                                                                              ║
-║    S1: D5 - C#5 - D5 - E5 - D5     [H+++]                                                    ║
-║    S2: A4 - G#4 - A4 - B4 - A4     [H++]                                                     ║
-║    A1: F#4 - F4 - F#4 - G4 - F#4   [H++, M+]                                                 ║
-║    A2: D4 - C#4 - D4 - E4 - D4     [M++]                                                     ║
-║    T1: A3 - G#3 - A3 - B3 - A3     [M++, C+]                                                 ║
-║    T2: F#3 - F3 - F#3 - G3 - F#3   [M+, C+]                                                  ║
-║    B1: D3 - C#3 - D3 - E3 - D3     [C++]                                                     ║
-║    B2: D2 - A1 - D2 - E2 - D2      [C+++]                                                    ║
+║       S1   S2   A1   A2   T1   T2   B1   B2                                                  ║
+║       ♩    ♩    ♩    ♩    ♩    ♩    ♩    ♩                                                   ║
+║       D5   A4   F#4  D4   A3   F#3  D3   D2                                                  ║
+║       ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓                                                   ║
+║       C#5  G#4  F4   C#4  G#3  F3   C#3  A1                                                  ║
+║       ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓                                                   ║
+║       D5   A4   F#4  D4   A3   F#3  D3   D2                                                  ║
+║       ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓                                                   ║
+║       E5   B4   G4   E4   B3   G3   E3   E2                                                  ║
+║       ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓                                                   ║
+║       D5   A4   F#4  D4   A3   F#3  D3   D2                                                  ║
 ║                                                                                              ║
-║    Rhythm: ♩   ♩    ♩   ♩   𝅗𝅥                                                               ║
+║       Rhythm: ♩   ♩    ♩   ♩   𝅗𝅥                                                            ║
+║               i   sing to  your soul                                                         ║
+║       Dynamic: fff   Resonance: [H+++] (S), [M++] (A,T), [C+++] (B)                          ║
 ║                                                                                              ║
-║  ORCHESTRA TUTTI: D major fanfare, Brass fff, Timpani D-A pattern, Cymbals crash             ║
+║  ORCHESTRA TUTTI: Brass D major fanfare fff, Timpani D-A, Strings tremolo, Cymbals           ║
+║                                                                                              ║
+║  SSAATTBB [Measure 9-16] f < ff, main theme (pentatonic):                                    ║
+║       Text: "we want to be free"                                                             ║
+║                                                                                              ║
+║       All voices - Pentatonic melody:                                                        ║
+║            ♩   ♩   ♩    ♩   𝅝~~~~~~~~~~~~                                                    ║
+║            D   E   F#   A   B                                                                ║
+║            we  want to   be  free                                                            ║
+║                                                                                              ║
+║       8-PART VOICING on "free" (sustained):                                                  ║
+║            S1   S2   A1   A2   T1   T2   B1   B2                                             ║
+║            𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                               ║
+║            B5   F#5  D5   B4   F#4  D4   B3   D2                                             ║
+║            fff  fff  fff  fff  fff  fff  fff  fff                                            ║
+║            Resonance all: [H+++, O++, M++]   Wide vibrato, triumphant                        ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  MEASURES 9-16: MAIN THEME (Pentatonic) — "we want to be free"                     f < ff    ║
+║  [B] MEASURES 41-72: SOPRANO SOLO SECTION                                          mf        ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  All voices: D - E - F# - A - B (pentatonic scale)                                           ║
+║  LIGHT (Soprano) [Measure 49-56] mf < f, soaring:                                            ║
+║       Resonance: [H+++, N++, Ey+]                                                            ║
+║       ♩    ♩   ♩     ♩    ♩    ♩     ♩    ♩                                                  ║
+║       free to  love  free to   see   free to  feel                                           ║
+║       A5   G5  F#5   E5   D5   E5    F#5  G5  A5                                             ║
 ║                                                                                              ║
-║  8-PART VOICING on sustained "free":                                                         ║
-║                                                                                              ║
-║    S1: B5 ════════════════════════  fff                                                      ║
-║    S2: F#5 ═══════════════════════  fff                                                      ║
-║    A1: D5 ════════════════════════  fff                                                      ║
-║    A2: B4 ════════════════════════  fff                                                      ║
-║    T1: F#4 ═══════════════════════  fff                                                      ║
-║    T2: D4 ════════════════════════  fff                                                      ║
-║    B1: B3 ════════════════════════  fff                                                      ║
-║    B2: D2 ════════════════════════  fff                                                      ║
-║                                                                                              ║
-║    VRN all: [H+++, O++, M++]  Wide vibrato, triumphant                                       ║
+║  SSAATTBB (humming, closed lips):                                                            ║
+║       S1   S2   A1   A2   T1   T2   B1   B2                                                  ║
+║       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                                    ║
+║       D5   A4   F#4  D4   A3   F#3  D3   D2                                                  ║
+║       mm   mm   mm   mm   mm   mm   mm   mm                                                  ║
+║       p    p    p    p    p    p    p    p    Resonance: [N++, H+]                           ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  MEASURES 113-120: EXPLOSION — "LOVE"                                              fff       ║
+║  [C] MEASURES 73-120: CLIMAX AND RESOLUTION                                        fff       ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  ALL FORCES — MASSIVE D MAJOR CHORD:                                                         ║
+║  [Measure 105-112] f > p, climactic moment:                                                  ║
+║       SSAATTBB: "and only love there is only one"                                            ║
+║       Building to unison D5, Dynamic: f > p (sudden drop)                                    ║
+║       Then: SILENCE (2 beats)                                                                ║
 ║                                                                                              ║
-║    S1: D6 ════════════════════════════════════════════════════  fff (8 beats)                ║
-║    S2: A5 ════════════════════════════════════════════════════  fff                          ║
-║    A1: F#5 ═══════════════════════════════════════════════════  fff                          ║
-║    A2: D5 ════════════════════════════════════════════════════  fff                          ║
-║    T1: A4 ════════════════════════════════════════════════════  fff                          ║
-║    T2: F#4 ═══════════════════════════════════════════════════  fff                          ║
-║    B1: D4 ════════════════════════════════════════════════════  fff                          ║
-║    B2: D2 ════════════════════════════════════════════════════  fff                          ║
+║  LIGHT (Soprano) SOLO, unaccompanied:                                                        ║
+║       Resonance: [H+++, O+++, Ey+, M(R)]                                                     ║
+║       𝅝~~~~~~~~~~~~                                                                          ║
+║       one                                                                                    ║
+║       D6 (4 beats, ethereal, completely alone)                                               ║
 ║                                                                                              ║
-║    Text: "LOVE"   VRN: [H+++, O+++, C++, M+++]  MAXIMUM POWER                                ║
+║  ORCHESTRA: TACET                                                                            ║
 ║                                                                                              ║
-║  ORCHESTRA TUTTI fff: All brass, Timpani fff roll, Bass Drum, Tam-tam, Tubular Bells D       ║
+║  ┌─────────────────────────────────────────────────────────────────────────────────────────┐ ║
+║  │  [Measure 113-120] fff, EXPLOSION:                                                     │ ║
+║  │                                                                                        │ ║
+║  │       Text: "LOVE!"                                                                    │ ║
+║  │                                                                                        │ ║
+║  │  SSAATTBB - MASSIVE D MAJOR CHORD:                                                     │ ║
+║  │       S1   S2   A1   A2   T1   T2   B1   B2                                            │ ║
+║  │       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                               │ ║
+║  │       D6   A5   F#5  D5   A4   F#4  D4   D2                                            │ ║
+║  │       fff  fff  fff  fff  fff  fff  fff  fff                                           │ ║
+║  │                                                                                        │ ║
+║  │       Duration: 8 beats                                                                │ ║
+║  │       Resonance: [H+++, O+++, C++, M+++]   MAXIMUM POWER                               │ ║
+║  │                                                                                        │ ║
+║  │  ORCHESTRA TUTTI fff: All brass, Strings tremolo, Timpani fff roll,                    │ ║
+║  │  Bass Drum fff, Tam-tam crash, Cymbals, Tubular Bells D                                │ ║
+║  │  8 beats, then gradual diminuendo                                                      │ ║
+║  └─────────────────────────────────────────────────────────────────────────────────────────┘ ║
 ║                                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
 </pre>
       </div>
     </section>
 
-    <!-- SCENE 5: WE COME (Finale) -->
+    <!-- SCENE 5 -->
     <section class="score-section" id="scene5">
       <div class="score-header">
         <h3>Scene 5: "We Come" (Act I Finale)</h3>
         <div class="score-meta">
-          <span>🎤 All Soloists + Full SSAATTBB</span>
+          <span>🎤 All Soloists + SSAATTBB</span>
           <span>⏱️ Maestoso ♩=84 → Allegro ♩=132</span>
           <span>🔑 D major</span>
           <span>📏 4/4 → 3/4</span>
@@ -434,107 +692,114 @@
       <div class="score-block">
 <pre>
 ╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-║  [A] MEASURES 1-16: PROCESSIONAL                                                   fff       ║
+║  [A] MEASURES 1-32: PROCESSIONAL                                                   fff       ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  ALL FORCES (fff):  Text: "we come into being"                                               ║
+║  ALL SOLOISTS + SSAATTBB [Measure 1-16] fff, triumphant:                                     ║
+║       Text: "we come into being"                                                             ║
 ║                                                                                              ║
-║  SOLOISTS (unison with chorus):                                                              ║
-║    LIGHT:    D5 - E5 - F#5 - G5 - A5 - B5                                                    ║
-║    OBSERVER: D4 - E4 - F#4 - G4 - A4 - B4                                                    ║
-║    SEEKER:   D4 - E4 - F#4 - G4 - A4 - B4                                                    ║
+║       OBSERVER (Mezzo) + SEEKER (Tenor):                                                     ║
+║            ♩   ♩    ♩     ♩   ♩   ♩                                                          ║
+║            D4  E4   F#4   G4  A4  B4                                                         ║
+║            we  come in-   to  be- ing                                                        ║
 ║                                                                                              ║
-║  SSAATTBB:                                                                                   ║
-║    S1: D5 - E5 - F#5 - G5 - A5 - B5                                                          ║
-║    S2: A4 - B4 - C#5 - D5 - E5 - F#5                                                         ║
-║    A1: F#4 - G4 - A4 - B4 - C#5 - D5                                                         ║
-║    A2: D4 - E4 - F#4 - G4 - A4 - B4                                                          ║
-║    T1: A3 - B3 - C#4 - D4 - E4 - F#4                                                         ║
-║    T2: F#3 - G3 - A3 - B3 - C#4 - D4                                                         ║
-║    B1: D3 - E3 - F#3 - G3 - A3 - B3                                                          ║
-║    B2: D2 - E2 - F#2 - G2 - A2 - B2                                                          ║
+║       LIGHT (Soprano):                                                                       ║
+║            ♩   ♩    ♩     ♩   ♩   ♩                                                          ║
+║            D5  E5   F#5   G5  A5  B5   (octave above)                                        ║
 ║                                                                                              ║
-║    VRN: [H+++, O+++, C++, M+++]                                                              ║
+║  SSAATTBB - FULL 8-PART:                                                                     ║
+║       S1:  ♩   ♩   ♩    ♩   ♩   𝅝      S2:  ♩   ♩   ♩    ♩   ♩   𝅝                           ║
+║            D5  E5  F#5  G5  A5  B5  fff     A4  B4  C#5  D5  E5  F#5 fff                     ║
+║       A1:  ♩   ♩   ♩    ♩   ♩    𝅝     A2:  ♩   ♩   ♩    ♩   ♩   𝅝                           ║
+║            F#4 G4  A4   B4  C#5  D5  f      D4  E4  F#4  G4  A4  B4  f                       ║
+║       T1:  ♩   ♩   ♩    ♩   ♩   𝅝      T2:  ♩   ♩   ♩    ♩   ♩    𝅝                          ║
+║            A3  B3  C#4  D4  E4  F#4 f       F#3 G3  A3   B3  C#4  D4 f                       ║
+║       B1:  ♩   ♩   ♩    ♩   ♩   𝅝      B2:  ♩   ♩   ♩    ♩   ♩   𝅝                           ║
+║            D3  E3  F#3  G3  A3  B3  f       D2  E2  F#2  G2  A2  B2  f                       ║
 ║                                                                                              ║
-║  ORCHESTRA: Bruckner-style brass chorale, Timpani D-A-D, Full strings                        ║
+║  ORCHESTRA TUTTI: Bruckner-style brass chorale, Timpani D-A-D, Full forces                   ║
 ║                                                                                              ║
-╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  MEASURES 17-32: CASCADING 8-PART COUNTERPOINT                                     ff        ║
-╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║                                                                                              ║
-║  Staggered entries (1 beat apart):                                                           ║
-║                                                                                              ║
-║    m.17: S1 enters  "we are beautiful"    ff  [H+++]                                         ║
-║    m.18: S2 enters  "we are beautiful"    ff  [H+++]                                         ║
-║    m.19: A1 enters  "we are lovely"       ff  [H++, N+]                                      ║
-║    m.20: A2 enters  "we are lovely"       f   [H++]                                          ║
-║    m.21: T1 enters  "we are infinite"     f   [M++, O++]                                     ║
-║    m.22: T2 enters  "we are infinite"     f   [M++]                                          ║
-║    m.23: B1 enters  "we come into being"  f   [C++, P+]                                      ║
-║    m.24: B2 enters  "we come into being"  f   [C+++]                                         ║
-║                                                                                              ║
-║  All 8 parts combine in full counterpoint through m.32                                       ║
+║  [Measure 17-32] ff, cascading counterpoint:                                                 ║
+║       m.17: S1 "we are beautiful" ff     m.21: T1 "we are infinite" f                        ║
+║       m.18: S2 "we are beautiful" ff     m.22: T2 "we are infinite" f                        ║
+║       m.19: A1 "we are lovely" ff        m.23: B1 "we come into being" f                     ║
+║       m.20: A2 "we are lovely" f         m.24: B2 "we come into being" f                     ║
+║       All 8 parts combine through m.32                                                       ║
 ║                                                                                              ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  [C] MEASURES 73-80: FINAL ARRIVAL                                           fff > pp        ║
+║  [B] MEASURES 33-56: DANCE SECTION (3/4)                                           mf        ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                              ║
-║  Text: "and find you whole"                                                                  ║
+║  TIME SIGNATURE: 3/4   TEMPO: Allegro vivace ♩= 132                                          ║
+║  Text: "we touch we feel we share"                                                           ║
 ║                                                                                              ║
-║  SSAATTBB — FINAL D MAJOR CHORD:                                                             ║
+║  SSAATTBB (waltz rhythm):                                                                    ║
+║       S1 + S2: Melody in thirds                                                              ║
+║            ♩    ♩    ♩  |  ♩    ♩    ♩                                                       ║
+║            D5   E5   F#5   G5   A5   B5                                                      ║
+║            we   touch we    feel we   share                                                  ║
 ║                                                                                              ║
-║    S1: A5 ════════════════════════════════════════════════════  fff > pp (8 beats)           ║
-║    S2: F#5 ═══════════════════════════════════════════════════  fff > pp                     ║
-║    A1: D5 ════════════════════════════════════════════════════  fff > pp                     ║
-║    A2: A4 ════════════════════════════════════════════════════  fff > pp                     ║
-║    T1: F#4 ═══════════════════════════════════════════════════  fff > pp                     ║
-║    T2: D4 ════════════════════════════════════════════════════  fff > pp                     ║
-║    B1: A3 ════════════════════════════════════════════════════  fff > pp                     ║
-║    B2: D2 ════════════════════════════════════════════════════  fff > pp                     ║
+║       A1 + A2: Counter-melody                                                                ║
+║            ♩    ♩    ♩  |  ♩    ♩    ♩                                                       ║
+║            F#4  G4   A4    B4   C#5  D5                                                      ║
 ║                                                                                              ║
-║    VRN: [H+++, O+++, M(R)]  Diminuendo, gradually releasing                                  ║
+║       T1 + T2: Harmonic support                                                              ║
+║            𝅗𝅥.        |  𝅗𝅥.                                                                 ║
+║            D4         |  G4                                                                  ║
 ║                                                                                              ║
-║  CONDUCTOR: Hold 4 silent beats before curtain                                               ║
+║       B1 + B2: Bass waltz pattern                                                            ║
+║            ♩    ♩  ♩  |  ♩    ♩  ♩                                                           ║
+║            D3   A3 A3 |  G3   D4 D4                                                          ║
 ║                                                                                              ║
-║  ═══════════════════════════════════════════════════════════════════════════════════════════ ║
-║                                    END OF ACT I                                              ║
-║  ═══════════════════════════════════════════════════════════════════════════════════════════ ║
+║  ORCHESTRA: Strings pizzicato (waltz), Fl melody, Hn off-beats, Triangle                     ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [C] MEASURES 57-80: FINAL ARRIVAL                                                 fff > pp  ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  [Measure 57-72] f > p, modulations:                                                         ║
+║       Text: "our peace will fill you"                                                        ║
+║       MODULATIONS: D → F# → B♭ → D                                                           ║
+║                                                                                              ║
+║  ┌─────────────────────────────────────────────────────────────────────────────────────────┐ ║
+║  │  [Measure 73-80] fff > pp, FINAL D MAJOR CHORD:                                        │ ║
+║  │                                                                                        │ ║
+║  │       Text: "and find you whole"                                                       │ ║
+║  │                                                                                        │ ║
+║  │  SSAATTBB:                                                                             │ ║
+║  │       S1   S2   A1   A2   T1   T2   B1   B2                                            │ ║
+║  │       𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝    𝅝                                               │ ║
+║  │       A5   F#5  D5   A4   F#4  D4   A3   D2                                            │ ║
+║  │                                                                                        │ ║
+║  │       Duration: 8 beats                                                                │ ║
+║  │       Dynamic: fff > pp (diminuendo)                                                   │ ║
+║  │       Resonance: [H+++, O+++, M(R)]                                                    │ ║
+║  │                                                                                        │ ║
+║  │  ORCHESTRA: Full chord fff, Gradual diminuendo, Strings last to fade                   │ ║
+║  │                                                                                        │ ║
+║  │       ═══════════════════════════════════════════════════                              │ ║
+║  │       CONDUCTOR: Hold 4 silent beats before curtain                                    │ ║
+║  │       ═══════════════════════════════════════════════════                              │ ║
+║  └─────────────────────────────────────────────────────────────────────────────────────────┘ ║
 ║                                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════════════════════
+                                        END OF ACT I
+═══════════════════════════════════════════════════════════════════════════════════════════════
 </pre>
       </div>
     </section>
 
-    <!-- Bottom Nav -->
-    <div class="sheet-nav" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: none;">
-      <div class="sheet-nav-inner">
-        <span class="label" style="color: var(--accent-cyan);">SATB:</span>
-        <a href="sheet-music.html">Index</a>
-        <a href="sheet-music-act1-p1.html">I:1-2</a>
-        <a href="sheet-music-act1-p2.html">I:3-5</a>
-        <a href="sheet-music-act2.html">II</a>
-        <a href="sheet-music-act3-p1.html">III:1-2</a>
-        <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
-        <span class="divider">|</span>
-        <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
-        <a href="ssaattbb-index.html">Index</a>
-        <a href="ssaattbb-act1.html" class="active-gold">Act I</a>
-        <a href="ssaattbb-act2.html">Act II</a>
-        <a href="ssaattbb-act3.html">Act III</a>
-      </div>
+    <!-- Navigation -->
+    <div class="page-nav">
+      <a href="ssaattbb-index.html">← SSAATTBB Index</a>
+      <a href="ssaattbb-act2.html">Act II: Into →</a>
     </div>
-
-    <!-- Page Navigation -->
-    <nav class="page-nav">
-      <a href="ssaattbb-index.html">← Back to Index</a>
-      <a href="ssaattbb-act2.html">Act II →</a>
-    </nav>
-
   </main>
 
   <footer class="footer">
-    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
-    <a href="index.html">Home</a> | <a href="ssaattbb-index.html">SSAATTBB Index</a></p>
+    <p>COSMOS the OPERA © 2002-2026 | DMCA Protected | <a href="notation.html">About VRN Notation</a></p>
   </footer>
 </body>
 </html>

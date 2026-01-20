@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubble Gallery - COSMOS the OPERA</title>
+  <meta name="description" content="15 iconic Hubble Space Telescope images paired with the cosmic characters of COSMOS the OPERA. Each celestial object embodies a voice and personality.">
+  <meta name="keywords" content="Hubble Space Telescope, nebula, galaxy, cosmic imagery, opera characters, Helix Nebula, Pillars of Creation">
+  <meta name="author" content="Tom Sans / AIUNITES">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hubble Gallery - COSMOS the OPERA">
+  <meta property="og:description" content="Explore the cosmic characters of COSMOS the OPERA through 15 stunning Hubble Space Telescope images.">
+  <meta property="og:url" content="https://cosmostheopera.com/gallery.html">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #00d4ff;
+      --accent-gold: #ffd700;
+      --accent-pink: #ff6b9d;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+    
+    /* Navigation */
+    .nav {
+      background: var(--bg-card);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-cyan);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: 
+        radial-gradient(ellipse at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff, var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Gallery Grid */
+    .gallery {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .gallery-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.4s ease;
+    }
+    
+    .gallery-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-purple);
+      box-shadow: 0 20px 60px rgba(157, 78, 221, 0.2);
+    }
+    
+    .gallery-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+    }
+    
+    .gallery-content {
+      padding: 25px;
+    }
+    
+    .gallery-act {
+      display: inline-block;
+      background: rgba(0, 212, 255, 0.2);
+      color: var(--accent-cyan);
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    
+    .gallery-voice {
+      display: inline-block;
+      background: rgba(157, 78, 221, 0.2);
+      color: var(--accent-purple);
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      margin-left: 8px;
+    }
+    
+    .gallery-character {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .gallery-object {
+      font-size: 1rem;
+      color: var(--accent-gold);
+      margin-bottom: 5px;
+    }
+    
+    .gallery-object-id {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    .gallery-quote {
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-left: 3px solid var(--accent-pink);
+      padding-left: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .gallery-reason {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.03);
+      padding: 12px;
+      border-radius: 8px;
+    }
+    
+    .gallery-reason strong {
+      color: var(--accent-cyan);
+    }
+    
+    /* Attribution Section */
+    .attribution {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    
+    .attribution h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+    }
+    
+    .attribution p {
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    .attribution a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+    
+    .attribution a:hover {
+      text-decoration: underline;
+    }
+    
+    .source-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .source-link {
+      background: var(--bg-card);
+      padding: 15px 25px;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+    
+    .source-link:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--bg-card);
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .footer p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html" class="active">Hubble Gallery</a>
+      <a href="sheet-music.html">Sheet Music</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🔭 Hubble Gallery</h1>
+    <p class="hero-subtitle">
+      Each cosmic character in COSMOS the OPERA is paired with an iconic Hubble Space Telescope image 
+      that embodies their essence. Unlike other cosmic works, these celestial objects are not backdrops — 
+      they are the characters themselves.
+    </p>
+  </section>
+
+  <!-- Gallery -->
+  <main class="gallery">
+    <div class="gallery-grid">
+      
+      <!-- 1. The Observer / Soul -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/01-helix-nebula.jpg" alt="Helix Nebula - Eye of God" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act I</span>
+          <span class="gallery-voice">Mezzo-Soprano</span>
+          <h2 class="gallery-character">The Observer / The Soul</h2>
+          <p class="gallery-object">🔭 Helix Nebula "Eye of God"</p>
+          <p class="gallery-object-id">NGC 7293 • 700 light-years away • Aquarius</p>
+          <p class="gallery-quote">"My face is now a window in this world... and looks at you and wonders if you know where I am"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Helix Nebula's striking resemblance to a cosmic eye perfectly embodies the Observer who peers through the "window" of existence, seeking meaning and connection.</p>
+        </div>
+      </article>
+      
+      <!-- 2. The Light / Universe -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/02-butterfly-nebula.jpg" alt="Butterfly Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act II</span>
+          <span class="gallery-voice">Soprano</span>
+          <h2 class="gallery-character">The Light / The Universe</h2>
+          <p class="gallery-object">🔭 Butterfly Nebula</p>
+          <p class="gallery-object-id">NGC 6302 • 3,800 light-years away • Scorpius</p>
+          <p class="gallery-quote">"See the colors of the light... in so many ways, in so many shades, bending in so many waves"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Butterfly Nebula's brilliant colors and transformative shape (from dying star to radiant nebula) mirrors the Light character's exploration of color, beauty, and metamorphosis.</p>
+        </div>
+      </article>
+      
+      <!-- 3. The Sun / Seeker -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/03-v838-monocerotis.jpg" alt="V838 Monocerotis Light Echo" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act III</span>
+          <span class="gallery-voice">Tenor</span>
+          <h2 class="gallery-character">The Sun / The Seeker</h2>
+          <p class="gallery-object">🔭 V838 Monocerotis Light Echo</p>
+          <p class="gallery-object-id">V838 Mon • 20,000 light-years away • Monoceros</p>
+          <p class="gallery-quote">"Did you say that I could be the sun to you? So warm and so bright, one truth in your life"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> V838 Mon's dramatic light echo — a star whose outburst illuminates surrounding dust — represents the Seeker's desire to be "the sun" to another, spreading warmth and truth across vast distances.</p>
+        </div>
+      </article>
+      
+      <!-- 4. The Twin / Mirror -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/04-arp-madore-twins.jpg" alt="Arp-Madore 417-391 Twin Galaxies" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act III</span>
+          <span class="gallery-voice">Baritone</span>
+          <h2 class="gallery-character">The Twin / The Mirror</h2>
+          <p class="gallery-object">🔭 Arp-Madore 417-391</p>
+          <p class="gallery-object-id">Twin Galaxy Cores • 670 million light-years away</p>
+          <p class="gallery-quote">"Were we once two bright suns roaming the galaxy together, orbiting each other?"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> This image of two interacting galaxy cores, gravitationally bound and destined to merge, embodies the Twin's longing for reunion with their cosmic counterpart.</p>
+        </div>
+      </article>
+      
+      <!-- 5. The Cosmos / We Come -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/05-pillars-creation.jpg" alt="Pillars of Creation" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act I Finale</span>
+          <span class="gallery-voice">SATB Chorus</span>
+          <h2 class="gallery-character">The Cosmos / We Come</h2>
+          <p class="gallery-object">🔭 Pillars of Creation</p>
+          <p class="gallery-object-id">Eagle Nebula M16 • 6,500 light-years away • Serpens</p>
+          <p class="gallery-quote">"We come into being, we are beautiful, we are lovely, we are infinite"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Pillars of Creation — towering columns of gas and dust where new stars are born — perfectly represents the collective voice of the Cosmos, beings coming into existence.</p>
+        </div>
+      </article>
+      
+      <!-- 6. The Waves -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/06-whirlpool-galaxy.jpg" alt="Whirlpool Galaxy" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act II</span>
+          <span class="gallery-voice">Ensemble</span>
+          <h2 class="gallery-character">The Waves</h2>
+          <p class="gallery-object">🔭 Whirlpool Galaxy</p>
+          <p class="gallery-object-id">M51 (NGC 5194/5195) • 23 million light-years away • Canes Venatici</p>
+          <p class="gallery-quote">"You can feel the waves in everything... the waves of the creation, the waves of the creator"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Whirlpool Galaxy's perfect spiral arms, like ripples in a cosmic pond, embody the wave-like nature of reality the character explores.</p>
+        </div>
+      </article>
+      
+      <!-- 7. The Dark -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/07-horsehead-nebula.jpg" alt="Horsehead Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act I</span>
+          <span class="gallery-voice">Bass</span>
+          <h2 class="gallery-character">The Dark</h2>
+          <p class="gallery-object">🔭 Horsehead Nebula</p>
+          <p class="gallery-object-id">Barnard 33 • 1,500 light-years away • Orion</p>
+          <p class="gallery-quote">"Some see the dark... do you see the dark... I see the light"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Horsehead's dramatic silhouette against glowing gas represents darkness not as absence but as presence — the shadow that defines the light.</p>
+        </div>
+      </article>
+      
+      <!-- 8. The Colors -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/08-orion-nebula.jpg" alt="Orion Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act II</span>
+          <span class="gallery-voice">Soprano Coloratura</span>
+          <h2 class="gallery-character">The Colors</h2>
+          <p class="gallery-object">🔭 Orion Nebula</p>
+          <p class="gallery-object-id">M42 • 1,344 light-years away • Orion</p>
+          <p class="gallery-quote">"See the colors of the light... the colors so beautiful, the colors so alive"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Orion Nebula's spectacular palette of reds, blues, greens, and purples — visible even to the naked eye — makes it the perfect embodiment of coloratura passages about light's spectrum.</p>
+        </div>
+      </article>
+      
+      <!-- 9. The Journey -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/09-mystic-mountain.jpg" alt="Mystic Mountain in Carina Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act I</span>
+          <span class="gallery-voice">Tenor</span>
+          <h2 class="gallery-character">The Journey</h2>
+          <p class="gallery-object">🔭 Mystic Mountain</p>
+          <p class="gallery-object-id">Carina Nebula (NGC 3372) • 7,500 light-years away • Carina</p>
+          <p class="gallery-quote">"This life is a journey, both endless and so brief, both finite and with infinity"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The towering "Mystic Mountain" pillar in the Carina Nebula evokes the epic scale of life's journey — peaks to climb, distances to traverse.</p>
+        </div>
+      </article>
+      
+      <!-- 10. Infinity / The Stars -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/10-hubble-deep-field.jpg" alt="Hubble Ultra Deep Field" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">All Acts</span>
+          <span class="gallery-voice">Full Chorus</span>
+          <h2 class="gallery-character">Infinity / The Stars</h2>
+          <p class="gallery-object">🔭 Hubble Ultra Deep Field</p>
+          <p class="gallery-object-id">HUDF • 10,000+ galaxies • 12 billion light-years</p>
+          <p class="gallery-quote">"An infinite number of stars swirling around in a cloud"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Hubble Deep Field — a tiny patch of sky revealing over 10,000 galaxies — is the ultimate representation of infinity, the countless stars the Observer sees.</p>
+        </div>
+      </article>
+      
+      <!-- 11. The Window / Face -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/11-cats-eye-nebula.jpg" alt="Cat's Eye Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act I</span>
+          <span class="gallery-voice">Mezzo-Soprano</span>
+          <h2 class="gallery-character">The Window / The Face</h2>
+          <p class="gallery-object">🔭 Cat's Eye Nebula</p>
+          <p class="gallery-object-id">NGC 6543 • 3,000 light-years away • Draco</p>
+          <p class="gallery-quote">"My face is now a window in this world, that hangs here for a place to hold these eyes and peer"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Cat's Eye's concentric shells and central bright "pupil" create an almost face-like appearance — a cosmic window peering back at us.</p>
+        </div>
+      </article>
+      
+      <!-- 12. We Are One -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/12-antennae-galaxies.jpg" alt="Antennae Galaxies" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act II Finale</span>
+          <span class="gallery-voice">Duet + Chorus</span>
+          <h2 class="gallery-character">We Are One</h2>
+          <p class="gallery-object">🔭 Antennae Galaxies</p>
+          <p class="gallery-object-id">NGC 4038/4039 • 45 million light-years away • Corvus</p>
+          <p class="gallery-quote">"Everything is one, everything is a wave, all is the same, we are all the same"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Antennae Galaxies, two galaxies merging into one, physically embody the philosophical truth that "everything is one."</p>
+        </div>
+      </article>
+      
+      <!-- 13. Feeling Again -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/13-southern-ring-nebula.jpg" alt="Southern Ring Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act III</span>
+          <span class="gallery-voice">Soprano + Tenor Duet</span>
+          <h2 class="gallery-character">Feeling Again</h2>
+          <p class="gallery-object">🔭 Southern Ring Nebula</p>
+          <p class="gallery-object-id">NGC 3132 "Eight-Burst" • 2,000 light-years away • Vela</p>
+          <p class="gallery-quote">"You make me feel that feeling again, like I am holding my best friend"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Southern Ring's double-star system at its heart — two stars bound together — mirrors the intimate duet of souls reconnecting.</p>
+        </div>
+      </article>
+      
+      <!-- 14. You're A Star -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/14-eta-carinae.jpg" alt="Eta Carinae" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Act III Finale</span>
+          <span class="gallery-voice">Full Ensemble</span>
+          <h2 class="gallery-character">You're A Star (Finale)</h2>
+          <p class="gallery-object">🔭 Eta Carinae</p>
+          <p class="gallery-object-id">η Car • 7,500 light-years away • Carina</p>
+          <p class="gallery-quote">"You're a star, everybody loves you... reach out for the stars and show them your heart"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> Eta Carinae, one of the most massive and luminous stars known, embodies the opera's final message: each person carries a star within them.</p>
+        </div>
+      </article>
+      
+      <!-- 15. Eternal Return -->
+      <article class="gallery-card">
+        <img class="gallery-image" src="images/15-ring-nebula.jpg" alt="Ring Nebula" loading="lazy">
+        <div class="gallery-content">
+          <span class="gallery-act">Finale</span>
+          <span class="gallery-voice">All Forces</span>
+          <h2 class="gallery-character">The Eternal Return</h2>
+          <p class="gallery-object">🔭 Ring Nebula</p>
+          <p class="gallery-object-id">M57 • 2,300 light-years away • Lyra</p>
+          <p class="gallery-quote">"All melodic lines converge on a single note — middle C — the note that began the opera"</p>
+          <p class="gallery-reason"><strong>Why this pairing:</strong> The Ring Nebula's perfect circular form represents the opera's structure — beginning and ending on the same note, life and death, creation and return.</p>
+        </div>
+      </article>
+      
+    </div>
+  </main>
+
+  <!-- Attribution Section -->
+  <section class="attribution">
+    <h2>🛰️ Image Attribution</h2>
+    <p>
+      All Hubble Space Telescope images are in the public domain and provided by NASA, ESA, and the 
+      Space Telescope Science Institute (STScI). These images may be used freely for any purpose, 
+      with appropriate credit to the source.
+    </p>
+    <p>
+      Credit: NASA, ESA, and the Hubble Heritage Team (STScI/AURA)
+    </p>
+    
+    <div class="source-links">
+      <a href="https://hubblesite.org/" target="_blank" class="source-link">🔭 HubbleSite.org</a>
+      <a href="https://esahubble.org/" target="_blank" class="source-link">🇪🇺 ESA Hubble</a>
+      <a href="https://science.nasa.gov/mission/hubble/" target="_blank" class="source-link">🚀 NASA Hubble</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+      <a href="index.html">Back to Home</a> | 
+      <a href="notation.html">Vocal Resonance Notation</a> |
+      <a href="composition.html">AI Composition Guide</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMOS the OPERA - Personified Cosmic Beings</title>
+  <meta name="description" content="A trance opera featuring personified cosmic beings - the Sun, the Twin, the Light, the Universe - singing across space and time. Featuring Hubble imagery and original Vocal Resonance Notation.">
+  <meta name="keywords" content="opera, cosmos, space opera, trance opera, Hubble, cosmic beings, personification, vocal resonance notation">
+  <meta name="author" content="Tom Sans / AIUNITES">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="COSMOS the OPERA">
+  <meta property="og:description" content="A trance opera where cosmic beings - Suns, Nebulae, Galaxies - are personified characters with voices, emotions, and relationships.">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg/800px-Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg">
+  <meta property="og:url" content="https://aiunites.github.io/cosmostheopera-site/">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #00d4ff;
+      --accent-gold: #ffd700;
+      --accent-pink: #ff6b9d;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Webring Navigation */
+    .webring-nav {
+      background: linear-gradient(90deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+      padding: 8px 0;
+      text-align: center;
+      font-size: 12px;
+      border-bottom: 1px solid #333;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .webring-nav a {
+      color: #888;
+      text-decoration: none;
+      margin: 0 8px;
+      transition: color 0.3s;
+    }
+    
+    .webring-nav a:hover {
+      color: var(--accent-cyan);
+    }
+    
+    .webring-nav .current {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+    
+    /* Site Navigation */
+    .site-nav {
+      background: var(--bg-card);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .site-nav-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+    
+    .site-nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .site-nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    
+    .site-nav-links a:hover, .site-nav-links a.active {
+      color: var(--accent-cyan);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(157, 78, 221, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
+        var(--bg-dark);
+      position: relative;
+    }
+    
+    /* Animated stars background */
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 160px 120px, white, transparent);
+      background-size: 200px 200px;
+      animation: twinkle 4s ease-in-out infinite alternate;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.6; }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent-gold) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      font-weight: 300;
+      font-style: italic;
+    }
+    
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 35px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      color: white;
+      box-shadow: 0 4px 25px rgba(157, 78, 221, 0.4);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 35px rgba(157, 78, 221, 0.5);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 212, 255, 0.1);
+    }
+    
+    /* Quote Section */
+    .quote-section {
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+    }
+    
+    .quote {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-style: italic;
+      color: var(--accent-gold);
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .quote-author {
+      margin-top: 20px;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+    
+    /* Characters Section */
+    .characters-section {
+      padding: 100px 20px;
+      background: var(--bg-card);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #fff, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .character-card {
+      background: var(--bg-dark);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .character-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-purple);
+      box-shadow: 0 20px 60px rgba(157, 78, 221, 0.2);
+    }
+    
+    .character-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+      display: block;
+    }
+    
+    .character-image-placeholder {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+      font-size: 4rem;
+    }
+    
+    .character-content {
+      padding: 25px;
+    }
+    
+    .character-voice {
+      display: inline-block;
+      background: rgba(157, 78, 221, 0.2);
+      color: var(--accent-purple);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    
+    .character-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    
+    .character-hubble {
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      margin-bottom: 15px;
+    }
+    
+    .character-quote {
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-left: 3px solid var(--accent-gold);
+      padding-left: 15px;
+    }
+    
+    /* Acts Section */
+    .acts-section {
+      padding: 100px 20px;
+      background: var(--bg-dark);
+    }
+    
+    .acts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .act-card {
+      background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(0, 212, 255, 0.05));
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .act-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-5px);
+    }
+    
+    .act-number {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 15px;
+    }
+    
+    .act-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .act-description {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    .act-scenes {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .act-scenes li {
+      padding: 8px 0;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+    }
+    
+    .act-scenes li:last-child {
+      border-bottom: none;
+    }
+    
+    .act-scenes li::before {
+      content: "✦ ";
+      color: var(--accent-gold);
+    }
+    
+    /* Unique Features Section */
+    .features-section {
+      padding: 100px 20px;
+      background: var(--bg-card);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .feature-card {
+      text-align: center;
+      padding: 40px 30px;
+      background: var(--bg-dark);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .feature-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    /* Video Section */
+    .video-section {
+      padding: 100px 20px;
+      background: var(--bg-dark);
+      text-align: center;
+    }
+    
+    .video-container {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .video-placeholder {
+      background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    
+    .video-placeholder h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .video-placeholder p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--bg-card);
+      padding: 60px 20px 30px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff, var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+    }
+    
+    .footer-copyright {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .footer-copyright a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+    
+    .dmca-notice {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 107, 157, 0.1);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: var(--accent-pink);
+    }
+    
+    /* Floating Help Button */
+    .help-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: auto;
+      padding: 0 16px;
+      height: 48px;
+      background: linear-gradient(135deg, #ff3366, #ff6b35);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(255, 51, 102, 0.4);
+      transition: all 0.3s;
+      z-index: 9999;
+    }
+    
+    .help-fab:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 30px rgba(255, 51, 102, 0.5);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .webring-nav {
+        font-size: 10px;
+      }
+      
+      .webring-nav a {
+        margin: 0 5px;
+      }
+      
+      .site-nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .site-nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .hero {
+        min-height: auto;
+        padding: 60px 20px;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .characters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Webring Navigation -->
+  <nav class="webring-nav">
+    <span style="color: #ff3366;">♦</span>
+    <a href="https://aiunites.github.io/aiunites-site">AIUNITES</a> |
+    <a href="https://aiunites.github.io/aizines-app">AIZines</a> |
+    <a href="https://aiunites.github.io/redomy-demo">Redomy</a> |
+    <a href="https://aiunites.github.io/videobate-site">VideoBate</a> |
+    <a href="https://aiunites.github.io/furnishthings-site">FurnishThings</a> |
+    <a href="https://aiunites.github.io/bizstry-site">BizStry</a> |
+    <a href="https://aiunites.github.io/aiyhwh-site">AI YHWH</a> |
+    <a href="https://aiunites.github.io/cloudsion-site">Cloudsion</a> |
+    <a href="https://aiunites.github.io/gameatica-site">Gameatica</a> |
+    <a href="https://aiunites.github.io/uptownit-site">UptownIT</a> |
+    <a href="https://aiunites.github.io/inthisworld-site">InThisWorld</a> |
+    <a href="https://aiunites.github.io/erpise-site">ERPise</a> |
+    <a href="https://aiunites.github.io/erpize-site">ERPize</a> |
+    <a href="https://aiunites.github.io/aibyjob-demo">AIByJob</a> |
+    <a href="#" class="current">🌌 COSMOS</a>
+  </nav>
+
+  <!-- Site Navigation -->
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav-logo">🌌 COSMOS</a>
+    <div class="site-nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html">Sheet Music</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="stars"></div>
+    <div class="hero-content">
+      <span class="hero-badge">🎭 A Trance Opera</span>
+      <h1>COSMOS the OPERA</h1>
+      <p class="hero-subtitle">Cosmic Beings, Personified</p>
+      <p class="hero-description">
+        The first opera where celestial bodies are not mere backdrops, but living characters with voices, 
+        emotions, and souls. Twin suns yearn for reunion. The Universe sings of light. 
+        The Observer gazes through the window of existence.
+      </p>
+      <div class="hero-buttons">
+        <a href="#libretto" class="btn btn-primary">📜 Read the Libretto</a>
+        <a href="#characters" class="btn btn-secondary">🌟 Meet the Characters</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="quote-section">
+    <blockquote class="quote">
+      "Were we once two bright suns roaming the galaxy together, orbiting each other... 
+      only to be trapped on this planet for this short time?"
+    </blockquote>
+    <p class="quote-author">— The Twin, Act III</p>
+  </section>
+
+  <!-- Characters Section -->
+  <section class="characters-section" id="characters">
+    <div class="section-header">
+      <h2>The Cosmic Beings</h2>
+      <p>Personified celestial entities, each visualized through iconic Hubble Space Telescope imagery</p>
+    </div>
+    
+    <div class="characters-grid">
+      <!-- The Observer -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/NGC_7293.png/600px-NGC_7293.png" alt="Helix Nebula - Eye of God" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Mezzo-Soprano</span>
+          <h3 class="character-name">The Observer / The Soul</h3>
+          <p class="character-hubble">🔭 Helix Nebula "Eye of God" (NGC 7293)</p>
+          <p class="character-quote">"My face is now a window in this world... and looks at you and wonders if you know where I am"</p>
+        </div>
+      </div>
+      
+      <!-- The Light -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/NGC_6302_Hubble_2009.full.jpg/600px-NGC_6302_Hubble_2009.full.jpg" alt="Butterfly Nebula" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Soprano</span>
+          <h3 class="character-name">The Light / The Universe</h3>
+          <p class="character-hubble">🔭 Butterfly Nebula (NGC 6302)</p>
+          <p class="character-quote">"See the colors of the light... in so many ways, in so many shades, bending in so many waves"</p>
+        </div>
+      </div>
+      
+      <!-- The Sun -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/V838_Monocerotis_expansion.jpg/600px-V838_Monocerotis_expansion.jpg" alt="V838 Monocerotis" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Tenor</span>
+          <h3 class="character-name">The Sun / The Seeker</h3>
+          <p class="character-hubble">🔭 V838 Monocerotis Light Echo</p>
+          <p class="character-quote">"Did you say that I could be the sun to you? So warm and so bright, one truth in your life"</p>
+        </div>
+      </div>
+      
+      <!-- The Twin -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Antennae_galaxies_xl.jpg/600px-Antennae_galaxies_xl.jpg" alt="Antennae Galaxies" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Baritone</span>
+          <h3 class="character-name">The Twin / The Mirror</h3>
+          <p class="character-hubble">🔭 Antennae Galaxies (NGC 4038/4039)</p>
+          <p class="character-quote">"Were we once two bright suns roaming the galaxy together, orbiting each other?"</p>
+        </div>
+      </div>
+      
+      <!-- The Cosmos -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg/450px-Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg" alt="Pillars of Creation" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">SATB Chorus</span>
+          <h3 class="character-name">The Cosmos / We Come</h3>
+          <p class="character-hubble">🔭 Pillars of Creation (Eagle Nebula M16)</p>
+          <p class="character-quote">"We come into being, we are beautiful, we are lovely, we are infinite"</p>
+        </div>
+      </div>
+      
+      <!-- The Waves -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Messier51_sridge_nasamil.jpg/600px-Messier51_sridge_nasamil.jpg" alt="Whirlpool Galaxy" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Ensemble</span>
+          <h3 class="character-name">The Waves</h3>
+          <p class="character-hubble">🔭 Whirlpool Galaxy (M51)</p>
+          <p class="character-quote">"You can feel the waves in everything... the waves of the creation, the waves of the creator"</p>
+        </div>
+      </div>
+      
+      <!-- The Dark -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Barnard_33.jpg/600px-Barnard_33.jpg" alt="Horsehead Nebula" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Bass</span>
+          <h3 class="character-name">The Dark</h3>
+          <p class="character-hubble">🔭 Horsehead Nebula (Barnard 33)</p>
+          <p class="character-quote">"Some see the dark... do you see the dark... I see the light"</p>
+        </div>
+      </div>
+      
+      <!-- The Colors -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg/600px-Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg" alt="Orion Nebula" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Soprano Coloratura</span>
+          <h3 class="character-name">The Colors</h3>
+          <p class="character-hubble">🔭 Orion Nebula (M42)</p>
+          <p class="character-quote">"See the colors of the light... the colors so beautiful, the colors so alive"</p>
+        </div>
+      </div>
+      
+      <!-- The Journey -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Carina_Nebula_by_Harel_Boren_%28151851961%2C_modified%29.jpg/600px-Carina_Nebula_by_Harel_Boren_%28151851961%2C_modified%29.jpg" alt="Carina Nebula - Mystic Mountain" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Tenor</span>
+          <h3 class="character-name">The Journey</h3>
+          <p class="character-hubble">🔭 Mystic Mountain (Carina Nebula)</p>
+          <p class="character-quote">"This life is a journey, both endless and so brief"</p>
+        </div>
+      </div>
+      
+      <!-- Infinity -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/HubbleDeepField.800px.jpg/600px-HubbleDeepField.800px.jpg" alt="Hubble Deep Field" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Full Chorus</span>
+          <h3 class="character-name">Infinity / The Stars</h3>
+          <p class="character-hubble">🔭 Hubble Deep Field (HDF)</p>
+          <p class="character-quote">"An infinite number of stars swirling around in a cloud"</p>
+        </div>
+      </div>
+      
+      <!-- The Window -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Catseye-big.jpg/600px-Catseye-big.jpg" alt="Cat's Eye Nebula" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Mezzo-Soprano</span>
+          <h3 class="character-name">The Window / The Face</h3>
+          <p class="character-hubble">🔭 Cat's Eye Nebula (NGC 6543)</p>
+          <p class="character-quote">"My face is now a window in this world"</p>
+        </div>
+      </div>
+      
+      <!-- Feeling Again -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Southern_Ring_Nebula_%28NIRCam_Image%29.png/600px-Southern_Ring_Nebula_%28NIRCam_Image%29.png" alt="Southern Ring Nebula" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Soprano + Tenor Duet</span>
+          <h3 class="character-name">Feeling Again</h3>
+          <p class="character-hubble">🔭 Southern Ring Nebula (NGC 3132)</p>
+          <p class="character-quote">"You make me feel that feeling again, like I found my best friend"</p>
+        </div>
+      </div>
+      
+      <!-- You're A Star -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Eta_Carinae_2014.png/600px-Eta_Carinae_2014.png" alt="Eta Carinae" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">Full Ensemble</span>
+          <h3 class="character-name">You're A Star (Finale)</h3>
+          <p class="character-hubble">🔭 Eta Carinae</p>
+          <p class="character-quote">"You're a star, everybody loves you... reach out for the stars and show them your heart"</p>
+        </div>
+      </div>
+      
+      <!-- Ring Nebula - Eternal Return -->
+      <div class="character-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/M57_The_Ring_Nebula.JPG/600px-M57_The_Ring_Nebula.JPG" alt="Ring Nebula" class="character-image" loading="lazy">
+        <div class="character-content">
+          <span class="character-voice">All Forces</span>
+          <h3 class="character-name">The Eternal Return</h3>
+          <p class="character-hubble">🔭 Ring Nebula (M57)</p>
+          <p class="character-quote">"All melodic lines converge on a single note — middle C — the note that began the opera"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acts Section -->
+  <section class="acts-section" id="libretto">
+    <div class="section-header">
+      <h2>The Three Acts</h2>
+      <p>A journey from cosmic awakening through perception to connection</p>
+    </div>
+    
+    <div class="acts-grid">
+      <div class="act-card">
+        <div class="act-number">I</div>
+        <h3 class="act-title">We Come</h3>
+        <p class="act-description">The awakening of consciousness. The Observer asks the fundamental question: "What do you see when you close your eyes?" Light emerges from darkness.</p>
+        <ul class="act-scenes">
+          <li>Do You See</li>
+          <li>Look</li>
+          <li>A Window</li>
+          <li>I Sing</li>
+          <li>We Come (Finale)</li>
+        </ul>
+      </div>
+      
+      <div class="act-card">
+        <div class="act-number">II</div>
+        <h3 class="act-title">Into</h3>
+        <p class="act-description">The exploration of perception. Colors bend through prisms of the mind. Waves ripple through all existence. Everything becomes one.</p>
+        <ul class="act-scenes">
+          <li>The Colors</li>
+          <li>The Waves</li>
+          <li>Everything Is One</li>
+        </ul>
+      </div>
+      
+      <div class="act-card">
+        <div class="act-number">III</div>
+        <h3 class="act-title">Beings</h3>
+        <p class="act-description">The connection between souls. Twin suns separated across galaxies yearn for reunion. The star within each of us is celebrated.</p>
+        <ul class="act-scenes">
+          <li>I the Sun</li>
+          <li>My Twin</li>
+          <li>Feeling Again</li>
+          <li>You're A Star (Dismissal)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unique Features Section -->
+  <section class="features-section">
+    <div class="section-header">
+      <h2>What Makes This Opera Unique</h2>
+      <p>Breaking new ground in operatic storytelling and notation</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌟</div>
+        <h3 class="feature-title">Personified Cosmos</h3>
+        <p class="feature-text">Unlike Haydn's "The Creation" which depicts celestial bodies as objects, COSMOS gives voice to the Sun, the Universe, the Waves — as characters with emotions and relationships.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <h3 class="feature-title">Trance Opera Fusion</h3>
+        <p class="feature-text">Blending the driving rhythms and euphoric builds of trance music (130-138 BPM) with the expressive power of operatic vocals and full orchestration.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3 class="feature-title">Vocal Resonance Notation</h3>
+        <p class="feature-text">A new notation system indicating resonance locations: [C] Chest, [M] Mixed, [H] Head voice, plus muscular indicators like [Ey] Eye muscles and [Oc] Occipital.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">✍️</div>
+        <h3 class="feature-title">Automatic Writing</h3>
+        <p class="feature-text">The libretto emerged through automatic writing — stream-of-consciousness poetry described as "Rumi in Space" and "a Virginia Woolf walk through the mind."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="section-header">
+      <h2>🎶 Inspiration</h2>
+      <p>The ambient soundscapes that inform the opera's atmosphere</p>
+    </div>
+    
+    <div class="video-container">
+      <div class="video-placeholder">
+        <h3>Space Ambient Music by Nimanty</h3>
+        <p>Relax and journey through the cosmos with this curated playlist</p>
+        <a href="https://www.youtube.com/playlist?list=PLBrmUsi7dYLgHVsaH6d4mC__ZKmgnFrd4" target="_blank" class="btn btn-primary">
+          ▶️ Listen on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">🌌 COSMOS the OPERA</div>
+    
+    <div class="footer-links">
+      <a href="#libretto">Libretto</a>
+      <a href="#characters">Characters</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition Guide</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html">Sheet Music</a>
+    </div>
+    
+    <p class="footer-copyright">
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved.<br>
+      A product of <a href="https://aiunites.github.io/aiunites-site">AIUNITES</a> | 
+      by Tom Sans
+    </p>
+    
+    <div class="dmca-notice">
+      ⚠️ DMCA Protected. All content including lyrics, composition guides, and Vocal Resonance Notation 
+      system are original works. Hubble images used under NASA/ESA public domain policy with attribution.
+    </div>
+  </footer>
+
+  <!-- Floating Help Button -->
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeQUi49AdTBRjetz5MDFQgMIkm9-vOMb_ARKwYEz41j_Nfiwg/viewform?usp=pp_url&entry.2053726945=COSMOS+the+OPERA" target="_blank" class="help-fab">💬 Help / Feedback</a>
+</body>
+</html>

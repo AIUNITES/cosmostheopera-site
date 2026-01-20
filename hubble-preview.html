@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMOS the OPERA - Hubble Image Gallery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a0f;
+      color: #fff;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      text-align: center;
+      color: #a0a0b0;
+      margin-bottom: 40px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #12121a;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .character {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 5px;
+    }
+    .voice {
+      display: inline-block;
+      background: rgba(157, 78, 221, 0.3);
+      color: #9d4edd;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .object {
+      color: #00d4ff;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    .catalog {
+      color: #666;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .quote {
+      font-style: italic;
+      color: #a0a0b0;
+      border-left: 3px solid #ff6b9d;
+      padding-left: 12px;
+      font-size: 0.95rem;
+    }
+    .source {
+      margin-top: 15px;
+      font-size: 0.8rem;
+    }
+    .source a {
+      color: #00d4ff;
+      text-decoration: none;
+    }
+    .source a:hover {
+      text-decoration: underline;
+    }
+    .credit {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: #12121a;
+      border-radius: 10px;
+      color: #a0a0b0;
+      font-size: 0.9rem;
+    }
+    .credit a {
+      color: #00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌌 COSMOS the OPERA - Hubble Gallery</h1>
+  <p class="subtitle">15 Personified Cosmic Beings matched with iconic Hubble Space Telescope images</p>
+
+  <div class="gallery">
+
+    <!-- 1. The Observer / Soul - Helix Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0707a.jpg" alt="Helix Nebula - Eye of God" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Mezzo-Soprano</span>
+        <h2 class="character">The Observer / The Soul</h2>
+        <p class="object">🔭 Helix Nebula "Eye of God"</p>
+        <p class="catalog">NGC 7293 • 700 light-years • Aquarius</p>
+        <p class="quote">"My face is now a window in this world... and looks at you and wonders if you know where I am"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0707a/" target="_blank">ESA/Hubble heic0707a</a></p>
+      </div>
+    </div>
+
+    <!-- 2. The Light / Universe - Butterfly Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0910h.jpg" alt="Butterfly Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Soprano</span>
+        <h2 class="character">The Light / The Universe</h2>
+        <p class="object">🔭 Butterfly Nebula</p>
+        <p class="catalog">NGC 6302 • 3,800 light-years • Scorpius</p>
+        <p class="quote">"See the colors of the light... in so many ways, in so many shades, bending in so many waves"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0910h/" target="_blank">ESA/Hubble heic0910h</a></p>
+      </div>
+    </div>
+
+    <!-- 3. The Sun / Seeker - V838 Monocerotis -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0617a.jpg" alt="V838 Monocerotis Light Echo" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Tenor</span>
+        <h2 class="character">The Sun / The Seeker</h2>
+        <p class="object">🔭 V838 Monocerotis Light Echo</p>
+        <p class="catalog">V838 Mon • 20,000 light-years • Monoceros</p>
+        <p class="quote">"Did you say that I could be the sun to you? So warm and so bright, one truth in your life"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0617a/" target="_blank">ESA/Hubble heic0617a</a></p>
+      </div>
+    </div>
+
+    <!-- 4. The Twin / Mirror - Arp-Madore 417-391 -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/potw2149a.jpg" alt="Arp-Madore 417-391 Twin Galaxies" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Baritone</span>
+        <h2 class="character">The Twin / The Mirror</h2>
+        <p class="object">🔭 Arp-Madore 417-391</p>
+        <p class="catalog">Twin Galaxy Cores • 670 million light-years</p>
+        <p class="quote">"Were we once two bright suns roaming the galaxy together, orbiting each other?"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/potw2149a/" target="_blank">ESA/Hubble potw2149a</a></p>
+      </div>
+    </div>
+
+    <!-- 5. The Cosmos / We Come - Pillars of Creation -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic1501a.jpg" alt="Pillars of Creation" loading="lazy">
+      <div class="card-content">
+        <span class="voice">SATB Chorus</span>
+        <h2 class="character">The Cosmos / We Come</h2>
+        <p class="object">🔭 Pillars of Creation</p>
+        <p class="catalog">Eagle Nebula M16 • 6,500 light-years • Serpens</p>
+        <p class="quote">"We come into being, we are beautiful, we are lovely, we are infinite"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic1501a/" target="_blank">ESA/Hubble heic1501a</a></p>
+      </div>
+    </div>
+
+    <!-- 6. The Waves - Whirlpool Galaxy -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0506a.jpg" alt="Whirlpool Galaxy" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Ensemble</span>
+        <h2 class="character">The Waves</h2>
+        <p class="object">🔭 Whirlpool Galaxy</p>
+        <p class="catalog">M51 (NGC 5194/5195) • 23 million light-years • Canes Venatici</p>
+        <p class="quote">"You can feel the waves in everything... the waves of the creation, the waves of the creator"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0506a/" target="_blank">ESA/Hubble heic0506a</a></p>
+      </div>
+    </div>
+
+    <!-- 7. The Dark - Horsehead Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic1307a.jpg" alt="Horsehead Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Bass</span>
+        <h2 class="character">The Dark</h2>
+        <p class="object">🔭 Horsehead Nebula</p>
+        <p class="catalog">Barnard 33 • 1,500 light-years • Orion</p>
+        <p class="quote">"Some see the dark... do you see the dark... I see the light"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic1307a/" target="_blank">ESA/Hubble heic1307a</a></p>
+      </div>
+    </div>
+
+    <!-- 8. The Colors - Orion Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0601a.jpg" alt="Orion Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Soprano Coloratura</span>
+        <h2 class="character">The Colors</h2>
+        <p class="object">🔭 Orion Nebula</p>
+        <p class="catalog">M42 • 1,344 light-years • Orion</p>
+        <p class="quote">"See the colors of the light... the colors so beautiful, the colors so alive"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0601a/" target="_blank">ESA/Hubble heic0601a</a></p>
+      </div>
+    </div>
+
+    <!-- 9. The Journey - Mystic Mountain -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic1007a.jpg" alt="Mystic Mountain in Carina Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Tenor</span>
+        <h2 class="character">The Journey</h2>
+        <p class="object">🔭 Mystic Mountain</p>
+        <p class="catalog">Carina Nebula (NGC 3372) • 7,500 light-years • Carina</p>
+        <p class="quote">"This life is a journey, both endless and so brief, both finite and with infinity"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic1007a/" target="_blank">ESA/Hubble heic1007a</a></p>
+      </div>
+    </div>
+
+    <!-- 10. Infinity / The Stars - Hubble Deep Field -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0611a.jpg" alt="Hubble Ultra Deep Field" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Full Chorus</span>
+        <h2 class="character">Infinity / The Stars</h2>
+        <p class="object">🔭 Hubble Ultra Deep Field</p>
+        <p class="catalog">HUDF • 10,000+ galaxies • 13 billion light-years</p>
+        <p class="quote">"An infinite number of stars swirling around in a cloud"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0611a/" target="_blank">ESA/Hubble heic0611a</a></p>
+      </div>
+    </div>
+
+    <!-- 11. The Window / Face - Cat's Eye Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/opo0432d.jpg" alt="Cat's Eye Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Mezzo-Soprano</span>
+        <h2 class="character">The Window / The Face</h2>
+        <p class="object">🔭 Cat's Eye Nebula</p>
+        <p class="catalog">NGC 6543 • 3,000 light-years • Draco</p>
+        <p class="quote">"My face is now a window in this world, that hangs here for a place to hold these eyes"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/opo0432d/" target="_blank">ESA/Hubble opo0432d</a></p>
+      </div>
+    </div>
+
+    <!-- 12. We Are One - Antennae Galaxies -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic0615a.jpg" alt="Antennae Galaxies" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Duet + Chorus</span>
+        <h2 class="character">We Are One</h2>
+        <p class="object">🔭 Antennae Galaxies</p>
+        <p class="catalog">NGC 4038/4039 • 45 million light-years • Corvus</p>
+        <p class="quote">"Everything is one, everything is a wave, all is the same, we are all the same"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic0615a/" target="_blank">ESA/Hubble heic0615a</a></p>
+      </div>
+    </div>
+
+    <!-- 13. Feeling Again - Southern Ring Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/opo9838a.jpg" alt="Southern Ring Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Soprano + Tenor Duet</span>
+        <h2 class="character">Feeling Again</h2>
+        <p class="object">🔭 Southern Ring Nebula</p>
+        <p class="catalog">NGC 3132 "Eight-Burst" • 2,000 light-years • Vela</p>
+        <p class="quote">"You make me feel that feeling again, like I am holding my best friend"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/opo9838a/" target="_blank">ESA/Hubble opo9838a</a></p>
+      </div>
+    </div>
+
+    <!-- 14. You're A Star - Eta Carinae -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic1904a.jpg" alt="Eta Carinae" loading="lazy">
+      <div class="card-content">
+        <span class="voice">Full Ensemble</span>
+        <h2 class="character">You're A Star (Finale)</h2>
+        <p class="object">🔭 Eta Carinae</p>
+        <p class="catalog">η Car • 7,500 light-years • Carina</p>
+        <p class="quote">"You're a star, everybody loves you... reach out for the stars and show them your heart"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic1904a/" target="_blank">ESA/Hubble heic1904a</a></p>
+      </div>
+    </div>
+
+    <!-- 15. Eternal Return - Ring Nebula -->
+    <div class="card">
+      <img src="https://cdn.esahubble.org/archives/images/screen/heic1310a.jpg" alt="Ring Nebula" loading="lazy">
+      <div class="card-content">
+        <span class="voice">All Forces</span>
+        <h2 class="character">The Eternal Return</h2>
+        <p class="object">🔭 Ring Nebula</p>
+        <p class="catalog">M57 • 2,300 light-years • Lyra</p>
+        <p class="quote">"All melodic lines converge on a single note — the note that began the opera"</p>
+        <p class="source">Source: <a href="https://esahubble.org/images/heic1310a/" target="_blank">ESA/Hubble heic1310a</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="credit">
+    <p><strong>Image Credits:</strong> NASA, ESA, and the Hubble Heritage Team (STScI/AURA)</p>
+    <p>All Hubble images are in the public domain per <a href="https://www.nasa.gov/nasa-brand-center/images-and-media/" target="_blank">NASA Media Usage Guidelines</a></p>
+    <p style="margin-top: 15px;">© 2002-2026 COSMOS the OPERA • <a href="index.html">Back to Website</a></p>
+  </div>
+
+</body>
+</html>

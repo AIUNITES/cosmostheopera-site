@@ -1,0 +1,11 @@
+# Robots.txt for COSMOS the OPERA
+# https://cosmostheopera.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://aiunites.github.io/cosmostheopera-site/sitemap.xml
+
+# Crawl-delay suggestion
+Crawl-delay: 1

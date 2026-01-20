@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheet Music Index | COSMOS the OPERA</title>
+  <meta name="description" content="Complete ASCII vocal sheet music index for COSMOS the OPERA. Navigate all 12 scenes across 3 acts with Vocal Resonance Notation.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg-dark: #0a0a0f; --bg-card: #12121a; --bg-score: #1a1a24; --text-primary: #ffffff; --text-secondary: #a0a0b0; --accent-purple: #9d4edd; --accent-cyan: #00d4ff; --accent-gold: #ffd700; --accent-pink: #ff6b9d; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+    
+    .sheet-nav { background: var(--bg-card); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .sheet-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .sheet-nav a { color: var(--text-secondary); text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 15px; font-size: 0.85rem; transition: all 0.3s; }
+    .sheet-nav a:hover { background: rgba(157,78,221,0.2); color: var(--accent-purple); }
+    .sheet-nav a.active { background: rgba(157,78,221,0.3); color: var(--accent-purple); }
+    .sheet-nav a.climax { background: rgba(255,107,157,0.2); color: var(--accent-pink); }
+    
+    .hero { padding: 60px 20px; text-align: center; background: radial-gradient(ellipse at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 50%), var(--bg-dark); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 20px; background: linear-gradient(135deg, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+    
+    .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    
+    .stats { background: var(--bg-card); border-radius: 15px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1); }
+    .stats h2 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
+    .stat-item { padding: 15px; background: rgba(255,255,255,0.03); border-radius: 10px; }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--accent-cyan); }
+    .stat-label { font-size: 0.85rem; color: var(--text-secondary); margin-top: 5px; }
+    
+    .legend { background: var(--bg-card); border-radius: 15px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1); }
+    .legend h2 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+    .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+    .legend-item { display: flex; gap: 10px; align-items: flex-start; }
+    .legend-code { font-family: 'Courier New', monospace; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 5px; color: var(--accent-cyan); font-size: 0.9rem; white-space: nowrap; }
+    .legend-desc { font-size: 0.85rem; color: var(--text-secondary); }
+    
+    .acts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
+    .act-card { background: var(--bg-card); border-radius: 15px; padding: 25px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
+    .act-card:hover { transform: translateY(-5px); border-color: var(--accent-purple); }
+    .act-card.act1 { border-left: 4px solid var(--accent-purple); }
+    .act-card.act2 { border-left: 4px solid var(--accent-cyan); }
+    .act-card.act3 { border-left: 4px solid var(--accent-gold); }
+    .act-card.climax { border-left: 4px solid var(--accent-pink); background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), var(--bg-card)); }
+    .act-card h3 { color: var(--accent-gold); margin-bottom: 10px; font-size: 1.2rem; }
+    .act-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; }
+    .act-card ul { list-style: none; margin-bottom: 15px; }
+    .act-card li { color: var(--text-secondary); font-size: 0.85rem; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .act-card li:last-child { border-bottom: none; }
+    .act-card .scene-num { color: var(--accent-cyan); font-weight: 600; margin-right: 8px; }
+    .act-card a.view-btn { display: inline-block; padding: 10px 20px; background: rgba(157, 78, 221, 0.2); color: var(--accent-purple); text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s; }
+    .act-card a.view-btn:hover { background: rgba(157, 78, 221, 0.4); }
+    .act-card.climax a.view-btn { background: rgba(255, 107, 157, 0.2); color: var(--accent-pink); }
+    .act-card.climax a.view-btn:hover { background: rgba(255, 107, 157, 0.4); }
+    
+    .climax-banner { background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 215, 0, 0.1)); border: 2px solid var(--accent-pink); border-radius: 15px; padding: 25px; text-align: center; margin-bottom: 40px; }
+    .climax-banner h2 { color: var(--accent-pink); margin-bottom: 10px; }
+    .climax-banner p { color: var(--text-secondary); font-size: 0.95rem; }
+    
+    .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.85rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+    
+    @media (max-width: 768px) { .nav { flex-direction: column; gap: 15px; } .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; } .sheet-nav a { font-size: 0.75rem; padding: 4px 8px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html" class="active">Sheet Music</a>
+    </div>
+  </nav>
+
+  <!-- Sheet Music Navigation - TOP -->
+  <div class="sheet-nav">
+    <div class="sheet-nav-inner">
+      <a href="sheet-music.html" class="active">Index</a>
+      <a href="sheet-music-act1-p1.html">Act I: 1-2</a>
+      <a href="sheet-music-act1-p2.html">Act I: 3-5</a>
+      <a href="sheet-music-act2.html">Act II</a>
+      <a href="sheet-music-act3-p1.html">Act III: 1-2</a>
+      <a href="sheet-music-act3-p2.html" class="climax">Act III: 3-5 ★</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1>🎼 Complete Sheet Music</h1>
+    <p class="hero-subtitle">ASCII Vocal Notation with Vocal Resonance Notation (VRN) codes for all 12 scenes across 3 acts. Every line from the prose fully notated.</p>
+  </header>
+
+  <main class="content">
+
+    <!-- Statistics -->
+    <section class="stats">
+      <h2>📊 Score Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Acts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Scenes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Pages</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">~100</div>
+          <div class="stat-label">Minutes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">A7</div>
+          <div class="stat-label">Highest Note</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">C2</div>
+          <div class="stat-label">Lowest Note</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Climax Banner -->
+    <div class="climax-banner">
+      <h2>★ SUPREME CLIMAX ★</h2>
+      <p>Act III Part 2 contains the absolute pinnacle of COSMOS the OPERA:<br>
+      <strong>"Feeling Again"</strong> features Tenor E7 and Soprano A7 — the highest notes in the entire work.</p>
+    </div>
+
+    <!-- VRN Legend -->
+    <section class="legend">
+      <h2>🎤 Vocal Resonance Notation Legend</h2>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="legend-code">[C]</span>
+          <span class="legend-desc">Chest resonance</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">[CM]</span>
+          <span class="legend-desc">Chest-Mix</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">[M]</span>
+          <span class="legend-desc">Mixed voice</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">[HM]</span>
+          <span class="legend-desc">Head-Mix</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">[H]</span>
+          <span class="legend-desc">Head voice</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">[P]</span>
+          <span class="legend-desc">Pharyngeal</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">[Wr]</span>
+          <span class="legend-desc">Whistle register</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">●</span>
+          <span class="legend-desc">Sustained note</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">♩</span>
+          <span class="legend-desc">Quarter note</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">~~~~</span>
+          <span class="legend-desc">Vibrato/sustain</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">→</span>
+          <span class="legend-desc">Crescendo/transition</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-code">niente</span>
+          <span class="legend-desc">Fade to nothing</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Act Cards -->
+    <div class="acts-grid">
+      
+      <!-- Act I Part 1 -->
+      <div class="act-card act1">
+        <h3>🌅 Act I: We Come (Part 1)</h3>
+        <p>The awakening and the first questions of existence.</p>
+        <ul>
+          <li><span class="scene-num">1.</span> "Do You See" — Observer (Mezzo)</li>
+          <li><span class="scene-num">2.</span> "Look" — Seeker (Tenor)</li>
+        </ul>
+        <a href="sheet-music-act1-p1.html" class="view-btn">View Score →</a>
+      </div>
+      
+      <!-- Act I Part 2 -->
+      <div class="act-card act1">
+        <h3>🌅 Act I: We Come (Part 2)</h3>
+        <p>The window, the song, and the arrival of beings.</p>
+        <ul>
+          <li><span class="scene-num">3.</span> "A Window" — Observer (Mezzo)</li>
+          <li><span class="scene-num">4.</span> "I Sing" — Chorus + Soprano solo</li>
+          <li><span class="scene-num">5.</span> "We Come" — All Forces</li>
+        </ul>
+        <a href="sheet-music-act1-p2.html" class="view-btn">View Score →</a>
+      </div>
+      
+      <!-- Act II -->
+      <div class="act-card act2">
+        <h3>🌈 Act II: Into</h3>
+        <p>The exploration of light, color, and the waves of existence.</p>
+        <ul>
+          <li><span class="scene-num">1.</span> "The Colors" — Light (Soprano coloratura)</li>
+          <li><span class="scene-num">2.</span> "The Waves" — Observer + Chorus</li>
+        </ul>
+        <a href="sheet-music-act2.html" class="view-btn">View Score →</a>
+      </div>
+      
+      <!-- Act III Part 1 -->
+      <div class="act-card act3">
+        <h3>☀️ Act III: Beings (Part 1)</h3>
+        <p>The cosmic duets of connection between stars.</p>
+        <ul>
+          <li><span class="scene-num">1.</span> "I the Sun" — Soprano + Tenor duet</li>
+          <li><span class="scene-num">2.</span> "My Twin" — Tenor + Baritone duet</li>
+        </ul>
+        <a href="sheet-music-act3-p1.html" class="view-btn">View Score →</a>
+      </div>
+      
+      <!-- Act III Part 2 - CLIMAX -->
+      <div class="act-card act3 climax">
+        <h3>★ Act III: Beings (Part 2) ★</h3>
+        <p><strong>SUPREME CLIMAX</strong> — The pinnacle of the opera.</p>
+        <ul>
+          <li><span class="scene-num">3.</span> "Feeling Again" ★ Tenor E7 + Soprano A7</li>
+          <li><span class="scene-num">4.</span> "You're A Star" — The Dismissal</li>
+          <li><span class="scene-num">F.</span> "The Eternal Return" — Finale</li>
+        </ul>
+        <a href="sheet-music-act3-p2.html" class="view-btn">View Climax ★ →</a>
+      </div>
+      
+    </div>
+
+    <!-- Sheet Music Navigation - BOTTOM -->
+    <div class="sheet-nav" style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: none; padding-top: 20px;">
+      <div class="sheet-nav-inner">
+        <a href="sheet-music.html" class="active">Index</a>
+        <a href="sheet-music-act1-p1.html">Act I: 1-2</a>
+        <a href="sheet-music-act1-p2.html">Act I: 3-5</a>
+        <a href="sheet-music-act2.html">Act II</a>
+        <a href="sheet-music-act3-p1.html">Act III: 1-2</a>
+        <a href="sheet-music-act3-p2.html" class="climax">Act III: 3-5 ★</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+    <a href="index.html">Home</a> | <a href="notation.html">Vocal Resonance Notation</a> | <a href="gallery.html">Hubble Gallery</a></p>
+  </footer>
+</body>
+</html>

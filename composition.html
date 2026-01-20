@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Composition Guide - COSMOS the OPERA</title>
+  <meta name="description" content="Complete AI composition and orchestration guide for COSMOS the OPERA - a trance opera with full orchestra, electronic elements, and cosmic soundscapes.">
+  <meta name="keywords" content="opera composition, AI music, orchestration guide, trance opera, music composition, opera instrumentation">
+  <meta name="author" content="Tom Sans / AIUNITES">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="AI Composition Guide - COSMOS the OPERA">
+  <meta property="og:description" content="Detailed composition and orchestration guide for creating a trance opera with cosmic themes.">
+  <meta property="og:url" content="https://cosmostheopera.com/composition.html">
+  <meta property="og:type" content="article">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #00d4ff;
+      --accent-gold: #ffd700;
+      --accent-pink: #ff6b9d;
+      --accent-green: #4ade80;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+    
+    /* Navigation */
+    .nav {
+      background: var(--bg-card);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-cyan);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: 
+        radial-gradient(ellipse at 70% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff, var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Content */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    
+    .section {
+      margin-bottom: 60px;
+    }
+    
+    .section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .section h2::before {
+      content: "";
+      width: 5px;
+      height: 30px;
+      background: linear-gradient(180deg, var(--accent-purple), var(--accent-cyan));
+      border-radius: 3px;
+    }
+    
+    .section h3 {
+      font-size: 1.3rem;
+      margin: 30px 0 15px;
+      color: var(--accent-cyan);
+    }
+    
+    .section p {
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    /* Instrument Grid */
+    .instrument-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .instrument-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .instrument-card h4 {
+      color: var(--accent-cyan);
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    
+    .instrument-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .instrument-card li {
+      color: var(--text-secondary);
+      padding: 5px 0;
+      font-size: 0.95rem;
+    }
+    
+    .instrument-card li::before {
+      content: "• ";
+      color: var(--accent-gold);
+    }
+    
+    /* Scene Cards */
+    .scene-card {
+      background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(0, 212, 255, 0.05));
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      border-left: 4px solid var(--accent-purple);
+    }
+    
+    .scene-card h3 {
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+    }
+    
+    .scene-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    
+    .scene-meta span {
+      background: rgba(255,255,255,0.1);
+      padding: 5px 12px;
+      border-radius: 20px;
+      color: var(--accent-cyan);
+    }
+    
+    .scene-card p {
+      color: var(--text-secondary);
+    }
+    
+    /* Musical Elements */
+    .musical-element {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+    }
+    
+    .musical-element h4 {
+      color: var(--accent-pink);
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    
+    /* Code Block */
+    .code-block {
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 25px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin: 20px 0;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    
+    /* Voice Table */
+    .voice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: var(--bg-card);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    
+    .voice-table th,
+    .voice-table td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .voice-table th {
+      background: rgba(157, 78, 221, 0.2);
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+    
+    .voice-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    /* Motif Card */
+    .motif-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .motif-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .motif-name {
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    
+    .motif-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    /* Performance Note */
+    .performance-note {
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 4px solid var(--accent-gold);
+      margin: 20px 0;
+    }
+    
+    .performance-note h4 {
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--bg-card);
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .footer p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .instrument-grid,
+      .motif-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .scene-meta {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html" class="active">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html">Sheet Music</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🎼 AI Composition Guide</h1>
+    <p class="hero-subtitle">
+      Complete orchestration and musical composition guide for COSMOS the OPERA — 
+      a trance opera blending electronic elements with full symphony orchestra.
+    </p>
+  </section>
+
+  <!-- Main Content -->
+  <main class="content">
+    
+    <!-- Overview -->
+    <section class="section">
+      <h2>Musical Overview</h2>
+      <p>
+        COSMOS the OPERA fuses the driving rhythms and euphoric melodies of trance music with 
+        the expressive, dramatic vocals and arrangements of opera. The result is a cosmic 
+        soundscape that carries the listener through consciousness, perception, and connection.
+      </p>
+      
+      <div class="performance-note">
+        <h4>📋 Performance Specifications</h4>
+        <ul style="color: var(--text-secondary); padding-left: 20px;">
+          <li><strong>Duration:</strong> Approximately 100 minutes (Act I: 35 min, Act II: 25 min, Act III: 40 min)</li>
+          <li><strong>Orchestra Size:</strong> 90-100 musicians</li>
+          <li><strong>Amplification:</strong> Unamplified except for synthesizer elements</li>
+          <li><strong>Recording Recommendation:</strong> Large concert hall with warm acoustics; consider immersive sound design</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Instrumentation -->
+    <section class="section">
+      <h2>Instrumentation</h2>
+      
+      <div class="instrument-grid">
+        <div class="instrument-card">
+          <h4>🎻 Strings</h4>
+          <ul>
+            <li>16 First Violins</li>
+            <li>14 Second Violins</li>
+            <li>12 Violas</li>
+            <li>10 Cellos</li>
+            <li>8 Double Basses</li>
+          </ul>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎺 Brass</h4>
+          <ul>
+            <li>4 Horns</li>
+            <li>3 Trumpets</li>
+            <li>3 Trombones</li>
+            <li>1 Tuba</li>
+          </ul>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🪕 Woodwinds</h4>
+          <ul>
+            <li>3 Flutes (3rd doubling Piccolo)</li>
+            <li>2 Oboes, English Horn</li>
+            <li>3 Clarinets, Bass Clarinet</li>
+            <li>3 Bassoons, Contrabassoon</li>
+          </ul>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🥁 Percussion</h4>
+          <ul>
+            <li>Timpani</li>
+            <li>Suspended Cymbals, Gong, Tam-tam</li>
+            <li>Tubular Bells, Vibraphone, Glockenspiel</li>
+            <li>Triangle, Bass Drum</li>
+          </ul>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎹 Keyboards</h4>
+          <ul>
+            <li>2 Harps</li>
+            <li>Celesta</li>
+            <li>Synthesizer (cosmic soundscapes)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voices -->
+    <section class="section">
+      <h2>Vocal Requirements</h2>
+      
+      <table class="voice-table">
+        <thead>
+          <tr>
+            <th>Voice</th>
+            <th>Character</th>
+            <th>Range</th>
+            <th>Requirements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Soprano</strong></td>
+            <td>The Light / The Universe</td>
+            <td>E4-C6</td>
+            <td>Coloratura facility, sustained high notes</td>
+          </tr>
+          <tr>
+            <td><strong>Mezzo-Soprano</strong></td>
+            <td>The Observer / The Soul</td>
+            <td>A3-B5</td>
+            <td>Depth and warmth in middle register</td>
+          </tr>
+          <tr>
+            <td><strong>Tenor</strong></td>
+            <td>The Sun / The Seeker</td>
+            <td>C3-B♭4</td>
+            <td>Lyric voice with heroic quality</td>
+          </tr>
+          <tr>
+            <td><strong>Baritone</strong></td>
+            <td>The Twin / The Mirror</td>
+            <td>G2-G4</td>
+            <td>Rich, grounded tone (Finale only)</td>
+          </tr>
+          <tr>
+            <td><strong>SATB Chorus</strong></td>
+            <td>The Cosmos / Humanity</td>
+            <td>Full range</td>
+            <td>Mixed chorus, varied textures</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Scene Breakdowns -->
+    <section class="section">
+      <h2>Scene-by-Scene Composition</h2>
+      
+      <h3>ACT I: We Come</h3>
+      
+      <div class="scene-card">
+        <h3>Overture: "Genesis"</h3>
+        <div class="scene-meta">
+          <span>⏱️ 5 minutes</span>
+          <span>🎵 Largo misterioso → Andante luminoso</span>
+          <span>🔑 C minor → C major</span>
+        </div>
+        <p>
+          Opens in profound silence, then a single low C in the double basses (pppp), barely audible. 
+          Gradually, overtones emerge: cellos add a perfect fifth, violas a major third. 
+          The orchestra builds in a slow, expanding harmonic series mimicking the birth of light from darkness.
+        </p>
+        <div class="musical-element">
+          <h4>Notable Effects</h4>
+          <p>String harmonics creating "stellar shimmer," synthesizer pads suggesting cosmic background radiation.</p>
+        </div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>Scene 1: "Do You See"</h3>
+        <div class="scene-meta">
+          <span>🎤 Mezzo-Soprano + Chorus</span>
+          <span>🎵 Moderato contemplativo ♩=72</span>
+          <span>🔑 C major / A minor (ambiguous)</span>
+        </div>
+        <p>
+          The opening question "do you see" begins unaccompanied on middle C, then descends a minor third (haunting, inward). 
+          The phrase "when you close your eyes" rises chromatically, suggesting the paradox of inner vision.
+        </p>
+        <div class="musical-element">
+          <h4>Orchestration</h4>
+          <p>Sparse strings (sul tasto) create a veiled, introspective quality. Harp arpeggios in whole tones. 
+          Vibraphone adds shimmer on "light." Chorus enters in whispered spoken-sung texture.</p>
+        </div>
+        <div class="musical-element">
+          <h4>Climax on "infinite number of stars"</h4>
+          <p>Full orchestra enters fortissimo. Soprano joins on high B-flat, sustained over churning string figures. 
+          Glockenspiel cascades suggesting countless stars. Key modulates to E-flat major (brightness).</p>
+        </div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>Scene 4: "I Sing"</h3>
+        <div class="scene-meta">
+          <span>🎤 Full Chorus + Soprano solo</span>
+          <span>🎵 Allegro gioioso ♩=126</span>
+          <span>🔑 D major</span>
+        </div>
+        <p>
+          Jubilant, anthemic, affirmative. "I sing to your soul" opens homophonic, forte, all voices in unison rhythm. 
+          Brass fanfares punctuate.
+        </p>
+        <div class="musical-element">
+          <h4>Main Theme: "We want to be free"</h4>
+          <p>Melodic line is pentatonic (D-E-F#-A-B), suggesting universality and folk-like simplicity. 
+          This becomes the principal theme of Act I, building through three iterations with increasing intensity.</p>
+        </div>
+      </div>
+      
+      <h3>ACT II: Into</h3>
+      
+      <div class="scene-card">
+        <h3>Scene 1: "The Colors"</h3>
+        <div class="scene-meta">
+          <span>🎤 Soprano (Light)</span>
+          <span>🎵 Allegretto leggiero ♩=96</span>
+          <span>🔑 G major with constant modulations</span>
+        </div>
+        <p>
+          Shimmering, iridescent, ecstatic. Soprano entrance is high and bright (high G), 
+          with melismatic runs on "colors" (16th note flourishes). Coloratura passages throughout suggest dancing light.
+        </p>
+        <div class="musical-element">
+          <h4>Kaleidoscopic Effect</h4>
+          <p>Harmonic progression moves through a circle of major thirds (G→B→E♭→G), 
+          creating a prismatic effect. Each key illuminated with different orchestral colors.</p>
+        </div>
+        <div class="musical-element">
+          <h4>Climax</h4>
+          <p>"The colors of your love" refrain repeated three times: G major (p, tender), A major (mf, growing), 
+          B♭ major (f, passionate). Final: Soprano soars to high C, held for 6 beats over shimmering orchestral tremolo.</p>
+        </div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>Scene 2: "The Waves"</h3>
+        <div class="scene-meta">
+          <span>🎤 Mezzo-Soprano + Chorus</span>
+          <span>🎵 Andante ondeggiante ♩=69</span>
+          <span>🔑 E minor / G major (modal interchange)</span>
+        </div>
+        <p>
+          Hypnotic, meditative, building to ecstatic revelation. Undulating patterns in strings 
+          (3 against 4 polyrhythm) create a sense of oceanic motion.
+        </p>
+        <div class="musical-element">
+          <h4>"Everything is one"</h4>
+          <p>Sudden stillness. Solo mezzo-soprano, unaccompanied, on a single pitch (middle E), sustained for 4 beats. 
+          Chorus gradually hums the same note, one voice at a time, building into a rich E major chord.</p>
+        </div>
+      </div>
+      
+      <h3>ACT III: Beings</h3>
+      
+      <div class="scene-card">
+        <h3>Scene 1: "I the Sun"</h3>
+        <div class="scene-meta">
+          <span>🎤 Soprano + Tenor duet</span>
+          <span>🎵 Andante appassionato</span>
+          <span>🔑 E♭ major / C minor (ambiguous)</span>
+        </div>
+        <p>
+          Yearning, passionate, tinged with melancholy of separation. Twin suns reach toward each other 
+          but never quite touch — call and response, never singing together until "see the sun as one."
+        </p>
+        <div class="musical-element">
+          <h4>Duet Technique</h4>
+          <p>Soprano and tenor sing increasingly intertwined lines but always in call-and-response. 
+          First unison on "if we could only see the sun as one" (middle G), soft and tender, harp only.</p>
+        </div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>Scene 3: "Feeling Again" — CLIMAX</h3>
+        <div class="scene-meta">
+          <span>🎤 Tenor → Soprano + Tenor</span>
+          <span>🎵 Andante espressivo → Allegro con fuoco ♩=132</span>
+          <span>🔑 D major → E major</span>
+        </div>
+        <p>
+          From tender reminiscence to passionate declaration. This scene contains the climactic moment 
+          of the entire opera.
+        </p>
+        <div class="musical-element">
+          <h4>Ultimate Climax: "and show you what love can do"</h4>
+          <p><strong>TENOR:</strong> E7 (extreme high note for tenor role) sustained with full power.<br>
+          <strong>SOPRANO:</strong> A7 (stratospheric high A) brilliant, triumphant.<br>
+          Both voices hold for 12 beats over radiant D major chord, fff, slow diminuendo to forte.</p>
+        </div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>Finale: "The Eternal Return"</h3>
+        <div class="scene-meta">
+          <span>🎤 All Forces</span>
+          <span>🎵 Adagio → Moderato → Maestoso</span>
+          <span>🔑 Returns to C major</span>
+        </div>
+        <p>
+          All themes return, woven into culminating counterpoint. All melodic lines converge on a single note — 
+          middle C — the note that began the opera. Then expand outward into a C major chord spanning 
+          the full range from lowest to highest possible notes.
+        </p>
+        <div class="musical-element">
+          <h4>Final Measures</h4>
+          <p>Chord held for 12 beats (fff), then 16-beat diminuendo until only the highest note remains — 
+          a single piccolo playing high C (pppp), like a distant star. Silence. 
+          Conductor holds 8 beats before lowering baton.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thematic Motifs -->
+    <section class="section">
+      <h2>Thematic Musical Motifs</h2>
+      <p>These recurring motifs weave throughout the opera, transformed and recombined:</p>
+      
+      <div class="motif-grid">
+        <div class="motif-card">
+          <div class="motif-name">1. The Light Motif</div>
+          <p class="motif-desc">Ascending major scale fragments, often in parallel motion. Represents illumination and awareness.</p>
+        </div>
+        
+        <div class="motif-card">
+          <div class="motif-name">2. The Question Motif</div>
+          <p class="motif-desc">Rising minor thirds followed by falling fifths. Used for "do you see" and other questions.</p>
+        </div>
+        
+        <div class="motif-card">
+          <div class="motif-name">3. The Unity Motif</div>
+          <p class="motif-desc">Converging melodic lines meeting on unison. Represents connection and oneness.</p>
+        </div>
+        
+        <div class="motif-card">
+          <div class="motif-name">4. The Separation Motif</div>
+          <p class="motif-desc">Diverging lines moving in contrary motion. Represents the longing of twin suns.</p>
+        </div>
+        
+        <div class="motif-card">
+          <div class="motif-name">5. The Wave Motif</div>
+          <p class="motif-desc">Undulating scalar patterns in irregular rhythms. Oceanic, cosmic flow.</p>
+        </div>
+        
+        <div class="motif-card">
+          <div class="motif-name">6. The Love Motif</div>
+          <p class="motif-desc">Warm parallel thirds, resolving to consonant harmony. Tenderness and affection.</p>
+        </div>
+        
+        <div class="motif-card">
+          <div class="motif-name">7. The Cosmos Motif</div>
+          <p class="motif-desc">Sustained chords with slowly shifting overtones. Vastness and eternity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Musical Influences -->
+    <section class="section">
+      <h2>Musical Influences</h2>
+      <p>The composition draws from multiple traditions:</p>
+      
+      <div class="instrument-grid">
+        <div class="instrument-card">
+          <h4>🎭 Wagner</h4>
+          <p style="color: var(--text-secondary);">Rich harmonic language, leitmotifs, through-composed structure</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>✨ Messiaen</h4>
+          <p style="color: var(--text-secondary);">Cosmic spirituality, modes of limited transposition, orchestral color</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎵 John Adams</h4>
+          <p style="color: var(--text-secondary);">Rhythmic vitality, minimalist pulse, tonal accessibility</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🌊 Kaija Saariaho</h4>
+          <p style="color: var(--text-secondary);">Spectral textures, electronic integration, ethereal atmospheres</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎧 Trance Music</h4>
+          <p style="color: var(--text-secondary);">4/4 driving beat (130-138 BPM), builds and breakdowns, euphoric climaxes</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Staging Suggestions -->
+    <section class="section">
+      <h2>Staging Suggestions</h2>
+      
+      <div class="performance-note">
+        <h4>🎬 Visual Design</h4>
+        <ul style="color: var(--text-secondary); padding-left: 20px;">
+          <li>Minimal, abstract sets using light and projection</li>
+          <li>Projections of cosmic imagery (nebulae, stars, galaxies, light waves)</li>
+          <li>Soloists often spotlit against darkness</li>
+          <li>Chorus positioned on risers behind orchestra, becoming part of the cosmic backdrop</li>
+        </ul>
+      </div>
+      
+      <div class="performance-note">
+        <h4>🎭 Interpretive Notes</h4>
+        <ul style="color: var(--text-secondary); padding-left: 20px;">
+          <li>Balance intellectual/cerebral with deeply emotional/spiritual</li>
+          <li>Repeating texts should not feel redundant but mantra-like, each repetition revealing new depth</li>
+          <li>The opera is fundamentally about consciousness, connection, and the nature of existence</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+      <a href="index.html">Back to Home</a> | 
+      <a href="notation.html">Vocal Resonance Notation</a>
+    </p>
+  </footer>
+</body>
+</html>

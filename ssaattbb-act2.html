@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Act II: Into - SSAATTBB Score | COSMOS the OPERA</title>
+  <meta name="description" content="Act II SSAATTBB orchestral score for COSMOS the OPERA - The Colors and The Waves.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg-dark: #0a0a0f; --bg-card: #12121a; --bg-score: #1a1a24; --text-primary: #ffffff; --text-secondary: #a0a0b0; --accent-purple: #9d4edd; --accent-cyan: #00d4ff; --accent-gold: #ffd700; --accent-pink: #ff6b9d; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+    .sheet-nav { background: var(--bg-card); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .sheet-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+    .sheet-nav a { color: var(--text-secondary); text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 15px; font-size: 0.85rem; transition: all 0.3s; }
+    .sheet-nav a:hover { background: rgba(157,78,221,0.2); color: var(--accent-purple); }
+    .sheet-nav a.active-gold { background: rgba(255,215,0,0.3); color: var(--accent-gold); }
+    .sheet-nav a.climax { background: rgba(255,107,157,0.2); color: var(--accent-pink); }
+    .sheet-nav .label { font-weight: 600; font-size: 0.8rem; margin-right: 5px; }
+    .sheet-nav .divider { color: rgba(255,255,255,0.3); margin: 0 5px; }
+    .act-header { padding: 40px 20px; text-align: center; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(255, 215, 0, 0.1)); }
+    .act-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; background: linear-gradient(135deg, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .act-header p { color: var(--text-secondary); font-size: 1rem; }
+    .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .score-section { margin-bottom: 40px; }
+    .score-header { background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(157, 78, 221, 0.1)); border-radius: 10px 10px 0 0; padding: 20px; border-left: 4px solid var(--accent-cyan); }
+    .score-header h3 { color: var(--accent-gold); font-size: 1.3rem; margin-bottom: 5px; }
+    .score-meta { display: flex; gap: 15px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); }
+    .score-meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 15px; }
+    .score-block { background: var(--bg-score); border-radius: 0 0 10px 10px; padding: 20px; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); border-top: none; }
+    .score-block pre { font-family: 'Courier New', 'Consolas', 'Monaco', monospace; font-size: 11px; line-height: 1.3; color: var(--text-secondary); white-space: pre; margin: 0; }
+    .page-nav { display: flex; justify-content: space-between; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; flex-wrap: wrap; gap: 10px; }
+    .page-nav a { color: var(--accent-cyan); text-decoration: none; padding: 12px 24px; background: rgba(0,212,255,0.1); border-radius: 25px; transition: all 0.3s; }
+    .page-nav a:hover { background: rgba(0,212,255,0.2); }
+    .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.85rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+    @media (max-width: 768px) { .nav { flex-direction: column; gap: 15px; } .score-block pre { font-size: 9px; } .sheet-nav a { font-size: 0.7rem; padding: 4px 8px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html" class="active">Sheet Music</a>
+    </div>
+  </nav>
+
+  <div class="sheet-nav">
+    <div class="sheet-nav-inner">
+      <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+      <a href="sheet-music.html">Index</a>
+      <a href="sheet-music-act1-p1.html">I:1-2</a>
+      <a href="sheet-music-act1-p2.html">I:3-5</a>
+      <a href="sheet-music-act2.html">II</a>
+      <a href="sheet-music-act3-p1.html">III:1-2</a>
+      <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+      <span class="divider">|</span>
+      <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+      <a href="ssaattbb-index.html">Index</a>
+      <a href="ssaattbb-act1.html">Act I</a>
+      <a href="ssaattbb-act2.html" class="active-gold">Act II</a>
+      <a href="ssaattbb-act3.html">Act III</a>
+    </div>
+  </div>
+
+  <header class="act-header">
+    <h1>🌈 ACT II — INTO</h1>
+    <p>SSAATTBB Orchestral Score • "The Exploration of Perception" • ~25 minutes</p>
+  </header>
+
+  <main class="content">
+
+    <!-- ENTR'ACTE -->
+    <section class="score-section" id="entracte">
+      <div class="score-header">
+        <h3>Entr'acte: "Prism"</h3>
+        <div class="score-meta">
+          <span>🎻 Orchestra Only</span>
+          <span>⏱️ Lento ♩=48</span>
+          <span>🔑 Chromatic (12 keys)</span>
+          <span>⌛ 3 min</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  SPECTRAL UNFOLDING — Solo Violin ascending chromatic scale                        ppp → mp  ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  Each pitch (4 beats each) = different instrumental color:                                   ║
+║                                                                                              ║
+║    C:  Double Basses (ppp)        │  F#: Clarinet (pp)                                       ║
+║    C#: Cellos (ppp)               │  G:  Oboe (pp)                                           ║
+║    D:  Violas (ppp)               │  G#: English Horn (pp)                                   ║
+║    D#: Violins II (pp)            │  A:  Flute (p)                                           ║
+║    E:  Violins I (pp)             │  A#: Piccolo (p)                                         ║
+║    F:  Bass Clarinet (pp)         │  B:  Celesta (p)                                         ║
+║                                   │  C:  Glockenspiel + all (mp)                             ║
+║                                                                                              ║
+║  HARPS 1 & 2: Continuous glissandi throughout — spectrum of colors                           ║
+║  SYNTHESIZER: Prism-like pad, shimmering                                                     ║
+║                                                                                              ║
+║  Final: All instruments converge on C major chord, pp → mf → fade to silence                 ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- SCENE 1: THE COLORS -->
+    <section class="score-section" id="scene1">
+      <div class="score-header">
+        <h3>Scene 1: "The Colors"</h3>
+        <div class="score-meta">
+          <span>🎤 Light (Soprano Coloratura)</span>
+          <span>⏱️ Allegretto ♩=96</span>
+          <span>🔑 G major (kaleidoscopic)</span>
+          <span>📏 3/4</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  [A] MEASURES 1-16: OPENING — "see the colors of the light"                        p → mf    ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  LIGHT (Soprano):                                                                            ║
+║    m.1-8:  "see the colors of the light"                                                     ║
+║            G5 - F#5 - E5 - D5 - C5 - B4 - A4    p   [H+++, N+, SP+]                          ║
+║                                                                                              ║
+║    m.9-16: VIRTUOSIC COLORATURA on "co-------lors"                                           ║
+║            G5-F#5-E5-D5-C5-B4-A4-G4-A4-B4-C5-D5-E5-F#5-G5-A5  (rapid 16ths)                  ║
+║            Dynamic: p < mf    VRN: [H+++] throughout                                         ║
+║                                                                                              ║
+║  SSAATTBB (shimmering vowels on "Ah"):                                                       ║
+║                                                                                              ║
+║    S1: G5 → F#5 → G5 (gentle oscillation)     pp                                             ║
+║    S2: D5 → E5 → D5                           pp                                             ║
+║    A1: B4 → C5 → B4                           pp                                             ║
+║    A2: G4 → A4 → G4                           pp                                             ║
+║    T1: D4 → E4 → D4                           pp                                             ║
+║    T2: B3 → C4 → B3                           pp                                             ║
+║    B1: G3 → A3 → G3                           pp                                             ║
+║    B2: G2 (pedal)                             pp                                             ║
+║                                                                                              ║
+║    VRN: [H++, N+, O+]  Shimmering effect                                                     ║
+║                                                                                              ║
+║  ORCHESTRA: Glockenspiel doubles melody, Celesta arpeggios, Flutes flutter tongue            ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [B] MEASURES 33-56: KALEIDOSCOPIC MODULATIONS                                     mf        ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  LIGHT: "the windows of a prism in the middle of your mind"                                  ║
+║         Modulating: G → B → E♭ → G (circle of major thirds)                                  ║
+║                                                                                              ║
+║  SSAATTBB (kaleidoscopic harmony — each key = different voicing):                            ║
+║                                                                                              ║
+║  G MAJOR (mm.33-36):        B MAJOR (mm.37-40):        E♭ MAJOR (mm.41-44):                  ║
+║    S1: B4   S2: G4            S1: D#5  S2: B4            S1: G5   S2: E♭5                    ║
+║    A1: D4   A2: B3            A1: F#4  A2: D#4           A1: B♭4  A2: G4                     ║
+║    T1: G3   T2: D3            T1: B3   T2: F#3           T1: E♭4  T2: B♭3                    ║
+║    B1: B2   B2: G2            B1: D#3  B2: B2            B1: G3   B2: E♭2                    ║
+║                                                                                              ║
+║  VRN: [H++, O++, N+]  Each key with different orchestral color                               ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [C] MEASURES 89-100: CLIMAX — "the colors of your love" (3rd time, B♭ major)      fff       ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  LIGHT: B♭4 - C5 - D5 - E♭5 - F5 - G5 → HIGH C7 (6 beats fermata)                            ║
+║         Dynamic: f < fff    VRN: [H+++, O+++, Ey++, B++, M+++]                               ║
+║         Brilliant squillo, wide vibrato                                                      ║
+║                                                                                              ║
+║  SSAATTBB — MAXIMUM POWER:                                                                   ║
+║                                                                                              ║
+║    S1: C6 ════════════════════════════════════════════════════  fff (doubling octave below)  ║
+║    S2: G5 ════════════════════════════════════════════════════  fff                          ║
+║    A1: E♭5 ═══════════════════════════════════════════════════  fff                          ║
+║    A2: C5 ════════════════════════════════════════════════════  fff                          ║
+║    T1: G4 ════════════════════════════════════════════════════  fff                          ║
+║    T2: E♭4 ═══════════════════════════════════════════════════  fff                          ║
+║    B1: C4 ════════════════════════════════════════════════════  fff                          ║
+║    B2: C2 ════════════════════════════════════════════════════  fff                          ║
+║                                                                                              ║
+║    Text: "LOVE"   VRN: [H+++, O+++, M+++]   Sustained 6 beats                                ║
+║                                                                                              ║
+║  ORCHESTRA TUTTI fff: Full brass fanfare, Timpani B♭ roll, Cymbals crash                     ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- SCENE 2: THE WAVES -->
+    <section class="score-section" id="scene2">
+      <div class="score-header">
+        <h3>Scene 2: "The Waves"</h3>
+        <div class="score-meta">
+          <span>🎤 Observer (Mezzo) + SSAATTBB</span>
+          <span>⏱️ Andante ondeggiante ♩=69</span>
+          <span>🔑 E minor / G major</span>
+          <span>📏 6/8</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  [A] MEASURES 1-24: OCEANIC OPENING                                                mp        ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  OBSERVER: "you can feel the waves in everything"                                            ║
+║    Pitch: E4 - D4 - C4 - B3 - A3 - G3 - A3 - B3 - C4 - D4 - E4 (undulating)                  ║
+║    Rhythm: Wave-like 6/8     Dynamic: mp     VRN: [M++, P+, H+]                              ║
+║                                                                                              ║
+║  SSAATTBB (continuous wave ostinato):                                                        ║
+║                                                                                              ║
+║  ┌─────────────────────────────────────────────────────────────────────────────────────────┐ ║
+║  │  BASSES (foundation wave):                     TENORS (middle wave):                    │ ║
+║  │    B2: E2 - B2 - E2 - B2... (♩. ♩.)             T2: B2 - E3 - B2 - E3...                 │ ║
+║  │    B1: G2 - E3 - G2 - E3... (offset by ♪)       T1: E3 - G3 - E3 - G3...                 │ ║
+║  │    VRN: [C+++, P+]                              VRN: [M++, C+]                           │ ║
+║  │                                                                                         │ ║
+║  │  ALTOS (upper wave):                           SOPRANOS (crest wave):                   │ ║
+║  │    A2: G3 - B3 - G3 - B3...                     S2: E4 - G4 - E4 - G4...                 │ ║
+║  │    A1: B3 - E4 - B3 - E4...                     S1: G4 - B4 - G4 - B4...                 │ ║
+║  │    VRN: [M++, H+]                               VRN: [H++, N+]                           │ ║
+║  └─────────────────────────────────────────────────────────────────────────────────────────┘ ║
+║                                                                                              ║
+║  ORCHESTRA: Strings 3:4 polyrhythm, Harps wave arpeggios, Synth ocean ambience               ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [B] MEASURES 25-36: BUILDING ECSTASY — "you can you can you can"                  p → ff    ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  THREE ITERATIONS:                                                                           ║
+║                                                                                              ║
+║  1st time (p, spoken-sung):                                                                  ║
+║    OBSERVER: B4 repeated, minimal variation    p   [O+, P+]                                  ║
+║    SSAATTBB: All voices "you can" - spoken, rhythmic   p   [P+, O+]                          ║
+║                                                                                              ║
+║  2nd time (mf, pitched):                                                                     ║
+║    OBSERVER: B4 clear, accented               mf   [H+, N+, O++]                             ║
+║    SSAATTBB: S1+S2: B4  A1+A2: G4  T1+T2: E4  B1+B2: B3   mf, rhythmic                       ║
+║                                                                                              ║
+║  3rd time (f → ff, melismatic):                                                              ║
+║    OBSERVER: B4-C5-D5-E5-F#5-G5-A5-G5-F#5-E5-D5-C5-B4  (ecstatic melisma)                    ║
+║    Dynamic: f < ff    VRN: [H+++, O++, Ey+, B+]                                              ║
+║    SSAATTBB: All voices join melisma in parallel motion, building fff                        ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [C] MEASURES 61-72: RIPPLING 8-PART WAVE EFFECT                                   mp < f    ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  Staggered entries (1 beat apart) creating ripple:                                           ║
+║                                                                                              ║
+║    m.61 beat 1: B2 "feel all of it"   E2    [C++, P+]                                        ║
+║    m.61 beat 2: B1 "feel all of it"   E3    [C++]                                            ║
+║    m.62 beat 1: T2 "feel all of it"   E3    [M++]                                            ║
+║    m.62 beat 2: T1 "feel all of it"   E4    [M++, O+]                                        ║
+║    m.63 beat 1: A2 "feel all of it"   E4    [H+, N+]                                         ║
+║    m.63 beat 2: A1 "feel all of it"   E4    [H++, N+]                                        ║
+║    m.64 beat 1: S2 "feel all of it"   E5    [H++]                                            ║
+║    m.64 beat 2: S1 "feel all of it"   E5    [H+++]                                           ║
+║                                                                                              ║
+║    Dynamic: mp < f (building)                                                                ║
+║    Then all sustain E major chord (m.65-72)                                                  ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [D] MEASURES 97-132: THE REVELATION & MANTRA                                      p → ppp   ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  SUDDEN STILLNESS — OBSERVER SOLO, unaccompanied:                                            ║
+║    "everything is one"    E4 (single sustained pitch, 4 beats)    p    [H++, N+, M(R)]       ║
+║                                                                                              ║
+║  SSAATTBB enters one voice at a time on E unison:                                            ║
+║    m.101: B2 enters E2 (ppp)    m.105: A2 enters E4 (pp)                                     ║
+║    m.102: B1 enters E3 (ppp)    m.106: A1 enters E4 (p)                                      ║
+║    m.103: T2 enters E3 (pp)     m.107: S2 enters E5 (p)                                      ║
+║    m.104: T1 enters E4 (pp)     m.108: S1 enters E5 (p)                                      ║
+║                                                                                              ║
+║  MANTRA (repeated 3 times, each softer):                                                     ║
+║    "everything is a wave / all is the same / we are all the same"                            ║
+║                                                                                              ║
+║    1st time: f     E major → A major → E major                                               ║
+║    2nd time: mf    Slightly slower tempo                                                     ║
+║    3rd time: p     Slow, meditative                                                          ║
+║                                                                                              ║
+║  Final "same" held in 8-part E major:                                                        ║
+║    S1: B5   S2: G#5   A1: E5   A2: B4   T1: G#4   T2: E4   B1: B3   B2: E2                   ║
+║    Duration: 8 beats    Dynamic: p > pp > ppp (decrescendo to niente)                        ║
+║    VRN: [H+, P++, Oc+]                                                                       ║
+║                                                                                              ║
+║  SILENCE — Several seconds before Act III                                                    ║
+║                                                                                              ║
+║  ═══════════════════════════════════════════════════════════════════════════════════════════ ║
+║                                    END OF ACT II                                             ║
+║  ═══════════════════════════════════════════════════════════════════════════════════════════ ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- Bottom Nav -->
+    <div class="sheet-nav" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: none;">
+      <div class="sheet-nav-inner">
+        <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+        <a href="sheet-music.html">Index</a>
+        <a href="sheet-music-act1-p1.html">I:1-2</a>
+        <a href="sheet-music-act1-p2.html">I:3-5</a>
+        <a href="sheet-music-act2.html">II</a>
+        <a href="sheet-music-act3-p1.html">III:1-2</a>
+        <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+        <span class="divider">|</span>
+        <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+        <a href="ssaattbb-index.html">Index</a>
+        <a href="ssaattbb-act1.html">Act I</a>
+        <a href="ssaattbb-act2.html" class="active-gold">Act II</a>
+        <a href="ssaattbb-act3.html">Act III</a>
+      </div>
+    </div>
+
+    <nav class="page-nav">
+      <a href="ssaattbb-act1.html">← Act I</a>
+      <a href="ssaattbb-act3.html">Act III →</a>
+    </nav>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+    <a href="index.html">Home</a> | <a href="ssaattbb-index.html">SSAATTBB Index</a></p>
+  </footer>
+</body>
+</html>

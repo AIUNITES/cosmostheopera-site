@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Act III: Beings - SSAATTBB Score | COSMOS the OPERA</title>
+  <meta name="description" content="Act III SSAATTBB orchestral score for COSMOS the OPERA - The Connection Between Souls, Grand Finale.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg-dark: #0a0a0f; --bg-card: #12121a; --bg-score: #1a1a24; --text-primary: #ffffff; --text-secondary: #a0a0b0; --accent-purple: #9d4edd; --accent-cyan: #00d4ff; --accent-gold: #ffd700; --accent-pink: #ff6b9d; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+    .sheet-nav { background: var(--bg-card); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .sheet-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+    .sheet-nav a { color: var(--text-secondary); text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 15px; font-size: 0.85rem; transition: all 0.3s; }
+    .sheet-nav a:hover { background: rgba(157,78,221,0.2); color: var(--accent-purple); }
+    .sheet-nav a.active-gold { background: rgba(255,215,0,0.3); color: var(--accent-gold); }
+    .sheet-nav a.climax { background: rgba(255,107,157,0.2); color: var(--accent-pink); }
+    .sheet-nav .label { font-weight: 600; font-size: 0.8rem; margin-right: 5px; }
+    .sheet-nav .divider { color: rgba(255,255,255,0.3); margin: 0 5px; }
+    .act-header { padding: 40px 20px; text-align: center; background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 107, 157, 0.1)); }
+    .act-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; background: linear-gradient(135deg, #fff, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .act-header p { color: var(--text-secondary); font-size: 1rem; }
+    .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .score-section { margin-bottom: 40px; }
+    .score-header { background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(157, 78, 221, 0.1)); border-radius: 10px 10px 0 0; padding: 20px; border-left: 4px solid var(--accent-gold); }
+    .score-header.climax { border-left: 4px solid var(--accent-pink); background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 215, 0, 0.1)); }
+    .score-header h3 { color: var(--accent-gold); font-size: 1.3rem; margin-bottom: 5px; }
+    .score-meta { display: flex; gap: 15px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); }
+    .score-meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 15px; }
+    .score-block { background: var(--bg-score); border-radius: 0 0 10px 10px; padding: 20px; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); border-top: none; }
+    .score-block pre { font-family: 'Courier New', 'Consolas', 'Monaco', monospace; font-size: 11px; line-height: 1.3; color: var(--text-secondary); white-space: pre; margin: 0; }
+    .page-nav { display: flex; justify-content: space-between; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; flex-wrap: wrap; gap: 10px; }
+    .page-nav a { color: var(--accent-gold); text-decoration: none; padding: 12px 24px; background: rgba(255,215,0,0.1); border-radius: 25px; transition: all 0.3s; }
+    .page-nav a:hover { background: rgba(255,215,0,0.2); }
+    .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.85rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+    @media (max-width: 768px) { .nav { flex-direction: column; gap: 15px; } .score-block pre { font-size: 9px; } .sheet-nav a { font-size: 0.7rem; padding: 4px 8px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html" class="active">Sheet Music</a>
+    </div>
+  </nav>
+
+  <div class="sheet-nav">
+    <div class="sheet-nav-inner">
+      <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+      <a href="sheet-music.html">Index</a>
+      <a href="sheet-music-act1-p1.html">I:1-2</a>
+      <a href="sheet-music-act1-p2.html">I:3-5</a>
+      <a href="sheet-music-act2.html">II</a>
+      <a href="sheet-music-act3-p1.html">III:1-2</a>
+      <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+      <span class="divider">|</span>
+      <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+      <a href="ssaattbb-index.html">Index</a>
+      <a href="ssaattbb-act1.html">Act I</a>
+      <a href="ssaattbb-act2.html">Act II</a>
+      <a href="ssaattbb-act3.html" class="active-gold">Act III</a>
+    </div>
+  </div>
+
+  <header class="act-header">
+    <h1>☀️ ACT III — BEINGS</h1>
+    <p>SSAATTBB Orchestral Score • "The Connection Between Souls" • ~40 minutes</p>
+  </header>
+
+  <main class="content">
+
+    <!-- PRELUDE -->
+    <section class="score-section" id="prelude">
+      <div class="score-header">
+        <h3>Prelude: "Stellar Dance"</h3>
+        <div class="score-meta">
+          <span>🎻 Two Solo Violins</span>
+          <span>⏱️ Moderato ♩=76</span>
+          <span>🔑 B♭ major</span>
+          <span>⌛ 4 min</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  TWO STARS ORBITING — Musical gravitational pull                                   mf        ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  SOLO VIOLIN I (Star A):                     SOLO VIOLIN II (Star B):                        ║
+║    B♭4 - C5 - D5 - E♭5 - F5                    F5 - E♭5 - D5 - C5 - B♭4                      ║
+║    Rising, yearning phrase                     Descending, answering                         ║
+║    mf, espressivo                              mf, espressivo                                ║
+║                                                                                              ║
+║  INTERACTION:                                                                                ║
+║    mm.1-8:   Lines distant (interval of 6th+)                                                ║
+║    mm.9-16:  Lines converging (3rds, 2nds)                                                   ║
+║    mm.17-24: Lines touching (unisons, octaves)                                               ║
+║    mm.25-32: Lines diverging again                                                           ║
+║                                                                                              ║
+║  mm.33-48: Two violins spiral closer, tempo ♩=76 → 84, mf < f                                ║
+║            Final convergence: Both on unison B♭5, sustained, vibrato                         ║
+║            Then pull apart, f > p > pp                                                       ║
+║            Final: Solo Vln I on B♭6 harmonic (ppp), fade to silence                          ║
+║                                                                                              ║
+║  ORCHESTRA: Strings divisi sustained B♭ major (pp), Harps gentle arpeggios, Celesta          ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- SCENE 1: I THE SUN -->
+    <section class="score-section" id="scene1">
+      <div class="score-header">
+        <h3>Scene 1: "I the Sun"</h3>
+        <div class="score-meta">
+          <span>🎤 Light (Soprano) & Seeker (Tenor) Duet</span>
+          <span>⏱️ Andante appassionato ♩=66</span>
+          <span>🔑 E♭ major / C minor</span>
+          <span>📏 4/4</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  [A] MEASURES 1-48: TENOR OPENS — YEARNING                                         p → mp    ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  SEEKER (Tenor):                                                                             ║
+║    m.1-16:  "did you say that i could be the sun to you"                                     ║
+║             C4 - D4 - E♭4 - F4 - G4 - A♭4 - B♭4 - C5 - D5 - E♭5                              ║
+║             p < mp    VRN: [C+, M+, P+] → [M++, H+]                                          ║
+║                                                                                              ║
+║    m.33-48: "and then yet so far from you" (KEY: C MINOR)                                    ║
+║             C4 - B♭3 - A♭3 - G3 - F3 - E♭3 (descent)    p   [C++, P++, L+]                   ║
+║                                                                                              ║
+║  SSAATTBB (mm.17-48, humming/sustaining):                                                    ║
+║    Women only (mm.17-32):  S1: E♭5  S2: B♭4  A1: G4  A2: E♭4   ppp  [N++, H+]                ║
+║    Full chorus (mm.33-48): C minor chord, somber   pp  [C+, P++, N+]                         ║
+║                                                                                              ║
+║  ORCHESTRA: Solo Vc counter-melody, Eng Horn prominent, Strings pp sustained                 ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [B] MEASURES 49-88: SOPRANO ENTERS — DIALOGUE                                     mf        ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  LIGHT (Soprano): "how could i be the sun to you when you are the sun to me"                 ║
+║    E♭5 - F5 - G5 - A♭5 - B♭5 - C6    mf   [H++, N+, O++]                                     ║
+║    E♭ MAJOR RETURNS — Melodic line mirrors tenor but inverted                                ║
+║                                                                                              ║
+║  DUET DEVELOPMENT (call and response, never quite together):                                 ║
+║    SEEKER: "you are the sun"        LIGHT: "you are the light"                               ║
+║    SEEKER: "i call to you"          LIGHT: "i hear you call"                                 ║
+║                                                                                              ║
+║  TOGETHER (m.81-88): "through all this space between us"                                     ║
+║    LIGHT:  B♭5 - C6 - D6 - E♭6      mf < f   [H+++, O++, Ey+]                                ║
+║    SEEKER: B♭4 - C5 - D5 - E♭5 (octave below)                                                ║
+║                                                                                              ║
+║  SSAATTBB (building support):                                                                ║
+║    S1: E♭6 (doubling Light)    S2: B♭5    A1: G5    A2: E♭5                                  ║
+║    T1: B♭4 (doubling Seeker)   T2: G4     B1: E♭4   B2: E♭3                                  ║
+║    Dynamic: mf < f    VRN: [H++, O++]                                                        ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [C] MEASURES 89-144: PASSIONATE DUET CLIMAX                                       f → fff   ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  LIGHT & SEEKER parallel: "let me be your sun / light / warmth / through the endless night"  ║
+║    LIGHT:  E♭5 - F5 - G5 - A♭5 - B♭5 - C6 - D6 - E♭6    f < ff   [H+++, O+++, Ey+, M++]     ║
+║    SEEKER: E♭4 - F4 - G4 - A♭4 - B♭4 - C5 - D5 - E♭5                                         ║
+║                                                                                              ║
+║  SSAATTBB FULL 8-PART (ff):                                                                  ║
+║    S1: E♭6 (descant)   S2: B♭5   A1: G5    A2: E♭5                                           ║
+║    T1: B♭4             T2: G4    B1: E♭4   B2: E♭2 (foundation)                              ║
+║    Text: "sun... light... warmth..."    VRN: [H+++, O++, M++]                                ║
+║                                                                                              ║
+║  PEAK (m.105-120): "we are one sun"                                                          ║
+║    Both soloists UNISON on E♭5 (4 beats, fff)  VRN: [H+++, O+++, M+++]                       ║
+║    SSAATTBB massive E♭ major: S1: B♭5  S2: G5  A1: E♭5  A2: B♭4  T1: G4  T2: E♭4  B1: B♭3  B2: E♭2 ║
+║                                                                                              ║
+║  ORCHESTRA TUTTI fff: Full forces, Timpani fff roll, Cymbals, Tam-tam                        ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- SCENE 3: FEELING AGAIN -->
+    <section class="score-section" id="scene3">
+      <div class="score-header climax">
+        <h3>★ Scene 3: "Feeling Again"</h3>
+        <div class="score-meta">
+          <span>🎤 Full SSAATTBB Chorus</span>
+          <span>⏱️ Allegro con spirito ♩=120</span>
+          <span>🔑 A major</span>
+          <span>📏 4/4</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  [A] MEASURES 1-48: AWAKENING JOY                                                  f → ff    ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  SSAATTBB (energetic entrance):  "i am feeling again / i am living again"                    ║
+║                                                                                              ║
+║    S1: C#5 - D5 - E5 - F#5 - E5 - D5 - C#5     f  [H++, O++, M+]                             ║
+║    S2: A4 - B4 - C#5 - D5 - C#5 - B4 - A4                                                    ║
+║    A1: E4 - F#4 - G#4 - A4 - G#4 - F#4 - E4                                                  ║
+║    A2: C#4 - D4 - E4 - F#4 - E4 - D4 - C#4                                                   ║
+║    T1: A3 - B3 - C#4 - D4 - C#4 - B3 - A3                                                    ║
+║    T2: E3 - F#3 - G#3 - A3 - G#3 - F#3 - E3                                                  ║
+║    B1: C#3 - D3 - E3 - F#3 - E3 - D3 - C#3                                                   ║
+║    B2: A2 - B2 - C#3 - D3 - C#3 - B2 - A2                                                    ║
+║                                                                                              ║
+║  ORCHESTRA: Full strings energetic, Brass fanfare accents, Timpani A-E pattern               ║
+║                                                                                              ║
+║  mm.33-48: 8-PART FUGAL ENTRIES on "every atom every star / we are what we are"              ║
+║    m.33: B2 enters with subject                                                              ║
+║    m.35: B1 enters (5th above)                                                               ║
+║    m.37: T2 enters    m.39: T1 enters                                                        ║
+║    m.41: A2 enters    m.43: A1 enters                                                        ║
+║    m.45: S2 enters    m.47: S1 enters (highest)                                              ║
+║    All combine m.48 — A major chord, ff                                                      ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [B] MEASURES 73-96: ECSTATIC CLIMAX — "WE ARE ALIVE"                              fff       ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  ★★★ MASSIVE A MAJOR CHORD ★★★                                                               ║
+║                                                                                              ║
+║    S1: E6 ════════════════════════════════════════════════════════════════  fff (8 beats)    ║
+║    S2: C#6 ═══════════════════════════════════════════════════════════════  fff              ║
+║    A1: A5 ════════════════════════════════════════════════════════════════  fff              ║
+║    A2: E5 ════════════════════════════════════════════════════════════════  fff              ║
+║    T1: C#5 ═══════════════════════════════════════════════════════════════  fff              ║
+║    T2: A4 ════════════════════════════════════════════════════════════════  fff              ║
+║    B1: E4 ════════════════════════════════════════════════════════════════  fff              ║
+║    B2: A2 ════════════════════════════════════════════════════════════════  fff              ║
+║                                                                                              ║
+║    Text: "WE ARE ALIVE"                                                                      ║
+║    VRN: [H+++, O+++, C++, M+++]  MAXIMUM RESONANCE                                           ║
+║                                                                                              ║
+║  ORCHESTRA TUTTI fff: Full forces, Timpani fff roll, All brass, Cymbals crash, Tam-tam       ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- SCENE 4: YOU'RE A STAR (FINALE) -->
+    <section class="score-section" id="scene4">
+      <div class="score-header climax">
+        <h3>★ Scene 4: "You're A Star" (Grand Finale)</h3>
+        <div class="score-meta">
+          <span>🎤 All Soloists + Full SSAATTBB</span>
+          <span>⏱️ Maestoso ♩=72 → Largo ♩=48</span>
+          <span>🔑 D major → G major</span>
+          <span>📏 4/4</span>
+        </div>
+      </div>
+      <div class="score-block">
+<pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  [A] MEASURES 1-48: PROCLAMATION                                                   ff → fff  ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  ALL THREE SOLOISTS (unison):  "you're a star"                                               ║
+║    LIGHT + OBSERVER + SEEKER:  D5 - E5 - F#5 - G5 - A5    ff   [H+++, O+++]                  ║
+║                                                                                              ║
+║  SSAATTBB (D major chord):                                                                   ║
+║    S1: A5   S2: F#5   A1: D5   A2: A4   T1: F#4   T2: D4   B1: A3   B2: D2                   ║
+║    Text: "star... star..."    ff    VRN: [H++, O++, M++]                                     ║
+║                                                                                              ║
+║  SOLOISTS sequence:                                                                          ║
+║    LIGHT:    "you shine so bright"    [H+++]                                                 ║
+║    OBSERVER: "you light the night"    [H++, M+]                                              ║
+║    SEEKER:   "you guide our sight"    [M++, H+]                                              ║
+║    ALL THREE: "you are the light"     [H+++, O+++]                                           ║
+║                                                                                              ║
+║  SSAATTBB echoes after each: "bright... night... sight... light..."                          ║
+║    Building: mp → mf → f → ff                                                                ║
+║                                                                                              ║
+║  ORCHESTRA TUTTI: D major fanfare, Full brass, Timpani D pattern                             ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [B] MEASURES 49-96: FINAL TRANSCENDENCE — G MAJOR                                 fff       ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  Text: "the star within you / the star within me / the star within all / eternally"          ║
+║                                                                                              ║
+║  SOLOISTS layered:                                                                           ║
+║    LIGHT:    G5 - A5 - B5 - C6 - D6 (ascending)    f < ff   [H+++, O+++, Oc++]               ║
+║    OBSERVER: G4 - A4 - B4 - C5 - D5                                                          ║
+║    SEEKER:   G4 - A4 - B4 - C5 - D5 (with Observer)                                          ║
+║                                                                                              ║
+║  SSAATTBB — ASCENDING 8-PART TEXTURE (each voice ascending in turn):                         ║
+║                                                                                              ║
+║    B2: G2 → A2 → B2 → C3 → D3                                                                ║
+║    B1: D3 → E3 → F#3 → G3 → A3                                                               ║
+║    T2: G3 → A3 → B3 → C4 → D4                                                                ║
+║    T1: B3 → C4 → D4 → E4 → F#4                                                               ║
+║    A2: D4 → E4 → F#4 → G4 → A4                                                               ║
+║    A1: G4 → A4 → B4 → C5 → D5                                                                ║
+║    S2: B4 → C5 → D5 → E5 → F#5                                                               ║
+║    S1: D5 → E5 → F#5 → G5 → A5                                                               ║
+║                                                                                              ║
+║    VRN: [H+++, O++, M++]   Building fff                                                      ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [C] MEASURES 73-96: APOTHEOSIS — MAXIMUM FORCES                                   ffff      ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  ★★★★★ FINAL G MAJOR CHORD — FULL SPREAD ★★★★★                                               ║
+║                                                                                              ║
+║  SOLOISTS:                                                                                   ║
+║    LIGHT:    D6 sustained (fff)                                                              ║
+║    OBSERVER: B5 sustained (fff)                                                              ║
+║    SEEKER:   G4 sustained (fff)                                                              ║
+║    VRN: [H+++, O+++, M+++]                                                                   ║
+║                                                                                              ║
+║  SSAATTBB — FULL SPREAD G MAJOR (12 beats fermata):                                          ║
+║                                                                                              ║
+║    S1: D6 ═══════════════════════════════════════════════════════════════════  fff (highest) ║
+║    S2: B5 ═══════════════════════════════════════════════════════════════════  fff           ║
+║    A1: G5 ═══════════════════════════════════════════════════════════════════  fff           ║
+║    A2: D5 ═══════════════════════════════════════════════════════════════════  fff           ║
+║    T1: B4 ═══════════════════════════════════════════════════════════════════  fff           ║
+║    T2: G4 ═══════════════════════════════════════════════════════════════════  fff           ║
+║    B1: D4 ═══════════════════════════════════════════════════════════════════  fff           ║
+║    B2: G1 ═══════════════════════════════════════════════════════════════════  fff (lowest)  ║
+║                                                                                              ║
+║    VRN: [H+++, O+++, C+++, M+++]   MAXIMUM RESONANCE                                         ║
+║    Duration: 12 beats (fermata)                                                              ║
+║                                                                                              ║
+║  ORCHESTRA TUTTI ffff:                                                                       ║
+║    All brass sustained    │  Timpani G roll ffff                                             ║
+║    All strings tremolo    │  Bass Drum fff                                                   ║
+║    All winds sustained    │  Cymbals crash, let ring                                         ║
+║    Tubular Bells: G       │  Tam-tam crash, let ring                                         ║
+║                                                                                              ║
+║    HOLD 12 BEATS                                                                             ║
+║                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║  [D] MEASURES 97-120: FINAL DISSOLUTION                                      ffff → silence  ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                              ║
+║  Gradual diminuendo: ffff > fff > ff > f > mf > mp > p > pp > ppp                            ║
+║                                                                                              ║
+║  Voices drop out one by one:                                                                 ║
+║    m.97:  S1 stops     m.101: T1 stops     m.105: LIGHT stops                                ║
+║    m.98:  S2 stops     m.102: T2 stops     m.106: SEEKER stops                               ║
+║    m.99:  A1 stops     m.103: B1 stops     m.107: OBSERVER sustains B4 (ppp)                 ║
+║    m.100: A2 stops     m.104: B2 sustains G2 (ppp)                                           ║
+║                                                                                              ║
+║  Orchestra reduction:                                                                        ║
+║    m.105: Brass stops      m.107: Percussion stops                                           ║
+║    m.106: Winds stop       m.108: Strings alone (ppp)                                        ║
+║                                                                                              ║
+║  FINAL SOUNDS (m.109-120):                                                                   ║
+║    OBSERVER: B4 (ppp, straight tone, fading)                                                 ║
+║    B2: G2 (ppp, fading)                                                                      ║
+║    Solo Violin I: D6 harmonic (pppp)                                                         ║
+║    Solo Cello: G2 (pppp)                                                                     ║
+║                                                                                              ║
+║  m.113-116: Solo Violin I alone: D6 harmonic (pppp)                                          ║
+║             Celesta: Single G5 (pppp)                                                        ║
+║                                                                                              ║
+║  m.117-120: Celesta: G5 fading to nothing                                                    ║
+║                                                                                              ║
+║  ════════════════════════════════════════════════════════════════════════════════════════════ ║
+║                                                                                              ║
+║                              SILENCE — Hold 8 beats                                          ║
+║                                                                                              ║
+║                                      CURTAIN                                                 ║
+║                                                                                              ║
+║  ════════════════════════════════════════════════════════════════════════════════════════════ ║
+║                                  END OF ACT III                                              ║
+║                                END OF THE OPERA                                              ║
+║  ════════════════════════════════════════════════════════════════════════════════════════════ ║
+║                                                                                              ║
+║                         TOTAL DURATION: Approximately 100 minutes                            ║
+║                                                                                              ║
+║  PERFORMANCE NOTES:                                                                          ║
+║    • Full orchestral forces required throughout Act III                                      ║
+║    • Careful balance needed between 8-part chorus and orchestra                              ║
+║    • Final chord should ring for full 12 beats before fade                                   ║
+║    • Silence at end should be held until applause naturally begins                           ║
+║    • Conductor should not lower baton until complete silence achieved                        ║
+║                                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+</pre>
+      </div>
+    </section>
+
+    <!-- Bottom Nav -->
+    <div class="sheet-nav" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: none;">
+      <div class="sheet-nav-inner">
+        <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+        <a href="sheet-music.html">Index</a>
+        <a href="sheet-music-act1-p1.html">I:1-2</a>
+        <a href="sheet-music-act1-p2.html">I:3-5</a>
+        <a href="sheet-music-act2.html">II</a>
+        <a href="sheet-music-act3-p1.html">III:1-2</a>
+        <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+        <span class="divider">|</span>
+        <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+        <a href="ssaattbb-index.html">Index</a>
+        <a href="ssaattbb-act1.html">Act I</a>
+        <a href="ssaattbb-act2.html">Act II</a>
+        <a href="ssaattbb-act3.html" class="active-gold">Act III</a>
+      </div>
+    </div>
+
+    <nav class="page-nav">
+      <a href="ssaattbb-act2.html">← Act II</a>
+      <a href="ssaattbb-index.html">SSAATTBB Index</a>
+    </nav>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+    <a href="index.html">Home</a> | <a href="ssaattbb-index.html">SSAATTBB Index</a></p>
+  </footer>
+</body>
+</html>

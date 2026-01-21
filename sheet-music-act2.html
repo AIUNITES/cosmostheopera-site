@@ -35,8 +35,13 @@
     .audio-init-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,136,0.4); }
     .audio-init-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
     .audio-init-btn.ready { background: var(--accent-cyan); }
+    .play-all-btn { background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink)); color: #000; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .play-all-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+    .play-all-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: none; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
     .floating-controls.visible { display: flex; }
+    .floating-controls.continuous { border-color: var(--accent-gold); box-shadow: 0 10px 40px rgba(255,215,0,0.3); }
+    .continuous-badge { background: var(--accent-gold); color: #000; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; display: none; }
     .now-playing-note { font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: bold; color: var(--accent-green); min-width: 50px; }
     .now-playing-text { color: var(--accent-cyan); font-style: italic; min-width: 100px; }
     .floating-progress { width: 120px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
@@ -102,8 +107,10 @@
       <p>Click to enable synthesized audio. The page scrolls to follow the music.</p>
     </div>
     <button class="audio-init-btn" id="audioInitBtn" onclick="initAudio()">Enable Audio</button>
+    <button class="play-all-btn" id="playAllBtn" onclick="playFullOpera()" disabled>▶ Play Full Opera</button>
   </div>
   <div class="floating-controls" id="floatingControls">
+    <span class="continuous-badge" id="continuousBadge">FULL OPERA</span>
     <div class="now-playing-note" id="floatingNote">--</div>
     <div class="now-playing-text" id="floatingText">Ready</div>
     <div class="floating-progress"><div class="floating-progress-bar" id="floatingProgress"></div></div>
@@ -405,7 +412,9 @@
     <a href="index.html">Home</a> | <a href="sheet-music.html">Sheet Music Index</a></p>
   </footer>
   <script>
-let audioReady=false,synth=null,isPlaying={},currentMeasure=null,currentScene=null;
+let audioReady=false,synth=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false;
+const NEXT_PAGE='sheet-music-act3-p1.html';
+const PAGE_SCENES=['scene1','scene2'];
 
 // Scene 1: "What Are We" - 56 BPM, E minor
 const scene1Data={tempo:56,notes:[
@@ -565,7 +574,17 @@ async function initAudio(){
     audioReady=true;btn.textContent='✓ Audio Ready';btn.classList.add('ready');
     document.getElementById('playScene1').disabled=false;
     document.getElementById('playScene2').disabled=false;
+    document.getElementById('playAllBtn').disabled=false;
+    checkAutoplay();
   }catch(e){btn.textContent='Audio Failed';console.error(e);}
+}
+
+function checkAutoplay(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('autoplay')==='continuous'){
+    continuousMode=true;
+    playAllScenesSequentially();
+  }
 }
 
 function scrollToMeasure(id){
@@ -578,53 +597,84 @@ function scrollToMeasure(id){
   }
 }
 
+async function playScene(sceneId){
+  const dataMap={scene1:scene1Data,scene2:scene2Data};
+  const data=dataMap[sceneId];
+  if(!data)return;
+  const bpm=data.tempo,beatDuration=60/bpm;
+  let totalBeats=data.notes.reduce((s,n)=>s+n.duration,0),currentBeat=0;
+  const floatingControls=document.getElementById('floatingControls');
+  const progressBar=document.getElementById('floatingProgress');
+  const noteDisplay=document.getElementById('floatingNote');
+  const textDisplay=document.getElementById('floatingText');
+  floatingControls.classList.add('visible');
+  if(continuousMode){floatingControls.classList.add('continuous');document.getElementById('continuousBadge').style.display='inline';}
+  scrollToMeasure(data.notes[0].m);
+  for(let i=0;i<data.notes.length;i++){
+    if(!isPlaying[sceneId])return false;
+    const note=data.notes[i],durationSec=note.duration*beatDuration;
+    scrollToMeasure(note.m);
+    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synth.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn);}
+    else{noteDisplay.textContent='—';textDisplay.textContent='(rest)';}
+    currentBeat+=note.duration;progressBar.style.width=(currentBeat/totalBeats)*100+'%';
+    await new Promise(r=>setTimeout(r,durationSec*1000));
+  }
+  return true;
+}
+
 async function togglePlay(sceneId){
   if(!audioReady)return;
   if(currentScene&&currentScene!==sceneId){stopAll();}
   const btnMap={scene1:'playScene1',scene2:'playScene2'};
   const playBtn=document.getElementById(btnMap[sceneId]);
-  const floatingControls=document.getElementById('floatingControls');
-  const progressBar=document.getElementById('floatingProgress');
-  const noteDisplay=document.getElementById('floatingNote');
-  const textDisplay=document.getElementById('floatingText');
   if(isPlaying[sceneId]){stopAll();return;}
+  continuousMode=false;
   isPlaying[sceneId]=true;currentScene=sceneId;
   playBtn.classList.add('playing');playBtn.textContent='⏸ Playing...';
-  floatingControls.classList.add('visible');
-  const dataMap={scene1:scene1Data,scene2:scene2Data};
-  const data=dataMap[sceneId];
-  const bpm=data.tempo,beatDuration=60/bpm;
-  let totalBeats=data.notes.reduce((s,n)=>s+n.duration,0),currentBeat=0;
-  scrollToMeasure(data.notes[0].m);
-  for(let i=0;i<data.notes.length;i++){
-    if(!isPlaying[sceneId])break;
-    const note=data.notes[i],durationSec=note.duration*beatDuration;
-    scrollToMeasure(note.m);
-    if(note.note){
-      noteDisplay.textContent=note.note;
-      textDisplay.textContent=note.text?'"'+note.text+'"':'♪';
-      synth.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn);
-    }else{noteDisplay.textContent='—';textDisplay.textContent='(rest)';}
-    currentBeat+=note.duration;progressBar.style.width=(currentBeat/totalBeats)*100+'%';
-    await new Promise(r=>setTimeout(r,durationSec*1000));
+  const completed=await playScene(sceneId);
+  if(completed)stopAll();
+}
+
+async function playAllScenesSequentially(){
+  for(const sceneId of PAGE_SCENES){
+    if(!continuousMode)break;
+    const btnMap={scene1:'playScene1',scene2:'playScene2'};
+    const btn=document.getElementById(btnMap[sceneId]);
+    isPlaying[sceneId]=true;currentScene=sceneId;
+    btn.classList.add('playing');btn.textContent='⏸ Playing...';
+    const completed=await playScene(sceneId);
+    btn.classList.remove('playing');btn.textContent='▶ Play Scene '+(PAGE_SCENES.indexOf(sceneId)+1);
+    isPlaying[sceneId]=false;
+    if(!completed||!continuousMode)break;
   }
+  if(continuousMode&&NEXT_PAGE){window.location.href=NEXT_PAGE+'?autoplay=continuous';}
+  else{stopAll();}
+}
+
+function playFullOpera(){
+  if(!audioReady)return;
   stopAll();
+  continuousMode=true;
+  document.getElementById('playAllBtn').textContent='⏸ Playing Opera...';
+  playAllScenesSequentially();
 }
 
 function stopAll(){
+  continuousMode=false;
   Object.keys(isPlaying).forEach(k=>isPlaying[k]=false);
   currentScene=null;
-  ['playScene1','playScene2'].forEach((id,i)=>{
-    const btn=document.getElementById(id);
-    if(btn){btn.classList.remove('playing');btn.textContent='▶ Play Scene '+(i+1);}
-  });
-  document.getElementById('floatingControls').classList.remove('visible');
+  ['playScene1','playScene2'].forEach((id,i)=>{const btn=document.getElementById(id);if(btn){btn.classList.remove('playing');btn.textContent='▶ Play Scene '+(i+1);}});
+  document.getElementById('playAllBtn').textContent='▶ Play Full Opera';
+  document.getElementById('floatingControls').classList.remove('visible','continuous');
+  document.getElementById('continuousBadge').style.display='none';
   document.getElementById('floatingProgress').style.width='0%';
   document.getElementById('floatingNote').textContent='--';
   document.getElementById('floatingText').textContent='Ready';
   if(currentMeasure){document.getElementById(currentMeasure)?.classList.remove('active');currentMeasure=null;}
   if(synth)synth.releaseAll();
 }
+
+window.onload=()=>{const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){initAudio();}};
   </script>
 </body>
 </html>

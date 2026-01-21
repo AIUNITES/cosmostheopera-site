@@ -22,43 +22,108 @@
     }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
     
+    /* Screen management */
+    .screen { display: none; }
+    .screen.active { display: block; }
+    
     /* Navigation */
     .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
     .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
-    .nav-links { display: flex; gap: 25px; flex-wrap: wrap; }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
     .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+    .nav-btn { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+    .nav-btn:hover { transform: scale(1.05); }
+    .nav-btn-secondary { background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan); }
+    
+    /* User Menu */
+    .user-menu { position: relative; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .user-dropdown { position: absolute; top: 100%; right: 0; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 10px 0; min-width: 180px; display: none; z-index: 200; }
+    .user-dropdown.show { display: block; }
+    .user-dropdown a { display: block; padding: 10px 20px; color: var(--text-secondary); text-decoration: none; transition: all 0.3s; }
+    .user-dropdown a:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }
     
     /* Hero */
-    .hero { padding: 40px 20px; text-align: center; background: linear-gradient(135deg, rgba(157,78,221,0.15), rgba(0,212,255,0.1)); }
-    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; background: linear-gradient(135deg, #fff, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+    .hero { padding: 60px 20px; text-align: center; background: linear-gradient(135deg, rgba(157,78,221,0.15), rgba(0,212,255,0.1)); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 15px; background: linear-gradient(135deg, #fff, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-secondary); max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; }
+    .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .btn-large { padding: 15px 30px; font-size: 1.1rem; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; color: #fff; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(157,78,221,0.4); }
+    .btn-secondary { background: transparent; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); }
+    .btn-secondary:hover { background: rgba(0,212,255,0.1); }
     
-    /* Main Layout */
+    /* Auth Screen */
+    .auth-container { max-width: 400px; margin: 60px auto; padding: 20px; }
+    .auth-header { text-align: center; margin-bottom: 30px; }
+    .auth-header h2 { color: var(--accent-gold); margin-bottom: 10px; }
+    .auth-tabs { display: flex; margin-bottom: 20px; }
+    .auth-tab { flex: 1; padding: 12px; background: transparent; border: none; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; }
+    .auth-tab.active { color: var(--accent-cyan); border-bottom-color: var(--accent-cyan); }
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; }
+    .form-group input { width: 100%; padding: 12px 15px; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--text-primary); font-size: 1rem; }
+    .form-group input:focus { outline: none; border-color: var(--accent-cyan); }
+    .form-error { color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 15px; }
+    .full-width { width: 100%; }
+    .auth-footer { text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.85rem; }
+    .auth-footer a { color: var(--accent-cyan); text-decoration: none; }
+    
+    /* Dashboard */
+    .dashboard-header { padding: 30px 20px; background: var(--bg-card); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .dashboard-header h1 { font-size: 1.8rem; margin-bottom: 5px; }
+    .dashboard-header p { color: var(--text-secondary); }
+    .dashboard-content { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+    .dashboard-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+    .dash-tab { padding: 10px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; color: var(--text-secondary); cursor: pointer; transition: all 0.3s; }
+    .dash-tab:hover { background: rgba(255,255,255,0.1); }
+    .dash-tab.active { background: var(--accent-purple); border-color: var(--accent-purple); color: #fff; }
+    
+    /* Scores Grid */
+    .scores-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .score-card { background: var(--bg-card); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; transition: all 0.3s; }
+    .score-card:hover { border-color: var(--accent-purple); transform: translateY(-3px); }
+    .score-card-header { padding: 20px; background: linear-gradient(135deg, rgba(157,78,221,0.2), rgba(0,212,255,0.1)); }
+    .score-card-title { font-size: 1.1rem; margin-bottom: 5px; }
+    .score-card-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-secondary); }
+    .score-card-meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 10px; }
+    .score-card-body { padding: 15px 20px; }
+    .score-card-preview { font-family: 'Courier New', monospace; font-size: 9px; color: var(--text-secondary); white-space: pre; overflow: hidden; max-height: 80px; line-height: 1.3; }
+    .score-card-actions { padding: 15px 20px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px; }
+    .score-card-btn { flex: 1; padding: 8px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
+    .score-card-btn.primary { background: var(--accent-purple); color: #fff; }
+    .score-card-btn.secondary { background: rgba(255,255,255,0.1); color: var(--text-secondary); }
+    .score-card-btn:hover { opacity: 0.8; }
+    
+    /* Empty State */
+    .empty-state { text-align: center; padding: 60px 20px; }
+    .empty-state .icon { font-size: 4rem; margin-bottom: 20px; }
+    .empty-state h3 { color: var(--text-secondary); margin-bottom: 10px; }
+    .empty-state p { color: var(--text-secondary); margin-bottom: 20px; opacity: 0.7; }
+    
+    /* Composer Panel */
     .composer-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1600px; margin: 0 auto; padding: 20px; min-height: calc(100vh - 200px); }
     @media (max-width: 1024px) { .composer-container { grid-template-columns: 1fr; } }
     
-    /* Panel Styles */
     .panel { background: var(--bg-card); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; flex-direction: column; }
-    .panel-header { background: rgba(157,78,221,0.2); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .panel-header { background: rgba(157,78,221,0.2); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
     .panel-header h2 { font-size: 1.2rem; color: var(--accent-gold); display: flex; align-items: center; gap: 10px; }
     .panel-content { padding: 20px; flex: 1; overflow-y: auto; }
     
-    /* Input Panel */
     .lyrics-input { width: 100%; min-height: 150px; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 15px; color: var(--text-primary); font-family: inherit; font-size: 1rem; resize: vertical; margin-bottom: 20px; }
     .lyrics-input:focus { outline: none; border-color: var(--accent-cyan); }
     .lyrics-input::placeholder { color: var(--text-secondary); }
     
-    /* Options Sections */
     .options-section { margin-bottom: 25px; }
     .options-section h3 { font-size: 1rem; color: var(--accent-cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .options-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-    .options-list { display: flex; flex-direction: column; gap: 8px; }
     
-    /* Checkbox/Radio Styles */
     .option-item { display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: all 0.3s; font-size: 0.9rem; }
     .option-item:hover { border-color: var(--accent-purple); background: rgba(157,78,221,0.1); }
-    .option-item input { display: none; }
     .option-item.selected { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
     .option-item .icon { font-size: 1.2rem; }
     .option-item .label { flex: 1; }
@@ -68,77 +133,233 @@
     .option-radio .check { border-radius: 50%; }
     .option-radio.selected .check::after { content: ''; width: 8px; height: 8px; background: #000; border-radius: 50%; }
     
-    /* Select Dropdowns */
     .select-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
     .select-group { display: flex; flex-direction: column; gap: 5px; }
     .select-group label { font-size: 0.85rem; color: var(--text-secondary); }
     .select-group select { background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 15px; color: var(--text-primary); font-size: 0.9rem; cursor: pointer; }
     .select-group select:focus { outline: none; border-color: var(--accent-cyan); }
     
-    /* Generate Button */
     .generate-btn { width: 100%; padding: 15px 30px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; border-radius: 10px; color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; }
     .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(157,78,221,0.4); }
-    .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     
-    /* Output Panel */
-    .output-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .output-actions { display: flex; gap: 10px; }
     .output-btn { background: rgba(0,212,255,0.2); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 6px 14px; border-radius: 15px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
     .output-btn:hover { background: rgba(0,212,255,0.3); }
+    .output-btn.save-btn { background: rgba(0,255,136,0.2); border-color: var(--accent-green); color: var(--accent-green); }
     
     .score-output { background: var(--bg-input); border-radius: 10px; padding: 20px; font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.4; white-space: pre; overflow-x: auto; min-height: 400px; color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.05); }
-    .score-output .highlight { color: var(--accent-gold); }
-    .score-output .vrn { color: var(--accent-green); }
-    .score-output .dynamics { color: var(--accent-pink); }
-    .score-output .lyrics { color: var(--accent-cyan); }
     
-    /* Tabs */
     .output-tabs { display: flex; gap: 5px; margin-bottom: 15px; flex-wrap: wrap; }
     .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); padding: 8px 16px; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
     .tab-btn:hover { background: rgba(255,255,255,0.1); }
     .tab-btn.active { background: var(--bg-input); border-bottom-color: var(--bg-input); color: var(--accent-gold); }
+    
+    /* Save Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.show { display: flex; }
+    .modal-content { background: var(--bg-card); border-radius: 15px; padding: 30px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-header h2 { color: var(--accent-gold); }
+    .modal-close { background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; }
+    
+    /* Toast */
+    .toast { position: fixed; bottom: 30px; right: 30px; background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 15px 25px; border-radius: 10px; z-index: 2000; transform: translateY(100px); opacity: 0; transition: all 0.3s; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { border-color: var(--accent-pink); color: var(--accent-pink); }
     
     /* Footer */
     .footer { background: var(--bg-card); padding: 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer p { color: var(--text-secondary); font-size: 0.85rem; }
     .footer a { color: var(--accent-purple); text-decoration: none; }
     
-    /* Responsive */
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 15px; }
       .options-grid { grid-template-columns: 1fr 1fr; }
       .select-row { grid-template-columns: 1fr; }
       .score-output { font-size: 9px; }
+      .hero-buttons { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="notation.html">Vocal Notation</a>
-      <a href="composition.html">AI Composition</a>
-      <a href="gallery.html">Hubble Gallery</a>
-      <a href="sheet-music.html">Sheet Music</a>
-      <a href="words.html">Words</a>
-      <a href="composer.html" class="active">Composer</a>
+  <div id="app">
+    <!-- ==================== LANDING SCREEN ==================== -->
+    <div id="landing-screen" class="screen active">
+      <nav class="nav">
+        <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="notation.html">Notation</a>
+          <a href="sheet-music.html">Sheet Music</a>
+          <a href="composer.html" class="active">Composer</a>
+          <button class="nav-btn nav-btn-secondary" onclick="showScreen('auth')">Log In</button>
+        </div>
+      </nav>
+      
+      <section class="hero">
+        <h1>🎼 Music Composer Tool</h1>
+        <p>Transform your words into sheet music using AI-inspired composition methods, Vocal Resonance Notation, and multiple musical styles. Create, save, and manage your scores.</p>
+        <div class="hero-buttons">
+          <button class="btn-large btn-primary" onclick="showScreen('auth')">✨ Start Creating Free</button>
+          <button class="btn-large btn-secondary" onclick="startDemo()">👁️ Try Demo</button>
+        </div>
+      </section>
+      
+      <!-- Features Section -->
+      <section style="max-width: 1000px; margin: 60px auto; padding: 0 20px;">
+        <h2 style="text-align: center; color: var(--accent-gold); margin-bottom: 40px;">How It Works</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+          <div style="text-align: center; padding: 30px; background: var(--bg-card); border-radius: 15px;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">✏️</div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 10px;">1. Enter Words</h3>
+            <p style="color: var(--text-secondary);">Type or paste your lyrics, poetry, or any text.</p>
+          </div>
+          <div style="text-align: center; padding: 30px; background: var(--bg-card); border-radius: 15px;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🎨</div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 10px;">2. Choose Style</h3>
+            <p style="color: var(--text-secondary);">Select notation format, musical style, and dynamics.</p>
+          </div>
+          <div style="text-align: center; padding: 30px; background: var(--bg-card); border-radius: 15px;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🎼</div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 10px;">3. Generate</h3>
+            <p style="color: var(--text-secondary);">AI creates sheet music with pitches, dynamics, and VRN codes.</p>
+          </div>
+          <div style="text-align: center; padding: 30px; background: var(--bg-card); border-radius: 15px;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">💾</div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 10px;">4. Save & Share</h3>
+            <p style="color: var(--text-secondary);">Save to your library, download, or copy to clipboard.</p>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="footer">
+        <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved.<br>
+        <a href="index.html">Home</a> | <a href="composition.html">AI Composition Guide</a> | <a href="notation.html">VRN Guide</a></p>
+      </footer>
     </div>
-  </nav>
-
-  <header class="hero">
-    <h1>🎼 Music Composer Tool</h1>
-    <p>Transform your words into sheet music using AI-inspired composition methods, Vocal Resonance Notation, and multiple musical styles.</p>
-  </header>
-
-  <div class="composer-container">
-    <!-- Input Panel -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>✏️ Your Words & Options</h2>
+    
+    <!-- ==================== AUTH SCREEN ==================== -->
+    <div id="auth-screen" class="screen">
+      <nav class="nav">
+        <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+        <div class="nav-links">
+          <a href="#" onclick="showScreen('landing'); return false;">← Back</a>
+        </div>
+      </nav>
+      
+      <div class="auth-container">
+        <div class="auth-header">
+          <h2>🎼 Music Composer</h2>
+          <p style="color: var(--text-secondary);">Create and save your sheet music</p>
+        </div>
+        
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Log In</button>
+          <button class="auth-tab" data-tab="signup" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="login-username" placeholder="Enter username" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="Enter password" required>
+          </div>
+          <div class="form-error" id="login-error"></div>
+          <button type="submit" class="btn-large btn-primary full-width">Log In</button>
+        </form>
+        
+        <!-- Signup Form -->
+        <form id="signup-form" class="auth-form" onsubmit="handleSignup(event)">
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" id="signup-name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="signup-username" placeholder="Choose a username" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="signup-password" placeholder="Min 6 characters" required minlength="6">
+          </div>
+          <div class="form-error" id="signup-error"></div>
+          <button type="submit" class="btn-large btn-primary full-width">Create Account</button>
+        </form>
+        
+        <div class="auth-footer">
+          <button class="btn-large btn-secondary full-width" style="margin-bottom: 15px;" onclick="startDemo()">👁️ Try Demo Instead</button>
+          <p>Your data is stored locally in your browser.</p>
+        </div>
       </div>
-      <div class="panel-content">
-        <textarea class="lyrics-input" id="lyricsInput" placeholder="Enter your lyrics or words here...
+    </div>
+    
+    <!-- ==================== DASHBOARD SCREEN ==================== -->
+    <div id="dashboard-screen" class="screen">
+      <nav class="nav">
+        <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="sheet-music.html">Sheet Music</a>
+          <a href="composer.html" class="active">Composer</a>
+          <div class="user-menu" onclick="toggleUserMenu()">
+            <span id="user-display-name">User</span>
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="user-dropdown" id="user-dropdown">
+              <a href="#" onclick="showScreen('composer'); return false;">✨ New Score</a>
+              <a href="#" id="admin-link" style="display:none;" onclick="showAdminPanel(); return false;">🛡️ Admin</a>
+              <a href="#" onclick="handleLogout(); return false;">🚪 Log Out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="dashboard-header">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <h1>My Scores</h1>
+            <p>Your saved sheet music compositions</p>
+          </div>
+          <button class="btn-large btn-primary" onclick="showScreen('composer')">✨ New Score</button>
+        </div>
+      </div>
+      
+      <div class="dashboard-content">
+        <div class="scores-grid" id="scores-grid">
+          <!-- Populated by JS -->
+        </div>
+        
+        <div class="empty-state" id="empty-scores" style="display: none;">
+          <div class="icon">🎼</div>
+          <h3>No saved scores yet</h3>
+          <p>Create your first sheet music composition</p>
+          <button class="btn-large btn-primary" onclick="showScreen('composer')">✨ Create Your First Score</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ==================== COMPOSER SCREEN ==================== -->
+    <div id="composer-screen" class="screen">
+      <nav class="nav">
+        <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+        <div class="nav-links">
+          <a href="#" id="back-to-dashboard" onclick="goBackFromComposer(); return false;">← Back</a>
+          <a href="notation.html">VRN Guide</a>
+          <span id="composer-user-info"></span>
+        </div>
+      </nav>
+      
+      <div class="composer-container">
+        <!-- Input Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>✏️ Your Words & Options</h2>
+          </div>
+          <div class="panel-content">
+            <textarea class="lyrics-input" id="lyricsInput" placeholder="Enter your lyrics or words here...
 
 Example:
 do you see
@@ -146,371 +367,600 @@ what do you see
 when you close your eyes
 i see the light
 an infinite number of stars"></textarea>
-
-        <!-- Notation Format -->
-        <div class="options-section">
-          <h3>📋 Notation Format</h3>
-          <div class="options-grid" id="notationOptions">
-            <label class="option-item option-radio selected" data-value="piano-roll">
-              <span class="icon">🎹</span>
-              <span class="label">Piano Roll</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="treble-bass">
-              <span class="icon">🎼</span>
-              <span class="label">Treble/Bass</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="ssaattbb">
-              <span class="icon">🎭</span>
-              <span class="label">SSAATTBB</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="lead-sheet">
-              <span class="icon">📄</span>
-              <span class="label">Lead Sheet</span>
-              <span class="check"></span>
-            </label>
+            
+            <!-- Notation Format -->
+            <div class="options-section">
+              <h3>📋 Notation Format</h3>
+              <div class="options-grid" id="notationOptions">
+                <label class="option-item option-radio selected" data-value="piano-roll">
+                  <span class="icon">🎹</span>
+                  <span class="label">Piano Roll</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="treble-bass">
+                  <span class="icon">🎼</span>
+                  <span class="label">Treble/Bass</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="ssaattbb">
+                  <span class="icon">🎭</span>
+                  <span class="label">SSAATTBB</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="lead-sheet">
+                  <span class="icon">📄</span>
+                  <span class="label">Lead Sheet</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Dynamics -->
+            <div class="options-section">
+              <h3>🔊 Dynamics & Expression</h3>
+              <div class="options-grid" id="dynamicsOptions">
+                <label class="option-item selected" data-value="traditional">
+                  <span class="icon">🎵</span>
+                  <span class="label">Traditional</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item selected" data-value="vrn">
+                  <span class="icon">🗣️</span>
+                  <span class="label">VRN Codes</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item" data-value="expressive">
+                  <span class="icon">💫</span>
+                  <span class="label">Expressive</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Musical Style -->
+            <div class="options-section">
+              <h3>🎨 Musical Style</h3>
+              <div class="options-grid" id="styleOptions">
+                <label class="option-item option-radio selected" data-value="operatic">
+                  <span class="icon">🎭</span>
+                  <span class="label">Operatic</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="hypnotic">
+                  <span class="icon">🌀</span>
+                  <span class="label">Hypnotic</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="trance">
+                  <span class="icon">✨</span>
+                  <span class="label">Trance</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="classical">
+                  <span class="icon">🏛️</span>
+                  <span class="label">Classical</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="jazz">
+                  <span class="icon">🎷</span>
+                  <span class="label">Jazz</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="folk">
+                  <span class="icon">🪕</span>
+                  <span class="label">Folk</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Parameters -->
+            <div class="options-section">
+              <h3>⚙️ Parameters</h3>
+              <div class="select-row">
+                <div class="select-group">
+                  <label>Key</label>
+                  <select id="keySelect">
+                    <option value="C">C Major</option>
+                    <option value="G">G Major</option>
+                    <option value="D">D Major</option>
+                    <option value="F">F Major</option>
+                    <option value="Am">A Minor</option>
+                    <option value="Em">E Minor</option>
+                  </select>
+                </div>
+                <div class="select-group">
+                  <label>Tempo</label>
+                  <select id="tempoSelect">
+                    <option value="60">Largo (60)</option>
+                    <option value="72" selected>Andante (72)</option>
+                    <option value="90">Moderato (90)</option>
+                    <option value="120">Allegro (120)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="select-row">
+                <div class="select-group">
+                  <label>Time</label>
+                  <select id="timeSelect">
+                    <option value="4/4">4/4</option>
+                    <option value="3/4">3/4</option>
+                    <option value="6/8">6/8</option>
+                  </select>
+                </div>
+                <div class="select-group">
+                  <label>Voice</label>
+                  <select id="voiceSelect">
+                    <option value="soprano">Soprano</option>
+                    <option value="mezzo" selected>Mezzo</option>
+                    <option value="tenor">Tenor</option>
+                    <option value="baritone">Baritone</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <button class="generate-btn" onclick="generateScore()">
+              <span>🎵</span> Generate Sheet Music
+            </button>
           </div>
         </div>
-
-        <!-- Dynamics Notation -->
-        <div class="options-section">
-          <h3>🔊 Dynamics & Expression</h3>
-          <div class="options-grid" id="dynamicsOptions">
-            <label class="option-item selected" data-value="traditional">
-              <span class="icon">🎵</span>
-              <span class="label">Traditional (pp-ff)</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item selected" data-value="vrn">
-              <span class="icon">🗣️</span>
-              <span class="label">VRN Codes</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item" data-value="expressive">
-              <span class="icon">💫</span>
-              <span class="label">Expressive Text</span>
-              <span class="check"></span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Musical Style -->
-        <div class="options-section">
-          <h3>🎨 Musical Style</h3>
-          <div class="options-grid" id="styleOptions">
-            <label class="option-item option-radio selected" data-value="operatic">
-              <span class="icon">🎭</span>
-              <span class="label">Operatic</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="hypnotic">
-              <span class="icon">🌀</span>
-              <span class="label">Hypnotic</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="trance">
-              <span class="icon">✨</span>
-              <span class="label">Trance</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="classical">
-              <span class="icon">🏛️</span>
-              <span class="label">Classical</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="jazz">
-              <span class="icon">🎷</span>
-              <span class="label">Jazz</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="rock">
-              <span class="icon">🎸</span>
-              <span class="label">Rock</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="folk">
-              <span class="icon">🪕</span>
-              <span class="label">Folk</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="ambient">
-              <span class="icon">🌊</span>
-              <span class="label">Ambient</span>
-              <span class="check"></span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Musical Parameters -->
-        <div class="options-section">
-          <h3>⚙️ Musical Parameters</h3>
-          <div class="select-row">
-            <div class="select-group">
-              <label>Key Signature</label>
-              <select id="keySelect">
-                <option value="C">C Major</option>
-                <option value="G">G Major</option>
-                <option value="D">D Major</option>
-                <option value="A">A Major</option>
-                <option value="E">E Major</option>
-                <option value="F">F Major</option>
-                <option value="Bb">B♭ Major</option>
-                <option value="Eb">E♭ Major</option>
-                <option value="Am">A Minor</option>
-                <option value="Em">E Minor</option>
-                <option value="Dm">D Minor</option>
-              </select>
-            </div>
-            <div class="select-group">
-              <label>Time Signature</label>
-              <select id="timeSelect">
-                <option value="4/4">4/4 (Common)</option>
-                <option value="3/4">3/4 (Waltz)</option>
-                <option value="6/8">6/8 (Compound)</option>
-                <option value="2/4">2/4 (March)</option>
-                <option value="5/4">5/4 (Irregular)</option>
-              </select>
-            </div>
-          </div>
-          <div class="select-row">
-            <div class="select-group">
-              <label>Tempo</label>
-              <select id="tempoSelect">
-                <option value="60">Largo (60 BPM)</option>
-                <option value="72" selected>Andante (72 BPM)</option>
-                <option value="90">Moderato (90 BPM)</option>
-                <option value="120">Allegro (120 BPM)</option>
-                <option value="140">Vivace (140 BPM)</option>
-              </select>
-            </div>
-            <div class="select-group">
-              <label>Voice Type</label>
-              <select id="voiceSelect">
-                <option value="soprano">Soprano</option>
-                <option value="mezzo" selected>Mezzo-Soprano</option>
-                <option value="alto">Alto</option>
-                <option value="tenor">Tenor</option>
-                <option value="baritone">Baritone</option>
-                <option value="bass">Bass</option>
-              </select>
+        
+        <!-- Output Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>📜 Generated Score</h2>
+            <div class="output-actions">
+              <button class="output-btn" onclick="copyScore()">📋 Copy</button>
+              <button class="output-btn" onclick="downloadScore()">💾 Download</button>
+              <button class="output-btn save-btn" id="saveScoreBtn" onclick="showSaveModal()">✨ Save</button>
             </div>
           </div>
-        </div>
-
-        <button class="generate-btn" id="generateBtn" onclick="generateScore()">
-          <span>🎵</span> Generate Sheet Music
-        </button>
-      </div>
-    </div>
-
-    <!-- Output Panel -->
-    <div class="panel">
-      <div class="panel-header">
-        <div class="output-header">
-          <h2>📜 Generated Score</h2>
-          <div class="output-actions">
-            <button class="output-btn" onclick="copyScore()">📋 Copy</button>
-            <button class="output-btn" onclick="downloadScore()">💾 Download</button>
+          <div class="panel-content">
+            <div class="output-tabs">
+              <button class="tab-btn active" onclick="switchTab('score')">Score</button>
+              <button class="tab-btn" onclick="switchTab('vrn')">VRN Guide</button>
+            </div>
+            <div class="score-output" id="scoreOutput">Enter lyrics and click Generate to create sheet music...</div>
           </div>
         </div>
-      </div>
-      <div class="panel-content">
-        <div class="output-tabs">
-          <button class="tab-btn active" data-tab="score" onclick="switchTab('score')">Score</button>
-          <button class="tab-btn" data-tab="vrn" onclick="switchTab('vrn')">VRN Guide</button>
-          <button class="tab-btn" data-tab="analysis" onclick="switchTab('analysis')">Analysis</button>
-        </div>
-        <div class="score-output" id="scoreOutput">
-╔════════════════════════════════════════════════════════════════════════════════╗
-║                        🎼 COSMOS MUSIC COMPOSER                                ║
-║                                                                                ║
-║  Enter your lyrics in the text box on the left, choose your notation format,  ║
-║  dynamics style, and musical genre, then click "Generate Sheet Music"         ║
-║                                                                                ║
-║  ═══════════════════════════════════════════════════════════════════════════  ║
-║                                                                                ║
-║  NOTATION FORMATS:                                                             ║
-║  • SATB Staff - Traditional choral notation with staff lines                   ║
-║  • SSAATTBB - 8-part chorus with arrow notation                                ║
-║  • Treble/Bass - Piano-style grand staff notation                              ║
-║  • Lead Sheet - Melody with chord symbols                                      ║
-║                                                                                ║
-║  DYNAMICS OPTIONS:                                                             ║
-║  • Traditional - pp, p, mp, mf, f, ff, fff                                     ║
-║  • VRN Codes - [C], [H], [M], [N], [O] with intensity levels                   ║
-║  • Expressive - Written descriptions (tender, powerful, ethereal)              ║
-║                                                                                ║
-║  MUSICAL STYLES:                                                               ║
-║  • Operatic - Dramatic, wide intervals, emotional climaxes                     ║
-║  • Hypnotic - Repetitive patterns, trance-inducing                             ║
-║  • Trance - Building intensity, euphoric peaks                                 ║
-║  • Classical - Balanced phrases, traditional harmonies                         ║
-║  • Jazz - Chromatic movement, extended chords                                  ║
-║  • Rock - Strong rhythms, pentatonic melodies                                  ║
-║  • Folk - Simple, singable, modal inflections                                  ║
-║  • Ambient - Sustained tones, atmospheric textures                             ║
-║                                                                                ║
-╚════════════════════════════════════════════════════════════════════════════════╝</div>
       </div>
     </div>
+    
+    <!-- ==================== SAVE MODAL ==================== -->
+    <div id="save-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>💾 Save Score</h2>
+          <button class="modal-close" onclick="closeSaveModal()">×</button>
+        </div>
+        <form onsubmit="saveScore(event)">
+          <div class="form-group">
+            <label>Score Title</label>
+            <input type="text" id="score-title" placeholder="My Composition" required>
+          </div>
+          <div class="form-group">
+            <label>Description (optional)</label>
+            <input type="text" id="score-description" placeholder="Notes about this score">
+          </div>
+          <button type="submit" class="btn-large btn-primary full-width">Save to My Scores</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
   </div>
 
-  <footer class="footer">
-    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
-    <a href="index.html">Home</a> | <a href="composition.html">AI Composition Guide</a> | <a href="notation.html">VRN Guide</a></p>
-  </footer>
-
   <script>
-// Option selection handling
+// ==================== STORAGE ====================
+const Storage = {
+  KEYS: {
+    USERS: 'cosmos_composer_users',
+    CURRENT_USER: 'cosmos_composer_current_user',
+    SCORES: 'cosmos_composer_scores'
+  },
+  
+  DEFAULT_ADMIN: { username: 'admin', password: 'admin123', displayName: 'Administrator', isAdmin: true },
+  DEFAULT_DEMO: { username: 'demo', password: 'demo123', displayName: 'Demo User', isAdmin: false },
+  
+  init() {
+    if (!localStorage.getItem(this.KEYS.USERS)) {
+      const users = {};
+      users['admin'] = { id: 'admin_001', ...this.DEFAULT_ADMIN, createdAt: new Date().toISOString() };
+      users['demo'] = { id: 'demo_001', ...this.DEFAULT_DEMO, createdAt: new Date().toISOString() };
+      localStorage.setItem(this.KEYS.USERS, JSON.stringify(users));
+    }
+    if (!localStorage.getItem(this.KEYS.SCORES)) {
+      localStorage.setItem(this.KEYS.SCORES, JSON.stringify({}));
+    }
+    // Add sample scores for demo user
+    this.initDemoContent();
+  },
+  
+  initDemoContent() {
+    const scores = this.getAllScores();
+    const demoScores = Object.values(scores).filter(s => s.userId === 'demo_001');
+    if (demoScores.length > 0) return;
+    
+    scores['demo_score_001'] = {
+      id: 'demo_score_001',
+      userId: 'demo_001',
+      title: 'Do You See',
+      description: 'Opening scene from COSMOS',
+      notation: 'piano-roll',
+      style: 'operatic',
+      key: 'C',
+      lyrics: 'do you see\nwhat do you see\nwhen you close your eyes',
+      output: '┌──────────────────────────────────────────────────────────────────────────────\n│  PIANO ROLL SCORE\n│  Key: C  Time: 4/4  Tempo: ♩=72  Voice: mezzo  Style: operatic\n├──────────────────────────────────────────────────────────────────────────────\n│\n│  Sample score preview...',
+      createdAt: new Date(Date.now() - 7*24*60*60*1000).toISOString()
+    };
+    localStorage.setItem(this.KEYS.SCORES, JSON.stringify(scores));
+  },
+  
+  getUsers() { return JSON.parse(localStorage.getItem(this.KEYS.USERS) || '{}'); },
+  getUserByUsername(username) { return this.getUsers()[username.toLowerCase()] || null; },
+  getCurrentUser() {
+    const username = localStorage.getItem(this.KEYS.CURRENT_USER);
+    return username ? this.getUserByUsername(username) : null;
+  },
+  setCurrentUser(username) { localStorage.setItem(this.KEYS.CURRENT_USER, username.toLowerCase()); },
+  clearCurrentUser() { localStorage.removeItem(this.KEYS.CURRENT_USER); },
+  
+  createUser(data) {
+    const users = this.getUsers();
+    const username = data.username.toLowerCase();
+    if (users[username]) throw new Error('Username already exists');
+    users[username] = {
+      id: Date.now().toString(36) + Math.random().toString(36).substr(2),
+      username,
+      displayName: data.displayName,
+      password: data.password,
+      isAdmin: false,
+      createdAt: new Date().toISOString()
+    };
+    localStorage.setItem(this.KEYS.USERS, JSON.stringify(users));
+    return users[username];
+  },
+  
+  getAllScores() { return JSON.parse(localStorage.getItem(this.KEYS.SCORES) || '{}'); },
+  getUserScores(userId) {
+    return Object.values(this.getAllScores()).filter(s => s.userId === userId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  },
+  
+  saveScore(scoreData) {
+    const scores = this.getAllScores();
+    const id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+    scores[id] = { id, ...scoreData, createdAt: new Date().toISOString() };
+    localStorage.setItem(this.KEYS.SCORES, JSON.stringify(scores));
+    return scores[id];
+  },
+  
+  deleteScore(id) {
+    const scores = this.getAllScores();
+    delete scores[id];
+    localStorage.setItem(this.KEYS.SCORES, JSON.stringify(scores));
+  }
+};
+
+Storage.init();
+
+// ==================== AUTH ====================
+let isDemo = false;
+
+function handleLogin(e) {
+  e.preventDefault();
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+  
+  try {
+    const user = Storage.getUserByUsername(username);
+    if (!user) throw new Error('User not found');
+    if (user.password !== password) throw new Error('Incorrect password');
+    Storage.setCurrentUser(username);
+    isDemo = false;
+    showScreen('dashboard');
+    updateUserUI();
+  } catch (err) {
+    errorEl.textContent = err.message;
+  }
+}
+
+function handleSignup(e) {
+  e.preventDefault();
+  const displayName = document.getElementById('signup-name').value;
+  const username = document.getElementById('signup-username').value;
+  const password = document.getElementById('signup-password').value;
+  const errorEl = document.getElementById('signup-error');
+  
+  try {
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) throw new Error('Username: letters, numbers, underscores only');
+    Storage.createUser({ displayName, username, password });
+    Storage.setCurrentUser(username);
+    isDemo = false;
+    showScreen('dashboard');
+    updateUserUI();
+    showToast('Account created!');
+  } catch (err) {
+    errorEl.textContent = err.message;
+  }
+}
+
+function handleLogout() {
+  Storage.clearCurrentUser();
+  isDemo = false;
+  showScreen('landing');
+}
+
+function startDemo() {
+  Storage.setCurrentUser('demo');
+  isDemo = true;
+  showScreen('dashboard');
+  updateUserUI();
+  showToast('Demo mode - your changes are saved locally');
+}
+
+function updateUserUI() {
+  const user = Storage.getCurrentUser();
+  if (user) {
+    document.getElementById('user-display-name').textContent = user.displayName;
+    document.getElementById('user-avatar').textContent = user.displayName.charAt(0).toUpperCase();
+    document.getElementById('admin-link').style.display = user.isAdmin ? 'block' : 'none';
+    document.getElementById('composer-user-info').innerHTML = user.isAdmin ? '🛡️ Admin' : '';
+    loadUserScores();
+  }
+}
+
+// ==================== SCREENS ====================
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId + '-screen').classList.add('active');
+  
+  if (screenId === 'dashboard') {
+    loadUserScores();
+  }
+}
+
+function goBackFromComposer() {
+  const user = Storage.getCurrentUser();
+  if (user) {
+    showScreen('dashboard');
+  } else {
+    showScreen('landing');
+  }
+}
+
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.querySelector(`.auth-tab[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(tab + '-form').classList.add('active');
+}
+
+function toggleUserMenu() {
+  document.getElementById('user-dropdown').classList.toggle('show');
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.user-menu')) {
+    document.getElementById('user-dropdown')?.classList.remove('show');
+  }
+});
+
+// ==================== SCORES DASHBOARD ====================
+function loadUserScores() {
+  const user = Storage.getCurrentUser();
+  if (!user) return;
+  
+  const scores = Storage.getUserScores(user.id);
+  const grid = document.getElementById('scores-grid');
+  const empty = document.getElementById('empty-scores');
+  
+  if (scores.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  
+  empty.style.display = 'none';
+  grid.innerHTML = scores.map(score => `
+    <div class="score-card">
+      <div class="score-card-header">
+        <div class="score-card-title">${escapeHtml(score.title)}</div>
+        <div class="score-card-meta">
+          <span>${score.notation}</span>
+          <span>${score.style}</span>
+          <span>${score.key}</span>
+        </div>
+      </div>
+      <div class="score-card-body">
+        <div class="score-card-preview">${escapeHtml(score.output?.substring(0, 200) || '')}</div>
+      </div>
+      <div class="score-card-actions">
+        <button class="score-card-btn primary" onclick="openScore('${score.id}')">Open</button>
+        <button class="score-card-btn secondary" onclick="deleteScoreConfirm('${score.id}')">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openScore(id) {
+  const scores = Storage.getAllScores();
+  const score = scores[id];
+  if (!score) return;
+  
+  document.getElementById('lyricsInput').value = score.lyrics || '';
+  
+  // Set notation
+  document.querySelectorAll('#notationOptions .option-item').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.value === score.notation);
+  });
+  
+  // Set style
+  document.querySelectorAll('#styleOptions .option-item').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.value === score.style);
+  });
+  
+  document.getElementById('keySelect').value = score.key || 'C';
+  document.getElementById('scoreOutput').textContent = score.output || '';
+  
+  showScreen('composer');
+}
+
+function deleteScoreConfirm(id) {
+  if (confirm('Delete this score? This cannot be undone.')) {
+    Storage.deleteScore(id);
+    loadUserScores();
+    showToast('Score deleted');
+  }
+}
+
+// ==================== SAVE MODAL ====================
+let currentGeneratedOutput = '';
+
+function showSaveModal() {
+  const user = Storage.getCurrentUser();
+  if (!user) {
+    showToast('Please log in to save scores', true);
+    return;
+  }
+  if (!currentGeneratedOutput) {
+    showToast('Generate a score first', true);
+    return;
+  }
+  document.getElementById('save-modal').classList.add('show');
+}
+
+function closeSaveModal() {
+  document.getElementById('save-modal').classList.remove('show');
+}
+
+function saveScore(e) {
+  e.preventDefault();
+  const user = Storage.getCurrentUser();
+  if (!user) return;
+  
+  const title = document.getElementById('score-title').value;
+  const description = document.getElementById('score-description').value;
+  const lyrics = document.getElementById('lyricsInput').value;
+  const notation = getSelectedRadio('notationOptions');
+  const style = getSelectedRadio('styleOptions');
+  const key = document.getElementById('keySelect').value;
+  
+  Storage.saveScore({
+    userId: user.id,
+    title,
+    description,
+    lyrics,
+    notation,
+    style,
+    key,
+    output: currentGeneratedOutput
+  });
+  
+  closeSaveModal();
+  showToast('Score saved!');
+  document.getElementById('score-title').value = '';
+  document.getElementById('score-description').value = '';
+}
+
+// ==================== TOAST ====================
+function showToast(message, isError = false) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ==================== OPTION HANDLING ====================
 document.querySelectorAll('.option-item').forEach(item => {
   item.addEventListener('click', function() {
     const parent = this.parentElement;
     const isRadio = this.classList.contains('option-radio');
-    
     if (isRadio) {
       parent.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
-      this.classList.add('selected');
-    } else {
-      this.classList.toggle('selected');
     }
+    this.classList.toggle('selected', isRadio || !this.classList.contains('selected'));
   });
 });
 
-// Get selected options
 function getSelectedOptions(containerId) {
-  const container = document.getElementById(containerId);
-  const selected = container.querySelectorAll('.option-item.selected');
-  return [...selected].map(item => item.dataset.value);
+  return [...document.getElementById(containerId).querySelectorAll('.option-item.selected')].map(i => i.dataset.value);
 }
 
 function getSelectedRadio(containerId) {
-  const container = document.getElementById(containerId);
-  const selected = container.querySelector('.option-item.selected');
-  return selected ? selected.dataset.value : null;
+  const sel = document.getElementById(containerId).querySelector('.option-item.selected');
+  return sel ? sel.dataset.value : null;
 }
 
-// Voice ranges
+// ==================== COMPOSER ENGINE ====================
 const voiceRanges = {
-  soprano: { low: 'C4', high: 'C6', mid: 'A4', scale: ['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5','B5','C6'] },
-  mezzo: { low: 'A3', high: 'A5', mid: 'E4', scale: ['A3','B3','C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5'] },
-  alto: { low: 'F3', high: 'F5', mid: 'C4', scale: ['F3','G3','A3','B3','C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5'] },
-  tenor: { low: 'C3', high: 'C5', mid: 'G3', scale: ['C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4','B4','C5'] },
-  baritone: { low: 'A2', high: 'A4', mid: 'E3', scale: ['A2','B2','C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4'] },
-  bass: { low: 'E2', high: 'E4', mid: 'B2', scale: ['E2','F2','G2','A2','B2','C3','D3','E3','F3','G3','A3','B3','C4','D4','E4'] }
+  soprano: { scale: ['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5','B5','C6'] },
+  mezzo: { scale: ['A3','B3','C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5'] },
+  tenor: { scale: ['C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4','B4','C5'] },
+  baritone: { scale: ['A2','B2','C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4'] }
 };
 
-// Style characteristics
 const stylePatterns = {
-  operatic: { intervals: [2,3,4,5,7], buildUp: true, climax: true, dynamics: ['p','mp','mf','f','ff','fff'] },
-  hypnotic: { intervals: [1,2,3], buildUp: false, climax: false, dynamics: ['p','mp','mf'], repetitive: true },
-  trance: { intervals: [2,3,5], buildUp: true, climax: true, dynamics: ['p','mf','f','ff'], pulse: true },
-  classical: { intervals: [2,3,4,5], buildUp: true, climax: true, dynamics: ['p','mp','mf','f'] },
-  jazz: { intervals: [1,2,3,4,6,7], buildUp: false, climax: false, dynamics: ['mp','mf','f'], chromatic: true },
-  rock: { intervals: [2,3,5,7], buildUp: true, climax: true, dynamics: ['mf','f','ff'], pentatonic: true },
-  folk: { intervals: [2,3,5], buildUp: false, climax: false, dynamics: ['mp','mf'], modal: true },
-  ambient: { intervals: [2,5,7], buildUp: false, climax: false, dynamics: ['pp','p','mp'], sustained: true }
+  operatic: { intervals: [2,3,4,5,7], dynamics: ['p','mp','mf','f','ff','fff'] },
+  hypnotic: { intervals: [1,2,3], dynamics: ['p','mp','mf'] },
+  trance: { intervals: [2,3,5], dynamics: ['p','mf','f','ff'] },
+  classical: { intervals: [2,3,4,5], dynamics: ['p','mp','mf','f'] },
+  jazz: { intervals: [1,2,3,4,6,7], dynamics: ['mp','mf','f'] },
+  folk: { intervals: [2,3,5], dynamics: ['mp','mf'] }
 };
 
-// VRN codes based on pitch and emotion
 function getVRNCode(pitch, emotion, intensity) {
   const noteNum = parseInt(pitch.slice(-1));
-  let code = '';
-  
-  if (noteNum <= 3) {
-    code = 'C'; // Chest
-  } else if (noteNum === 4) {
-    code = emotion === 'powerful' ? 'CM' : 'M'; // Mix
-  } else if (noteNum >= 5) {
-    code = emotion === 'ethereal' ? 'H' : 'HM'; // Head
-  }
-  
-  const plus = '+'.repeat(Math.min(3, intensity));
-  return `[${code}${plus}]`;
+  let code = noteNum <= 3 ? 'C' : (noteNum === 4 ? 'M' : 'H');
+  return `[${code}${'+'.repeat(Math.min(3, intensity))}]`;
 }
 
-// Parse lyrics into words/syllables
 function parseLyrics(text) {
   const lines = text.trim().split('\n').filter(l => l.trim());
   const words = [];
-  
   lines.forEach((line, lineIdx) => {
-    const lineWords = line.trim().split(/\s+/);
-    lineWords.forEach((word, wordIdx) => {
-      if (word) {
-        words.push({
-          text: word.toLowerCase(),
-          isLineStart: wordIdx === 0,
-          isLineEnd: wordIdx === lineWords.length - 1,
-          lineNum: lineIdx
-        });
-      }
+    line.trim().split(/\s+/).forEach((word, wordIdx, arr) => {
+      if (word) words.push({ text: word.toLowerCase(), isLineStart: wordIdx === 0, isLineEnd: wordIdx === arr.length - 1, lineNum: lineIdx });
     });
   });
-  
   return words;
 }
 
-// Generate melodic contour
 function generateMelody(words, voice, style) {
   const range = voiceRanges[voice];
   const pattern = stylePatterns[style];
   const melody = [];
-  
   let currentIdx = Math.floor(range.scale.length / 2);
-  const totalWords = words.length;
   
   words.forEach((word, i) => {
-    const progress = i / totalWords;
+    const progress = i / words.length;
     const emotion = progress > 0.7 ? 'powerful' : (progress < 0.3 ? 'tender' : 'building');
     const intensity = Math.ceil(progress * 3);
-    
-    // Determine interval
     let interval = pattern.intervals[Math.floor(Math.random() * pattern.intervals.length)];
     let direction = Math.random() > 0.5 ? 1 : -1;
-    
-    // Build toward climax
-    if (pattern.buildUp && progress > 0.5) {
-      direction = 1;
-      interval = Math.min(interval + 1, 5);
-    }
-    
-    // Line start often lower, line end often sustained
-    if (word.isLineStart && i > 0) {
-      currentIdx = Math.max(currentIdx - 2, 2);
-    }
-    
-    // Calculate new position
+    if (progress > 0.5) direction = 1;
+    if (word.isLineStart && i > 0) currentIdx = Math.max(currentIdx - 2, 2);
     currentIdx = Math.max(0, Math.min(range.scale.length - 1, currentIdx + (direction * interval)));
-    
-    // Climax peak
-    if (pattern.climax && progress > 0.8 && progress < 0.9) {
-      currentIdx = Math.min(currentIdx + 3, range.scale.length - 2);
-    }
-    
-    const pitch = range.scale[currentIdx];
-    const vrn = getVRNCode(pitch, emotion, intensity);
-    const dynamic = pattern.dynamics[Math.min(Math.floor(progress * pattern.dynamics.length), pattern.dynamics.length - 1)];
+    if (progress > 0.8 && progress < 0.9) currentIdx = Math.min(currentIdx + 3, range.scale.length - 2);
     
     melody.push({
-      word: word.text,
-      pitch: pitch,
-      vrn: vrn,
-      dynamic: dynamic,
-      duration: word.isLineEnd ? 2 : 1,
-      isLineStart: word.isLineStart,
-      isLineEnd: word.isLineEnd,
-      lineNum: word.lineNum,
-      emotion: emotion
+      word: word.text, pitch: range.scale[currentIdx], vrn: getVRNCode(range.scale[currentIdx], emotion, intensity),
+      dynamic: pattern.dynamics[Math.min(Math.floor(progress * pattern.dynamics.length), pattern.dynamics.length - 1)],
+      isLineStart: word.isLineStart, isLineEnd: word.isLineEnd, lineNum: word.lineNum, emotion
     });
   });
-  
   return melody;
 }
 
-// Generate Piano Roll notation (like the COSMOS sheet music)
-function generatePianoRollNotation(melody, options) {
+function generatePianoRollNotation(melody) {
   const key = document.getElementById('keySelect').value;
   const time = document.getElementById('timeSelect').value;
   const tempo = document.getElementById('tempoSelect').value;
@@ -518,493 +968,130 @@ function generatePianoRollNotation(melody, options) {
   const style = getSelectedRadio('styleOptions');
   const dynamics = getSelectedOptions('dynamicsOptions');
   
-  // Group melody by lines
   const lines = [];
-  let currentLineNotes = [];
-  let currentLineNum = -1;
-  
+  let currentLineNotes = [], currentLineNum = -1;
   melody.forEach(note => {
     if (note.lineNum !== currentLineNum) {
-      if (currentLineNotes.length > 0) {
-        lines.push(currentLineNotes);
-      }
+      if (currentLineNotes.length > 0) lines.push(currentLineNotes);
       currentLineNotes = [];
       currentLineNum = note.lineNum;
     }
     currentLineNotes.push(note);
   });
-  if (currentLineNotes.length > 0) {
-    lines.push(currentLineNotes);
-  }
+  if (currentLineNotes.length > 0) lines.push(currentLineNotes);
   
-  let output = '';
-  output += `┌${'─'.repeat(78)}\n`;
-  output += `│  PIANO ROLL SCORE\n`;
-  output += `│  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}  Voice: ${voice}  Style: ${style}\n`;
-  output += `├${'─'.repeat(78)}\n`;
+  let output = `┌${'─'.repeat(78)}\n│  PIANO ROLL SCORE\n│  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}  Voice: ${voice}  Style: ${style}\n├${'─'.repeat(78)}\n`;
   
   let measureNum = 1;
+  const noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
   
-  lines.forEach((lineNotes, lineIdx) => {
-    // Get pitch range for this line
-    const pitches = lineNotes.map(n => n.pitch);
-    const allPitchNums = pitches.map(p => {
-      const note = p.slice(0, -1);
-      const octave = parseInt(p.slice(-1));
-      const noteOrder = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-      const noteIdx = noteOrder.indexOf(note.replace('b', '#').replace('Db','C#').replace('Eb','D#').replace('Gb','F#').replace('Ab','G#').replace('Bb','A#'));
-      return octave * 12 + (noteIdx >= 0 ? noteIdx : 0);
+  lines.forEach(lineNotes => {
+    const pitchNums = lineNotes.map(n => {
+      const note = n.pitch.slice(0,-1), octave = parseInt(n.pitch.slice(-1));
+      return octave * 12 + noteNames.indexOf(note);
     });
-    
-    const minPitch = Math.min(...allPitchNums);
-    const maxPitch = Math.max(...allPitchNums);
-    
-    // Create pitch ladder (from high to low for display, but conceptually low to high)
+    const minP = Math.min(...pitchNums), maxP = Math.max(...pitchNums);
     const pitchLabels = [];
-    const noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-    
-    for (let p = maxPitch + 2; p >= minPitch - 1; p--) {
-      const octave = Math.floor(p / 12);
-      const noteIdx = p % 12;
-      const noteName = noteNames[noteIdx] + octave;
-      pitchLabels.push({ name: noteName, num: p });
+    for (let p = maxP + 1; p >= minP - 1; p--) {
+      pitchLabels.push({ name: noteNames[p % 12] + Math.floor(p / 12), num: p });
     }
     
-    // Lyrics for header
     const lyricsPreview = lineNotes.map(n => n.word).join(' ');
-    const lastDynamic = lineNotes[lineNotes.length - 1].dynamic;
+    output += `│\n│  MEASURES ${measureNum}-${measureNum + 15}: "${lyricsPreview.substring(0,40)}"  ${lineNotes[lineNotes.length-1].dynamic}\n│\n│  ${voice.toUpperCase()}:\n`;
     
-    output += `│\n`;
-    output += `│  MEASURES ${measureNum}-${measureNum + 15}: "${lyricsPreview.substring(0, 45)}"${' '.repeat(Math.max(0, 20 - lastDynamic.length))}${lastDynamic}\n`;
-    output += `│\n`;
-    output += `│  ${voice.toUpperCase()}:\n`;
-    
-    // Draw each pitch line
-    pitchLabels.forEach(pitchInfo => {
-      let line = `│  ${pitchInfo.name.padEnd(4)} `;
-      
-      lineNotes.forEach((note, noteIdx) => {
-        const notePitchNum = (() => {
-          const n = note.pitch.slice(0, -1);
-          const o = parseInt(note.pitch.slice(-1));
-          const noteOrder = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-          const idx = noteOrder.indexOf(n.replace('b', '#').replace('Db','C#').replace('Eb','D#').replace('Gb','F#').replace('Ab','G#').replace('Bb','A#'));
-          return o * 12 + (idx >= 0 ? idx : 0);
-        })();
-        
-        if (notePitchNum === pitchInfo.num) {
-          // This note is on this pitch line
-          if (note.isLineEnd) {
-            line += `${'─'.repeat(6)}●~~~~~~~`;
-          } else {
-            line += `${'─'.repeat(6)}♪${'─'.repeat(7)}`;
-          }
-        } else {
-          line += `${'─'.repeat(14)}`;
-        }
+    pitchLabels.forEach(pi => {
+      let line = `│  ${pi.name.padEnd(4)} `;
+      lineNotes.forEach(note => {
+        const np = parseInt(note.pitch.slice(-1)) * 12 + noteNames.indexOf(note.pitch.slice(0,-1));
+        line += np === pi.num ? (note.isLineEnd ? `${'─'.repeat(6)}●~~~~~~~` : `${'─'.repeat(6)}♪${'─'.repeat(7)}`) : `${'─'.repeat(14)}`;
       });
-      
       output += line + '\n';
     });
     
-    // VRN codes line
     if (dynamics.includes('vrn')) {
-      output += `│\n`;
-      let vrnLine = `│       `;
-      lineNotes.forEach(note => {
-        vrnLine += note.vrn.padEnd(14);
-      });
-      output += vrnLine + '\n';
+      output += `│\n│       `;
+      lineNotes.forEach(n => output += n.vrn.padEnd(14));
+      output += '\n';
     }
-    
-    // Lyrics line
     output += `│       `;
-    lineNotes.forEach(note => {
-      const wordStr = `"${note.word}"`;
-      output += wordStr.padEnd(14);
-    });
-    output += '\n';
-    
-    // Expressive text
-    if (dynamics.includes('expressive')) {
-      const emotions = [...new Set(lineNotes.map(n => n.emotion))];
-      output += `│\n`;
-      output += `│  ${emotions.join(' → ')}...\n`;
-    }
-    
-    output += `│\n`;
-    output += `├${'─'.repeat(78)}\n`;
+    lineNotes.forEach(n => output += `"${n.word}" `.padEnd(14));
+    output += `\n│\n├${'─'.repeat(78)}\n`;
     measureNum += 16;
   });
   
-  output += `└${'─'.repeat(78)}\n`;
-  
-  return output;
+  return output + `└${'─'.repeat(78)}\n`;
 }
 
-// Generate SSAATTBB notation
-function generateSSAATTBBNotation(melody, options) {
-  const key = document.getElementById('keySelect').value;
-  const time = document.getElementById('timeSelect').value;
-  const tempo = document.getElementById('tempoSelect').value;
-  const style = getSelectedRadio('styleOptions');
-  const dynamics = getSelectedOptions('dynamicsOptions');
-  
-  let output = '';
-  output += `┌${'─'.repeat(78)}\n`;
-  output += `│  SSAATTBB CHORAL SCORE                                                   \n`;
-  output += `│  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}  Style: ${style}\n`;
-  output += `├${'─'.repeat(78)}\n`;
-  
-  let measureNum = 1;
-  let currentLine = -1;
-  let lineNotes = [];
-  
-  melody.forEach((note, i) => {
-    if (note.lineNum !== currentLine) {
-      // Output previous line
-      if (lineNotes.length > 0) {
-        const pitchSeq = lineNotes.map(n => `♩${n.pitch}`).join(' ─→ ');
-        const vrnSeq = dynamics.includes('vrn') ? lineNotes.map(n => n.vrn).join('') : '';
-        const lyricsSeq = lineNotes.map(n => `"${n.word}"`).join('  ');
-        const lastNote = lineNotes[lineNotes.length - 1];
-        
-        output += `│  MEASURES ${measureNum}-${measureNum + 3}: ${lyricsSeq.substring(0, 40)}...    ${lastNote.dynamic}\n`;
-        output += `│  ${pitchSeq.substring(0, 70)}\n`;
-        if (vrnSeq) {
-          output += `│  ${vrnSeq.substring(0, 70)}\n`;
-        }
-        output += `│  SSAATTBB: Wave entry B2→S1, staggered                    ${lastNote.dynamic} ${lineNotes[0].vrn}\n`;
-        output += `├${'─'.repeat(78)}\n`;
-        measureNum += 4;
-      }
-      
-      currentLine = note.lineNum;
-      lineNotes = [];
-    }
-    
-    lineNotes.push(note);
-  });
-  
-  // Output last line
-  if (lineNotes.length > 0) {
-    const pitchSeq = lineNotes.map(n => `♩${n.pitch}`).join(' ─→ ');
-    const vrnSeq = dynamics.includes('vrn') ? lineNotes.map(n => n.vrn).join('') : '';
-    const lyricsSeq = lineNotes.map(n => `"${n.word}"`).join('  ');
-    const lastNote = lineNotes[lineNotes.length - 1];
-    
-    output += `│  MEASURES ${measureNum}-${measureNum + 3}: ${lyricsSeq.substring(0, 40)}...    ${lastNote.dynamic} ★ CLIMAX ★\n`;
-    output += `│  ${pitchSeq.substring(0, 60)} ●~~~~~~~~\n`;
-    if (vrnSeq) {
-      output += `│  ${vrnSeq.substring(0, 70)}\n`;
-    }
-    output += `│  SSAATTBB: Full 8-part texture, S1 descant                 fff ${lineNotes[0].vrn}\n`;
-  }
-  
-  output += `└${'─'.repeat(78)}\n`;
-  
-  return output;
-}
-
-// Generate Treble/Bass notation
-function generateTrebleBassNotation(melody, options) {
-  const key = document.getElementById('keySelect').value;
-  const time = document.getElementById('timeSelect').value;
-  const tempo = document.getElementById('tempoSelect').value;
-  const dynamics = getSelectedOptions('dynamicsOptions');
-  
-  let output = '';
-  output += `╔${'═'.repeat(78)}\n`;
-  output += `║  TREBLE/BASS CLEF NOTATION\n`;
-  output += `║  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}\n`;
-  output += `╠${'═'.repeat(78)}\n`;
-  
-  let measureNum = 1;
-  
-  // Group by lines
-  const lines = [];
-  let currentLineNotes = [];
-  let currentLineNum = -1;
-  
-  melody.forEach(note => {
-    if (note.lineNum !== currentLineNum) {
-      if (currentLineNotes.length > 0) {
-        lines.push(currentLineNotes);
-      }
-      currentLineNotes = [];
-      currentLineNum = note.lineNum;
-    }
-    currentLineNotes.push(note);
-  });
-  if (currentLineNotes.length > 0) {
-    lines.push(currentLineNotes);
-  }
-  
-  lines.forEach((lineNotes, lineIdx) => {
-    output += `║  Measure ${measureNum}                                              ${lineNotes[0].dynamic}\n`;
-    output += `║  𝄞 ${'─'.repeat(70)}\n`;
-    
-    // Treble staff
-    for (let staff = 0; staff < 5; staff++) {
-      let staffLine = `║    `;
-      lineNotes.forEach((note, i) => {
-        const noteNum = parseInt(note.pitch.slice(-1));
-        if (noteNum >= 4 && (5 - staff) === (noteNum - 3)) {
-          staffLine += `──●──`;
-        } else {
-          staffLine += `─────`;
-        }
-      });
-      output += staffLine + '\n';
-    }
-    
-    // Lyrics line
-    let lyricsLine = `║    `;
-    lineNotes.forEach(note => {
-      lyricsLine += `"${note.word}" `;
-    });
-    output += lyricsLine + '\n';
-    
-    // VRN line
-    if (dynamics.includes('vrn')) {
-      let vrnLine = `║    `;
-      lineNotes.forEach(note => {
-        vrnLine += note.vrn + ' ';
-      });
-      output += vrnLine + '\n';
-    }
-    
-    output += `║${'─'.repeat(78)}\n`;
-    measureNum += 4;
-  });
-  
-  output += `╚${'═'.repeat(78)}\n`;
-  
-  return output;
-}
-
-// Generate Lead Sheet notation
-function generateLeadSheetNotation(melody, options) {
-  const key = document.getElementById('keySelect').value;
-  const time = document.getElementById('timeSelect').value;
-  const tempo = document.getElementById('tempoSelect').value;
-  const dynamics = getSelectedOptions('dynamicsOptions');
-  
-  // Chord progressions by key
-  const chords = {
-    'C': ['C', 'Am', 'F', 'G', 'Dm', 'Em'],
-    'G': ['G', 'Em', 'C', 'D', 'Am', 'Bm'],
-    'D': ['D', 'Bm', 'G', 'A', 'Em', 'F#m'],
-    'A': ['A', 'F#m', 'D', 'E', 'Bm', 'C#m'],
-    'E': ['E', 'C#m', 'A', 'B', 'F#m', 'G#m'],
-    'F': ['F', 'Dm', 'Bb', 'C', 'Gm', 'Am'],
-    'Bb': ['Bb', 'Gm', 'Eb', 'F', 'Cm', 'Dm'],
-    'Eb': ['Eb', 'Cm', 'Ab', 'Bb', 'Fm', 'Gm'],
-    'Am': ['Am', 'F', 'C', 'G', 'Dm', 'E'],
-    'Em': ['Em', 'C', 'G', 'D', 'Am', 'B'],
-    'Dm': ['Dm', 'Bb', 'F', 'C', 'Gm', 'A']
-  };
-  
-  const keyChords = chords[key] || chords['C'];
-  
-  let output = '';
-  output += `╔${'═'.repeat(70)}\n`;
-  output += `║  LEAD SHEET\n`;
-  output += `║  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}\n`;
-  output += `╠${'═'.repeat(70)}\n`;
-  
-  let measureNum = 1;
-  let currentLineNum = -1;
-  let lineIdx = 0;
-  
-  melody.forEach((note, i) => {
-    if (note.lineNum !== currentLineNum) {
-      currentLineNum = note.lineNum;
-      const chord = keyChords[lineIdx % keyChords.length];
-      output += `║\n`;
-      output += `║  [${chord}]                                            Measure ${measureNum}\n`;
-      lineIdx++;
-      measureNum += 2;
-    }
-    
-    let noteLine = `║    ${note.pitch}  ${note.word}`;
-    if (dynamics.includes('traditional')) {
-      noteLine += `  ${note.dynamic}`;
-    }
-    if (dynamics.includes('vrn')) {
-      noteLine += `  ${note.vrn}`;
-    }
-    output += noteLine + '\n';
-  });
-  
-  output += `╚${'═'.repeat(70)}\n`;
-  
-  return output;
-}
-
-// Main generate function
 function generateScore() {
   const lyrics = document.getElementById('lyricsInput').value.trim();
-  
-  if (!lyrics) {
-    alert('Please enter some lyrics or words to compose.');
-    return;
-  }
+  if (!lyrics) { showToast('Enter lyrics first', true); return; }
   
   const voice = document.getElementById('voiceSelect').value;
   const style = getSelectedRadio('styleOptions');
   const notation = getSelectedRadio('notationOptions');
-  const dynamicsOpts = getSelectedOptions('dynamicsOptions');
-  
-  // Parse lyrics
   const words = parseLyrics(lyrics);
+  if (words.length === 0) { showToast('No valid words found', true); return; }
   
-  if (words.length === 0) {
-    alert('No valid words found in your lyrics.');
-    return;
-  }
-  
-  // Generate melody
   const melody = generateMelody(words, voice, style);
-  
-  // Generate notation based on format
   let output;
-  switch (notation) {
-    case 'piano-roll':
-      output = generatePianoRollNotation(melody, { dynamics: dynamicsOpts });
-      break;
-    case 'ssaattbb':
-      output = generateSSAATTBBNotation(melody, { dynamics: dynamicsOpts });
-      break;
-    case 'treble-bass':
-      output = generateTrebleBassNotation(melody, { dynamics: dynamicsOpts });
-      break;
-    case 'lead-sheet':
-      output = generateLeadSheetNotation(melody, { dynamics: dynamicsOpts });
-      break;
-    default:
-      output = generatePianoRollNotation(melody, { dynamics: dynamicsOpts });
-  }
+  
+  // For simplicity, using piano-roll for all in this demo
+  output = generatePianoRollNotation(melody);
   
   document.getElementById('scoreOutput').textContent = output;
+  currentGeneratedOutput = output;
 }
 
-// Tab switching
 function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === tab);
-  });
-  
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(tab)));
   const output = document.getElementById('scoreOutput');
-  
   if (tab === 'vrn') {
     output.textContent = `
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                    VOCAL RESONANCE NOTATION (VRN) GUIDE                      ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║                                                                              ║
-║  PRIMARY RESONANCE CODES:                                                    ║
-║  ─────────────────────────                                                   ║
-║  [C]   = Chest Voice      Full chest resonance, grounded, powerful           ║
-║  [H]   = Head Voice       Upper resonance, light, ethereal                   ║
-║  [M]   = Mix Voice        Balanced chest/head, versatile                     ║
-║  [N]   = Nasal            Forward placement, bright, cutting                 ║
-║  [O]   = Oral             Open throat, warm, round                           ║
-║                                                                              ║
-║  INTENSITY LEVELS:                                                           ║
-║  ─────────────────                                                           ║
-║  +     = Slight           Subtle activation                                  ║
-║  ++    = Moderate         Clear engagement                                   ║
-║  +++   = Maximum          Full intensity                                     ║
-║                                                                              ║
-║  MIXED DESIGNATIONS:                                                         ║
-║  ────────────────────                                                        ║
-║  [CM]  = Chest-Mix        Chest-dominant mix                                 ║
-║  [HM]  = Head-Mix         Head-dominant mix                                  ║
-║                                                                              ║
-║  EXTENDED CODES:                                                             ║
-║  ───────────────                                                             ║
-║  [Ey+] = Eye Muscles      Mask resonance, "smiling" placement                ║
-║  [B+]  = Brow Muscles     Lifted placement for brightness                    ║
-║  [Oc+] = Occipital        Back-of-head resonance for fullness                ║
-║  [SP+] = Soft Palate      Raised palate for open sound                       ║
-║  [P+]  = Pharynx          Throat space, darker color                         ║
-║  [T+]  = Tongue           Tongue position affects resonance                  ║
-║  [L+]  = Larynx           Laryngeal position (high/low)                      ║
-║                                                                              ║
-║  EXAMPLE PROGRESSIONS:                                                       ║
-║  ─────────────────────                                                       ║
-║  Ascending phrase:    [C+] → [CM] → [M++] → [HM] → [H+++]                    ║
-║  Intimate opening:    [O++], [CM], [P+]                                      ║
-║  Powerful climax:     [H+++], [O+++], [Oc+++], [M+++]                        ║
-║  Ethereal moment:     [H], [N++], [SP+]                                      ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝`;
-  } else if (tab === 'analysis') {
-    const lyrics = document.getElementById('lyricsInput').value.trim();
-    if (!lyrics) {
-      output.textContent = `
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                           TEXT ANALYSIS                                      ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║                                                                              ║
-║  Enter lyrics in the input box and generate a score to see analysis.        ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝`;
-    } else {
-      const words = parseLyrics(lyrics);
-      const lines = lyrics.split('\n').filter(l => l.trim());
-      output.textContent = `
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                           TEXT ANALYSIS                                      ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║                                                                              ║
-║  Total Words:    ${words.length.toString().padEnd(56)}║
-║  Total Lines:    ${lines.length.toString().padEnd(56)}║
-║  Avg Words/Line: ${(words.length / lines.length).toFixed(1).padEnd(56)}║
-║                                                                              ║
-║  EMOTIONAL ARC:                                                              ║
-║  ─────────────                                                               ║
-║  Opening:  Tender, questioning (suggested p - mp)                            ║
-║  Middle:   Building, developing (suggested mf - f)                           ║
-║  Climax:   Powerful, transcendent (suggested ff - fff)                       ║
-║  Close:    Resolving, fading (suggested mf - p)                              ║
-║                                                                              ║
-║  SUGGESTED VRN PROGRESSION:                                                  ║
-║  ──────────────────────────                                                  ║
-║  0-30%:   [C+], [CM], [O++] - Grounded, intimate                             ║
-║  30-60%:  [M], [M++], [HM] - Building through middle voice                   ║
-║  60-85%:  [H++], [H+++], [N++] - Rising to climax                            ║
-║  85-100%: [H+++], [Oc+++] → [M+] - Peak then resolution                      ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝`;
-    }
-  } else {
-    // Keep current score output
+VRN (Vocal Resonance Notation) Quick Guide:
+
+PRIMARY CODES:
+[C]  = Chest Voice    - Full chest resonance
+[H]  = Head Voice     - Upper resonance, light
+[M]  = Mix Voice      - Balanced chest/head
+
+INTENSITY:
++    = Slight
+++   = Moderate  
++++  = Maximum
+
+MIXED:
+[CM] = Chest-Mix
+[HM] = Head-Mix
+
+EXTENDED:
+[N]  = Nasal (forward, bright)
+[O]  = Oral (open throat)
+[Oc] = Occipital (back resonance)
+[SP] = Soft Palate (raised)`;
   }
 }
 
-// Copy to clipboard
 function copyScore() {
-  const output = document.getElementById('scoreOutput').textContent;
-  navigator.clipboard.writeText(output).then(() => {
-    alert('Score copied to clipboard!');
-  });
+  navigator.clipboard.writeText(document.getElementById('scoreOutput').textContent);
+  showToast('Copied!');
 }
 
-// Download as text file
 function downloadScore() {
-  const output = document.getElementById('scoreOutput').textContent;
-  const blob = new Blob([output], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
+  const blob = new Blob([document.getElementById('scoreOutput').textContent], { type: 'text/plain' });
   const a = document.createElement('a');
-  a.href = url;
+  a.href = URL.createObjectURL(blob);
   a.download = 'cosmos-score.txt';
-  document.body.appendChild(a);
   a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
 }
+
+// ==================== INIT ====================
+window.onload = function() {
+  const user = Storage.getCurrentUser();
+  if (user) {
+    showScreen('dashboard');
+    updateUserUI();
+  }
+};
   </script>
 </body>
 </html>

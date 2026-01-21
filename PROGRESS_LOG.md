@@ -204,5 +204,64 @@ Added continuous playback that automatically navigates through all 5 sheet music
 
 ---
 
+## Session 13: Enhanced Visual Sheet Music (January 21, 2026)
+
+### Changes Made
+
+**sheet-music-act1-p1.html - ENHANCED FORMAT:**
+- Converted to real 5-line music staff format (treble clef)
+- Staff lines: E4, G4, B4, D5, F5 (and extended range for climax sections)
+- Notes placed ON lines and IN spaces (like traditional notation)
+- All melodic lines now ASCEND (pitch going UP) to represent cosmic awakening
+- Full Vocal Resonance Notation preserved with detailed codes:
+  - [O++,H+] - Overtone++, Head+
+  - [H+++,N+++,Oc+++] - Head+++, Nasal+++, Occiput+++
+  - [C+,O+,L+] - Chest+, Overtone+, Low+
+- Open right edge on all measure boxes (no closing border)
+- Scene climaxes now reach A5 (Scene 1) representing full cosmic expansion
+- Updated audio note data to match ascending melodies
+
+**Other Pages (Simple Method):**
+- sheet-music-act1-p2.html - VRN present, staff lines across
+- sheet-music-act2.html - VRN present ([C], [CM], [M], [HM], [H] notation)
+- sheet-music-act3-p1.html - VRN present, ascending patterns
+- sheet-music-act3-p2.html - VRN present, grand finale notation
+
+### Visual Staff Format (Enhanced - Act1 P1)
+```
+│  𝄞                                                                ●~~~~~~~~   
+│ ════════════════════════════════════════════════════════════════════════════ A5
+│                                                               ●               
+│ ════════════════════════════════════════════════════════════════════════════ F5
+│                                                       ●                       
+│ ════════════════════════════════════════════════════════════════════════════ D5
+│                                               ●                               
+│ ════════════════════════════════════════════════════════════════════════════ B4
+│                       ●               ●                                       
+│ ════════════════════════════════════════════════════════════════════════════ G4
+│               ●                                                               
+│ ════════════════════════════════════════════════════════════════════════════ E4
+│       ●                                                                       
+```
+
+### Visual Staff Format (Simple - Other Pages)
+```
+│  G4 ───────♩───────────────────────────────────────────────────────────────
+│  A4 ─────────────────♩─────────────────────────────────────────────────────
+│  B4 ─────────────────────────────────♩─────────────────────────────────────
+│  D5 ─────────────────────────────────────────────●~~~~~~~~~────────────────
+│       [M]             [HM]            [H]             [H]~~~~
+│       "i              sing            be-             cause i can~~~~"
+```
+
+### Key Design Decisions
+1. Act I Part 1 uses enhanced 5-line staff to showcase the opening scenes
+2. Other pages use simplified notation for consistency and readability
+3. All pages omit right box edges per user preference
+4. VRN codes preserved in all files for vocal technique guidance
+5. Ascending melodic contours represent cosmic awakening themes
+
+---
+
 *Implementation by Claude (Anthropic) - January 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

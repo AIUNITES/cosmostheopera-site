@@ -503,4 +503,28 @@ cosmostheopera-site/
 
 ---
 
+## Notation Philosophy
+
+**Design Decision: AI-Generation Notation (No Traditional Clefs)**
+
+COSMOS uses pitch-octave notation (C4, E7, A7) and Vocal Resonance Notation (VRN) rather than traditional treble/bass clefs. This is intentional.
+
+**Rationale:**
+
+1. **AI-Readable** — Pitch-octave format is unambiguous and machine-parseable. An AI synthesis model can target E7 (2637 Hz) directly without clef interpretation.
+
+2. **Universal Accessibility** — No music theory training required. Anyone can understand "C4 = middle C" without learning clef systems.
+
+3. **Information Density** — VRN encodes resonance placement, muscular engagement, and physical vocal technique. Traditional notation cannot capture [P++, H+, Oc+] (pharynx strong, head moderate, occipital engaged). This information doesn't exist in conventional scores.
+
+4. **Format Independence** — ASCII/Markdown renders anywhere. No proprietary software (Sibelius, Finale), no licensing fees, no PDF lock-in. Version controllable, diffable, forkable.
+
+5. **Democratization** — Traditional notation is gatekept by conservatories and publishers. COSMOS is on GitHub, open, ready for whatever comes next.
+
+**The pompous plutocrats won't let us in the door anyway. We'll go over them.**
+
+The Hubble images are public domain because NASA believed space belongs to everyone. This notation says music belongs to everyone too.
+
+---
+
 *Last updated: January 20, 2026*

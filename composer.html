@@ -300,6 +300,27 @@
     .footer p { color: var(--text-secondary); font-size: 0.85rem; }
     .footer a { color: var(--accent-purple); text-decoration: none; }
     
+    /* Login Banner */
+    .login-banner { background: linear-gradient(135deg, rgba(157,78,221,0.3), rgba(0,212,255,0.2)); padding: 12px 20px; border-bottom: 1px solid rgba(157,78,221,0.3); }
+    .login-banner-content { max-width: 1600px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .login-banner-icon { font-size: 1.2rem; }
+    .login-banner-text { color: var(--text-primary); font-size: 0.95rem; }
+    .login-banner-text a { color: var(--accent-cyan); text-decoration: none; font-weight: 600; }
+    .login-banner-text a:hover { text-decoration: underline; }
+    .login-banner-btn { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; color: #fff; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
+    .login-banner-btn:hover { transform: scale(1.05); }
+    
+    /* Landing Composer */
+    .landing-composer-container { padding: 20px; background: linear-gradient(180deg, rgba(157,78,221,0.1) 0%, transparent 100%); }
+    .landing-composer-container .composer-container { min-height: auto; }
+    .landing-composer-container .panel-content { max-height: 500px; overflow-y: auto; }
+    .landing-composer-container .score-output { min-height: 300px; }
+    
+    /* CTA Section */
+    .cta-section { padding: 60px 20px; text-align: center; background: linear-gradient(135deg, rgba(157,78,221,0.15), rgba(0,212,255,0.1)); margin-top: 40px; }
+    .cta-section h2 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 15px; }
+    .cta-section p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 25px; }
+    
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 15px; }
       .options-grid { grid-template-columns: 1fr 1fr; }
@@ -324,14 +345,143 @@
         </div>
       </nav>
       
-      <section class="hero">
+      <section class="hero" style="padding: 30px 20px;">
         <h1>🎼 Music Composer Tool</h1>
-        <p>Transform your words into sheet music using AI-inspired composition methods, Vocal Resonance Notation, and multiple musical styles. Create, save, and manage your scores.</p>
-        <div class="hero-buttons">
-          <button class="btn-large btn-primary" onclick="showScreen('auth')">✨ Start Creating Free</button>
-          <button class="btn-large btn-secondary" onclick="startDemo()">👁️ Try Demo</button>
-        </div>
+        <p>Transform your words into sheet music instantly. Try it below - no account needed!</p>
       </section>
+      
+      <!-- Login Banner -->
+      <div class="login-banner">
+        <div class="login-banner-content">
+          <span class="login-banner-icon">✨</span>
+          <span class="login-banner-text"><strong>Try the composer below!</strong> <a href="#" onclick="showScreen('auth'); return false;">Log in</a> or <a href="#" onclick="showScreen('auth'); return false;">Sign up</a> to save your scores.</span>
+          <button class="login-banner-btn" onclick="showScreen('auth')">Get Started Free</button>
+        </div>
+      </div>
+      
+      <!-- Embedded Composer -->
+      <div class="landing-composer-container">
+        <div class="composer-container">
+          <!-- Input Panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2>✏️ Your Words & Options</h2>
+            </div>
+            <div class="panel-content">
+              <textarea class="lyrics-input" id="landingLyricsInput" placeholder="Enter your lyrics or words here...
+
+Example:
+do you see
+what do you see
+when you close your eyes
+i see the light
+an infinite number of stars"></textarea>
+              
+              <!-- Notation Format -->
+              <div class="options-section">
+                <h3>📋 Notation Format</h3>
+                <div class="options-grid" id="landingNotationOptions">
+                  <label class="option-item option-radio selected" data-value="piano-roll">
+                    <span class="icon">🎹</span>
+                    <span class="label">Piano Roll</span>
+                    <span class="check"></span>
+                  </label>
+                  <label class="option-item option-radio" data-value="treble-bass">
+                    <span class="icon">🎼</span>
+                    <span class="label">Treble/Bass</span>
+                    <span class="check"></span>
+                  </label>
+                  <label class="option-item option-radio" data-value="ssaattbb">
+                    <span class="icon">🎭</span>
+                    <span class="label">SSAATTBB</span>
+                    <span class="check"></span>
+                  </label>
+                  <label class="option-item option-radio" data-value="lead-sheet">
+                    <span class="icon">📄</span>
+                    <span class="label">Lead Sheet</span>
+                    <span class="check"></span>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Musical Style -->
+              <div class="options-section">
+                <h3>🎨 Musical Style</h3>
+                <div class="options-grid" id="landingStyleOptions">
+                  <label class="option-item option-radio selected" data-value="operatic">
+                    <span class="icon">🎭</span>
+                    <span class="label">Operatic</span>
+                    <span class="check"></span>
+                  </label>
+                  <label class="option-item option-radio" data-value="hypnotic">
+                    <span class="icon">🌀</span>
+                    <span class="label">Hypnotic</span>
+                    <span class="check"></span>
+                  </label>
+                  <label class="option-item option-radio" data-value="trance">
+                    <span class="icon">✨</span>
+                    <span class="label">Trance</span>
+                    <span class="check"></span>
+                  </label>
+                  <label class="option-item option-radio" data-value="classical">
+                    <span class="icon">🏛️</span>
+                    <span class="label">Classical</span>
+                    <span class="check"></span>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Parameters -->
+              <div class="options-section">
+                <h3>⚙️ Parameters</h3>
+                <div class="select-row">
+                  <div class="select-group">
+                    <label>Key</label>
+                    <select id="landingKeySelect">
+                      <option value="C">C Major</option>
+                      <option value="G">G Major</option>
+                      <option value="D">D Major</option>
+                      <option value="Am">A Minor</option>
+                    </select>
+                  </div>
+                  <div class="select-group">
+                    <label>Voice</label>
+                    <select id="landingVoiceSelect">
+                      <option value="soprano">Soprano</option>
+                      <option value="mezzo" selected>Mezzo</option>
+                      <option value="tenor">Tenor</option>
+                      <option value="baritone">Baritone</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              <button class="generate-btn" onclick="generateLandingScore()">
+                <span>🎵</span> Generate Sheet Music
+              </button>
+            </div>
+          </div>
+          
+          <!-- Output Panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2>📜 Generated Score</h2>
+              <div class="output-actions">
+                <button class="output-btn" onclick="copyLandingScore()">📋 Copy</button>
+                <button class="output-btn" onclick="downloadLandingScore()">💾 Download</button>
+                <button class="output-btn save-btn" onclick="promptLoginToSave()">✨ Save</button>
+              </div>
+            </div>
+            <div class="panel-content">
+              <div class="score-output" id="landingScoreOutput">Enter lyrics above and click Generate to create sheet music...
+
+✨ Try it now - no account needed!
+
+💾 Want to save your scores? Log in or sign up for free.</div>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <!-- Features Section -->
       <section style="max-width: 1000px; margin: 60px auto; padding: 0 20px;">

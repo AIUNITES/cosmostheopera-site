@@ -58,6 +58,8 @@
     .floating-progress { width: 120px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
     .floating-progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); width: 0%; transition: width 0.1s; }
     .floating-btn { background: rgba(255,107,157,0.2); border: 1px solid var(--accent-pink); color: var(--accent-pink); padding: 6px 14px; border-radius: 15px; cursor: pointer; font-size: 0.85rem; }
+    .loop-btn { background: rgba(157,78,221,0.2); border: 1px solid var(--accent-purple); color: var(--accent-purple); }
+    .loop-btn.active { background: rgba(157,78,221,0.4); border-color: var(--accent-gold); color: var(--accent-gold); }
     .continuous-badge { background: var(--accent-gold); color: #000; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; }
     .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; padding-bottom: 100px; }
     .score-section { margin-bottom: 40px; }
@@ -144,6 +146,7 @@
     <div class="now-playing-note" id="floatingNote">--</div>
     <div class="now-playing-text" id="floatingText">Ready</div>
     <div class="floating-progress"><div class="floating-progress-bar" id="floatingProgress"></div></div>
+    <button class="floating-btn loop-btn" id="loopBtn" onclick="toggleLoop()" title="Loop current scene">↻ Loop</button>
     <button class="floating-btn" onclick="stopAll()">■ Stop</button>
   </div>
   <main class="content">
@@ -623,7 +626,7 @@
     <a href="index.html">Home</a> | <a href="sheet-music.html">Sheet Music Index</a></p>
   </footer>
   <script>
-let audioReady=false,synths=[],reverb=null,chorus=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false,activeVoices=['pure'];
+let audioReady=false,synths=[],reverb=null,chorus=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false,loopMode=false,activeVoices=['pure'];
 const NEXT_PAGE='sheet-music-act1-p2.html';
 const PAGE_SCENES=['scene1','scene2'];
 
@@ -746,8 +749,12 @@ async function togglePlay(sceneId){
   continuousMode=false;
   isPlaying[sceneId]=true;currentScene=sceneId;
   playBtn.classList.add('playing');playBtn.textContent='⏸ Playing...';
-  const completed=await playScene(sceneId);
-  if(completed)stopAll();
+  let completed=true;
+  while(completed&&isPlaying[sceneId]){
+    completed=await playScene(sceneId);
+    if(!loopMode||!isPlaying[sceneId])break;
+  }
+  if(!loopMode)stopAll();
 }
 
 async function playAllScenesSequentially(){
@@ -775,6 +782,7 @@ function playFullOpera(){
 
 function stopAll(){
   continuousMode=false;
+  loopMode=false;
   Object.keys(isPlaying).forEach(k=>isPlaying[k]=false);
   currentScene=null;
   ['playScene1','playScene2'].forEach(id=>{const btn=document.getElementById(id);btn.classList.remove('playing');btn.textContent=id==='playScene1'?'▶ Play Scene 1':'▶ Play Scene 2';});
@@ -784,8 +792,16 @@ function stopAll(){
   document.getElementById('floatingProgress').style.width='0%';
   document.getElementById('floatingNote').textContent='--';
   document.getElementById('floatingText').textContent='Ready';
+  document.getElementById('loopBtn').classList.remove('active');
   if(currentMeasure){document.getElementById(currentMeasure)?.classList.remove('active');currentMeasure=null;}
   if(synths.length)synths.forEach(s=>s.releaseAll());
+}
+
+function toggleLoop(){
+  loopMode=!loopMode;
+  const btn=document.getElementById('loopBtn');
+  if(loopMode){btn.classList.add('active');btn.textContent='↻ Looping';}
+  else{btn.classList.remove('active');btn.textContent='↻ Loop';}
 }
 
 window.onload=()=>{const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){initAudio();}};

@@ -43,6 +43,13 @@
     .voice-select { background: var(--bg-card); color: var(--text-primary); border: 1px solid rgba(0,255,136,0.3); padding: 8px 12px; border-radius: 15px; font-size: 0.85rem; cursor: pointer; }
     .voice-select:disabled { opacity: 0.5; cursor: not-allowed; }
     .voice-select:focus { outline: none; border-color: var(--accent-cyan); }
+    .voice-options { display: flex; gap: 8px; flex-wrap: wrap; opacity: 0.5; pointer-events: none; }
+    .voice-options.enabled { opacity: 1; pointer-events: auto; }
+    .voice-checkbox { display: flex; align-items: center; gap: 4px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
+    .voice-checkbox:hover { border-color: var(--accent-cyan); }
+    .voice-checkbox input { display: none; }
+    .voice-checkbox input:checked + span { color: var(--accent-green); }
+    .voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
     .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: none; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); }
     .floating-controls.visible { display: flex; }
     .floating-controls.continuous { border-color: var(--accent-gold); }
@@ -119,13 +126,13 @@
       <p>Click to enable synthesized audio for the 8-part choral score.</p>
     </div>
     <button class="audio-init-btn" id="audioInitBtn" onclick="initAudio()">Enable Audio</button>
-    <select class="voice-select" id="voiceSelect" onchange="changeVoice()" disabled>
-      <option value="pure">🎵 Pure Tone</option>
-      <option value="choir">🎤 Choir Pad</option>
-      <option value="organ">🎹 Organ</option>
-      <option value="strings">🎻 Strings</option>
-      <option value="rich">✨ Rich Harmonics</option>
-    </select>
+    <div class="voice-options" id="voiceOptions">
+      <label class="voice-checkbox"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵 Pure</span></label>
+      <label class="voice-checkbox"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎤 Choir</span></label>
+      <label class="voice-checkbox"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹 Organ</span></label>
+      <label class="voice-checkbox"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻 Strings</span></label>
+      <label class="voice-checkbox"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨ Rich</span></label>
+    </div>
     <button class="play-all-btn" id="playAllBtn" onclick="playFullOpera()" disabled>▶ Play Full Opera</button>
   </div>
   <div class="floating-controls" id="floatingControls">
@@ -402,7 +409,7 @@
     <a href="index.html">Home</a> | <a href="ssaattbb-index.html">SSAATTBB Index</a></p>
   </footer>
   <script>
-let audioReady=false,synth=null,reverb=null,chorus=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false,currentVoice='pure';
+let audioReady=false,synths=[],reverb=null,chorus=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false,activeVoices=['pure'];
 const NEXT_PAGE='ssaattbb-act2.html';
 const PAGE_SCENES=['scene1','scene2','scene3','scene4','scene5'];
 
@@ -446,11 +453,11 @@ const scene5Data={tempo:84,notes:[
 const sceneDataMap={scene1:scene1Data,scene2:scene2Data,scene3:scene3Data,scene4:scene4Data,scene5:scene5Data};
 
 const voicePresets={
-  pure:{osc:'sine',attack:0.1,decay:0.2,sustain:0.85,release:1.2,reverbDecay:4,reverbWet:0.45,chorusWet:0},
-  choir:{osc:'triangle',attack:0.15,decay:0.3,sustain:0.9,release:1.5,reverbDecay:5,reverbWet:0.55,chorusWet:0.4},
-  organ:{osc:'square',attack:0.01,decay:0.1,sustain:0.95,release:0.3,reverbDecay:3,reverbWet:0.35,chorusWet:0.1},
-  strings:{osc:'sawtooth',attack:0.3,decay:0.4,sustain:0.8,release:2,reverbDecay:6,reverbWet:0.6,chorusWet:0.3},
-  rich:{osc:'fatsine',attack:0.12,decay:0.25,sustain:0.88,release:1.4,reverbDecay:5,reverbWet:0.5,chorusWet:0.25}
+  pure:{osc:'sine',attack:0.1,decay:0.2,sustain:0.85,release:1.2,vol:-6},
+  choir:{osc:'triangle',attack:0.15,decay:0.3,sustain:0.9,release:1.5,vol:-8},
+  organ:{osc:'square',attack:0.01,decay:0.1,sustain:0.95,release:0.3,vol:-12},
+  strings:{osc:'sawtooth',attack:0.3,decay:0.4,sustain:0.8,release:2,vol:-10},
+  rich:{osc:'fatsine',attack:0.12,decay:0.25,sustain:0.88,release:1.4,vol:-8}
 };
 
 async function initAudio(){
@@ -458,29 +465,32 @@ async function initAudio(){
   try{
     await Tone.start();
     reverb=new Tone.Reverb({decay:4,wet:0.45}).toDestination();
-    chorus=new Tone.Chorus({frequency:2,delayTime:3.5,depth:0.7,wet:0}).connect(reverb);
-    createSynth('pure');
+    chorus=new Tone.Chorus({frequency:2,delayTime:3.5,depth:0.7,wet:0.3}).connect(reverb);
+    createSynths();
     audioReady=true;btn.textContent='✓ Audio Ready';btn.classList.add('ready');
-    document.getElementById('voiceSelect').disabled=false;
+    document.getElementById('voiceOptions').classList.add('enabled');
     ['playScene1','playScene2','playScene3','playScene4','playScene5'].forEach(id=>document.getElementById(id).disabled=false);
     document.getElementById('playAllBtn').disabled=false;
     checkAutoplay();
   }catch(e){btn.textContent='Audio Failed';console.error(e);}
 }
 
-function createSynth(voice){
-  const p=voicePresets[voice];
-  if(synth){synth.disconnect();synth.dispose();}
-  synth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:p.osc},envelope:{attack:p.attack,decay:p.decay,sustain:p.sustain,release:p.release}});
-  synth.connect(chorus);
-  reverb.decay=p.reverbDecay;reverb.wet.value=p.reverbWet;
-  chorus.wet.value=p.chorusWet;
-  currentVoice=voice;
+function createSynths(){
+  synths.forEach(s=>{s.disconnect();s.dispose();});
+  synths=[];
+  const checkboxes=document.querySelectorAll('.voice-checkbox input:checked');
+  activeVoices=[...checkboxes].map(cb=>cb.value);
+  if(activeVoices.length===0){activeVoices=['pure'];document.querySelector('.voice-checkbox input[value="pure"]').checked=true;}
+  activeVoices.forEach(voice=>{
+    const p=voicePresets[voice];
+    const s=new Tone.PolySynth(Tone.Synth,{oscillator:{type:p.osc},envelope:{attack:p.attack,decay:p.decay,sustain:p.sustain,release:p.release},volume:p.vol});
+    s.connect(chorus);
+    synths.push(s);
+  });
 }
 
 function changeVoice(){
-  const voice=document.getElementById('voiceSelect').value;
-  if(audioReady)createSynth(voice);
+  if(audioReady)createSynths();
 }
 
 function checkAutoplay(){const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){continuousMode=true;playAllScenesSequentially();}}
@@ -499,7 +509,7 @@ async function playScene(sceneId){
     if(!isPlaying[sceneId])return false;
     const note=data.notes[i],durationSec=note.duration*beatDuration;
     scrollToMeasure(note.m);
-    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synth.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn);}
+    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synths.forEach(s=>s.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn));}
     else{noteDisplay.textContent='—';textDisplay.textContent='(rest)';}
     currentBeat+=note.duration;progressBar.style.width=(currentBeat/totalBeats)*100+'%';
     await new Promise(r=>setTimeout(r,durationSec*1000));
@@ -547,7 +557,7 @@ function stopAll(){
   document.getElementById('floatingNote').textContent='--';
   document.getElementById('floatingText').textContent='Ready';
   if(currentMeasure){document.getElementById(currentMeasure)?.classList.remove('active');currentMeasure=null;}
-  if(synth)synth.releaseAll();
+  if(synths.length)synths.forEach(s=>s.releaseAll());
 }
 
 window.onload=()=>{const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){initAudio();}};

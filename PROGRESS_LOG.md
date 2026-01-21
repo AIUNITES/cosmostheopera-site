@@ -375,6 +375,25 @@ Added complete audio playback functionality to all three SSAATTBB score pages wi
 
 **TOTAL SSAATTBB: 12 Scenes across 3 pages**
 
+### Voice/Sound Selector Added
+
+All three SSAATTBB pages now include a dropdown to select different synth voices:
+
+| Voice | Oscillator | Character | Effects |
+|-------|------------|-----------|--------|
+| 🎵 Pure Tone | sine | Clean, simple | Light reverb, no chorus |
+| 🎤 Choir Pad | triangle | Vocal-like, warm | Heavy reverb + chorus |
+| 🎹 Organ | square | Sharp, sustained | Light reverb |
+| 🎻 Strings | sawtooth | Rich, expressive | Heavy reverb + chorus |
+| ✨ Rich Harmonics | fatsine | Full, warm | Medium reverb + chorus |
+
+**Technical Implementation:**
+- `voicePresets` object with oscillator type, envelope (ADSR), reverb, and chorus settings
+- `createSynth(voice)` function rebuilds synth with selected preset
+- `changeVoice()` called on dropdown change
+- Tone.js Chorus effect added to signal chain: Synth → Chorus → Reverb → Destination
+- Voice selection persists during playback (can change mid-scene)
+
 ---
 
 *Implementation by Claude (Anthropic) - January 2026*

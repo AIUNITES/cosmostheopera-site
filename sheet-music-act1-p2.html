@@ -58,6 +58,9 @@
     .floating-progress { width: 120px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
     .floating-progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); width: 0%; transition: width 0.1s; }
     .floating-btn { background: rgba(255,107,157,0.2); border: 1px solid var(--accent-pink); color: var(--accent-pink); padding: 6px 14px; border-radius: 15px; cursor: pointer; font-size: 0.85rem; }
+    .play-btn-float { background: rgba(0,255,136,0.2); border: 1px solid var(--accent-green); color: var(--accent-green); }
+    .play-btn-float.playing { background: rgba(255,215,0,0.2); border-color: var(--accent-gold); color: var(--accent-gold); }
+    .stop-btn-float { background: rgba(255,107,157,0.2); border: 1px solid var(--accent-pink); color: var(--accent-pink); }
     .loop-btn { background: rgba(157,78,221,0.2); border: 1px solid var(--accent-purple); color: var(--accent-purple); }
     .loop-btn.active { background: rgba(157,78,221,0.4); border-color: var(--accent-gold); color: var(--accent-gold); }
     .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; padding-bottom: 100px; }
@@ -143,8 +146,9 @@
       <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻</span></label>
       <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨</span></label>
     </div>
-    <button class="floating-btn loop-btn active" id="loopBtn" onclick="toggleLoop()" title="Loop current scene">↻ Looping</button>
-    <button class="floating-btn" onclick="stopAll()">■ Stop</button>
+    <button class="floating-btn play-btn-float" id="playPauseBtn" onclick="togglePlayPause()" title="Play/Pause">▶ Play</button>
+    <button class="floating-btn stop-btn-float" onclick="stopAll()" title="Stop">■ Stop</button>
+    <button class="floating-btn loop-btn active" id="loopBtn" onclick="toggleLoop()" title="Loop current scene">↻ Loop</button>
   </div>
   <main class="content">
     <!-- SCENE 3: A WINDOW -->
@@ -586,8 +590,32 @@ function stopAll(){
 function toggleLoop(){
   loopMode=!loopMode;
   const btn=document.getElementById('loopBtn');
-  if(loopMode){btn.classList.add('active');btn.textContent='↻ Looping';}
+  if(loopMode){btn.classList.add('active');btn.textContent='↻ Loop';}
   else{btn.classList.remove('active');btn.textContent='↻ Loop';}
+}
+
+function togglePlayPause(){
+  if(!audioReady){initAudio();return;}
+  if(currentScene&&isPlaying[currentScene]){
+    stopAll();
+  }else{
+    const sceneToPlay=currentScene||'scene3';
+    togglePlay(sceneToPlay);
+  }
+}
+
+function updateFloatingState(playing){
+  const fc=document.getElementById('floatingControls');
+  const ppBtn=document.getElementById('playPauseBtn');
+  if(playing){
+    fc.classList.add('playing');
+    ppBtn.classList.add('playing');
+    ppBtn.textContent='⏸ Pause';
+  }else{
+    fc.classList.remove('playing');
+    ppBtn.classList.remove('playing');
+    ppBtn.textContent='▶ Play';
+  }
 }
 
 window.onload=()=>{const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){initAudio();}};

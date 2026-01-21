@@ -38,6 +38,17 @@
     .play-all-btn { background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink)); color: #000; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
     .play-all-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,215,0,0.4); }
     .play-all-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .voice-options { display: flex; gap: 8px; flex-wrap: wrap; opacity: 0.5; pointer-events: none; }
+    .voice-options.enabled { opacity: 1; pointer-events: auto; }
+    .voice-checkbox { display: flex; align-items: center; gap: 4px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
+    .voice-checkbox:hover { border-color: var(--accent-cyan); }
+    .voice-checkbox input { display: none; }
+    .voice-checkbox input:checked + span { color: var(--accent-green); }
+    .voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
+    .voice-guide { max-width: 1100px; margin: 0 auto 10px; padding: 8px 15px; background: rgba(255,255,255,0.03); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 0.8rem; color: var(--text-secondary); }
+    .voice-guide-label { color: var(--accent-gold); font-weight: 600; }
+    .voice-guide b { color: var(--accent-cyan); }
+    .voice-guide-tip { color: var(--accent-pink); margin-left: auto; }
     .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: none; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
     .floating-controls.visible { display: flex; }
     .floating-controls.continuous { border-color: var(--accent-gold); box-shadow: 0 10px 40px rgba(255,215,0,0.3); }
@@ -108,6 +119,22 @@
     </div>
     <button class="audio-init-btn" id="audioInitBtn" onclick="initAudio()">Enable Audio</button>
     <button class="play-all-btn" id="playAllBtn" onclick="playFullOpera()" disabled>▶ Play Full Opera</button>
+    <div class="voice-options" id="voiceOptions">
+      <label class="voice-checkbox" title="Clean sine wave"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵 Pure</span></label>
+      <label class="voice-checkbox" title="Warm vocal sound"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎤 Choir</span></label>
+      <label class="voice-checkbox" title="Church/sacred"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹 Organ</span></label>
+      <label class="voice-checkbox" title="Rich orchestral"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻 Strings</span></label>
+      <label class="voice-checkbox" title="Full harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨ Rich</span></label>
+    </div>
+  </div>
+  <div class="voice-guide">
+    <span class="voice-guide-label">🎼 Voice Guide:</span>
+    <span><b>Pure</b> = Clean tone</span>
+    <span><b>Choir</b> = Vocal warmth</span>
+    <span><b>Organ</b> = Sacred/church</span>
+    <span><b>Strings</b> = Orchestral</span>
+    <span><b>Rich</b> = Full harmonics</span>
+    <span class="voice-guide-tip">💡 Select multiple for layered sound!</span>
   </div>
   <div class="floating-controls" id="floatingControls">
     <span class="continuous-badge" id="continuousBadge">FULL OPERA</span>
@@ -456,7 +483,7 @@ async function playScene(sceneId){
     if(!isPlaying[sceneId])return false;
     const note=data.notes[i],durationSec=note.duration*beatDuration;
     scrollToMeasure(note.m);
-    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synth.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn);}
+    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synths.forEach(s=>s.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn));}
     else{noteDisplay.textContent='—';textDisplay.textContent='(rest)';}
     currentBeat+=note.duration;progressBar.style.width=(currentBeat/totalBeats)*100+'%';
     await new Promise(r=>setTimeout(r,durationSec*1000));
@@ -513,7 +540,7 @@ function stopAll(){
   document.getElementById('floatingNote').textContent='--';
   document.getElementById('floatingText').textContent='Ready';
   if(currentMeasure){document.getElementById(currentMeasure)?.classList.remove('active');currentMeasure=null;}
-  if(synth)synth.releaseAll();
+  if(synths.length)synths.forEach(s=>s.releaseAll());
 }
 
 window.onload=()=>{const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){initAudio();}};

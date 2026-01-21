@@ -50,6 +50,10 @@
     .voice-checkbox input { display: none; }
     .voice-checkbox input:checked + span { color: var(--accent-green); }
     .voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
+    .voice-guide { max-width: 1100px; margin: 0 auto 10px; padding: 8px 15px; background: rgba(255,255,255,0.03); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 0.8rem; color: var(--text-secondary); }
+    .voice-guide-label { color: var(--accent-gold); font-weight: 600; }
+    .voice-guide b { color: var(--accent-cyan); }
+    .voice-guide-tip { color: var(--accent-pink); margin-left: auto; }
     .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: none; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); }
     .floating-controls.visible { display: flex; }
     .floating-controls.continuous { border-color: var(--accent-gold); }
@@ -127,13 +131,21 @@
     </div>
     <button class="audio-init-btn" id="audioInitBtn" onclick="initAudio()">Enable Audio</button>
     <div class="voice-options" id="voiceOptions">
-      <label class="voice-checkbox"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵 Pure</span></label>
-      <label class="voice-checkbox"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎤 Choir</span></label>
-      <label class="voice-checkbox"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹 Organ</span></label>
-      <label class="voice-checkbox"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻 Strings</span></label>
-      <label class="voice-checkbox"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨ Rich</span></label>
+      <label class="voice-checkbox" title="Clean sine wave - clear melodic lines"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵 Pure</span></label>
+      <label class="voice-checkbox" title="Triangle wave + chorus - warm vocal 'ahhh' sound"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎤 Choir</span></label>
+      <label class="voice-checkbox" title="Square wave - church/sacred feel"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹 Organ</span></label>
+      <label class="voice-checkbox" title="Sawtooth wave + reverb - rich orchestral"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻 Strings</span></label>
+      <label class="voice-checkbox" title="Fat sine + chorus - full warm blend"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨ Rich</span></label>
     </div>
     <button class="play-all-btn" id="playAllBtn" onclick="playFullOpera()" disabled>▶ Play Full Opera</button>
+  </div>
+  <div class="voice-guide">
+    <span class="voice-guide-label">🎼 Combos:</span>
+    <span><b>Pure+Choir</b> = warm vocal</span>
+    <span><b>Choir+Strings</b> = orchestral</span>
+    <span><b>Organ+Strings</b> = cathedral</span>
+    <span><b>All 5</b> = epic full!</span>
+    <span class="voice-guide-tip">💡 Select multiple checkboxes to layer voices</span>
   </div>
   <div class="floating-controls" id="floatingControls">
     <span class="continuous-badge" id="continuousBadge">FULL OPERA</span>

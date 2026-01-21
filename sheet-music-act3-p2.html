@@ -40,8 +40,15 @@
     .play-all-btn { background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink)); color: #000; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
     .play-all-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,215,0,0.4); }
     .play-all-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: none; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-    .floating-controls.visible { display: flex; }
+    .voice-options { display: flex; gap: 8px; flex-wrap: wrap; opacity: 0.5; pointer-events: none; }
+    .voice-options.enabled { opacity: 1; pointer-events: auto; }
+    .voice-checkbox { display: flex; align-items: center; gap: 4px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
+    .voice-checkbox:hover { border-color: var(--accent-cyan); }
+    .voice-checkbox input { display: none; }
+    .voice-checkbox input:checked + span { color: var(--accent-green); }
+    .voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
+    .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: flex; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); flex-wrap: wrap; justify-content: center; }
+    .floating-controls.playing { border-color: var(--accent-cyan); box-shadow: 0 10px 40px rgba(0,212,255,0.3); }
     .floating-controls.continuous { border-color: var(--accent-gold); box-shadow: 0 10px 40px rgba(255,215,0,0.3); }
     .continuous-badge { background: var(--accent-gold); color: #000; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; display: none; }
     .now-playing-note { font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: bold; color: var(--accent-green); min-width: 50px; }
@@ -122,10 +129,18 @@
     <button class="play-all-btn" id="playAllBtn" onclick="playFullOpera()" disabled>▶ Play Full Opera</button>
   </div>
   <div class="floating-controls" id="floatingControls">
-    <span class="continuous-badge" id="continuousBadge">FULL OPERA</span>
+    <span class="continuous-badge" id="continuousBadge" style="display:none;">FULL OPERA</span>
     <div class="now-playing-note" id="floatingNote">--</div>
     <div class="now-playing-text" id="floatingText">Ready</div>
     <div class="floating-progress"><div class="floating-progress-bar" id="floatingProgress"></div></div>
+    <div class="voice-options" id="voiceOptions">
+      <label class="voice-checkbox" title="Clean sine wave"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵</span></label>
+      <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎤</span></label>
+      <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹</span></label>
+      <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻</span></label>
+      <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨</span></label>
+    </div>
+    <button class="floating-btn loop-btn active" id="loopBtn" onclick="toggleLoop()" title="Loop current scene">↻ Looping</button>
     <button class="floating-btn" onclick="stopAll()">■ Stop</button>
   </div>
   <div class="opera-complete" id="operaComplete">
@@ -328,7 +343,45 @@
     <a href="index.html">Home</a> | <a href="sheet-music.html">Sheet Music Index</a></p>
   </footer>
   <script>
-let audioReady=false,synth=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false;
+let audioReady=false,synths=[],reverb=null,chorus=null,isPlaying={},currentMeasure=null,currentScene=null,continuousMode=false,loopMode=true,activeVoices=['pure'];
+
+const voicePresets={
+  pure:{osc:'sine',attack:0.1,decay:0.2,sustain:0.85,release:1.2,vol:-6},
+  choir:{osc:'triangle',attack:0.15,decay:0.3,sustain:0.9,release:1.5,vol:-8},
+  organ:{osc:'square',attack:0.01,decay:0.1,sustain:0.95,release:0.3,vol:-12},
+  strings:{osc:'sawtooth',attack:0.3,decay:0.4,sustain:0.8,release:2,vol:-10},
+  rich:{osc:'fatsine',attack:0.12,decay:0.25,sustain:0.88,release:1.4,vol:-8}
+};
+
+function createSynths(){
+  synths.forEach(s=>{s.disconnect();s.dispose();});
+  synths=[];
+  const checkboxes=document.querySelectorAll('.voice-checkbox input:checked');
+  activeVoices=[...checkboxes].map(cb=>cb.value);
+  if(activeVoices.length===0){activeVoices=['pure'];document.querySelector('.voice-checkbox input[value="pure"]').checked=true;}
+  activeVoices.forEach(voice=>{
+    const p=voicePresets[voice];
+    const s=new Tone.PolySynth(Tone.Synth,{oscillator:{type:p.osc},envelope:{attack:p.attack,decay:p.decay,sustain:p.sustain,release:p.release},volume:p.vol});
+    s.connect(chorus);
+    synths.push(s);
+  });
+}
+
+function changeVoice(){
+  if(audioReady)createSynths();
+}
+
+function updateFloatingState(playing){
+  const fc=document.getElementById('floatingControls');
+  if(playing){fc.classList.add('playing');}else{fc.classList.remove('playing');}
+}
+
+function toggleLoop(){
+  loopMode=!loopMode;
+  const btn=document.getElementById('loopBtn');
+  if(loopMode){btn.classList.add('active');btn.textContent='↻ Looping';}
+  else{btn.classList.remove('active');btn.textContent='↻ Loop';}
+}
 const NEXT_PAGE=null;
 const PAGE_SCENES=['scene3','scene4','scene5'];
 
@@ -477,10 +530,11 @@ async function initAudio(){
   btn.textContent='Initializing...';btn.disabled=true;
   try{
     await Tone.start();
-    synth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine'},envelope:{attack:0.1,decay:0.2,sustain:0.85,release:1.2}}).toDestination();
-    const reverb=new Tone.Reverb({decay:5,wet:0.5}).toDestination();
-    synth.connect(reverb);
+    reverb=new Tone.Reverb({decay:4,wet:0.45}).toDestination();
+    chorus=new Tone.Chorus({frequency:2,delayTime:3.5,depth:0.7,wet:0.3}).connect(reverb);
+    createSynths();
     audioReady=true;btn.textContent='✓ Audio Ready';btn.classList.add('ready');
+    document.getElementById('voiceOptions').classList.add('enabled');
     document.getElementById('playScene3').disabled=false;
     document.getElementById('playScene4').disabled=false;
     document.getElementById('playScene5').disabled=false;
@@ -512,14 +566,14 @@ async function playScene(sceneId){
   const progressBar=document.getElementById('floatingProgress');
   const noteDisplay=document.getElementById('floatingNote');
   const textDisplay=document.getElementById('floatingText');
-  floatingControls.classList.add('visible');
+  updateFloatingState(true);
   if(continuousMode){floatingControls.classList.add('continuous');document.getElementById('continuousBadge').style.display='inline';}
   scrollToMeasure(data.notes[0].m);
   for(let i=0;i<data.notes.length;i++){
     if(!isPlaying[sceneId])return false;
     const note=data.notes[i],durationSec=note.duration*beatDuration;
     scrollToMeasure(note.m);
-    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synth.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn);}
+    if(note.note){noteDisplay.textContent=note.note;textDisplay.textContent=note.text?'"'+note.text+'"':'♪';synths.forEach(s=>s.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dyn));}
     else{noteDisplay.textContent='—';textDisplay.textContent='(rest)';}
     currentBeat+=note.duration;progressBar.style.width=(currentBeat/totalBeats)*100+'%';
     await new Promise(r=>setTimeout(r,durationSec*1000));
@@ -536,8 +590,12 @@ async function togglePlay(sceneId){
   continuousMode=false;
   isPlaying[sceneId]=true;currentScene=sceneId;
   playBtn.classList.add('playing');playBtn.textContent='⏸ Playing...';
-  const completed=await playScene(sceneId);
-  if(completed)stopAll();
+  let completed=true;
+  while(completed&&isPlaying[sceneId]){
+    completed=await playScene(sceneId);
+    if(!loopMode||!isPlaying[sceneId])break;
+  }
+  if(!loopMode)stopAll();
 }
 
 async function playAllScenesSequentially(){
@@ -573,13 +631,14 @@ function stopAll(){
   currentScene=null;
   ['playScene3','playScene4','playScene5'].forEach((id,i)=>{const btn=document.getElementById(id);if(btn){btn.classList.remove('playing');btn.textContent='▶ Play Scene '+(i+3);}});
   document.getElementById('playAllBtn').textContent='▶ Play Full Opera';
-  document.getElementById('floatingControls').classList.remove('visible','continuous');
+  document.getElementById('floatingControls').classList.remove('playing','continuous');
   document.getElementById('continuousBadge').style.display='none';
   document.getElementById('floatingProgress').style.width='0%';
   document.getElementById('floatingNote').textContent='--';
   document.getElementById('floatingText').textContent='Ready';
+  updateFloatingState(false);
   if(currentMeasure){document.getElementById(currentMeasure)?.classList.remove('active');currentMeasure=null;}
-  if(synth)synth.releaseAll();
+  if(synths.length)synths.forEach(s=>s.releaseAll());
 }
 
 window.onload=()=>{const params=new URLSearchParams(window.location.search);if(params.get('autoplay')==='continuous'){initAudio();}};

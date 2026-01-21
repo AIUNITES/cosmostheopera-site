@@ -597,4 +597,38 @@ Added "About This Notation Format" section to `sheet-music.html` explaining that
 
 ---
 
+### 2026-01-21 - Session 10
+
+**AUDIO PLAYBACK WITH AUTO-SCROLL FEATURE** 🔊
+
+Adding synthesized audio playback with auto-scrolling page follow to ALL sheet music pages.
+
+**Features:**
+- Tone.js audio synthesis (PolySynth + Reverb)
+- Auto-scroll: page smoothly scrolls to follow the music
+- Measure highlighting: current measure glows green (pink for climax)
+- Floating control bar with Play/Stop, current note, lyrics, progress bar
+- Dynamic velocity mapping (p=0.4 → fff=1.0)
+- Note data extracted from ASCII notation
+
+**Implementation Progress:**
+
+| Page | Status | Notes |
+|------|--------|-------|
+| sheet-music-audio-prototype.html | ✅ COMPLETE | Test file with Scene 1 |
+| sheet-music-act1-p1.html | ✅ COMPLETE | Scene 1 "Do You See", Scene 2 "Look" |
+| sheet-music-act1-p2.html | ⏳ PENDING | Scenes 3-5 |
+| sheet-music-act2.html | ⏳ PENDING | Scenes 1-2 |
+| sheet-music-act3-p1.html | ⏳ PENDING | Scenes 1-2 |
+| sheet-music-act3-p2.html | ⏳ PENDING | CLIMAX Scenes 3-5 |
+
+**Technical Implementation:**
+- Each measure block wrapped in `<div class="measure-block" id="mX">`
+- Note data array with: note, duration (beats), text, dynamic, measureId
+- `scrollToMeasure()` function scrolls & highlights current section
+- Floating controls stay visible during playback
+- Responsive design for mobile
+
+---
+
 *Last updated: January 21, 2026*

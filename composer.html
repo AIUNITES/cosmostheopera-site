@@ -510,6 +510,16 @@ an infinite number of stars"></textarea>
         </div>
       </section>
       
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <h2>Ready to Save Your Compositions?</h2>
+        <p>Create a free account to save your scores, access them anywhere, and build your musical library.</p>
+        <div class="hero-buttons">
+          <button class="btn-large btn-primary" onclick="showScreen('auth')">✨ Create Free Account</button>
+          <button class="btn-large btn-secondary" onclick="showChangelogModal()">📋 What's New</button>
+        </div>
+      </section>
+      
       <footer class="footer">
         <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved.<br>
         <a href="index.html">Home</a> | <a href="composition.html">AI Composition Guide</a> | <a href="notation.html">VRN Guide</a> | <a href="#" onclick="showChangelogModal(); return false;">Change Log</a></p>
@@ -2536,6 +2546,228 @@ document.addEventListener('click', (e) => {
   if (e.target.id === 'profile-modal') closeProfileModal();
   if (e.target.id === 'settings-modal') closeSettingsModal();
   if (e.target.id === 'changelog-modal') closeChangelogModal();
+});
+
+// ==================== LANDING PAGE COMPOSER ====================
+let landingGeneratedScore = '';
+
+function setupLandingPageOptions() {
+  // Setup notation options
+  document.querySelectorAll('#landingNotationOptions .option-item').forEach(option => {
+    option.addEventListener('click', () => {
+      document.querySelectorAll('#landingNotationOptions .option-item').forEach(o => o.classList.remove('selected'));
+      option.classList.add('selected');
+    });
+  });
+  
+  // Setup style options
+  document.querySelectorAll('#landingStyleOptions .option-item').forEach(option => {
+    option.addEventListener('click', () => {
+      document.querySelectorAll('#landingStyleOptions .option-item').forEach(o => o.classList.remove('selected'));
+      option.classList.add('selected');
+    });
+  });
+}
+
+function generateLandingScore() {
+  const lyrics = document.getElementById('landingLyricsInput').value.trim();
+  
+  if (!lyrics) {
+    showToast('Please enter some lyrics first', true);
+    return;
+  }
+  
+  const notation = document.querySelector('#landingNotationOptions .option-item.selected')?.dataset.value || 'piano-roll';
+  const style = document.querySelector('#landingStyleOptions .option-item.selected')?.dataset.value || 'operatic';
+  const key = document.getElementById('landingKeySelect').value;
+  const voice = document.getElementById('landingVoiceSelect').value;
+  
+  // Use the main generateScore function but capture output for landing page
+  const options = {
+    lyrics,
+    notation,
+    style,
+    key,
+    voice,
+    dynamics: ['traditional', 'vrn'],
+    tempo: '72',
+    time: '4/4'
+  };
+  
+  landingGeneratedScore = generateScoreFromOptions(options);
+  document.getElementById('landingScoreOutput').textContent = landingGeneratedScore;
+  showToast('Score generated! Log in to save.');
+}
+
+function generateScoreFromOptions(options) {
+  // Generate score based on options (reusing core generation logic)
+  const lines = options.lyrics.split('\n').filter(l => l.trim());
+  const voiceRanges = {
+    soprano: { low: 'C4', high: 'C6', clef: 'treble' },
+    mezzo: { low: 'A3', high: 'A5', clef: 'treble' },
+    tenor: { low: 'C3', high: 'C5', clef: 'treble' },
+    baritone: { low: 'A2', high: 'A4', clef: 'bass' }
+  };
+  
+  const range = voiceRanges[options.voice] || voiceRanges.mezzo;
+  const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+  const octaves = options.voice === 'soprano' ? [4, 5] : options.voice === 'baritone' ? [2, 3] : [3, 4];
+  
+  let output = '';
+  
+  // Header
+  output += `┌${'─'.repeat(60)}┐\n`;
+  output += `│  🎼 COSMOS Composer - ${capitalize(options.style)} Style${' '.repeat(60 - 30 - options.style.length)}│\n`;
+  output += `│  Key: ${options.key} | Tempo: ${options.tempo} BPM | Time: ${options.time}${' '.repeat(60 - 40)}│\n`;
+  output += `│  Voice: ${capitalize(options.voice)} (${range.low}-${range.high})${' '.repeat(60 - 35 - options.voice.length)}│\n`;
+  output += `└${'─'.repeat(60)}┘\n\n`;
+  
+  if (options.notation === 'piano-roll') {
+    output += generatePianoRoll(lines, notes, octaves, options);
+  } else if (options.notation === 'treble-bass') {
+    output += generateTrebleBass(lines, notes, octaves, options);
+  } else if (options.notation === 'ssaattbb') {
+    output += generateSSAATTBB(lines, notes, options);
+  } else {
+    output += generateLeadSheet(lines, notes, octaves, options);
+  }
+  
+  return output;
+}
+
+function generatePianoRoll(lines, notes, octaves, options) {
+  let output = '';
+  const pitchLine = [];
+  
+  lines.forEach((line, lineIdx) => {
+    const words = line.split(/\s+/);
+    output += `\n═══ Line ${lineIdx + 1} ═══\n`;
+    
+    words.forEach(word => {
+      const syllables = word.match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [word];
+      syllables.forEach(syl => {
+        const note = notes[Math.floor(Math.random() * notes.length)];
+        const oct = octaves[Math.floor(Math.random() * octaves.length)];
+        const vrn = getVRNCode(syl);
+        const dynamic = getDynamic(lineIdx, lines.length);
+        
+        output += `  ${syl.padEnd(12)} │ ${note}${oct} ${dynamic.padEnd(4)} [${vrn}]\n`;
+      });
+    });
+  });
+  
+  return output;
+}
+
+function generateTrebleBass(lines, notes, octaves, options) {
+  let output = 'TREBLE CLEF:\n';
+  output += '┌' + '─'.repeat(50) + '┐\n';
+  
+  lines.forEach((line, i) => {
+    const note = notes[Math.floor(Math.random() * notes.length)];
+    const oct = octaves[1] || octaves[0];
+    output += `│ ${(i+1).toString().padStart(2)}. ${line.substring(0, 30).padEnd(30)} ${note}${oct} │\n`;
+  });
+  
+  output += '└' + '─'.repeat(50) + '┘\n';
+  return output;
+}
+
+function generateSSAATTBB(lines, notes, options) {
+  let output = 'SSAATTBB CHORAL ARRANGEMENT:\n\n';
+  const voices = ['S1', 'S2', 'A1', 'A2', 'T1', 'T2', 'B1', 'B2'];
+  const voiceOctaves = [5, 5, 4, 4, 4, 3, 3, 2];
+  
+  lines.forEach((line, lineIdx) => {
+    output += `Measure ${lineIdx + 1}: "${line}"\n`;
+    output += '─'.repeat(40) + '\n';
+    
+    voices.forEach((v, vi) => {
+      const note = notes[Math.floor(Math.random() * notes.length)];
+      output += `  ${v}: ${note}${voiceOctaves[vi]}\n`;
+    });
+    output += '\n';
+  });
+  
+  return output;
+}
+
+function generateLeadSheet(lines, notes, octaves, options) {
+  let output = 'LEAD SHEET:\n\n';
+  const chords = ['Cmaj7', 'Dm7', 'Em7', 'Fmaj7', 'G7', 'Am7'];
+  
+  lines.forEach((line, i) => {
+    const chord = chords[i % chords.length];
+    output += `[${chord}]\n`;
+    output += `  ${line}\n\n`;
+  });
+  
+  return output;
+}
+
+function getVRNCode(syllable) {
+  const vowel = syllable.match(/[aeiou]/i)?.[0]?.toLowerCase() || 'a';
+  const codes = {
+    a: 'OP-A', e: 'RS-E', i: 'CH-I', o: 'TH-O', u: 'NS-U'
+  };
+  return codes[vowel] || 'OP-A';
+}
+
+function getDynamic(lineIdx, totalLines) {
+  const dynamics = ['pp', 'p', 'mp', 'mf', 'f', 'ff'];
+  const midPoint = totalLines / 2;
+  const idx = Math.min(Math.floor(Math.abs(lineIdx - midPoint) / midPoint * 3) + 2, 5);
+  return dynamics[idx];
+}
+
+function copyLandingScore() {
+  const output = document.getElementById('landingScoreOutput').textContent;
+  if (!output || output.includes('Enter lyrics above')) {
+    showToast('Generate a score first', true);
+    return;
+  }
+  
+  navigator.clipboard.writeText(output).then(() => {
+    showToast('Score copied to clipboard!');
+  }).catch(() => {
+    showToast('Failed to copy', true);
+  });
+}
+
+function downloadLandingScore() {
+  const output = document.getElementById('landingScoreOutput').textContent;
+  if (!output || output.includes('Enter lyrics above')) {
+    showToast('Generate a score first', true);
+    return;
+  }
+  
+  const blob = new Blob([output], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `cosmos-score-${Date.now()}.txt`;
+  a.click();
+  
+  showToast('Score downloaded!');
+}
+
+function promptLoginToSave() {
+  const output = document.getElementById('landingScoreOutput').textContent;
+  if (!output || output.includes('Enter lyrics above')) {
+    showToast('Generate a score first', true);
+    return;
+  }
+  
+  // Store the score temporarily for after login
+  sessionStorage.setItem('pendingScore', output);
+  sessionStorage.setItem('pendingLyrics', document.getElementById('landingLyricsInput').value);
+  
+  showToast('Log in to save your score!');
+  showScreen('auth');
+}
+
+// Initialize landing page options on load
+document.addEventListener('DOMContentLoaded', function() {
+  setupLandingPageOptions();
 });
   </script>
 </body>

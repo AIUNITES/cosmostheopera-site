@@ -527,4 +527,33 @@ The Hubble images are public domain because NASA believed space belongs to every
 
 ---
 
+### 2026-01-20 - Session 8
+
+**WORD ART PROSE PAGE CREATED** ✅
+
+Created `words.html` — a dedicated page displaying the complete prose poetry as visual word art.
+
+**Design Features:**
+- Cosmic starfield background with drifting star animation
+- Typography-forward using Cormorant Garamond serif font
+- Visual hierarchy with three text treatments:
+  - `.whisper` — smaller, italic, dimmed for soft moments
+  - `.emphasis` — brighter, larger for key lines
+  - `.crescendo` — large, glowing for climax words
+- Hover effects on each line (glow on interaction)
+- Act color coding: I (cyan), II (purple), III (gold)
+- Full-screen hero section
+- Stanza spacing for breathing room
+- Mobile responsive
+
+**All Prose Included:**
+- Act I: do you see, look, a window, i sing, we come
+- Act II: the colors, the waves
+- Act III: i the sun, my twin, feeling again, you're a star
+
+**Navigation Updated:**
+- Added "Words" link to site navigation
+
+---
+
 *Last updated: January 20, 2026*

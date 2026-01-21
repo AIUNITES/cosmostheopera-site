@@ -217,6 +217,37 @@
     .theme-option span { font-size: 0.85rem; color: var(--text-secondary); }
     .theme-option.selected span { color: var(--accent-green); }
     
+    /* Change Log Modal */
+    .changelog-version-badge { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding: 15px 20px; background: linear-gradient(135deg, rgba(157,78,221,0.2), rgba(0,212,255,0.1)); border-radius: 10px; }
+    .version-number { font-size: 1.5rem; font-weight: bold; color: var(--accent-gold); }
+    .version-date { color: var(--text-secondary); }
+    .changelog-content { max-height: 400px; overflow-y: auto; padding-right: 10px; }
+    .changelog-entry { margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .changelog-entry:last-child { border-bottom: none; margin-bottom: 0; }
+    .changelog-entry.roadmap { background: rgba(0,212,255,0.05); padding: 20px; border-radius: 10px; border: 1px dashed rgba(0,212,255,0.3); }
+    .changelog-entry-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; flex-wrap: wrap; }
+    .changelog-entry-header h3 { font-size: 1.1rem; color: var(--accent-cyan); margin: 0; }
+    .changelog-date { color: var(--text-secondary); font-size: 0.85rem; }
+    .changelog-tag { padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .changelog-tag.new { background: rgba(0,255,136,0.2); color: var(--accent-green); }
+    .changelog-tag.initial { background: rgba(157,78,221,0.2); color: var(--accent-purple); }
+    .changelog-tag.upcoming { background: rgba(0,212,255,0.2); color: var(--accent-cyan); }
+    .changelog-section { margin-bottom: 15px; }
+    .changelog-section:last-child { margin-bottom: 0; }
+    .changelog-section h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 10px; }
+    .changelog-section ul { list-style: none; padding: 0; margin: 0; }
+    .changelog-section li { padding: 6px 0 6px 20px; position: relative; color: var(--text-secondary); font-size: 0.9rem; }
+    .changelog-section li::before { content: '•'; position: absolute; left: 0; color: var(--accent-purple); }
+    .changelog-section li strong { color: var(--text-primary); }
+    .changelog-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .changelog-footer p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+    
+    /* Scrollbar for changelog */
+    .changelog-content::-webkit-scrollbar { width: 6px; }
+    .changelog-content::-webkit-scrollbar-track { background: var(--bg-input); border-radius: 3px; }
+    .changelog-content::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 3px; }
+    .changelog-content::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+    
     /* Admin Panel */
     .modal-large { max-width: 800px; }
     .admin-tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
@@ -331,7 +362,7 @@
       
       <footer class="footer">
         <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved.<br>
-        <a href="index.html">Home</a> | <a href="composition.html">AI Composition Guide</a> | <a href="notation.html">VRN Guide</a></p>
+        <a href="index.html">Home</a> | <a href="composition.html">AI Composition Guide</a> | <a href="notation.html">VRN Guide</a> | <a href="#" onclick="showChangelogModal(); return false;">Change Log</a></p>
       </footer>
     </div>
     
@@ -409,6 +440,7 @@
               <a href="#" onclick="showScreen('composer'); return false;">✨ New Score</a>
               <a href="#" onclick="showProfileModal(); return false;">👤 My Profile</a>
               <a href="#" onclick="showSettingsModal(); return false;">⚙️ Settings</a>
+              <a href="#" onclick="showChangelogModal(); return false;">📋 Change Log</a>
               <a href="#" id="admin-link" style="display:none;" onclick="showAdminPanel(); return false;">🛡️ Admin</a>
               <a href="#" onclick="handleLogout(); return false;">🚪 Log Out</a>
             </div>
@@ -914,6 +946,117 @@ an infinite number of stars"></textarea>
           </div>
           
           <button class="btn-large btn-secondary" onclick="resetDefaults()">Reset to Factory Defaults</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ==================== CHANGE LOG MODAL ==================== -->
+    <div id="changelog-modal" class="modal">
+      <div class="modal-content modal-medium">
+        <div class="modal-header">
+          <h2>📋 Change Log</h2>
+          <button class="modal-close" onclick="closeChangelogModal()">×</button>
+        </div>
+        
+        <div class="changelog-version-badge">
+          <span class="version-number">v1.2.0</span>
+          <span class="version-date">January 2026</span>
+        </div>
+        
+        <div class="changelog-content">
+          <!-- Version 1.2.0 -->
+          <div class="changelog-entry">
+            <div class="changelog-entry-header">
+              <h3>v1.2.0</h3>
+              <span class="changelog-date">January 21, 2026</span>
+              <span class="changelog-tag new">Latest</span>
+            </div>
+            <div class="changelog-section">
+              <h4>✨ New Features</h4>
+              <ul>
+                <li><strong>User Profile</strong> - View your stats, favorite styles, and recent activity</li>
+                <li><strong>User Settings</strong> - Customize your experience with themes, preferences, and defaults</li>
+                <li><strong>Theme Options</strong> - Choose between Dark, Light, and Cosmic themes</li>
+                <li><strong>Default Composition Settings</strong> - Set your preferred notation, style, key, and more</li>
+                <li><strong>Change Log</strong> - Track updates and new features</li>
+              </ul>
+            </div>
+            <div class="changelog-section">
+              <h4>🐛 Bug Fixes</h4>
+              <ul>
+                <li>Improved modal close behavior on outside click</li>
+                <li>Fixed user preferences not persisting across sessions</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Version 1.1.0 -->
+          <div class="changelog-entry">
+            <div class="changelog-entry-header">
+              <h3>v1.1.0</h3>
+              <span class="changelog-date">January 15, 2026</span>
+            </div>
+            <div class="changelog-section">
+              <h4>✨ New Features</h4>
+              <ul>
+                <li><strong>Admin Panel</strong> - Manage users, view statistics, backup/restore data</li>
+                <li><strong>User Management</strong> - Create accounts, promote admins, delete users</li>
+                <li><strong>Data Backup</strong> - Export and import all application data</li>
+                <li><strong>App Settings</strong> - Configure registration, limits, and maintenance mode</li>
+              </ul>
+            </div>
+            <div class="changelog-section">
+              <h4>🛠️ Improvements</h4>
+              <ul>
+                <li>Enhanced score card previews in dashboard</li>
+                <li>Better error handling for authentication</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Version 1.0.0 -->
+          <div class="changelog-entry">
+            <div class="changelog-entry-header">
+              <h3>v1.0.0</h3>
+              <span class="changelog-date">January 1, 2026</span>
+              <span class="changelog-tag initial">Initial Release</span>
+            </div>
+            <div class="changelog-section">
+              <h4>🎉 Initial Release</h4>
+              <ul>
+                <li><strong>Music Composer Tool</strong> - Transform words into sheet music</li>
+                <li><strong>Multiple Notation Formats</strong> - Piano Roll, Treble/Bass, SSAATTBB, Lead Sheet</li>
+                <li><strong>Musical Styles</strong> - Operatic, Hypnotic, Trance, Classical, Jazz, Folk</li>
+                <li><strong>VRN Integration</strong> - Vocal Resonance Notation codes</li>
+                <li><strong>User Accounts</strong> - Sign up, log in, save scores</li>
+                <li><strong>Score Management</strong> - Save, open, delete, copy, download scores</li>
+                <li><strong>Demo Mode</strong> - Try without creating an account</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Roadmap -->
+          <div class="changelog-entry roadmap">
+            <div class="changelog-entry-header">
+              <h3>📍 Roadmap</h3>
+              <span class="changelog-tag upcoming">Coming Soon</span>
+            </div>
+            <div class="changelog-section">
+              <h4>🚀 Planned Features</h4>
+              <ul>
+                <li>Audio playback of generated scores</li>
+                <li>MIDI export functionality</li>
+                <li>PDF score generation</li>
+                <li>Collaboration features</li>
+                <li>Custom VRN code editor</li>
+                <li>Score sharing and public gallery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="changelog-footer">
+          <p>Have feedback or feature requests? Let us know!</p>
         </div>
       </div>
     </div>
@@ -1995,6 +2138,15 @@ function applyDefaultsToComposer() {
   document.getElementById('voiceSelect').value = prefs.defaultVoice || 'mezzo';
 }
 
+// ==================== CHANGE LOG ====================
+function showChangelogModal() {
+  document.getElementById('changelog-modal').classList.add('show');
+}
+
+function closeChangelogModal() {
+  document.getElementById('changelog-modal').classList.remove('show');
+}
+
 // ==================== ADMIN PANEL ====================
 function showAdminPanel() {
   const user = Storage.getCurrentUser();
@@ -2193,6 +2345,7 @@ window.onload = function() {
 document.addEventListener('click', (e) => {
   if (e.target.id === 'profile-modal') closeProfileModal();
   if (e.target.id === 'settings-modal') closeSettingsModal();
+  if (e.target.id === 'changelog-modal') closeChangelogModal();
 });
   </script>
 </body>

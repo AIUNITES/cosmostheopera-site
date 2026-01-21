@@ -4,866 +4,413 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Act I Part 1: Do You See - Sheet Music with Audio | COSMOS the OPERA</title>
-  <meta name="description" content="Act I Part 1 complete sheet music for COSMOS the OPERA with audio playback.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
-  
-  <!-- Tone.js for audio synthesis -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: #12121a;
-      --bg-score: #1a1a24;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0b0;
-      --accent-purple: #9d4edd;
-      --accent-cyan: #00d4ff;
-      --accent-gold: #ffd700;
-      --accent-pink: #ff6b9d;
-      --accent-green: #00ff88;
-    }
+    :root { --bg-dark: #0a0a0f; --bg-card: #12121a; --bg-score: #1a1a24; --text-primary: #fff; --text-secondary: #a0a0b0; --accent-purple: #9d4edd; --accent-cyan: #00d4ff; --accent-gold: #ffd700; --accent-pink: #ff6b9d; --accent-green: #00ff88; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
     .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
     .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
-    .nav-links { display: flex; gap: 25px; }
-    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+    .act-header { padding: 40px 20px; text-align: center; background: linear-gradient(135deg, rgba(157,78,221,0.15), rgba(0,212,255,0.1)); }
+    .act-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; background: linear-gradient(135deg, #fff, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .act-header p { color: var(--text-secondary); }
     
-    .sheet-nav { background: var(--bg-card); padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .sheet-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .sheet-nav a { color: var(--text-secondary); text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 15px; font-size: 0.85rem; transition: all 0.3s; }
-    .sheet-nav a:hover { background: rgba(0,212,255,0.2); color: var(--accent-cyan); }
-    .sheet-nav a.active { background: rgba(157,78,221,0.3); color: var(--accent-purple); }
-    .sheet-nav a.climax { background: rgba(255,107,157,0.2); color: var(--accent-pink); }
+    /* Floating Controls */
+    .floating-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,26,0.95); border: 1px solid rgba(0,255,136,0.3); border-radius: 30px; padding: 12px 25px; display: flex; align-items: center; gap: 15px; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .floating-controls.hidden { display: none; }
+    .now-playing-mini { display: flex; align-items: center; gap: 10px; min-width: 180px; }
+    .now-playing-note-mini { font-family: 'Courier New', monospace; font-size: 1.3rem; font-weight: bold; color: var(--accent-green); min-width: 45px; }
+    .now-playing-text-mini { color: var(--accent-cyan); font-style: italic; font-size: 0.9rem; }
+    .floating-progress { width: 120px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+    .floating-progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); width: 0%; transition: width 0.1s linear; }
     
-    .act-header { padding: 40px 20px; text-align: center; background: linear-gradient(135deg, rgba(157, 78, 221, 0.15), rgba(0, 212, 255, 0.1)); }
-    .act-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; background: linear-gradient(135deg, #fff, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .act-header p { color: var(--text-secondary); font-size: 1rem; }
-    
-    /* Audio Feature Banner - NOW STICKY */
-    .audio-banner { 
-      background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 255, 0.1)); 
-      border: 1px solid rgba(0, 255, 136, 0.3);
-      border-radius: 10px;
-      padding: 15px 20px;
-      margin: 20px auto;
-      max-width: 1100px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      position: sticky;
-      top: 60px;
-      z-index: 90;
-      backdrop-filter: blur(10px);
-    }
+    .audio-banner { background: linear-gradient(135deg, rgba(0,255,136,0.15), rgba(0,212,255,0.1)); border: 1px solid rgba(0,255,136,0.3); border-radius: 10px; padding: 15px 20px; margin: 20px auto; max-width: 1100px; display: flex; align-items: center; gap: 15px; }
     .audio-banner-icon { font-size: 2rem; }
     .audio-banner-text { flex: 1; }
     .audio-banner-text h3 { color: var(--accent-green); font-size: 1rem; margin-bottom: 5px; }
     .audio-banner-text p { color: var(--text-secondary); font-size: 0.85rem; }
-    .audio-init-btn {
-      background: var(--accent-green);
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
+    .audio-init-btn { background: var(--accent-green); color: #000; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
     .audio-init-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,136,0.4); }
-    .audio-init-btn:disabled { background: #444; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+    .audio-init-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
     .audio-init-btn.ready { background: var(--accent-cyan); }
     
-    /* Now Playing - Sticky at top during playback */
-    .now-playing-sticky {
-      position: sticky;
-      top: 130px;
-      z-index: 85;
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 255, 136, 0.3);
-      border-radius: 10px;
-      padding: 12px 20px;
-      margin: 0 auto 20px;
-      max-width: 1100px;
-      display: none;
-      align-items: center;
-      gap: 20px;
-    }
-    .now-playing-sticky.visible { display: flex; }
-    .now-playing-note {
-      font-family: 'Courier New', monospace;
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--accent-green);
-      min-width: 70px;
-      text-align: center;
-    }
-    .now-playing-info { flex: 1; }
-    .now-playing-text {
-      color: var(--accent-cyan);
-      font-size: 1.2rem;
-      font-style: italic;
-    }
-    .now-playing-resonance {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-    }
-    .now-playing-measure {
-      color: var(--accent-gold);
-      font-size: 0.8rem;
-      margin-top: 2px;
-    }
-    .playback-progress-sticky {
-      width: 150px;
-      height: 6px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .playback-progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-    .sticky-controls {
-      display: flex;
-      gap: 8px;
-    }
-    .sticky-btn {
-      background: rgba(255, 107, 157, 0.2);
-      border: 1px solid var(--accent-pink);
-      color: var(--accent-pink);
-      padding: 6px 14px;
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: all 0.3s;
-    }
-    .sticky-btn:hover { background: rgba(255, 107, 157, 0.3); }
-    
-    .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; padding-bottom: 120px; }
     .score-section { margin-bottom: 40px; }
-    .score-header { background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(0, 212, 255, 0.1)); border-radius: 10px 10px 0 0; padding: 20px; border-left: 4px solid var(--accent-purple); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
-    .score-header-info { flex: 1; }
-    .score-header h3 { color: var(--accent-gold); font-size: 1.3rem; margin-bottom: 5px; }
+    .score-header { background: linear-gradient(135deg, rgba(157,78,221,0.2), rgba(0,212,255,0.1)); border-radius: 10px 10px 0 0; padding: 20px; border-left: 4px solid var(--accent-purple); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+    .score-header h3 { color: var(--accent-gold); font-size: 1.3rem; }
     .score-meta { display: flex; gap: 15px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); }
     .score-meta span { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 15px; }
     
-    /* Audio Controls */
-    .audio-controls {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .play-btn, .stop-btn {
-      background: rgba(0, 255, 136, 0.2);
-      border: 1px solid var(--accent-green);
-      color: var(--accent-green);
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .play-btn:hover, .stop-btn:hover {
-      background: rgba(0, 255, 136, 0.3);
-      transform: scale(1.05);
-    }
-    .play-btn:disabled, .stop-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .play-btn.playing {
-      background: rgba(255, 107, 157, 0.2);
-      border-color: var(--accent-pink);
-      color: var(--accent-pink);
-    }
-    .stop-btn {
-      background: rgba(255, 107, 157, 0.2);
-      border-color: var(--accent-pink);
-      color: var(--accent-pink);
-    }
+    .play-btn, .stop-btn { background: rgba(0,255,136,0.2); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 8px 16px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .play-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .play-btn.playing { background: rgba(255,107,157,0.2); border-color: var(--accent-pink); color: var(--accent-pink); }
+    .stop-btn { background: rgba(255,107,157,0.2); border-color: var(--accent-pink); color: var(--accent-pink); }
     
-    .score-block { background: var(--bg-score); border-radius: 0 0 10px 10px; padding: 20px; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); border-top: none; position: relative; }
+    .score-block { background: var(--bg-score); border-radius: 0 0 10px 10px; padding: 20px; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); }
     
-    /* Individual measure blocks for scrolling */
-    .measure-block {
-      font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
-      font-size: 12px;
-      line-height: 1.3;
-      color: var(--text-secondary);
-      white-space: pre;
-      margin: 0;
-      padding: 10px 0;
-      border-left: 3px solid transparent;
-      transition: all 0.3s ease;
-      scroll-margin-top: 200px;
-    }
-    .measure-block.playing {
-      background: rgba(0, 255, 136, 0.08);
-      border-left-color: var(--accent-green);
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
-    }
-    .measure-block.climax {
-      background: rgba(255, 107, 157, 0.1);
-      border-left-color: var(--accent-pink);
-    }
+    .measure-block { font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.3; color: var(--text-secondary); white-space: pre; padding: 10px; border-radius: 8px; transition: all 0.3s; scroll-margin-top: 200px; }
+    .measure-block.active { background: rgba(0,255,136,0.1); border-left: 4px solid var(--accent-green); box-shadow: 0 0 20px rgba(0,255,136,0.2); }
+    .measure-block.climax-section { background: rgba(255,107,157,0.05); }
+    .measure-block.climax-section.active { background: rgba(255,107,157,0.15); border-left-color: var(--accent-pink); box-shadow: 0 0 30px rgba(255,107,157,0.3); }
     
-    .score-annotation { background: rgba(255, 215, 0, 0.1); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary); border-left: 3px solid var(--accent-gold); }
-    .score-annotation strong { color: var(--accent-gold); }
+    .score-annotation { background: rgba(255,215,0,0.1); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary); border-left: 3px solid var(--accent-gold); }
+    .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.85rem; }
     
-    .page-nav { display: flex; justify-content: space-between; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; flex-wrap: wrap; gap: 10px; }
-    .page-nav a { color: var(--accent-cyan); text-decoration: none; padding: 12px 24px; background: rgba(0,212,255,0.1); border-radius: 25px; transition: all 0.3s; }
-    .page-nav a:hover { background: rgba(0,212,255,0.2); }
-    
-    .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-    .footer p { color: var(--text-secondary); font-size: 0.85rem; }
-    .footer a { color: var(--accent-purple); text-decoration: none; }
-    
-    @media (max-width: 768px) {
-      .nav { flex-direction: column; gap: 15px; }
-      .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
-      .measure-block { font-size: 10px; }
-      .sheet-nav a { font-size: 0.75rem; padding: 4px 8px; }
-      .score-header { flex-direction: column; }
-      .audio-banner { flex-direction: column; text-align: center; top: 50px; }
-      .now-playing-sticky { flex-direction: column; top: 180px; text-align: center; }
-    }
+    @media (max-width: 768px) { .measure-block { font-size: 9px; } .floating-controls { flex-wrap: wrap; justify-content: center; padding: 10px 15px; bottom: 10px; width: 95%; } }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="notation.html">Vocal Notation</a>
-      <a href="composition.html">AI Composition</a>
-      <a href="gallery.html">Hubble Gallery</a>
-      <a href="sheet-music.html" class="active">Sheet Music</a>
-      <a href="words.html">Words</a>
-    </div>
-  </nav>
-
-  <div class="sheet-nav">
-    <div class="sheet-nav-inner">
-      <a href="sheet-music.html">Index</a>
-      <a href="sheet-music-act1-p1.html" class="active">Act I: 1-2</a>
-      <a href="sheet-music-act1-p2.html">Act I: 3-5</a>
-      <a href="sheet-music-act2.html">Act II</a>
-      <a href="sheet-music-act3-p1.html">Act III: 1-2</a>
-      <a href="sheet-music-act3-p2.html" class="climax">Act III: 3-5 ★</a>
-    </div>
-  </div>
-
+  <nav class="nav"><a href="index.html" class="nav-logo">🌌 COSMOS</a></nav>
   <header class="act-header">
     <h1>🌅 ACT I — WE COME (Part 1)</h1>
-    <p>Scenes 1-2: "Do You See" and "Look" — <span style="color: var(--accent-green);">🔊 Audio Enabled with Auto-Scroll</span></p>
+    <p>Scene 1: "Do You See" — <span style="color: var(--accent-green);">🔊 Audio + Auto-Scroll</span></p>
   </header>
-
-  <!-- Audio Initialization Banner -->
-  <div class="audio-banner" id="audioBanner">
+  
+  <div class="audio-banner">
     <div class="audio-banner-icon">🎵</div>
     <div class="audio-banner-text">
-      <h3>Audio Playback Available</h3>
-      <p>Click to enable audio. The page will auto-scroll to follow the music.</p>
+      <h3>Audio Playback with Auto-Scroll</h3>
+      <p>Click to enable audio. The page will automatically scroll to follow along with the music.</p>
     </div>
     <button class="audio-init-btn" id="audioInitBtn" onclick="initAudio()">Enable Audio</button>
   </div>
 
-  <!-- Sticky Now Playing Display -->
-  <div class="now-playing-sticky" id="nowPlayingSticky">
-    <div class="now-playing-note" id="currentNote">--</div>
-    <div class="now-playing-info">
-      <div class="now-playing-text" id="currentText">Ready to play</div>
-      <div class="now-playing-resonance" id="currentResonance"></div>
-      <div class="now-playing-measure" id="currentMeasure"></div>
+  <div class="floating-controls hidden" id="floatingControls">
+    <button class="play-btn" id="floatingPlayBtn" onclick="togglePlay('scene1')"><span>▶</span> Play</button>
+    <button class="stop-btn" onclick="stopPlay('scene1')"><span>■</span> Stop</button>
+    <div class="now-playing-mini">
+      <div class="now-playing-note-mini" id="floatingNote">--</div>
+      <div class="now-playing-text-mini" id="floatingText">Ready</div>
     </div>
-    <div class="playback-progress-sticky">
-      <div class="playback-progress-bar" id="progressBar"></div>
-    </div>
-    <div class="sticky-controls">
-      <button class="sticky-btn" onclick="stopPlay('scene1')">■ Stop</button>
-    </div>
+    <div class="floating-progress"><div class="floating-progress-bar" id="floatingProgressBar"></div></div>
   </div>
 
   <main class="content">
-
-    <!-- SCENE 1: DO YOU SEE -->
-    <section class="score-section" id="do-you-see">
+    <section class="score-section">
       <div class="score-header">
-        <div class="score-header-info">
-          <h3>Scene 1: "Do You See" — Complete Score</h3>
-          <div class="score-meta">
-            <span>🎤 Observer (Mezzo-Soprano)</span>
-            <span>⏱️ Moderato ♩= 72</span>
-            <span>🔑 C major</span>
-            <span>📏 4/4</span>
-          </div>
+        <div>
+          <h3>Scene 1: "Do You See"</h3>
+          <div class="score-meta"><span>🎤 Mezzo-Soprano</span><span>♩= 72</span><span>C major</span></div>
         </div>
-        <div class="audio-controls">
-          <button class="play-btn" id="playScene1" onclick="togglePlay('scene1')" disabled>
-            <span class="play-icon">▶</span> Play Scene
-          </button>
-          <button class="stop-btn" id="stopScene1" onclick="stopPlay('scene1')" disabled style="display:none;">
-            <span>■</span> Stop
-          </button>
-        </div>
+        <button class="play-btn" id="playScene1" onclick="togglePlay('scene1')" disabled>▶ Play Scene</button>
       </div>
-      <div class="score-block" id="scoreBlock1">
-
-<!-- MEASURE 1-4 -->
-<div class="measure-block" id="m1-4" data-measures="1-4">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 1-4: Opening Question                                            p (tender)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  A4 ───────♩─────────────────────────────────────────────────────────────────────────────
-│  G4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  E4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│
+      <div class="score-block">
+<div class="measure-block" id="m1">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 1-4: Opening Question                                    p (tender)
+├────────────────────────────────────────────────────────────────────────────
+│  A4 ───────♩────────────────────────────────────────────────────────────────
+│  G4 ─────────────────♩──────────────────────────────────────────────────────
+│  E4 ─────────────────────────────────♩──────────────────────────────────────
 │       [CM]            [M]             [C]
 │       "do             you             see"
-│
-│  Resonance: Chest-mix to mixed to chest, questioning, intimate
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 5-8 -->
-<div class="measure-block" id="m5-8" data-measures="5-8">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 5-8: The Central Question                                        mp
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  G4 ───────♩─────────────────────────────────────────────────────────────────────────────
-│  F4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  E4 ─────────────────────────────────♩───────♩───────────────────────────────────────────
-│  D4 ─────────────────────────────────────────────────────♩───────────────────────────────
-│  C4 ─────────────────────────────────────────────────────────────────♩───────────────────
-│
-│       [M]             [M]             [CM]    [CM]            [C]             [C]
-│       "what           do              you     see             when            you"
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 9-12 -->
-<div class="measure-block" id="m9-12" data-measures="9-12">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 9-12: "close your eyes"                                          mp (ethereal)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  A4 ─────────────────────────────────────────────────────────────────────────●~~~~~~~~~~
-│  G4 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  F4 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  E4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  D4 ─────────────────────♩───────────────────────────────────────────────────────────────
-│  C4 ─────────♩───────────────────────────────────────────────────────────────────────────
-│
-│       [C]             [CM]            [M]             [HM]            [H]     [H]~~~vibr.
-│       "close          your            eyes"          (ascending to head voice, held)
-│
-│  Orchestra: Strings sustain, celesta enters with high harmonics
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 13-16 -->
-<div class="measure-block" id="m13-16" data-measures="13-16">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 13-16: "some don't see they sleep"                               p (mysterious)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  E4 ───────♩─────────────────────────────────────────────────────────────────────────────
-│  D4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  C4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  B3 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  A3 ─────────────────────────────────────────────────────────●~~~~~~~~~~─────────────────
-│
-│       [CM]            [C]             [C]             [C]             [C]~~~~~
-│       "some           don't           see             they            sleep~~~~~"
-│
-│  Low register, almost spoken, mysterious. Muted strings underneath
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 17-24 -->
-<div class="measure-block" id="m17-24" data-measures="17-24">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 17-24: "what i see is the light"                                 mf (revelation)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  C5 ─────────────────────────────────────────────────────────────────────────●~~~~~~~~~~
-│  B4 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  A4 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  G4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  F4 ─────────────────────♩───────────────────────────────────────────────────────────────
-│  E4 ─────────♩───────────────────────────────────────────────────────────────────────────
-│  D4 ───♩─────────────────────────────────────────────────────────────────────────────────
-│  C4 ♩────────────────────────────────────────────────────────────────────────────────────
-│
-│       [C]  [C]  [CM]  [M]   [M]   [HM]  [H]   [H]                      [H]~~~~vibr.
-│       "what i   see   is    the   light~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-│
-│  Ascending scale, building intensity. Hold C5 with vibrato.
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 25-32: CLIMAX -->
-<div class="measure-block" id="m25-32" data-measures="25-32" data-climax="true">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 25-32: "an infinite number of stars"                             f → ff CLIMAX
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  G5 ─────────────────────────────────────────────────────────────────────────●~~~~~~~~~~
-│  F5 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  E5 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  D5 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  C5 ─────────────────────♩───────────────────────────────────────────────────────────────
-│  B4 ─────────♩───────────────────────────────────────────────────────────────────────────
-│  A4 ───♩─────────────────────────────────────────────────────────────────────────────────
-│  G4 ♩────────────────────────────────────────────────────────────────────────────────────
-│
-│       [M]  [M]  [HM]  [H]   [H]   [H]   [H]   [H]                      [H]~~~~fff
-│       "an  in-  fi-   nite  num-  ber   of    stars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-│
-│  ★ Full orchestra crescendo. G5 is the first climax of the opera. ★
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 33-40 -->
-<div class="measure-block" id="m33-40" data-measures="33-40">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 33-40: "swirling around in a cloud"                              mf (flowing)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  E5 ───────♩───────♩─────────────────────────────────────────────────────────────────────
-│  D5 ─────────────────────────♩───────♩───────────────────────────────────────────────────
-│  C5 ─────────────────────────────────────────────♩───────♩───────────────────────────────
-│  B4 ─────────────────────────────────────────────────────────────────♩───────♩───────────
-│  A4 ─────────────────────────────────────────────────────────────────────────────────●~~~
-│
-│       [H]     [H]     [H]     [H]     [HM]    [HM]    [M]     [M]              [M]~~~~
-│       "swirl- ing     a-      round   in      a       cloud~~~~~~~~~~~~~~~~~~~~~~~~~"
-│
-│  Undulating melody, wave-like motion. Strings play tremolo.
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 41-48 -->
-<div class="measure-block" id="m41-48" data-measures="41-48">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 41-48: "some see the dark, i see the light"                      mp → mf
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  G4 ───────♩─────────────────────────────────────────────────────────────────────────────
-│  F4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  E4 ─────────────────────────────────♩───────────────────────♩───────────────────────────
-│  D4 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  C4 ─────────────────────────────────────────────────────────────────────♩───────────────
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m2">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 5-8: The Central Question                                mp
+├────────────────────────────────────────────────────────────────────────────
+│  G4 ───────♩────────────────────────────────────────────────────────────────
+│  F4 ─────────────────♩──────────────────────────────────────────────────────
+│  E4 ─────────────────────────────────♩───────♩──────────────────────────────
+│  D4 ─────────────────────────────────────────────────────♩──────────────────
+│  C4 ─────────────────────────────────────────────────────────────────♩──────
+│       [M]             [M]             [CM]    [CM]            [C]      [C]
+│       "what           do              you     see             when     you"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m3">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 9-12: "close your eyes"                              mp (ethereal)
+├────────────────────────────────────────────────────────────────────────────
+│  A4 ─────────────────────────────────────────────────────────────────●~~~~~
+│  G4 ─────────────────────────────────────────────────────────♩──────────────
+│  F4 ─────────────────────────────────────────────♩──────────────────────────
+│  E4 ─────────────────────────────────♩──────────────────────────────────────
+│  D4 ─────────────────────♩──────────────────────────────────────────────────
+│  C4 ─────────♩──────────────────────────────────────────────────────────────
+│       [C]             [CM]            [M]             [HM]     [H] [H]vibr
+│       "close          your            eyes"          (ascending, held)
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m4">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 13-16: "some don't see they sleep"                   p (mysterious)
+├────────────────────────────────────────────────────────────────────────────
+│  E4 ───────♩────────────────────────────────────────────────────────────────
+│  D4 ─────────────────♩──────────────────────────────────────────────────────
+│  C4 ─────────────────────────────────♩──────────────────────────────────────
+│  B3 ─────────────────────────────────────────────♩──────────────────────────
+│  A3 ─────────────────────────────────────────────────────────●~~~~~~~~~~~~~
+│       [CM]            [C]             [C]             [C]             [C]~~
+│       "some           don't           see             they            sleep"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m5">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 17-24: "what i see is the light"                     mf (revelation)
+├────────────────────────────────────────────────────────────────────────────
+│  C5 ─────────────────────────────────────────────────────────────────●~~~~~
+│  B4 ─────────────────────────────────────────────────────────♩──────────────
+│  A4 ─────────────────────────────────────────────♩──────────────────────────
+│  G4 ─────────────────────────────────♩──────────────────────────────────────
+│  F4 ─────────────────────♩──────────────────────────────────────────────────
+│  E4 ─────────♩──────────────────────────────────────────────────────────────
+│  D4 ───♩────────────────────────────────────────────────────────────────────
+│  C4 ♩───────────────────────────────────────────────────────────────────────
+│       [C]  [C]  [CM]  [M]   [M]   [HM]  [H]   [H]              [H]~~~~vibr
+│       "what i   see   is    the   light~~~~~~~~~~~~~~~~~~~~~~~"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block climax-section" id="m6">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 25-32: "an infinite number of stars"             f → ff ★ CLIMAX ★
+├────────────────────────────────────────────────────────────────────────────
+│  G5 ─────────────────────────────────────────────────────────────────●~~~~~
+│  F5 ─────────────────────────────────────────────────────────♩──────────────
+│  E5 ─────────────────────────────────────────────♩──────────────────────────
+│  D5 ─────────────────────────────────♩──────────────────────────────────────
+│  C5 ─────────────────────♩──────────────────────────────────────────────────
+│  B4 ─────────♩──────────────────────────────────────────────────────────────
+│  A4 ───♩────────────────────────────────────────────────────────────────────
+│  G4 ♩───────────────────────────────────────────────────────────────────────
+│       [M]  [M]  [HM]  [H]   [H]   [H]   [H]   [H]              [H]~~~~fff
+│       "an  in-  fi-   nite  num-  ber   of    STARS~~~~~~~~~~~~~"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m7">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 33-40: "swirling around in a cloud"                  mf (flowing)
+├────────────────────────────────────────────────────────────────────────────
+│  E5 ───────♩───────♩────────────────────────────────────────────────────────
+│  D5 ─────────────────────────♩───────♩──────────────────────────────────────
+│  C5 ─────────────────────────────────────────────♩───────♩──────────────────
+│  B4 ─────────────────────────────────────────────────────────────────♩──────
+│  A4 ─────────────────────────────────────────────────────────────────────●~~
+│       [H]     [H]     [H]     [H]     [HM]    [HM]    [M]     [M]      [M]
+│       "swirl- ing     a-      round   in      a       cloud~~~~~~~~~~~"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m8">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 41-48: "some see the dark, i see the light"          mp → mf
+├────────────────────────────────────────────────────────────────────────────
+│  G4 ───────♩──────────   F4 ─────────────────♩──────────────────────────────
+│  E4 ─────────────────────────────────♩───────────────────────♩──────────────
+│  D4 ─────────────────────────────────────────────♩──────────────────────────
+│  C4 ─────────────────────────────────────────────────────────────────────♩──
 │       "some           see             the             dark"
-│
-│  C5 ─────────────────────────────────────────────────────────────────────────●~~~~~~~~~~
-│  B4 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  A4 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  G4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│       "i              see             the             light~~~~~~~~~~~~~~~~~~~~~~~~~"
-│
-│  Contrast: dark (descending, p) vs light (ascending, mf)
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 49-64 -->
-<div class="measure-block" id="m49-64" data-measures="49-64">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 49-64: "some say it is the snow captured by the vacuum..."       mp (wondering)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  E4 ───────♩─────────────────────────────────────────────────────────────────────────────
-│  F4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  G4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  A4 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  B4 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  C5 ─────────────────────────────────────────────────────────────────────●~~~────────────
-│
-│       [C]     [CM]    [M]     [M]     [HM]    [H]                      [H]~~~~
-│       "some   say     it      is      the     snow    cap-tured by the
-│        va-cuum that   they    see...                  what is it~~~~~"
-│
-│  Questioning, uncertain. Sparse orchestration, solo oboe.
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 65-72 -->
-<div class="measure-block" id="m65-72" data-measures="65-72">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 65-72: "the echo of all from the start"                          p (ancient)
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  A4 ───────♩───────────────────────────♩─────────────────────────────────────────────────
-│  G4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  F4 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  E4 ─────────────────────────────────────────────────────────────────────♩───────────────
-│  D4 ─────────────────────────────────────────────────────────────────────────────●~~~~~~~
-│
-│       [HM]    [M]     [M]     [M]     [CM]            [C]              [C]~~~~
-│       "the    e-      cho     of      all             from            the start~~~~~"
-│
-│  Descending, ancient, primordial. Low strings drone.
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 73-80 -->
-<div class="measure-block" id="m73-80" data-measures="73-80">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 73-80: "do you see the dark" (reprise)                           p
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  G4 ───────♩─────────────────────────────────────────────────────────────────────────────
-│  F4 ─────────────────♩───────────────────────────────────────────────────────────────────
-│  E4 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  D4 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  C4 ─────────────────────────────────────────────────────────●~~~~~~~────────────────────
-│
+│  C5 ─────────────────────────────────────────────────────────────────●~~~~~
+│  B4 ─────────────────────────────────────────────────────────♩──────────────
+│  A4 ─────────────────────────────────────────────♩──────────────────────────
+│  G4 ─────────────────────────────────♩──────────────────────────────────────
+│       "i              see             the             light~~~~~~~~~~~~~~"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m9">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 49-64: "some say it is the snow..."                  mp (wondering)
+├────────────────────────────────────────────────────────────────────────────
+│  E4 ───────♩──────   F4 ─────────────────♩──────────────────────────────────
+│  G4 ─────────────────────────────────♩──────────────────────────────────────
+│  A4 ─────────────────────────────────────────────♩──────────────────────────
+│  B4 ─────────────────────────────────────────────────────────♩──────────────
+│  C5 ─────────────────────────────────────────────────────────────────●~~~~~~
+│       [C]     [CM]    [M]     [M]     [HM]    [H]              [H]~~~~
+│       "some   say     it      is      the     snow..."
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m10">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 65-72: "the echo of all from the start"              p (ancient)
+├────────────────────────────────────────────────────────────────────────────
+│  A4 ───────♩───────────────────────────♩────────────────────────────────────
+│  G4 ─────────────────♩──────────────────────────────────────────────────────
+│  F4 ─────────────────────────────────────────────────────────♩──────────────
+│  E4 ─────────────────────────────────────────────────────────────────────♩──
+│  D4 ─────────────────────────────────────────────────────────────────────●~~
+│       [HM]    [M]     [M]     [M]     [CM]            [C]          [C]~~~~
+│       "the    e-      cho     of      all             from the start~~~"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block" id="m11">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 73-80: "do you see the dark" (reprise)               p
+├────────────────────────────────────────────────────────────────────────────
+│  G4 ───────♩────────────────────────────────────────────────────────────────
+│  F4 ─────────────────♩──────────────────────────────────────────────────────
+│  E4 ─────────────────────────────────♩──────────────────────────────────────
+│  D4 ─────────────────────────────────────────────♩──────────────────────────
+│  C4 ─────────────────────────────────────────────────────────●~~~~~~────────
 │       [M]     [M]     [CM]    [C]     [C]                     [C]~~~~
-│       "do     you     see     the     dark~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
-<!-- MEASURE 81-96: FINALE -->
-<div class="measure-block" id="m81-96" data-measures="81-96" data-climax="true">
-┌──────────────────────────────────────────────────────────────────────────────────────────
-│  MEASURES 81-96: FINALE "i see the light and the stars, i see the universe"    mf → ff
-├──────────────────────────────────────────────────────────────────────────────────────────
-│  G5 ─────────────────────────────────────────────────────────────────────────●~~~~~~~~~~
-│  F5 ─────────────────────────────────────────────────────────♩───────────────────────────
-│  E5 ─────────────────────────────────────────────♩───────────────────────────────────────
-│  D5 ─────────────────────────────────♩───────────────────────────────────────────────────
-│  C5 ─────────────────────♩───────────────────────────────────────────────────────────────
-│  B4 ─────────♩───────────────────────────────────────────────────────────────────────────
-│  A4 ───♩─────────────────────────────────────────────────────────────────────────────────
-│  G4 ♩────────────────────────────────────────────────────────────────────────────────────
-│
-│       [M]  [M]  [HM]  [H]   [H]   [H]   [H]   [H]                      [H]~~~~fff
+│       "do     you     see     the     dark~~~~~~~~~~~~~"
+└────────────────────────────────────────────────────────────────────────────</div>
+<div class="measure-block climax-section" id="m12">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 81-96: FINALE                                    mf → ff ★★★
+├────────────────────────────────────────────────────────────────────────────
+│  G5 ─────────────────────────────────────────────────────────────────●~~~~~
+│  F5 ─────────────────────────────────────────────────────────♩──────────────
+│  E5 ─────────────────────────────────────────────♩──────────────────────────
+│  D5 ─────────────────────────────────♩──────────────────────────────────────
+│  C5 ─────────────────────♩──────────────────────────────────────────────────
+│  B4 ─────────♩──────────────────────────────────────────────────────────────
+│  A4 ───♩────────────────────────────────────────────────────────────────────
+│  G4 ♩───────────────────────────────────────────────────────────────────────
+│       [M]  [M]  [HM]  [H]   [H]   [H]   [H]   [H]              [H]~~~~fff
 │       "i   see  the   light and   the   stars~~~
-│        i   see  the   u-    ni-   verse~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-│
-│  ★★★ Grand finale of Scene 1. Full orchestra, triumphant. Hold G5. ★★★
-└──────────────────────────────────────────────────────────────────────────────────────────
-</div>
-
+│        i   see  the   U-    NI-   VERSE~~~~~~~~~~~~~~~~~~~~~~~"
+│  ★★★ Grand finale. Full orchestra. Hold G5. ★★★
+└────────────────────────────────────────────────────────────────────────────</div>
       </div>
-      <div class="score-annotation">
-        <p>
-          <strong>Performance Notes:</strong> "Do You See" establishes the central question of the opera. The Observer's voice should be warm and inviting, drawing the audience into contemplation. The contrast between "dark" and "light" sections should be distinct. The final ascent to G5 on "universe" is the first major climax - sustain with full vibrato.
-        </p>
-      </div>
+      <div class="score-annotation"><strong>Performance Notes:</strong> The Observer's voice should be warm and inviting. The final G5 on "universe" is the major climax - sustain with full vibrato.</div>
     </section>
-
   </main>
-
-  <footer class="footer">
-    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
-    <a href="index.html">Home</a> | <a href="sheet-music.html">Sheet Music Index</a></p>
-  </footer>
-
+  <footer class="footer">© 2002-2026 COSMOS the OPERA</footer>
+  
   <script>
-    // ═══════════════════════════════════════════════════════════════════════════
-    // COSMOS THE OPERA - Audio Playback Engine with Auto-Scroll
-    // ═══════════════════════════════════════════════════════════════════════════
-    
-    let audioReady = false;
-    let synth = null;
-    let isPlaying = {};
-    let currentMeasureElement = null;
-    
-    // Scene 1: "Do You See" - Note data with measure references
-    const scene1Data = {
-      tempo: 72,
-      notes: [
-        // Measures 1-4: "do you see"
-        { note: 'A4', duration: 1.5, text: 'do', resonance: 'CM', dynamic: 0.4, measure: 'm1-4' },
-        { note: 'G4', duration: 1.5, text: 'you', resonance: 'M', dynamic: 0.4, measure: 'm1-4' },
-        { note: 'E4', duration: 2, text: 'see', resonance: 'C', dynamic: 0.4, measure: 'm1-4' },
-        { note: null, duration: 1, text: '', resonance: '', dynamic: 0, measure: 'm1-4' },
-        
-        // Measures 5-8: "what do you see when you"
-        { note: 'G4', duration: 1, text: 'what', resonance: 'M', dynamic: 0.5, measure: 'm5-8' },
-        { note: 'F4', duration: 1, text: 'do', resonance: 'M', dynamic: 0.5, measure: 'm5-8' },
-        { note: 'E4', duration: 0.75, text: 'you', resonance: 'CM', dynamic: 0.5, measure: 'm5-8' },
-        { note: 'E4', duration: 0.75, text: 'see', resonance: 'CM', dynamic: 0.5, measure: 'm5-8' },
-        { note: 'D4', duration: 1, text: 'when', resonance: 'C', dynamic: 0.5, measure: 'm5-8' },
-        { note: 'C4', duration: 1, text: 'you', resonance: 'C', dynamic: 0.5, measure: 'm5-8' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm5-8' },
-        
-        // Measures 9-12: "close your eyes" (ascending)
-        { note: 'C4', duration: 0.75, text: 'close', resonance: 'C', dynamic: 0.5, measure: 'm9-12' },
-        { note: 'D4', duration: 0.75, text: 'your', resonance: 'CM', dynamic: 0.5, measure: 'm9-12' },
-        { note: 'E4', duration: 0.75, text: 'eyes', resonance: 'M', dynamic: 0.55, measure: 'm9-12' },
-        { note: 'F4', duration: 0.75, text: '', resonance: 'HM', dynamic: 0.6, measure: 'm9-12' },
-        { note: 'G4', duration: 0.75, text: '', resonance: 'H', dynamic: 0.65, measure: 'm9-12' },
-        { note: 'A4', duration: 3, text: '(held)', resonance: 'H vibrato', dynamic: 0.7, measure: 'm9-12' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm9-12' },
-        
-        // Measures 13-16: "some don't see they sleep"
-        { note: 'E4', duration: 1, text: 'some', resonance: 'CM', dynamic: 0.4, measure: 'm13-16' },
-        { note: 'D4', duration: 1, text: "don't", resonance: 'C', dynamic: 0.4, measure: 'm13-16' },
-        { note: 'C4', duration: 1, text: 'see', resonance: 'C', dynamic: 0.4, measure: 'm13-16' },
-        { note: 'B3', duration: 1, text: 'they', resonance: 'C', dynamic: 0.35, measure: 'm13-16' },
-        { note: 'A3', duration: 2.5, text: 'sleep', resonance: 'C', dynamic: 0.35, measure: 'm13-16' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm13-16' },
-        
-        // Measures 17-24: "what i see is the light"
-        { note: 'C4', duration: 0.5, text: 'what', resonance: 'C', dynamic: 0.5, measure: 'm17-24' },
-        { note: 'D4', duration: 0.5, text: 'i', resonance: 'C', dynamic: 0.5, measure: 'm17-24' },
-        { note: 'E4', duration: 0.5, text: 'see', resonance: 'CM', dynamic: 0.55, measure: 'm17-24' },
-        { note: 'F4', duration: 0.5, text: 'is', resonance: 'M', dynamic: 0.6, measure: 'm17-24' },
-        { note: 'G4', duration: 0.5, text: 'the', resonance: 'M', dynamic: 0.65, measure: 'm17-24' },
-        { note: 'A4', duration: 0.5, text: 'light', resonance: 'HM', dynamic: 0.7, measure: 'm17-24' },
-        { note: 'B4', duration: 0.75, text: '', resonance: 'H', dynamic: 0.75, measure: 'm17-24' },
-        { note: 'C5', duration: 4, text: '(light)', resonance: 'H vibrato', dynamic: 0.8, measure: 'm17-24' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm17-24' },
-        
-        // Measures 25-32: "an infinite number of stars" - CLIMAX
-        { note: 'G4', duration: 0.4, text: 'an', resonance: 'M', dynamic: 0.7, measure: 'm25-32' },
-        { note: 'A4', duration: 0.4, text: 'in-', resonance: 'M', dynamic: 0.75, measure: 'm25-32' },
-        { note: 'B4', duration: 0.4, text: 'fi-', resonance: 'HM', dynamic: 0.8, measure: 'm25-32' },
-        { note: 'C5', duration: 0.4, text: 'nite', resonance: 'H', dynamic: 0.85, measure: 'm25-32' },
-        { note: 'D5', duration: 0.4, text: 'num-', resonance: 'H', dynamic: 0.88, measure: 'm25-32' },
-        { note: 'E5', duration: 0.4, text: 'ber', resonance: 'H', dynamic: 0.9, measure: 'm25-32' },
-        { note: 'F5', duration: 0.5, text: 'of', resonance: 'H', dynamic: 0.95, measure: 'm25-32' },
-        { note: 'G5', duration: 5, text: '★ STARS ★', resonance: 'H fff', dynamic: 1.0, measure: 'm25-32' },
-        { note: null, duration: 1, text: '', resonance: '', dynamic: 0, measure: 'm25-32' },
-        
-        // Measures 33-40: "swirling around in a cloud"
-        { note: 'E5', duration: 0.75, text: 'swirl-', resonance: 'H', dynamic: 0.7, measure: 'm33-40' },
-        { note: 'E5', duration: 0.75, text: 'ing', resonance: 'H', dynamic: 0.7, measure: 'm33-40' },
-        { note: 'D5', duration: 0.75, text: 'a-', resonance: 'H', dynamic: 0.65, measure: 'm33-40' },
-        { note: 'D5', duration: 0.75, text: 'round', resonance: 'H', dynamic: 0.65, measure: 'm33-40' },
-        { note: 'C5', duration: 0.75, text: 'in', resonance: 'HM', dynamic: 0.6, measure: 'm33-40' },
-        { note: 'C5', duration: 0.75, text: 'a', resonance: 'HM', dynamic: 0.6, measure: 'm33-40' },
-        { note: 'B4', duration: 0.75, text: 'cloud', resonance: 'M', dynamic: 0.55, measure: 'm33-40' },
-        { note: 'B4', duration: 0.75, text: '', resonance: 'M', dynamic: 0.55, measure: 'm33-40' },
-        { note: 'A4', duration: 3, text: '(cloud)', resonance: 'M', dynamic: 0.5, measure: 'm33-40' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm33-40' },
-        
-        // Measures 41-48: "some see the dark / i see the light"
-        { note: 'G4', duration: 1, text: 'some', resonance: 'M', dynamic: 0.45, measure: 'm41-48' },
-        { note: 'F4', duration: 1, text: 'see', resonance: 'M', dynamic: 0.45, measure: 'm41-48' },
-        { note: 'E4', duration: 0.75, text: 'the', resonance: 'CM', dynamic: 0.4, measure: 'm41-48' },
-        { note: 'E4', duration: 0.75, text: 'dark', resonance: 'CM', dynamic: 0.4, measure: 'm41-48' },
-        { note: 'D4', duration: 1, text: '', resonance: 'C', dynamic: 0.35, measure: 'm41-48' },
-        { note: 'C4', duration: 1.5, text: '', resonance: 'C', dynamic: 0.35, measure: 'm41-48' },
-        { note: 'G4', duration: 0.75, text: 'i', resonance: 'M', dynamic: 0.55, measure: 'm41-48' },
-        { note: 'A4', duration: 0.75, text: 'see', resonance: 'HM', dynamic: 0.6, measure: 'm41-48' },
-        { note: 'B4', duration: 0.75, text: 'the', resonance: 'H', dynamic: 0.65, measure: 'm41-48' },
-        { note: 'C5', duration: 3, text: 'light', resonance: 'H', dynamic: 0.7, measure: 'm41-48' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm41-48' },
-        
-        // Measures 49-64: "some say it is the snow..."
-        { note: 'E4', duration: 0.75, text: 'some', resonance: 'C', dynamic: 0.45, measure: 'm49-64' },
-        { note: 'F4', duration: 0.75, text: 'say', resonance: 'CM', dynamic: 0.5, measure: 'm49-64' },
-        { note: 'G4', duration: 0.75, text: 'it', resonance: 'M', dynamic: 0.5, measure: 'm49-64' },
-        { note: 'A4', duration: 0.75, text: 'is', resonance: 'M', dynamic: 0.55, measure: 'm49-64' },
-        { note: 'B4', duration: 0.75, text: 'the', resonance: 'HM', dynamic: 0.55, measure: 'm49-64' },
-        { note: 'C5', duration: 3, text: 'snow...', resonance: 'H', dynamic: 0.6, measure: 'm49-64' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm49-64' },
-        
-        // Measures 65-72: "the echo of all from the start"
-        { note: 'A4', duration: 1, text: 'the', resonance: 'HM', dynamic: 0.45, measure: 'm65-72' },
-        { note: 'G4', duration: 1, text: 'e-', resonance: 'M', dynamic: 0.45, measure: 'm65-72' },
-        { note: 'A4', duration: 1, text: 'cho', resonance: 'M', dynamic: 0.45, measure: 'm65-72' },
-        { note: 'F4', duration: 1, text: 'of', resonance: 'M', dynamic: 0.4, measure: 'm65-72' },
-        { note: 'E4', duration: 1, text: 'all', resonance: 'CM', dynamic: 0.4, measure: 'm65-72' },
-        { note: 'D4', duration: 3, text: 'from the start', resonance: 'C', dynamic: 0.35, measure: 'm65-72' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm65-72' },
-        
-        // Measures 73-80: "do you see the dark" (reprise)
-        { note: 'G4', duration: 1, text: 'do', resonance: 'M', dynamic: 0.4, measure: 'm73-80' },
-        { note: 'F4', duration: 1, text: 'you', resonance: 'M', dynamic: 0.4, measure: 'm73-80' },
-        { note: 'E4', duration: 1, text: 'see', resonance: 'CM', dynamic: 0.4, measure: 'm73-80' },
-        { note: 'D4', duration: 1, text: 'the', resonance: 'C', dynamic: 0.35, measure: 'm73-80' },
-        { note: 'C4', duration: 3, text: 'dark', resonance: 'C', dynamic: 0.35, measure: 'm73-80' },
-        { note: null, duration: 0.5, text: '', resonance: '', dynamic: 0, measure: 'm73-80' },
-        
-        // Measures 81-96: FINALE
-        { note: 'G4', duration: 0.4, text: 'i', resonance: 'M', dynamic: 0.6, measure: 'm81-96' },
-        { note: 'A4', duration: 0.4, text: 'see', resonance: 'M', dynamic: 0.65, measure: 'm81-96' },
-        { note: 'B4', duration: 0.4, text: 'the', resonance: 'HM', dynamic: 0.7, measure: 'm81-96' },
-        { note: 'C5', duration: 0.4, text: 'light', resonance: 'H', dynamic: 0.75, measure: 'm81-96' },
-        { note: 'D5', duration: 0.4, text: 'and', resonance: 'H', dynamic: 0.8, measure: 'm81-96' },
-        { note: 'E5', duration: 0.4, text: 'the', resonance: 'H', dynamic: 0.85, measure: 'm81-96' },
-        { note: 'F5', duration: 0.5, text: 'stars', resonance: 'H', dynamic: 0.9, measure: 'm81-96' },
-        { note: null, duration: 0.3, text: '', resonance: '', dynamic: 0, measure: 'm81-96' },
-        { note: 'G4', duration: 0.4, text: 'i', resonance: 'M', dynamic: 0.7, measure: 'm81-96' },
-        { note: 'A4', duration: 0.4, text: 'see', resonance: 'M', dynamic: 0.75, measure: 'm81-96' },
-        { note: 'B4', duration: 0.4, text: 'the', resonance: 'HM', dynamic: 0.8, measure: 'm81-96' },
-        { note: 'C5', duration: 0.4, text: 'u-', resonance: 'H', dynamic: 0.85, measure: 'm81-96' },
-        { note: 'D5', duration: 0.4, text: 'ni-', resonance: 'H', dynamic: 0.9, measure: 'm81-96' },
-        { note: 'E5', duration: 0.4, text: 'verse', resonance: 'H', dynamic: 0.95, measure: 'm81-96' },
-        { note: 'F5', duration: 0.5, text: '', resonance: 'H', dynamic: 0.98, measure: 'm81-96' },
-        { note: 'G5', duration: 6, text: '★★★ UNIVERSE ★★★', resonance: 'H fff CLIMAX', dynamic: 1.0, measure: 'm81-96' },
-      ]
-    };
-    
-    // Initialize audio
-    async function initAudio() {
-      const btn = document.getElementById('audioInitBtn');
-      btn.textContent = 'Initializing...';
-      btn.disabled = true;
-      
-      try {
-        await Tone.start();
-        
-        // Create synth with reverb
-        synth = new Tone.PolySynth(Tone.Synth, {
-          oscillator: { type: 'sine' },
-          envelope: {
-            attack: 0.1,
-            decay: 0.2,
-            sustain: 0.8,
-            release: 0.8
-          }
-        }).toDestination();
-        
-        const reverb = new Tone.Reverb({ decay: 3, wet: 0.4 }).toDestination();
-        synth.connect(reverb);
-        
-        audioReady = true;
-        btn.textContent = '✓ Audio Ready';
-        btn.classList.add('ready');
-        document.getElementById('playScene1').disabled = false;
-        
-      } catch (err) {
-        console.error('Audio init failed:', err);
-        btn.textContent = 'Audio Failed';
-      }
-    }
-    
-    // Scroll to a measure element
-    function scrollToMeasure(measureId) {
-      const element = document.getElementById(measureId);
-      if (element && element !== currentMeasureElement) {
-        // Remove highlight from previous
-        if (currentMeasureElement) {
-          currentMeasureElement.classList.remove('playing', 'climax');
-        }
-        
-        // Add highlight to current
-        element.classList.add('playing');
-        if (element.dataset.climax === 'true') {
-          element.classList.add('climax');
-        }
-        
-        // Smooth scroll into view
-        element.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center'
-        });
-        
-        currentMeasureElement = element;
-      }
-    }
-    
-    // Play scene
-    async function togglePlay(sceneId) {
-      if (!audioReady) return;
-      
-      const playBtn = document.getElementById('playScene1');
-      const stopBtn = document.getElementById('stopScene1');
-      const nowPlaying = document.getElementById('nowPlayingSticky');
-      const progressBar = document.getElementById('progressBar');
-      const noteDisplay = document.getElementById('currentNote');
-      const textDisplay = document.getElementById('currentText');
-      const resonanceDisplay = document.getElementById('currentResonance');
-      const measureDisplay = document.getElementById('currentMeasure');
-      
-      if (isPlaying[sceneId]) {
-        stopPlay(sceneId);
-        return;
-      }
-      
-      isPlaying[sceneId] = true;
-      playBtn.classList.add('playing');
-      playBtn.innerHTML = '<span>⏸</span> Pause';
-      stopBtn.style.display = 'inline-flex';
-      stopBtn.disabled = false;
-      nowPlaying.classList.add('visible');
-      
-      const data = scene1Data;
-      const bpm = data.tempo;
-      const beatDuration = 60 / bpm;
-      
-      let totalBeats = data.notes.reduce((sum, n) => sum + n.duration, 0);
-      let currentBeat = 0;
-      
-      for (let i = 0; i < data.notes.length; i++) {
-        if (!isPlaying[sceneId]) break;
-        
-        const note = data.notes[i];
-        const durationSec = note.duration * beatDuration;
-        
-        // Scroll to current measure
-        if (note.measure) {
-          scrollToMeasure(note.measure);
-          measureDisplay.textContent = `Measures ${note.measure.replace('m', '')}`;
-        }
-        
-        // Update display
-        if (note.note) {
-          noteDisplay.textContent = note.note;
-          textDisplay.textContent = note.text ? `"${note.text}"` : '♪';
-          resonanceDisplay.textContent = note.resonance ? `Resonance: ${note.resonance}` : '';
-          
-          // Play note
-          synth.triggerAttackRelease(note.note, durationSec * 0.9, Tone.now(), note.dynamic);
-        } else {
-          noteDisplay.textContent = '—';
-          textDisplay.textContent = '(rest)';
-          resonanceDisplay.textContent = '';
-        }
-        
-        // Update progress
-        currentBeat += note.duration;
-        progressBar.style.width = `${(currentBeat / totalBeats) * 100}%`;
-        
-        await sleep(durationSec * 1000);
-      }
-      
-      stopPlay(sceneId);
-    }
-    
-    function stopPlay(sceneId) {
-      isPlaying[sceneId] = false;
-      
-      const playBtn = document.getElementById('playScene1');
-      const stopBtn = document.getElementById('stopScene1');
-      const nowPlaying = document.getElementById('nowPlayingSticky');
-      const progressBar = document.getElementById('progressBar');
-      const noteDisplay = document.getElementById('currentNote');
-      const textDisplay = document.getElementById('currentText');
-      const resonanceDisplay = document.getElementById('currentResonance');
-      const measureDisplay = document.getElementById('currentMeasure');
-      
-      playBtn.classList.remove('playing');
-      playBtn.innerHTML = '<span class="play-icon">▶</span> Play Scene';
-      stopBtn.style.display = 'none';
-      nowPlaying.classList.remove('visible');
-      
-      // Reset
-      progressBar.style.width = '0%';
-      noteDisplay.textContent = '--';
-      textDisplay.textContent = 'Ready to play';
-      resonanceDisplay.textContent = '';
-      measureDisplay.textContent = '';
-      
-      // Remove measure highlight
-      if (currentMeasureElement) {
-        currentMeasureElement.classList.remove('playing', 'climax');
-        currentMeasureElement = null;
-      }
-      
-      if (synth) synth.releaseAll();
-    }
-    
-    function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
+let audioReady=false,synth=null,isPlaying={},currentMeasure=null;
+const scene1Data={tempo:72,notes:[
+{note:'A4',duration:1.5,text:'do',dynamic:0.4,m:'m1'},
+{note:'G4',duration:1.5,text:'you',dynamic:0.4,m:'m1'},
+{note:'E4',duration:2,text:'see',dynamic:0.4,m:'m1'},
+{note:null,duration:1,m:'m1'},
+{note:'G4',duration:1,text:'what',dynamic:0.5,m:'m2'},
+{note:'F4',duration:1,text:'do',dynamic:0.5,m:'m2'},
+{note:'E4',duration:0.75,text:'you',dynamic:0.5,m:'m2'},
+{note:'E4',duration:0.75,text:'see',dynamic:0.5,m:'m2'},
+{note:'D4',duration:1,text:'when',dynamic:0.5,m:'m2'},
+{note:'C4',duration:1,text:'you',dynamic:0.5,m:'m2'},
+{note:null,duration:0.5,m:'m2'},
+{note:'C4',duration:0.75,text:'close',dynamic:0.5,m:'m3'},
+{note:'D4',duration:0.75,text:'your',dynamic:0.5,m:'m3'},
+{note:'E4',duration:0.75,text:'eyes',dynamic:0.55,m:'m3'},
+{note:'F4',duration:0.75,text:'',dynamic:0.6,m:'m3'},
+{note:'G4',duration:0.75,text:'',dynamic:0.65,m:'m3'},
+{note:'A4',duration:3,text:'(held)',dynamic:0.7,m:'m3'},
+{note:null,duration:0.5,m:'m3'},
+{note:'E4',duration:1,text:'some',dynamic:0.4,m:'m4'},
+{note:'D4',duration:1,text:"don't",dynamic:0.4,m:'m4'},
+{note:'C4',duration:1,text:'see',dynamic:0.4,m:'m4'},
+{note:'B3',duration:1,text:'they',dynamic:0.35,m:'m4'},
+{note:'A3',duration:2.5,text:'sleep',dynamic:0.35,m:'m4'},
+{note:null,duration:0.5,m:'m4'},
+{note:'C4',duration:0.5,text:'what',dynamic:0.5,m:'m5'},
+{note:'D4',duration:0.5,text:'i',dynamic:0.5,m:'m5'},
+{note:'E4',duration:0.5,text:'see',dynamic:0.55,m:'m5'},
+{note:'F4',duration:0.5,text:'is',dynamic:0.6,m:'m5'},
+{note:'G4',duration:0.5,text:'the',dynamic:0.65,m:'m5'},
+{note:'A4',duration:0.5,text:'light',dynamic:0.7,m:'m5'},
+{note:'B4',duration:0.75,text:'',dynamic:0.75,m:'m5'},
+{note:'C5',duration:4,text:'(light)',dynamic:0.8,m:'m5'},
+{note:null,duration:0.5,m:'m5'},
+{note:'G4',duration:0.4,text:'an',dynamic:0.7,m:'m6'},
+{note:'A4',duration:0.4,text:'in-',dynamic:0.75,m:'m6'},
+{note:'B4',duration:0.4,text:'fi-',dynamic:0.8,m:'m6'},
+{note:'C5',duration:0.4,text:'nite',dynamic:0.85,m:'m6'},
+{note:'D5',duration:0.4,text:'num-',dynamic:0.88,m:'m6'},
+{note:'E5',duration:0.4,text:'ber',dynamic:0.9,m:'m6'},
+{note:'F5',duration:0.5,text:'of',dynamic:0.95,m:'m6'},
+{note:'G5',duration:5,text:'★ STARS ★',dynamic:1.0,m:'m6'},
+{note:null,duration:1,m:'m6'},
+{note:'E5',duration:0.75,text:'swirl-',dynamic:0.7,m:'m7'},
+{note:'E5',duration:0.75,text:'ing',dynamic:0.7,m:'m7'},
+{note:'D5',duration:0.75,text:'a-',dynamic:0.65,m:'m7'},
+{note:'D5',duration:0.75,text:'round',dynamic:0.65,m:'m7'},
+{note:'C5',duration:0.75,text:'in',dynamic:0.6,m:'m7'},
+{note:'C5',duration:0.75,text:'a',dynamic:0.6,m:'m7'},
+{note:'B4',duration:0.75,text:'cloud',dynamic:0.55,m:'m7'},
+{note:'B4',duration:0.75,text:'',dynamic:0.55,m:'m7'},
+{note:'A4',duration:3,text:'(cloud)',dynamic:0.5,m:'m7'},
+{note:null,duration:0.5,m:'m7'},
+{note:'G4',duration:1,text:'some',dynamic:0.45,m:'m8'},
+{note:'F4',duration:1,text:'see',dynamic:0.45,m:'m8'},
+{note:'E4',duration:0.75,text:'the',dynamic:0.4,m:'m8'},
+{note:'E4',duration:0.75,text:'dark',dynamic:0.4,m:'m8'},
+{note:'D4',duration:1,text:'',dynamic:0.35,m:'m8'},
+{note:'C4',duration:1.5,text:'',dynamic:0.35,m:'m8'},
+{note:'G4',duration:0.75,text:'i',dynamic:0.55,m:'m8'},
+{note:'A4',duration:0.75,text:'see',dynamic:0.6,m:'m8'},
+{note:'B4',duration:0.75,text:'the',dynamic:0.65,m:'m8'},
+{note:'C5',duration:3,text:'light',dynamic:0.7,m:'m8'},
+{note:null,duration:0.5,m:'m8'},
+{note:'E4',duration:0.75,text:'some',dynamic:0.45,m:'m9'},
+{note:'F4',duration:0.75,text:'say',dynamic:0.5,m:'m9'},
+{note:'G4',duration:0.75,text:'it',dynamic:0.5,m:'m9'},
+{note:'A4',duration:0.75,text:'is',dynamic:0.55,m:'m9'},
+{note:'B4',duration:0.75,text:'the',dynamic:0.55,m:'m9'},
+{note:'C5',duration:3,text:'snow...',dynamic:0.6,m:'m9'},
+{note:null,duration:0.5,m:'m9'},
+{note:'A4',duration:1,text:'the',dynamic:0.45,m:'m10'},
+{note:'G4',duration:1,text:'e-',dynamic:0.45,m:'m10'},
+{note:'A4',duration:1,text:'cho',dynamic:0.45,m:'m10'},
+{note:'F4',duration:1,text:'of',dynamic:0.4,m:'m10'},
+{note:'E4',duration:1,text:'all',dynamic:0.4,m:'m10'},
+{note:'D4',duration:3,text:'start',dynamic:0.35,m:'m10'},
+{note:null,duration:0.5,m:'m10'},
+{note:'G4',duration:1,text:'do',dynamic:0.4,m:'m11'},
+{note:'F4',duration:1,text:'you',dynamic:0.4,m:'m11'},
+{note:'E4',duration:1,text:'see',dynamic:0.4,m:'m11'},
+{note:'D4',duration:1,text:'the',dynamic:0.35,m:'m11'},
+{note:'C4',duration:3,text:'dark',dynamic:0.35,m:'m11'},
+{note:null,duration:0.5,m:'m11'},
+{note:'G4',duration:0.4,text:'i',dynamic:0.6,m:'m12'},
+{note:'A4',duration:0.4,text:'see',dynamic:0.65,m:'m12'},
+{note:'B4',duration:0.4,text:'the',dynamic:0.7,m:'m12'},
+{note:'C5',duration:0.4,text:'light',dynamic:0.75,m:'m12'},
+{note:'D5',duration:0.4,text:'and',dynamic:0.8,m:'m12'},
+{note:'E5',duration:0.4,text:'the',dynamic:0.85,m:'m12'},
+{note:'F5',duration:0.5,text:'stars',dynamic:0.9,m:'m12'},
+{note:null,duration:0.3,m:'m12'},
+{note:'G4',duration:0.4,text:'i',dynamic:0.7,m:'m12'},
+{note:'A4',duration:0.4,text:'see',dynamic:0.75,m:'m12'},
+{note:'B4',duration:0.4,text:'the',dynamic:0.8,m:'m12'},
+{note:'C5',duration:0.4,text:'u-',dynamic:0.85,m:'m12'},
+{note:'D5',duration:0.4,text:'ni-',dynamic:0.9,m:'m12'},
+{note:'E5',duration:0.4,text:'verse',dynamic:0.95,m:'m12'},
+{note:'F5',duration:0.5,text:'',dynamic:0.98,m:'m12'},
+{note:'G5',duration:6,text:'★★★ UNIVERSE ★★★',dynamic:1.0,m:'m12'}
+]};
+
+async function initAudio(){
+  const btn=document.getElementById('audioInitBtn');
+  btn.textContent='Initializing...';btn.disabled=true;
+  try{
+    await Tone.start();
+    synth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine'},envelope:{attack:0.1,decay:0.2,sustain:0.8,release:0.8}}).toDestination();
+    const reverb=new Tone.Reverb({decay:3,wet:0.4}).toDestination();
+    synth.connect(reverb);
+    audioReady=true;btn.textContent='✓ Audio Ready';btn.classList.add('ready');
+    document.getElementById('playScene1').disabled=false;
+    document.getElementById('floatingControls').classList.remove('hidden');
+  }catch(e){btn.textContent='Audio Failed';}
+}
+
+function scrollToMeasure(id){
+  if(currentMeasure)document.getElementById(currentMeasure)?.classList.remove('active');
+  const el=document.getElementById(id);
+  if(el&&id!==currentMeasure){
+    el.classList.add('active');
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    currentMeasure=id;
+  }
+}
+
+async function togglePlay(sceneId){
+  if(!audioReady)return;
+  const playBtn=document.getElementById('playScene1'),floatingPlayBtn=document.getElementById('floatingPlayBtn'),progressBar=document.getElementById('floatingProgressBar'),noteDisplay=document.getElementById('floatingNote'),textDisplay=document.getElementById('floatingText');
+  if(isPlaying[sceneId]){stopPlay(sceneId);return;}
+  isPlaying[sceneId]=true;
+  playBtn.classList.add('playing');playBtn.innerHTML='⏸ Pause';
+  floatingPlayBtn.classList.add('playing');floatingPlayBtn.innerHTML='⏸';
+  const data=scene1Data,bpm=data.tempo,beatDuration=60/bpm;
+  let totalBeats=data.notes.reduce((s,n)=>s+n.duration,0),currentBeat=0;
+  scrollToMeasure(data.notes[0].m);
+  for(let i=0;i<data.notes.length;i++){
+    if(!isPlaying[sceneId])break;
+    const note=data.notes[i],durationSec=note.duration*beatDuration;
+    scrollToMeasure(note.m);
+    if(note.note){
+      noteDisplay.textContent=note.note;
+      textDisplay.textContent=note.text?'"'+note.text+'"':'♪';
+      synth.triggerAttackRelease(note.note,durationSec*0.9,Tone.now(),note.dynamic);
+    }else{noteDisplay.textContent='—';textDisplay.textContent='(rest)';}
+    currentBeat+=note.duration;progressBar.style.width=(currentBeat/totalBeats)*100+'%';
+    await new Promise(r=>setTimeout(r,durationSec*1000));
+  }
+  stopPlay(sceneId);
+}
+
+function stopPlay(sceneId){
+  isPlaying[sceneId]=false;
+  const playBtn=document.getElementById('playScene1'),floatingPlayBtn=document.getElementById('floatingPlayBtn'),progressBar=document.getElementById('floatingProgressBar');
+  playBtn.classList.remove('playing');playBtn.innerHTML='▶ Play Scene';
+  floatingPlayBtn.classList.remove('playing');floatingPlayBtn.innerHTML='<span>▶</span> Play';
+  progressBar.style.width='0%';
+  document.getElementById('floatingNote').textContent='--';
+  document.getElementById('floatingText').textContent='Ready';
+  if(currentMeasure){document.getElementById(currentMeasure)?.classList.remove('active');currentMeasure=null;}
+  if(synth)synth.releaseAll();
+}
   </script>
 </body>
 </html>

@@ -368,13 +368,17 @@
       Complete orchestration and musical composition guide for COSMOS the OPERA — 
       a trance opera blending electronic elements with full symphony orchestra.
     </p>
+    <nav style="display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+      <a href="#musical-overview" style="color: var(--accent-gold); text-decoration: none; padding: 10px 20px; background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.3); border-radius: 25px; font-size: 0.95rem; transition: all 0.3s;">🎵 Musical Overview</a>
+      <a href="#ai-sheet-music" style="color: var(--accent-cyan); text-decoration: none; padding: 10px 20px; background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); border-radius: 25px; font-size: 0.95rem; transition: all 0.3s;">🤖 AI Sheet Music</a>
+    </nav>
   </section>
 
   <!-- Main Content -->
   <main class="content">
     
     <!-- Overview -->
-    <section class="section">
+    <section class="section" id="musical-overview">
       <h2>Musical Overview</h2>
       <p>
         COSMOS the OPERA fuses the driving rhythms and euphoric melodies of trance music with 
@@ -742,6 +746,358 @@
       </div>
     </section>
 
+    <!-- AI Sheet Music Creation -->
+    <section class="section" id="ai-sheet-music">
+      <h2>AI Sheet Music Creation</h2>
+      <p>
+        The ASCII sheet music for COSMOS the OPERA was created using Claude AI with carefully designed prompts 
+        and structured templates. This section documents the prompts, notation systems, and methodologies 
+        used to generate consistent, readable musical scores in text format.
+      </p>
+      
+      <h3>🎯 Overview of Notation Systems</h3>
+      <p>
+        Multiple ASCII notation formats were developed for this opera, each serving different purposes 
+        and levels of detail:
+      </p>
+      
+      <div class="instrument-grid">
+        <div class="instrument-card">
+          <h4>📋 Solo Staff Notation</h4>
+          <p style="color: var(--text-secondary);">Detailed measure-by-measure notation with dots on horizontal staff lines and pitch names. 
+          Best for: Solo arias, detailed vocal study, precise pitch tracking.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎼 SSAATTBB Arrow Notation</h4>
+          <p style="color: var(--text-secondary);">Condensed arrow-notation (♩D4 ─→ ♩E4) showing melodic flow. 
+          Best for: Quick reading, audio synthesis, melodic direction.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎭 SSAATTBB Full Texture</h4>
+          <p style="color: var(--text-secondary);">All 8 voice parts listed with pitch sequences (S1: E5—F5—G5). 
+          Best for: Choral rehearsal, part learning, harmonic analysis.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎵 SSAATTBB Chord Notation</h4>
+          <p style="color: var(--text-secondary);">All parts on one line (S1: D5, S2: B4, A1: G4...). 
+          Best for: Final chords, sustained harmonies, vertical voicing.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>👥 Dual Voice Dialogue</h4>
+          <p style="color: var(--text-secondary);">Side-by-side staves showing two characters in dialogue. 
+          Best for: Duets, call-and-response, dramatic interplay.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🔊 Antiphonal Grouping</h4>
+          <p style="color: var(--text-secondary);">HIGH VOICES / LOW VOICES separation with grouped pitch sequences. 
+          Best for: Spatial effects, echo passages, contrast.</p>
+        </div>
+      </div>
+      
+      <h3>📐 SATB Notation Elements</h3>
+      <p>The detailed SATB notation uses the following ASCII elements:</p>
+      
+      <table class="voice-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Symbol</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Box Frame</strong></td>
+            <td style="font-family: monospace;">┌─┐│└┘</td>
+            <td>Unicode box-drawing characters create measure boundaries</td>
+          </tr>
+          <tr>
+            <td><strong>Staff Lines</strong></td>
+            <td style="font-family: monospace;">─────────</td>
+            <td>Horizontal lines represent pitch positions (e.g., C4, D4, E4)</td>
+          </tr>
+          <tr>
+            <td><strong>Quarter Note</strong></td>
+            <td style="font-family: monospace;">♩</td>
+            <td>Standard note marker on staff line</td>
+          </tr>
+          <tr>
+            <td><strong>Half/Whole Note</strong></td>
+            <td style="font-family: monospace;">●</td>
+            <td>Filled circle for sustained notes</td>
+          </tr>
+          <tr>
+            <td><strong>Vibrato</strong></td>
+            <td style="font-family: monospace;">~~~~~~~</td>
+            <td>Tildes indicate sustained vibrato</td>
+          </tr>
+          <tr>
+            <td><strong>Breath Mark</strong></td>
+            <td style="font-family: monospace;">'</td>
+            <td>Apostrophe indicates breath point</td>
+          </tr>
+          <tr>
+            <td><strong>VRN Codes</strong></td>
+            <td style="font-family: monospace;">[CM], [H++]</td>
+            <td>Vocal Resonance Notation in brackets</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="scene-card">
+        <h3>SATB Notation Example</h3>
+        <div class="code-block" style="white-space: pre; font-size: 12px;">┌─────────────────────────────────────────────────────────────────────────────┐
+│  MEASURE 1-2                                              p (piano - soft)  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  A4 ───────♩────────────────────────────────────────────────────────────── │
+│  C4 ─────────────────♩───────♩───────────────────────(rest)──────────────── │
+│  B3 ───────────────────────────────♩─────────────────────────────────────── │
+│                                                                             │
+│       ╔═══════════════════════════════════════════════════════════════════╗ │
+│       ║  [CM]      [C]       [C]       [C]                               ║ │
+│       ║  "do       you       see"      "what"                            ║ │
+│       ╚═══════════════════════════════════════════════════════════════════╝ │
+│  Resonance: Chest-mix descending to full chest voice, tender, questioning   │
+└─────────────────────────────────────────────────────────────────────────────┘</div>
+      </div>
+      
+      <h3>📐 SSAATTBB Notation Elements</h3>
+      <p>The condensed 8-part chorus format uses streamlined arrow notation:</p>
+      
+      <table class="voice-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Symbol</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Note Arrow</strong></td>
+            <td style="font-family: monospace;">♩D4 ─→ ♩E4</td>
+            <td>Shows melodic direction and pitch sequence</td>
+          </tr>
+          <tr>
+            <td><strong>Sustained</strong></td>
+            <td style="font-family: monospace;">●G5~~~~~~~~</td>
+            <td>Long note with duration indicated by tildes</td>
+          </tr>
+          <tr>
+            <td><strong>Climax Marker</strong></td>
+            <td style="font-family: monospace;">★ CLIMAX ★</td>
+            <td>Highlights dramatic high points</td>
+          </tr>
+          <tr>
+            <td><strong>Voice Parts</strong></td>
+            <td style="font-family: monospace;">S1, S2, A1, A2, T1, T2, B1, B2</td>
+            <td>8-part choir designation</td>
+          </tr>
+          <tr>
+            <td><strong>Wave Entry</strong></td>
+            <td style="font-family: monospace;">B2→S1</td>
+            <td>Staggered entry direction (Bass 2 to Soprano 1)</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="scene-card">
+        <h3>SSAATTBB Notation Example</h3>
+        <div class="code-block" style="white-space: pre; font-size: 12px;">┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 41-60: "an infinite number of stars"             ff ★ CLIMAX ★
+│  ♩D4 ─→ ♩F#4 ─→ ♩A4 ─→ ♩D5 ─→ ♩F#5 ─→ ●A5~~~~~~~~              [H+++→N++→Oc+→H+++→H+++→H+++]
+│  "an      in-     fi-     nite    num-    ber of ★STARS!★~~~~~~~~"   fff
+│  SSAATTBB: Full 8-part texture, S1 descant to A5               fff [H+++,O+++]
+└────────────────────────────────────────────────────────────────────────────</div>
+      </div>
+      
+      <h3>🤖 AI Prompts & Templates</h3>
+      <p>
+        The following prompts were developed to generate consistent ASCII sheet music. 
+        These can be adapted for your own musical notation projects.
+      </p>
+      
+      <div class="scene-card">
+        <h3>Base System Prompt Template</h3>
+        <div class="scene-meta">
+          <span>📋 For initializing Claude</span>
+        </div>
+        <div class="code-block" style="white-space: pre-wrap; font-size: 11px;">You are an expert music notation assistant specializing in creating ASCII sheet music 
+for opera and choral works. You understand:
+- Traditional music notation (pitch, rhythm, dynamics, tempo)
+- Vocal Resonance Notation (VRN) codes: [C]=Chest, [H]=Head, [M]=Mix, [N]=Nasal, [O]=Oral
+- VRN intensity levels: + (slight), ++ (moderate), +++ (maximum)
+- Mixed voice designations: [CM]=Chest-Mix, [HM]=Head-Mix
+- Unicode box-drawing characters for score layout
+- Proper measure structure and time signatures
+
+When creating scores, you will:
+1. Use consistent box-drawing characters (┌─┐│└┘┬┴├┤╔═╗║╚╝)
+2. Place pitch names on the left margin (C4, D4, E4, etc.)
+3. Use ♩ for quarter notes, ● for sustained notes, ~~~~~~ for vibrato
+4. Include VRN codes in brackets below lyrics
+5. Add performance annotations (dynamics, tempo, resonance descriptions)</div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>SATB Score Generation Prompt</h3>
+        <div class="scene-meta">
+          <span>🎤 For detailed solo/ensemble scores</span>
+        </div>
+        <div class="code-block" style="white-space: pre-wrap; font-size: 11px;">Create an ASCII vocal score for the following text in SATB format:
+
+Text: "[LYRICS HERE]"
+Voice: [VOICE TYPE - Soprano/Mezzo/Tenor/Baritone/Chorus]
+Tempo: [TEMPO MARKING] ♩= [BPM]
+Key: [KEY SIGNATURE]
+Time Signature: [4/4, 3/4, etc.]
+Mood: [DESCRIPTION]
+
+Requirements:
+1. Create measure-by-measure notation with box-drawing frame
+2. Show each pitch on its own staff line (e.g., A4, B4, C5)
+3. Include VRN codes matching the emotional content:
+   - Intimate/questioning: [CM], [C+], [O++]
+   - Building/ascending: [M], [HM], [H++]
+   - Climactic/powerful: [H+++], [N++], [Oc+]
+4. Place lyrics in a text box below staff using ╔═══╗/║/╚═══╝
+5. Add resonance description line at bottom
+6. Use appropriate dynamics (p, mp, mf, f, ff, fff)
+
+Output format example:
+┌─────────────────────────────────────────────────────────┐
+│  MEASURE [N]                           [dynamic]        │
+├─────────────────────────────────────────────────────────┤
+│  [pitch] ───────♩─────────────────────────────────────  │
+│  [pitch] ─────────────────♩───────────────────────────  │
+│                                                         │
+│       ╔════════════════════════════════════════════════╗│
+│       ║  [VRN]    [VRN]    [VRN]                       ║│
+│       ║  "word    word     word"                       ║│
+│       ╚════════════════════════════════════════════════╝│
+│  Resonance: [Description of vocal placement and feel]   │
+└─────────────────────────────────────────────────────────┘</div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>SSAATTBB Score Generation Prompt</h3>
+        <div class="scene-meta">
+          <span>🎼 For 8-part choral scores</span>
+        </div>
+        <div class="code-block" style="white-space: pre-wrap; font-size: 11px;">Create an ASCII SSAATTBB orchestral choral score:
+
+Text: "[LYRICS HERE]"
+Solo Voice: [VOICE TYPE] (optional)
+Tempo: [TEMPO MARKING] ♩= [BPM]
+Key: [KEY SIGNATURE]
+Measures: [START]-[END]
+
+Format Requirements:
+1. Use condensed arrow notation: ♩[PITCH] ─→ ♩[PITCH]
+2. Show melodic direction with arrows (ascending ↑ or descending ↓)
+3. Mark sustained notes: ●[PITCH]~~~~~~~~
+4. Include VRN progression: [VRN→VRN→VRN]
+5. Describe chorus texture (wave entry, staggered, unison)
+6. Mark climax points with ★ CLIMAX ★
+7. Voice parts: S1, S2, A1, A2, T1, T2, B1, B2
+
+Output format:
+┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES [N]-[M]: "[section title]"                    [dynamic] [marker]
+│  ♩[P1] ─→ ♩[P2] ─→ ♩[P3] ─→ ●[P4]~~~~~~~~  ([direction]) [VRN sequence]
+│  "[lyrics aligned with notes]"
+│  SSAATTBB: [Chorus instruction]                         [dynamic] [VRN]
+└────────────────────────────────────────────────────────────────────────────</div>
+      </div>
+      
+      <div class="scene-card">
+        <h3>VRN Assignment Prompt</h3>
+        <div class="scene-meta">
+          <span>🎵 For automatic resonance coding</span>
+        </div>
+        <div class="code-block" style="white-space: pre-wrap; font-size: 11px;">Analyze the following lyrics and assign appropriate VRN codes based on:
+
+1. PITCH CONTEXT:
+   - Low notes (below E4): Favor [C], [C+], [CM]
+   - Mid notes (E4-A4): Favor [M], [CM], [HM], [O++]
+   - High notes (above A4): Favor [H], [H++], [H+++], [N++]
+
+2. EMOTIONAL CONTENT:
+   - Questioning/intimate: [O++], [CM], [P+]
+   - Ascending/transcendent: [H++], [N+], [Ey+]
+   - Powerful/climactic: [H+++], [O+++], [Oc+++], [M+++]
+   - Grounded/heavy: [C++], [L+], [T+]
+   - Ethereal/light: [H], [N++], [SP+]
+
+3. WORD PAINTING:
+   - "light/stars/sky": [H+++], [N++], [Ey+] (bright mask)
+   - "earth/ground/deep": [C++], [P+], [T+] (grounded chest)
+   - "love/soul/heart": [CM], [O++], [M+] (warm middle)
+   - "universe/cosmos/infinite": [H+++], [Oc+++], [M+++] (full expansion)
+
+Text to analyze: "[LYRICS]"
+Mood: [MOOD DESCRIPTION]
+Voice type: [SOPRANO/MEZZO/TENOR/BASS]</div>
+      </div>
+      
+      <h3>📝 Workflow Example</h3>
+      <p>Here's the complete workflow for generating a scene's sheet music:</p>
+      
+      <div class="performance-note">
+        <h4>Step 1: Prepare the Source Material</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 10px;">Gather the lyrics, identify the emotional arc, and determine key/tempo/time signature.</p>
+      </div>
+      
+      <div class="performance-note">
+        <h4>Step 2: Generate SATB Score</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 10px;">Use the SATB prompt template with your lyrics to create detailed measure notation for study and rehearsal.</p>
+      </div>
+      
+      <div class="performance-note">
+        <h4>Step 3: Generate SSAATTBB Score</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 10px;">Use the SSAATTBB prompt to create the condensed choral version with audio synthesis markers.</p>
+      </div>
+      
+      <div class="performance-note">
+        <h4>Step 4: Apply VRN Codes</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 10px;">Use the VRN assignment prompt to ensure resonance markings match the emotional and physical demands of each phrase.</p>
+      </div>
+      
+      <div class="performance-note">
+        <h4>Step 5: Review & Refine</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 10px;">Check pitch ranges, VRN consistency, and notation clarity. Iterate with Claude to refine specific measures.</p>
+      </div>
+      
+      <h3>🔧 Advanced Techniques</h3>
+      
+      <div class="instrument-grid">
+        <div class="instrument-card">
+          <h4>🎭 Multi-Voice Scenes</h4>
+          <p style="color: var(--text-secondary);">For duets and ensembles, specify each voice's melodic line separately, then ask Claude to interleave them with call-and-response or parallel notation.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>📊 Climax Building</h4>
+          <p style="color: var(--text-secondary);">Request gradual dynamic and VRN progressions: start at p with [C+], build through mf with [M], peak at fff with [H+++, O+++, M+++].</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>🎹 Audio Integration</h4>
+          <p style="color: var(--text-secondary);">The SSAATTBB format was designed to integrate with Tone.js for browser-based audio playback with measure-by-measure auto-scrolling.</p>
+        </div>
+        
+        <div class="instrument-card">
+          <h4>📐 Consistent Spacing</h4>
+          <p style="color: var(--text-secondary);">Use monospace font (Courier New) and fixed-width box characters to ensure alignment across all browsers and devices.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Staging Suggestions -->
     <section class="section">
       <h2>Staging Suggestions</h2>
@@ -773,7 +1129,8 @@
     <p>
       © 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
       <a href="index.html">Back to Home</a> | 
-      <a href="notation.html">Vocal Resonance Notation</a>
+      <a href="notation.html">Vocal Resonance Notation</a> |
+      <a href="#ai-sheet-music">AI Sheet Music Creation</a>
     </p>
   </footer>
 </body>

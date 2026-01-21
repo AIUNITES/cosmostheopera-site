@@ -151,19 +151,19 @@ an infinite number of stars"></textarea>
         <div class="options-section">
           <h3>📋 Notation Format</h3>
           <div class="options-grid" id="notationOptions">
-            <label class="option-item option-radio selected" data-value="satb">
+            <label class="option-item option-radio selected" data-value="piano-roll">
+              <span class="icon">🎹</span>
+              <span class="label">Piano Roll</span>
+              <span class="check"></span>
+            </label>
+            <label class="option-item option-radio" data-value="treble-bass">
               <span class="icon">🎼</span>
-              <span class="label">SATB Staff</span>
+              <span class="label">Treble/Bass</span>
               <span class="check"></span>
             </label>
             <label class="option-item option-radio" data-value="ssaattbb">
               <span class="icon">🎭</span>
               <span class="label">SSAATTBB</span>
-              <span class="check"></span>
-            </label>
-            <label class="option-item option-radio" data-value="treble-bass">
-              <span class="icon">🎹</span>
-              <span class="label">Treble/Bass</span>
               <span class="check"></span>
             </label>
             <label class="option-item option-radio" data-value="lead-sheet">
@@ -509,8 +509,8 @@ function generateMelody(words, voice, style) {
   return melody;
 }
 
-// Generate SATB notation
-function generateSATBNotation(melody, options) {
+// Generate Piano Roll notation (like the COSMOS sheet music)
+function generatePianoRollNotation(melody, options) {
   const key = document.getElementById('keySelect').value;
   const time = document.getElementById('timeSelect').value;
   const tempo = document.getElementById('tempoSelect').value;
@@ -518,52 +518,123 @@ function generateSATBNotation(melody, options) {
   const style = getSelectedRadio('styleOptions');
   const dynamics = getSelectedOptions('dynamicsOptions');
   
+  // Group melody by lines
+  const lines = [];
+  let currentLineNotes = [];
+  let currentLineNum = -1;
+  
+  melody.forEach(note => {
+    if (note.lineNum !== currentLineNum) {
+      if (currentLineNotes.length > 0) {
+        lines.push(currentLineNotes);
+      }
+      currentLineNotes = [];
+      currentLineNum = note.lineNum;
+    }
+    currentLineNotes.push(note);
+  });
+  if (currentLineNotes.length > 0) {
+    lines.push(currentLineNotes);
+  }
+  
   let output = '';
   output += `┌${'─'.repeat(78)}\n`;
-  output += `│  GENERATED SCORE\n`;
-  output += `│  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}  Voice: ${voice}\n`;
-  output += `│  Style: ${style}  Format: SATB Staff Notation\n`;
+  output += `│  PIANO ROLL SCORE\n`;
+  output += `│  Key: ${key}  Time: ${time}  Tempo: ♩=${tempo}  Voice: ${voice}  Style: ${style}\n`;
   output += `├${'─'.repeat(78)}\n`;
   
   let measureNum = 1;
-  let currentLine = -1;
   
-  melody.forEach((note, i) => {
-    if (note.lineNum !== currentLine) {
-      currentLine = note.lineNum;
-      output += `│\n`;
-      output += `│  MEASURE ${measureNum}-${measureNum + 3}                                              ${note.dynamic}\n`;
-      output += `│${'═'.repeat(78)}\n`;
-      measureNum += 4;
+  lines.forEach((lineNotes, lineIdx) => {
+    // Get pitch range for this line
+    const pitches = lineNotes.map(n => n.pitch);
+    const allPitchNums = pitches.map(p => {
+      const note = p.slice(0, -1);
+      const octave = parseInt(p.slice(-1));
+      const noteOrder = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+      const noteIdx = noteOrder.indexOf(note.replace('b', '#').replace('Db','C#').replace('Eb','D#').replace('Gb','F#').replace('Ab','G#').replace('Bb','A#'));
+      return octave * 12 + (noteIdx >= 0 ? noteIdx : 0);
+    });
+    
+    const minPitch = Math.min(...allPitchNums);
+    const maxPitch = Math.max(...allPitchNums);
+    
+    // Create pitch ladder (from high to low for display, but conceptually low to high)
+    const pitchLabels = [];
+    const noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+    
+    for (let p = maxPitch + 2; p >= minPitch - 1; p--) {
+      const octave = Math.floor(p / 12);
+      const noteIdx = p % 12;
+      const noteName = noteNames[noteIdx] + octave;
+      pitchLabels.push({ name: noteName, num: p });
     }
     
-    // Create staff representation
-    const pitchNum = parseInt(note.pitch.slice(-1));
-    const pitchName = note.pitch;
-    const staffLine = 6 - (pitchNum - 3);
+    // Lyrics for header
+    const lyricsPreview = lineNotes.map(n => n.word).join(' ');
+    const lastDynamic = lineNotes[lineNotes.length - 1].dynamic;
     
-    let staffStr = `│  ${pitchName.padEnd(4)} `;
-    for (let s = 0; s < 5; s++) {
-      if (s === staffLine) {
-        staffStr += `${'─'.repeat(10)}●${'─'.repeat(10)}`;
-      } else {
-        staffStr += `${'─'.repeat(21)}`;
-      }
-    }
-    output += staffStr + '\n';
+    output += `│\n`;
+    output += `│  MEASURES ${measureNum}-${measureNum + 15}: "${lyricsPreview.substring(0, 45)}"${' '.repeat(Math.max(0, 20 - lastDynamic.length))}${lastDynamic}\n`;
+    output += `│\n`;
+    output += `│  ${voice.toUpperCase()}:\n`;
     
-    // Add text box with lyrics and VRN
+    // Draw each pitch line
+    pitchLabels.forEach(pitchInfo => {
+      let line = `│  ${pitchInfo.name.padEnd(4)} `;
+      
+      lineNotes.forEach((note, noteIdx) => {
+        const notePitchNum = (() => {
+          const n = note.pitch.slice(0, -1);
+          const o = parseInt(note.pitch.slice(-1));
+          const noteOrder = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+          const idx = noteOrder.indexOf(n.replace('b', '#').replace('Db','C#').replace('Eb','D#').replace('Gb','F#').replace('Ab','G#').replace('Bb','A#'));
+          return o * 12 + (idx >= 0 ? idx : 0);
+        })();
+        
+        if (notePitchNum === pitchInfo.num) {
+          // This note is on this pitch line
+          if (note.isLineEnd) {
+            line += `${'─'.repeat(6)}●~~~~~~~`;
+          } else {
+            line += `${'─'.repeat(6)}♪${'─'.repeat(7)}`;
+          }
+        } else {
+          line += `${'─'.repeat(14)}`;
+        }
+      });
+      
+      output += line + '\n';
+    });
+    
+    // VRN codes line
     if (dynamics.includes('vrn')) {
-      output += `│       ╔${'═'.repeat(60)}\n`;
-      output += `│       ║  ${note.vrn}  "${note.word}"\n`;
-      output += `│       ╚${'═'.repeat(60)}\n`;
-    } else {
-      output += `│       "${note.word}"\n`;
+      output += `│\n`;
+      let vrnLine = `│       `;
+      lineNotes.forEach(note => {
+        vrnLine += note.vrn.padEnd(14);
+      });
+      output += vrnLine + '\n';
     }
     
-    if (dynamics.includes('expressive') && note.isLineEnd) {
-      output += `│  Resonance: ${note.emotion}, ${note.duration > 1 ? 'sustained' : 'flowing'}\n`;
+    // Lyrics line
+    output += `│       `;
+    lineNotes.forEach(note => {
+      const wordStr = `"${note.word}"`;
+      output += wordStr.padEnd(14);
+    });
+    output += '\n';
+    
+    // Expressive text
+    if (dynamics.includes('expressive')) {
+      const emotions = [...new Set(lineNotes.map(n => n.emotion))];
+      output += `│\n`;
+      output += `│  ${emotions.join(' → ')}...\n`;
     }
+    
+    output += `│\n`;
+    output += `├${'─'.repeat(78)}\n`;
+    measureNum += 16;
   });
   
   output += `└${'─'.repeat(78)}\n`;
@@ -799,8 +870,8 @@ function generateScore() {
   // Generate notation based on format
   let output;
   switch (notation) {
-    case 'satb':
-      output = generateSATBNotation(melody, { dynamics: dynamicsOpts });
+    case 'piano-roll':
+      output = generatePianoRollNotation(melody, { dynamics: dynamicsOpts });
       break;
     case 'ssaattbb':
       output = generateSSAATTBBNotation(melody, { dynamics: dynamicsOpts });
@@ -812,7 +883,7 @@ function generateScore() {
       output = generateLeadSheetNotation(melody, { dynamics: dynamicsOpts });
       break;
     default:
-      output = generateSATBNotation(melody, { dynamics: dynamicsOpts });
+      output = generatePianoRollNotation(melody, { dynamics: dynamicsOpts });
   }
   
   document.getElementById('scoreOutput').textContent = output;

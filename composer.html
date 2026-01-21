@@ -431,9 +431,10 @@
         <a href="index.html" class="nav-logo">🌌 COSMOS</a>
         <div class="nav-links">
           <a href="index.html">Home</a>
+          <a href="notation.html">Notation</a>
           <a href="sheet-music.html">Sheet Music</a>
           <a href="composer.html" class="active">Composer</a>
-          <div class="user-menu" onclick="toggleUserMenu()">
+          <div class="user-menu" onclick="toggleUserMenu(event)">
             <span id="user-display-name">User</span>
             <div class="user-avatar" id="user-avatar">U</div>
             <div class="user-dropdown" id="user-dropdown">
@@ -477,9 +478,23 @@
       <nav class="nav">
         <a href="index.html" class="nav-logo">🌌 COSMOS</a>
         <div class="nav-links">
-          <a href="#" id="back-to-dashboard" onclick="goBackFromComposer(); return false;">← Back</a>
-          <a href="notation.html">VRN Guide</a>
-          <span id="composer-user-info"></span>
+          <a href="#" onclick="goBackFromComposer(); return false;">← Back</a>
+          <a href="index.html">Home</a>
+          <a href="notation.html">Notation</a>
+          <a href="sheet-music.html">Sheet Music</a>
+          <a href="composer.html" class="active">Composer</a>
+          <div class="user-menu" onclick="toggleUserMenu(event)">
+            <span id="composer-user-display-name">User</span>
+            <div class="user-avatar" id="composer-user-avatar">U</div>
+            <div class="user-dropdown" id="composer-user-dropdown">
+              <a href="#" onclick="showScreen('composer'); return false;">✨ New Score</a>
+              <a href="#" onclick="showProfileModal(); return false;">👤 My Profile</a>
+              <a href="#" onclick="showSettingsModal(); return false;">⚙️ Settings</a>
+              <a href="#" onclick="showChangelogModal(); return false;">📋 Change Log</a>
+              <a href="#" id="composer-admin-link" style="display:none;" onclick="showAdminPanel(); return false;">🛡️ Admin</a>
+              <a href="#" onclick="handleLogout(); return false;">🚪 Log Out</a>
+            </div>
+          </div>
         </div>
       </nav>
       
@@ -1355,10 +1370,20 @@ function startDemo() {
 function updateUserUI() {
   const user = Storage.getCurrentUser();
   if (user) {
+    // Update dashboard user menu
     document.getElementById('user-display-name').textContent = user.displayName;
     document.getElementById('user-avatar').textContent = user.displayName.charAt(0).toUpperCase();
     document.getElementById('admin-link').style.display = user.isAdmin ? 'block' : 'none';
-    document.getElementById('composer-user-info').innerHTML = user.isAdmin ? '🛡️ Admin' : '';
+    
+    // Update composer screen user menu
+    const composerDisplayName = document.getElementById('composer-user-display-name');
+    const composerAvatar = document.getElementById('composer-user-avatar');
+    const composerAdminLink = document.getElementById('composer-admin-link');
+    
+    if (composerDisplayName) composerDisplayName.textContent = user.displayName;
+    if (composerAvatar) composerAvatar.textContent = user.displayName.charAt(0).toUpperCase();
+    if (composerAdminLink) composerAdminLink.style.display = user.isAdmin ? 'block' : 'none';
+    
     loadUserScores();
   }
 }
@@ -1394,13 +1419,28 @@ function switchAuthTab(tab) {
   document.getElementById(tab + '-form').classList.add('active');
 }
 
-function toggleUserMenu() {
-  document.getElementById('user-dropdown').classList.toggle('show');
+function toggleUserMenu(event) {
+  // Close all dropdowns first
+  document.querySelectorAll('.user-dropdown').forEach(dropdown => {
+    if (!event || !event.currentTarget.contains(dropdown)) {
+      dropdown.classList.remove('show');
+    }
+  });
+  
+  // Toggle the dropdown inside the clicked user-menu
+  if (event && event.currentTarget) {
+    const dropdown = event.currentTarget.querySelector('.user-dropdown');
+    if (dropdown) dropdown.classList.toggle('show');
+  } else {
+    // Fallback for old-style calls
+    document.getElementById('user-dropdown')?.classList.toggle('show');
+  }
 }
 
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.user-menu')) {
     document.getElementById('user-dropdown')?.classList.remove('show');
+    document.getElementById('composer-user-dropdown')?.classList.remove('show');
   }
 });
 

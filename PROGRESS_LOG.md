@@ -571,6 +571,30 @@ Fixed `sheet-music-act3-p2.html` to match the open-right border style used in ot
 
 All sheet music pages now consistently use the open-ended box style for ASCII staff notation.
 
+**AI-GENERATED LYRICS IDENTIFIED**
+
+Verified that the lyrics for three scenes in `sheet-music-act3-p2.html` were NOT from the original source file (`C:\Users\Tom\Downloads\Cosmos the Opera.txt`) and were AI-generated during a previous session:
+
+- Scene 3: "Transcend"
+- Scene 4: "Return" 
+- Scene 5: "COSMOS" (Grand Finale)
+
+Web searches confirmed these phrases do not appear elsewhere online:
+- "transcend your body transcend your mind" - no matches
+- "we come from the stars and to them we'll go" - no matches
+- "we are the cosmos the cosmos are we" - no matches
+- "atoms and energy are all that we are" - no matches
+- "the love of the cosmos has no beginning and no end" - no matches
+
+Added Claude attribution to these sections in the sheet music file.
+
+**NOTATION FORMAT DOCUMENTATION**
+
+Added "About This Notation Format" section to `sheet-music.html` explaining that COSMOS uses **ASCII piano roll notation** rather than traditional 5-line staff notation with treble/bass clefs. The section covers:
+- What ASCII piano roll notation is (text-based DAW-style pitch vs. time display)
+- Pitch-octave notation (C4 = middle C, etc.)
+- Benefits: AI-readable, universally accessible, format-independent, VRN-compatible
+
 ---
 
 *Last updated: January 21, 2026*

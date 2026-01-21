@@ -167,6 +167,53 @@
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast.error { border-color: var(--accent-pink); color: var(--accent-pink); }
     
+    /* Admin Panel */
+    .modal-large { max-width: 800px; }
+    .admin-tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+    .admin-tab { background: transparent; border: none; color: var(--text-secondary); padding: 10px 20px; cursor: pointer; border-radius: 8px; transition: all 0.3s; }
+    .admin-tab:hover { background: rgba(255,255,255,0.05); }
+    .admin-tab.active { background: var(--accent-purple); color: #fff; }
+    .admin-tab-content { display: none; }
+    .admin-tab-content.active { display: block; }
+    
+    .admin-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px; }
+    .admin-stat-card { background: var(--bg-input); border-radius: 10px; padding: 20px; text-align: center; }
+    .admin-stat-value { font-size: 2rem; font-weight: bold; color: var(--accent-cyan); }
+    .admin-stat-label { color: var(--text-secondary); font-size: 0.85rem; }
+    
+    .users-table { background: var(--bg-input); border-radius: 10px; overflow: hidden; }
+    .user-row { display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 15px; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
+    .user-row:last-child { border-bottom: none; }
+    .user-row.header { background: rgba(157,78,221,0.2); font-weight: 600; color: var(--accent-gold); }
+    .user-name { font-weight: 500; }
+    .user-meta { color: var(--text-secondary); font-size: 0.85rem; }
+    .user-badge { background: var(--accent-purple); color: #fff; padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; }
+    .user-badge.admin { background: var(--accent-gold); color: #000; }
+    
+    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+    .btn-danger { background: rgba(255,107,157,0.2); border: 1px solid var(--accent-pink); color: var(--accent-pink); }
+    .btn-danger:hover { background: rgba(255,107,157,0.3); }
+    .btn-small { padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
+    
+    .backup-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .backup-section h4 { color: var(--accent-gold); margin-bottom: 10px; }
+    .backup-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+    
+    /* Settings */
+    .settings-section { margin-bottom: 30px; }
+    .settings-section h4 { color: var(--accent-gold); margin-bottom: 15px; }
+    .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--bg-input); border-radius: 8px; margin-bottom: 10px; }
+    .setting-info { flex: 1; }
+    .setting-info label { display: block; font-weight: 500; margin-bottom: 3px; }
+    .setting-info span { font-size: 0.8rem; color: var(--text-secondary); }
+    .toggle { position: relative; width: 50px; height: 26px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.2); border-radius: 26px; transition: 0.3s; }
+    .toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+    .toggle input:checked + .toggle-slider { background: var(--accent-green); }
+    .toggle input:checked + .toggle-slider:before { transform: translateX(24px); }
+    .setting-input { background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; color: var(--text-primary); width: 80px; text-align: center; }
+    
     /* Footer */
     .footer { background: var(--bg-card); padding: 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer p { color: var(--text-secondary); font-size: 0.85rem; }
@@ -550,6 +597,130 @@ an infinite number of stars"></textarea>
     
     <!-- Toast -->
     <div class="toast" id="toast"></div>
+    
+    <!-- ==================== ADMIN MODAL ==================== -->
+    <div id="admin-modal" class="modal">
+      <div class="modal-content modal-large">
+        <div class="modal-header">
+          <h2>🛡️ Admin Panel</h2>
+          <button class="modal-close" onclick="closeAdminPanel()">×</button>
+        </div>
+        
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="stats" onclick="switchAdminTab('stats')">📊 Statistics</button>
+          <button class="admin-tab" data-tab="settings" onclick="switchAdminTab('settings')">⚙️ Settings</button>
+          <button class="admin-tab" data-tab="users" onclick="switchAdminTab('users')">👥 Users</button>
+          <button class="admin-tab" data-tab="data" onclick="switchAdminTab('data')">💾 Data</button>
+        </div>
+        
+        <!-- Stats Tab -->
+        <div id="admin-stats-tab" class="admin-tab-content active">
+          <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+              <div class="admin-stat-value" id="stat-total-users">0</div>
+              <div class="admin-stat-label">Total Users</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-value" id="stat-total-scores">0</div>
+              <div class="admin-stat-label">Total Scores</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-value" id="stat-admin-users">0</div>
+              <div class="admin-stat-label">Admin Users</div>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.85rem;">App Version: 1.0.0 | Data stored locally in browser</p>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div id="admin-settings-tab" class="admin-tab-content">
+          <div class="settings-section">
+            <h4>🔐 Registration</h4>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Allow Public Signup</label>
+                <span>Anyone can create an account</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="setting-public-signup" checked onchange="saveSettings()">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h4>📊 Limits</h4>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Max Scores per User</label>
+                <span>Maximum number of saved scores per user</span>
+              </div>
+              <input type="number" class="setting-input" id="setting-max-scores" value="50" min="1" max="500" onchange="saveSettings()">
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h4>🎨 Features</h4>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Demo Mode Available</label>
+                <span>Allow users to try without signing up</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="setting-demo-mode" checked onchange="saveSettings()">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Maintenance Mode</label>
+                <span>Only admins can access the app</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="setting-maintenance" onchange="saveSettings()">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <button class="btn-large btn-primary" onclick="saveSettings(); showToast('Settings saved!');">Save Settings</button>
+        </div>
+        
+        <!-- Users Tab -->
+        <div id="admin-users-tab" class="admin-tab-content">
+          <div class="users-table" id="users-table">
+            <div class="user-row header">
+              <div>Username</div>
+              <div>Display Name</div>
+              <div>Role</div>
+              <div>Actions</div>
+            </div>
+            <!-- Users populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Data Tab -->
+        <div id="admin-data-tab" class="admin-tab-content">
+          <div class="backup-section">
+            <h4>💾 Backup & Restore</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">Download all data or restore from a backup file.</p>
+            <div class="backup-buttons">
+              <button class="btn-large btn-secondary" onclick="exportAllData()">📥 Download Backup</button>
+              <label class="btn-large btn-secondary" style="cursor: pointer;">
+                📤 Restore Backup
+                <input type="file" id="restore-file" accept=".json" onchange="restoreData(event)" hidden>
+              </label>
+            </div>
+          </div>
+          
+          <div class="backup-section">
+            <h4>🗑️ Danger Zone</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">Permanently delete all data. This cannot be undone!</p>
+            <button class="btn-large btn-danger" onclick="resetAllData()">Reset All Data</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -558,7 +729,8 @@ const Storage = {
   KEYS: {
     USERS: 'cosmos_composer_users',
     CURRENT_USER: 'cosmos_composer_current_user',
-    SCORES: 'cosmos_composer_scores'
+    SCORES: 'cosmos_composer_scores',
+    SETTINGS: 'cosmos_composer_settings'
   },
   
   DEFAULT_ADMIN: { username: 'admin', password: 'admin123', displayName: 'Administrator', isAdmin: true },
@@ -573,6 +745,14 @@ const Storage = {
     }
     if (!localStorage.getItem(this.KEYS.SCORES)) {
       localStorage.setItem(this.KEYS.SCORES, JSON.stringify({}));
+    }
+    if (!localStorage.getItem(this.KEYS.SETTINGS)) {
+      localStorage.setItem(this.KEYS.SETTINGS, JSON.stringify({
+        allowPublicSignup: true,
+        maxScoresPerUser: 50,
+        demoModeEnabled: true,
+        maintenanceMode: false
+      }));
     }
     // Add sample scores for demo user
     this.initDemoContent();
@@ -640,6 +820,14 @@ const Storage = {
     const scores = this.getAllScores();
     delete scores[id];
     localStorage.setItem(this.KEYS.SCORES, JSON.stringify(scores));
+  },
+  
+  getSettings() {
+    return JSON.parse(localStorage.getItem(this.KEYS.SETTINGS) || '{}');
+  },
+  
+  saveSettings(settings) {
+    localStorage.setItem(this.KEYS.SETTINGS, JSON.stringify(settings));
   }
 };
 
@@ -1082,6 +1270,188 @@ function downloadScore() {
   a.href = URL.createObjectURL(blob);
   a.download = 'cosmos-score.txt';
   a.click();
+}
+
+// ==================== ADMIN PANEL ====================
+function showAdminPanel() {
+  const user = Storage.getCurrentUser();
+  if (!user || !user.isAdmin) {
+    showToast('Admin access required', true);
+    return;
+  }
+  document.getElementById('admin-modal').classList.add('show');
+  loadAdminStats();
+  loadAdminUsers();
+  loadAdminSettings();
+}
+
+function closeAdminPanel() {
+  document.getElementById('admin-modal').classList.remove('show');
+}
+
+function switchAdminTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.admin-tab[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`admin-${tab}-tab`).classList.add('active');
+}
+
+function loadAdminStats() {
+  const users = Storage.getUsers();
+  const scores = Storage.getAllScores();
+  const userList = Object.values(users);
+  
+  document.getElementById('stat-total-users').textContent = userList.length;
+  document.getElementById('stat-total-scores').textContent = Object.keys(scores).length;
+  document.getElementById('stat-admin-users').textContent = userList.filter(u => u.isAdmin).length;
+}
+
+function loadAdminUsers() {
+  const users = Storage.getUsers();
+  const currentUser = Storage.getCurrentUser();
+  const table = document.getElementById('users-table');
+  
+  let html = `<div class="user-row header">
+    <div>Username</div>
+    <div>Display Name</div>
+    <div>Role</div>
+    <div>Actions</div>
+  </div>`;
+  
+  Object.values(users).forEach(user => {
+    const isProtected = user.username === 'admin' || user.username === 'demo';
+    const isSelf = currentUser && user.username === currentUser.username;
+    
+    html += `<div class="user-row">
+      <div class="user-name">@${escapeHtml(user.username)}</div>
+      <div class="user-meta">${escapeHtml(user.displayName)}</div>
+      <div><span class="user-badge ${user.isAdmin ? 'admin' : ''}">${user.isAdmin ? 'Admin' : 'User'}</span></div>
+      <div>
+        ${!isProtected && !isSelf ? `
+          <button class="btn-small btn-secondary" onclick="toggleAdmin('${user.username}')">${user.isAdmin ? 'Remove Admin' : 'Make Admin'}</button>
+          <button class="btn-small btn-danger" onclick="deleteUser('${user.username}')">Delete</button>
+        ` : '<span style="color: var(--text-secondary); font-size: 0.8rem;">Protected</span>'}
+      </div>
+    </div>`;
+  });
+  
+  table.innerHTML = html;
+}
+
+function toggleAdmin(username) {
+  const users = Storage.getUsers();
+  if (!users[username]) return;
+  
+  users[username].isAdmin = !users[username].isAdmin;
+  localStorage.setItem(Storage.KEYS.USERS, JSON.stringify(users));
+  
+  loadAdminUsers();
+  loadAdminStats();
+  showToast(`${username} admin status updated`);
+}
+
+function deleteUser(username) {
+  if (!confirm(`Delete user @${username}? This will also delete all their scores.`)) return;
+  
+  const users = Storage.getUsers();
+  const scores = Storage.getAllScores();
+  const userId = users[username]?.id;
+  
+  // Delete user's scores
+  Object.keys(scores).forEach(scoreId => {
+    if (scores[scoreId].userId === userId) {
+      delete scores[scoreId];
+    }
+  });
+  
+  // Delete user
+  delete users[username];
+  
+  localStorage.setItem(Storage.KEYS.USERS, JSON.stringify(users));
+  localStorage.setItem(Storage.KEYS.SCORES, JSON.stringify(scores));
+  
+  loadAdminUsers();
+  loadAdminStats();
+  showToast(`User @${username} deleted`);
+}
+
+function loadAdminSettings() {
+  const settings = Storage.getSettings();
+  document.getElementById('setting-public-signup').checked = settings.allowPublicSignup !== false;
+  document.getElementById('setting-max-scores').value = settings.maxScoresPerUser || 50;
+  document.getElementById('setting-demo-mode').checked = settings.demoModeEnabled !== false;
+  document.getElementById('setting-maintenance').checked = settings.maintenanceMode === true;
+}
+
+function saveSettings() {
+  const settings = {
+    allowPublicSignup: document.getElementById('setting-public-signup').checked,
+    maxScoresPerUser: parseInt(document.getElementById('setting-max-scores').value) || 50,
+    demoModeEnabled: document.getElementById('setting-demo-mode').checked,
+    maintenanceMode: document.getElementById('setting-maintenance').checked
+  };
+  Storage.saveSettings(settings);
+}
+
+function exportAllData() {
+  const data = {
+    users: Storage.getUsers(),
+    scores: Storage.getAllScores(),
+    exportedAt: new Date().toISOString(),
+    version: '1.0.0'
+  };
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `cosmos-composer-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  
+  showToast('Backup downloaded!');
+}
+
+function restoreData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      
+      if (!confirm('This will replace all existing data. Continue?')) return;
+      
+      if (data.users) localStorage.setItem(Storage.KEYS.USERS, JSON.stringify(data.users));
+      if (data.scores) localStorage.setItem(Storage.KEYS.SCORES, JSON.stringify(data.scores));
+      
+      loadAdminUsers();
+      loadAdminStats();
+      showToast('Data restored successfully!');
+    } catch (err) {
+      showToast('Invalid backup file', true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // Reset file input
+}
+
+function resetAllData() {
+  const adminPass = prompt('Enter admin password to confirm reset:');
+  if (adminPass !== 'admin123') {
+    showToast('Incorrect admin password', true);
+    return;
+  }
+  
+  if (!confirm('⚠️ FINAL WARNING: This will delete ALL users and scores. This cannot be undone!')) return;
+  
+  localStorage.removeItem(Storage.KEYS.USERS);
+  localStorage.removeItem(Storage.KEYS.SCORES);
+  localStorage.removeItem(Storage.KEYS.CURRENT_USER);
+  
+  Storage.init();
+  closeAdminPanel();
+  showScreen('landing');
+  showToast('All data has been reset');
 }
 
 // ==================== INIT ====================

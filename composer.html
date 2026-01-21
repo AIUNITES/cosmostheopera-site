@@ -167,6 +167,56 @@
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast.error { border-color: var(--accent-pink); color: var(--accent-pink); }
     
+    /* Profile Modal */
+    .profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, rgba(157,78,221,0.2), rgba(0,212,255,0.1)); border-radius: 12px; }
+    .profile-avatar { width: 80px; height: 80px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; }
+    .profile-info h3 { font-size: 1.5rem; margin-bottom: 5px; }
+    .profile-info p { color: var(--text-secondary); margin: 0; }
+    .profile-meta { font-size: 0.85rem !important; opacity: 0.7; }
+    .profile-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+    @media (max-width: 600px) { .profile-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .profile-stat-card { background: var(--bg-input); border-radius: 10px; padding: 15px; text-align: center; }
+    .profile-stat-value { font-size: 1.5rem; font-weight: bold; color: var(--accent-cyan); }
+    .profile-stat-label { color: var(--text-secondary); font-size: 0.8rem; margin-top: 5px; }
+    .profile-section { margin-bottom: 25px; }
+    .profile-section h4 { color: var(--accent-gold); margin-bottom: 15px; }
+    .recent-scores-list { background: var(--bg-input); border-radius: 10px; overflow: hidden; }
+    .recent-score-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .recent-score-item:last-child { border-bottom: none; }
+    .recent-score-item:hover { background: rgba(255,255,255,0.03); }
+    .recent-score-title { font-weight: 500; }
+    .recent-score-date { color: var(--text-secondary); font-size: 0.8rem; }
+    .profile-actions { display: flex; gap: 15px; margin-top: 20px; }
+    .profile-actions button { flex: 1; }
+    .empty-recent { text-align: center; padding: 30px; color: var(--text-secondary); }
+    
+    /* Settings Modal */
+    .modal-medium { max-width: 600px; }
+    .settings-tabs { display: flex; gap: 5px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+    .settings-tab { background: transparent; border: none; color: var(--text-secondary); padding: 10px 15px; cursor: pointer; border-radius: 8px; transition: all 0.3s; font-size: 0.9rem; }
+    .settings-tab:hover { background: rgba(255,255,255,0.05); }
+    .settings-tab.active { background: var(--accent-purple); color: #fff; }
+    .settings-tab-content { display: none; }
+    .settings-tab-content.active { display: block; }
+    .settings-input-group { display: flex; gap: 10px; }
+    .settings-text-input { flex: 1; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 15px; color: var(--text-primary); font-size: 1rem; }
+    .settings-text-input:focus { outline: none; border-color: var(--accent-cyan); }
+    .settings-text-input.full { width: 100%; }
+    .setting-select { background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 12px; color: var(--text-primary); font-size: 0.9rem; cursor: pointer; }
+    .danger-zone { margin-top: 30px; padding: 20px; background: rgba(255,107,157,0.1); border: 1px solid rgba(255,107,157,0.3); border-radius: 10px; }
+    .danger-zone h4 { color: var(--accent-pink); margin-bottom: 10px; }
+    .danger-zone p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; }
+    .theme-options { display: flex; gap: 15px; flex-wrap: wrap; }
+    .theme-option { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 15px; background: var(--bg-input); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; cursor: pointer; transition: all 0.3s; min-width: 100px; }
+    .theme-option:hover { border-color: var(--accent-purple); }
+    .theme-option.selected { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
+    .theme-preview { width: 60px; height: 40px; border-radius: 6px; }
+    .dark-preview { background: linear-gradient(135deg, #0a0a0f, #1a1a24); }
+    .light-preview { background: linear-gradient(135deg, #f5f5f5, #ffffff); }
+    .cosmic-preview { background: linear-gradient(135deg, #1a0a2e, #0a1628, #2a0a3e); }
+    .theme-option span { font-size: 0.85rem; color: var(--text-secondary); }
+    .theme-option.selected span { color: var(--accent-green); }
+    
     /* Admin Panel */
     .modal-large { max-width: 800px; }
     .admin-tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
@@ -357,6 +407,8 @@
             <div class="user-avatar" id="user-avatar">U</div>
             <div class="user-dropdown" id="user-dropdown">
               <a href="#" onclick="showScreen('composer'); return false;">✨ New Score</a>
+              <a href="#" onclick="showProfileModal(); return false;">👤 My Profile</a>
+              <a href="#" onclick="showSettingsModal(); return false;">⚙️ Settings</a>
               <a href="#" id="admin-link" style="display:none;" onclick="showAdminPanel(); return false;">🛡️ Admin</a>
               <a href="#" onclick="handleLogout(); return false;">🚪 Log Out</a>
             </div>
@@ -597,6 +649,274 @@ an infinite number of stars"></textarea>
     
     <!-- Toast -->
     <div class="toast" id="toast"></div>
+    
+    <!-- ==================== USER PROFILE MODAL ==================== -->
+    <div id="profile-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>👤 My Profile</h2>
+          <button class="modal-close" onclick="closeProfileModal()">×</button>
+        </div>
+        
+        <div class="profile-header">
+          <div class="profile-avatar" id="profile-avatar">U</div>
+          <div class="profile-info">
+            <h3 id="profile-display-name">User</h3>
+            <p id="profile-username">@username</p>
+            <p id="profile-member-since" class="profile-meta">Member since...</p>
+          </div>
+        </div>
+        
+        <div class="profile-stats-grid">
+          <div class="profile-stat-card">
+            <div class="profile-stat-value" id="profile-total-scores">0</div>
+            <div class="profile-stat-label">Total Scores</div>
+          </div>
+          <div class="profile-stat-card">
+            <div class="profile-stat-value" id="profile-this-month">0</div>
+            <div class="profile-stat-label">This Month</div>
+          </div>
+          <div class="profile-stat-card">
+            <div class="profile-stat-value" id="profile-fav-style">-</div>
+            <div class="profile-stat-label">Favorite Style</div>
+          </div>
+          <div class="profile-stat-card">
+            <div class="profile-stat-value" id="profile-fav-notation">-</div>
+            <div class="profile-stat-label">Favorite Notation</div>
+          </div>
+        </div>
+        
+        <div class="profile-section">
+          <h4>📊 Recent Activity</h4>
+          <div class="recent-scores-list" id="recent-scores-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <div class="profile-actions">
+          <button class="btn-large btn-secondary" onclick="closeProfileModal(); showSettingsModal();">⚙️ Edit Settings</button>
+          <button class="btn-large btn-primary" onclick="closeProfileModal(); showScreen('composer');">✨ New Score</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ==================== USER SETTINGS MODAL ==================== -->
+    <div id="settings-modal" class="modal">
+      <div class="modal-content modal-medium">
+        <div class="modal-header">
+          <h2>⚙️ Settings</h2>
+          <button class="modal-close" onclick="closeSettingsModal()">×</button>
+        </div>
+        
+        <div class="settings-tabs">
+          <button class="settings-tab active" data-tab="account" onclick="switchSettingsTab('account')">👤 Account</button>
+          <button class="settings-tab" data-tab="preferences" onclick="switchSettingsTab('preferences')">🎨 Preferences</button>
+          <button class="settings-tab" data-tab="defaults" onclick="switchSettingsTab('defaults')">🎵 Defaults</button>
+        </div>
+        
+        <!-- Account Tab -->
+        <div id="settings-account-tab" class="settings-tab-content active">
+          <div class="settings-section">
+            <h4>Display Name</h4>
+            <div class="settings-input-group">
+              <input type="text" id="settings-display-name" class="settings-text-input" placeholder="Your display name">
+              <button class="btn-small btn-primary" onclick="updateDisplayName()">Update</button>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h4>Change Password</h4>
+            <div class="form-group">
+              <label>Current Password</label>
+              <input type="password" id="settings-current-password" class="settings-text-input full">
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" id="settings-new-password" class="settings-text-input full" minlength="6">
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" id="settings-confirm-password" class="settings-text-input full">
+            </div>
+            <button class="btn-large btn-primary" onclick="updatePassword()">Change Password</button>
+          </div>
+          
+          <div class="settings-section danger-zone">
+            <h4>⚠️ Danger Zone</h4>
+            <p>Permanently delete your account and all your scores. This cannot be undone.</p>
+            <button class="btn-large btn-danger" onclick="deleteOwnAccount()">Delete My Account</button>
+          </div>
+        </div>
+        
+        <!-- Preferences Tab -->
+        <div id="settings-preferences-tab" class="settings-tab-content">
+          <div class="settings-section">
+            <h4>🎨 Theme</h4>
+            <div class="theme-options" id="theme-options">
+              <label class="theme-option selected" data-theme="dark">
+                <div class="theme-preview dark-preview"></div>
+                <span>Dark</span>
+              </label>
+              <label class="theme-option" data-theme="light">
+                <div class="theme-preview light-preview"></div>
+                <span>Light</span>
+              </label>
+              <label class="theme-option" data-theme="cosmic">
+                <div class="theme-preview cosmic-preview"></div>
+                <span>Cosmic</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h4>🔔 Notifications</h4>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Show Toast Notifications</label>
+                <span>Display confirmation messages</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="pref-show-toasts" checked onchange="saveUserPreferences()">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Auto-save Drafts</label>
+                <span>Save work-in-progress automatically</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="pref-auto-save" onchange="saveUserPreferences()">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h4>📋 Display</h4>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Compact Score Cards</label>
+                <span>Show smaller cards in dashboard</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="pref-compact-cards" onchange="saveUserPreferences()">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <label>Score Font Size</label>
+                <span>Size of generated score text</span>
+              </div>
+              <select id="pref-font-size" class="setting-select" onchange="saveUserPreferences()">
+                <option value="9">Small (9px)</option>
+                <option value="11" selected>Medium (11px)</option>
+                <option value="13">Large (13px)</option>
+                <option value="15">Extra Large (15px)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Defaults Tab -->
+        <div id="settings-defaults-tab" class="settings-tab-content">
+          <div class="settings-section">
+            <h4>🎵 Default Composition Settings</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">These will be pre-selected when you create a new score.</p>
+            
+            <div class="select-row">
+              <div class="select-group">
+                <label>Default Notation</label>
+                <select id="default-notation" onchange="saveUserPreferences()">
+                  <option value="piano-roll">Piano Roll</option>
+                  <option value="treble-bass">Treble/Bass</option>
+                  <option value="ssaattbb">SSAATTBB</option>
+                  <option value="lead-sheet">Lead Sheet</option>
+                </select>
+              </div>
+              <div class="select-group">
+                <label>Default Style</label>
+                <select id="default-style" onchange="saveUserPreferences()">
+                  <option value="operatic">Operatic</option>
+                  <option value="hypnotic">Hypnotic</option>
+                  <option value="trance">Trance</option>
+                  <option value="classical">Classical</option>
+                  <option value="jazz">Jazz</option>
+                  <option value="folk">Folk</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="select-row">
+              <div class="select-group">
+                <label>Default Key</label>
+                <select id="default-key" onchange="saveUserPreferences()">
+                  <option value="C">C Major</option>
+                  <option value="G">G Major</option>
+                  <option value="D">D Major</option>
+                  <option value="F">F Major</option>
+                  <option value="Am">A Minor</option>
+                  <option value="Em">E Minor</option>
+                </select>
+              </div>
+              <div class="select-group">
+                <label>Default Tempo</label>
+                <select id="default-tempo" onchange="saveUserPreferences()">
+                  <option value="60">Largo (60)</option>
+                  <option value="72">Andante (72)</option>
+                  <option value="90">Moderato (90)</option>
+                  <option value="120">Allegro (120)</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="select-row">
+              <div class="select-group">
+                <label>Default Time Signature</label>
+                <select id="default-time" onchange="saveUserPreferences()">
+                  <option value="4/4">4/4</option>
+                  <option value="3/4">3/4</option>
+                  <option value="6/8">6/8</option>
+                </select>
+              </div>
+              <div class="select-group">
+                <label>Default Voice</label>
+                <select id="default-voice" onchange="saveUserPreferences()">
+                  <option value="soprano">Soprano</option>
+                  <option value="mezzo">Mezzo</option>
+                  <option value="tenor">Tenor</option>
+                  <option value="baritone">Baritone</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="settings-section" style="margin-top: 20px;">
+              <h4>Default Dynamics</h4>
+              <div class="options-grid" id="default-dynamics-options">
+                <label class="option-item selected" data-value="traditional">
+                  <span class="icon">🎵</span>
+                  <span class="label">Traditional</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item selected" data-value="vrn">
+                  <span class="icon">🗣️</span>
+                  <span class="label">VRN Codes</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item" data-value="expressive">
+                  <span class="icon">💫</span>
+                  <span class="label">Expressive</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn-large btn-secondary" onclick="resetDefaults()">Reset to Factory Defaults</button>
+        </div>
+      </div>
+    </div>
     
     <!-- ==================== ADMIN MODAL ==================== -->
     <div id="admin-modal" class="modal">
@@ -907,6 +1227,11 @@ function showScreen(screenId) {
   
   if (screenId === 'dashboard') {
     loadUserScores();
+  }
+  
+  if (screenId === 'composer') {
+    // Apply user's default composition settings
+    applyDefaultsToComposer();
   }
 }
 
@@ -1272,6 +1597,404 @@ function downloadScore() {
   a.click();
 }
 
+// ==================== USER PROFILE ====================
+function showProfileModal() {
+  const user = Storage.getCurrentUser();
+  if (!user) {
+    showToast('Please log in first', true);
+    return;
+  }
+  
+  // Populate profile header
+  document.getElementById('profile-avatar').textContent = user.displayName.charAt(0).toUpperCase();
+  document.getElementById('profile-display-name').textContent = user.displayName;
+  document.getElementById('profile-username').textContent = '@' + user.username;
+  
+  const createdDate = user.createdAt ? new Date(user.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Unknown';
+  document.getElementById('profile-member-since').textContent = 'Member since ' + createdDate;
+  
+  // Calculate stats
+  const scores = Storage.getUserScores(user.id);
+  const now = new Date();
+  const thisMonth = scores.filter(s => {
+    const created = new Date(s.createdAt);
+    return created.getMonth() === now.getMonth() && created.getFullYear() === now.getFullYear();
+  });
+  
+  // Find favorite style and notation
+  const styleCounts = {};
+  const notationCounts = {};
+  scores.forEach(s => {
+    if (s.style) styleCounts[s.style] = (styleCounts[s.style] || 0) + 1;
+    if (s.notation) notationCounts[s.notation] = (notationCounts[s.notation] || 0) + 1;
+  });
+  
+  const favStyle = Object.entries(styleCounts).sort((a, b) => b[1] - a[1])[0];
+  const favNotation = Object.entries(notationCounts).sort((a, b) => b[1] - a[1])[0];
+  
+  document.getElementById('profile-total-scores').textContent = scores.length;
+  document.getElementById('profile-this-month').textContent = thisMonth.length;
+  document.getElementById('profile-fav-style').textContent = favStyle ? capitalize(favStyle[0]) : '-';
+  document.getElementById('profile-fav-notation').textContent = favNotation ? formatNotation(favNotation[0]) : '-';
+  
+  // Recent scores
+  const recentList = document.getElementById('recent-scores-list');
+  const recentScores = scores.slice(0, 5);
+  
+  if (recentScores.length === 0) {
+    recentList.innerHTML = '<div class="empty-recent">No scores yet. Start creating!</div>';
+  } else {
+    recentList.innerHTML = recentScores.map(score => {
+      const date = new Date(score.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `<div class="recent-score-item">
+        <span class="recent-score-title">${escapeHtml(score.title)}</span>
+        <span class="recent-score-date">${date}</span>
+      </div>`;
+    }).join('');
+  }
+  
+  document.getElementById('profile-modal').classList.add('show');
+}
+
+function closeProfileModal() {
+  document.getElementById('profile-modal').classList.remove('show');
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function formatNotation(notation) {
+  const names = {
+    'piano-roll': 'Piano Roll',
+    'treble-bass': 'Treble/Bass',
+    'ssaattbb': 'SSAATTBB',
+    'lead-sheet': 'Lead Sheet'
+  };
+  return names[notation] || notation;
+}
+
+// ==================== USER SETTINGS ====================
+function showSettingsModal() {
+  const user = Storage.getCurrentUser();
+  if (!user) {
+    showToast('Please log in first', true);
+    return;
+  }
+  
+  // Load current display name
+  document.getElementById('settings-display-name').value = user.displayName;
+  
+  // Clear password fields
+  document.getElementById('settings-current-password').value = '';
+  document.getElementById('settings-new-password').value = '';
+  document.getElementById('settings-confirm-password').value = '';
+  
+  // Load user preferences
+  loadUserPreferences();
+  
+  // Setup theme options
+  setupThemeOptions();
+  
+  // Setup default dynamics options
+  setupDefaultDynamicsOptions();
+  
+  document.getElementById('settings-modal').classList.add('show');
+}
+
+function closeSettingsModal() {
+  document.getElementById('settings-modal').classList.remove('show');
+}
+
+function switchSettingsTab(tab) {
+  document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.settings-tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.settings-tab[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`settings-${tab}-tab`).classList.add('active');
+}
+
+function updateDisplayName() {
+  const user = Storage.getCurrentUser();
+  if (!user) return;
+  
+  const newName = document.getElementById('settings-display-name').value.trim();
+  if (!newName) {
+    showToast('Display name cannot be empty', true);
+    return;
+  }
+  
+  const users = Storage.getUsers();
+  users[user.username].displayName = newName;
+  localStorage.setItem(Storage.KEYS.USERS, JSON.stringify(users));
+  
+  updateUserUI();
+  showToast('Display name updated!');
+}
+
+function updatePassword() {
+  const user = Storage.getCurrentUser();
+  if (!user) return;
+  
+  const currentPass = document.getElementById('settings-current-password').value;
+  const newPass = document.getElementById('settings-new-password').value;
+  const confirmPass = document.getElementById('settings-confirm-password').value;
+  
+  if (!currentPass || !newPass || !confirmPass) {
+    showToast('Please fill in all password fields', true);
+    return;
+  }
+  
+  const users = Storage.getUsers();
+  if (users[user.username].password !== currentPass) {
+    showToast('Current password is incorrect', true);
+    return;
+  }
+  
+  if (newPass.length < 6) {
+    showToast('New password must be at least 6 characters', true);
+    return;
+  }
+  
+  if (newPass !== confirmPass) {
+    showToast('New passwords do not match', true);
+    return;
+  }
+  
+  users[user.username].password = newPass;
+  localStorage.setItem(Storage.KEYS.USERS, JSON.stringify(users));
+  
+  // Clear fields
+  document.getElementById('settings-current-password').value = '';
+  document.getElementById('settings-new-password').value = '';
+  document.getElementById('settings-confirm-password').value = '';
+  
+  showToast('Password updated successfully!');
+}
+
+function deleteOwnAccount() {
+  const user = Storage.getCurrentUser();
+  if (!user) return;
+  
+  if (user.username === 'admin' || user.username === 'demo') {
+    showToast('Cannot delete protected accounts', true);
+    return;
+  }
+  
+  const confirmText = prompt('Type your username to confirm deletion:');
+  if (confirmText !== user.username) {
+    showToast('Username does not match. Account not deleted.', true);
+    return;
+  }
+  
+  if (!confirm('⚠️ FINAL WARNING: This will permanently delete your account and all your scores. Continue?')) {
+    return;
+  }
+  
+  // Delete user's scores
+  const scores = Storage.getAllScores();
+  Object.keys(scores).forEach(scoreId => {
+    if (scores[scoreId].userId === user.id) {
+      delete scores[scoreId];
+    }
+  });
+  localStorage.setItem(Storage.KEYS.SCORES, JSON.stringify(scores));
+  
+  // Delete user
+  const users = Storage.getUsers();
+  delete users[user.username];
+  localStorage.setItem(Storage.KEYS.USERS, JSON.stringify(users));
+  
+  // Log out
+  Storage.clearCurrentUser();
+  closeSettingsModal();
+  showScreen('landing');
+  showToast('Account deleted');
+}
+
+// User Preferences
+function getUserPreferences() {
+  const user = Storage.getCurrentUser();
+  if (!user) return {};
+  
+  const allPrefs = JSON.parse(localStorage.getItem('cosmos_user_preferences') || '{}');
+  return allPrefs[user.id] || getDefaultPreferences();
+}
+
+function getDefaultPreferences() {
+  return {
+    theme: 'dark',
+    showToasts: true,
+    autoSave: false,
+    compactCards: false,
+    fontSize: '11',
+    defaultNotation: 'piano-roll',
+    defaultStyle: 'operatic',
+    defaultKey: 'C',
+    defaultTempo: '72',
+    defaultTime: '4/4',
+    defaultVoice: 'mezzo',
+    defaultDynamics: ['traditional', 'vrn']
+  };
+}
+
+function saveUserPreferences() {
+  const user = Storage.getCurrentUser();
+  if (!user) return;
+  
+  const prefs = {
+    theme: document.querySelector('.theme-option.selected')?.dataset.theme || 'dark',
+    showToasts: document.getElementById('pref-show-toasts')?.checked ?? true,
+    autoSave: document.getElementById('pref-auto-save')?.checked ?? false,
+    compactCards: document.getElementById('pref-compact-cards')?.checked ?? false,
+    fontSize: document.getElementById('pref-font-size')?.value || '11',
+    defaultNotation: document.getElementById('default-notation')?.value || 'piano-roll',
+    defaultStyle: document.getElementById('default-style')?.value || 'operatic',
+    defaultKey: document.getElementById('default-key')?.value || 'C',
+    defaultTempo: document.getElementById('default-tempo')?.value || '72',
+    defaultTime: document.getElementById('default-time')?.value || '4/4',
+    defaultVoice: document.getElementById('default-voice')?.value || 'mezzo',
+    defaultDynamics: getSelectedDefaultDynamics()
+  };
+  
+  const allPrefs = JSON.parse(localStorage.getItem('cosmos_user_preferences') || '{}');
+  allPrefs[user.id] = prefs;
+  localStorage.setItem('cosmos_user_preferences', JSON.stringify(allPrefs));
+  
+  applyPreferences(prefs);
+}
+
+function loadUserPreferences() {
+  const prefs = getUserPreferences();
+  
+  // Preferences tab
+  document.getElementById('pref-show-toasts').checked = prefs.showToasts !== false;
+  document.getElementById('pref-auto-save').checked = prefs.autoSave === true;
+  document.getElementById('pref-compact-cards').checked = prefs.compactCards === true;
+  document.getElementById('pref-font-size').value = prefs.fontSize || '11';
+  
+  // Defaults tab
+  document.getElementById('default-notation').value = prefs.defaultNotation || 'piano-roll';
+  document.getElementById('default-style').value = prefs.defaultStyle || 'operatic';
+  document.getElementById('default-key').value = prefs.defaultKey || 'C';
+  document.getElementById('default-tempo').value = prefs.defaultTempo || '72';
+  document.getElementById('default-time').value = prefs.defaultTime || '4/4';
+  document.getElementById('default-voice').value = prefs.defaultVoice || 'mezzo';
+  
+  // Theme
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.theme === (prefs.theme || 'dark'));
+  });
+  
+  // Default dynamics
+  const defaultDynamics = prefs.defaultDynamics || ['traditional', 'vrn'];
+  document.querySelectorAll('#default-dynamics-options .option-item').forEach(opt => {
+    opt.classList.toggle('selected', defaultDynamics.includes(opt.dataset.value));
+  });
+}
+
+function setupThemeOptions() {
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.onclick = function() {
+      document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+      saveUserPreferences();
+    };
+  });
+}
+
+function setupDefaultDynamicsOptions() {
+  document.querySelectorAll('#default-dynamics-options .option-item').forEach(opt => {
+    opt.onclick = function() {
+      this.classList.toggle('selected');
+      saveUserPreferences();
+    };
+  });
+}
+
+function getSelectedDefaultDynamics() {
+  return [...document.querySelectorAll('#default-dynamics-options .option-item.selected')].map(i => i.dataset.value);
+}
+
+function applyPreferences(prefs) {
+  // Apply font size to score output
+  const scoreOutput = document.getElementById('scoreOutput');
+  if (scoreOutput && prefs.fontSize) {
+    scoreOutput.style.fontSize = prefs.fontSize + 'px';
+  }
+  
+  // Apply theme (CSS variable changes)
+  applyTheme(prefs.theme || 'dark');
+}
+
+function applyTheme(theme) {
+  const root = document.documentElement;
+  
+  if (theme === 'light') {
+    root.style.setProperty('--bg-dark', '#f5f5f5');
+    root.style.setProperty('--bg-card', '#ffffff');
+    root.style.setProperty('--bg-input', '#e8e8e8');
+    root.style.setProperty('--text-primary', '#1a1a1a');
+    root.style.setProperty('--text-secondary', '#666666');
+  } else if (theme === 'cosmic') {
+    root.style.setProperty('--bg-dark', '#0d0618');
+    root.style.setProperty('--bg-card', '#1a0a2e');
+    root.style.setProperty('--bg-input', '#2a1048');
+    root.style.setProperty('--text-primary', '#e8d4ff');
+    root.style.setProperty('--text-secondary', '#a080c0');
+  } else {
+    // Dark (default)
+    root.style.setProperty('--bg-dark', '#0a0a0f');
+    root.style.setProperty('--bg-card', '#12121a');
+    root.style.setProperty('--bg-input', '#1a1a24');
+    root.style.setProperty('--text-primary', '#ffffff');
+    root.style.setProperty('--text-secondary', '#a0a0b0');
+  }
+}
+
+function resetDefaults() {
+  if (!confirm('Reset all composition defaults to factory settings?')) return;
+  
+  document.getElementById('default-notation').value = 'piano-roll';
+  document.getElementById('default-style').value = 'operatic';
+  document.getElementById('default-key').value = 'C';
+  document.getElementById('default-tempo').value = '72';
+  document.getElementById('default-time').value = '4/4';
+  document.getElementById('default-voice').value = 'mezzo';
+  
+  document.querySelectorAll('#default-dynamics-options .option-item').forEach(opt => {
+    opt.classList.toggle('selected', ['traditional', 'vrn'].includes(opt.dataset.value));
+  });
+  
+  saveUserPreferences();
+  showToast('Defaults reset!');
+}
+
+function applyDefaultsToComposer() {
+  const prefs = getUserPreferences();
+  
+  // Set notation
+  document.querySelectorAll('#notationOptions .option-item').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.value === prefs.defaultNotation);
+  });
+  
+  // Set style
+  document.querySelectorAll('#styleOptions .option-item').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.value === prefs.defaultStyle);
+  });
+  
+  // Set dynamics
+  const defaultDynamics = prefs.defaultDynamics || ['traditional', 'vrn'];
+  document.querySelectorAll('#dynamicsOptions .option-item').forEach(opt => {
+    opt.classList.toggle('selected', defaultDynamics.includes(opt.dataset.value));
+  });
+  
+  // Set selects
+  document.getElementById('keySelect').value = prefs.defaultKey || 'C';
+  document.getElementById('tempoSelect').value = prefs.defaultTempo || '72';
+  document.getElementById('timeSelect').value = prefs.defaultTime || '4/4';
+  document.getElementById('voiceSelect').value = prefs.defaultVoice || 'mezzo';
+}
+
 // ==================== ADMIN PANEL ====================
 function showAdminPanel() {
   const user = Storage.getCurrentUser();
@@ -1460,8 +2183,17 @@ window.onload = function() {
   if (user) {
     showScreen('dashboard');
     updateUserUI();
+    // Apply saved preferences
+    const prefs = getUserPreferences();
+    applyPreferences(prefs);
   }
 };
+
+// Close modals on outside click
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'profile-modal') closeProfileModal();
+  if (e.target.id === 'settings-modal') closeSettingsModal();
+});
   </script>
 </body>
 </html>

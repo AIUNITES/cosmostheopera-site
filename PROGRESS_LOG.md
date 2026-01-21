@@ -263,5 +263,55 @@ Added continuous playback that automatically navigates through all 5 sheet music
 
 ---
 
+---
+
+## Session 14: Simple One-Line Staff Format (January 21, 2026)
+
+### Changes Made
+
+Converted all sheet music pages (except Act1-P1 which uses enhanced 5-line format) to use a simplified one-line staff notation format for consistency and readability.
+
+### Simple Format Structure
+```
+┌────────────────────────────────────────────────────────────────────────────
+│  MEASURES 1-8: "i sing because i can"                          mf (joyful)
+│  ♩G4 ─→ ♩A4 ─→ ♩B4 ─→ ●D5~~~~~~~~  (ascending)                 [M→HM→H→H]
+│  "i      sing    be-     cause i can~~~~"
+└────────────────────────────────────────────────────────────────────────────
+```
+
+### Key Features of Simple Format
+- Single melodic line with arrow notation (♩ for notes, ● for sustained)
+- Direction indicator: (ascending), (descending), (returning)
+- VRN codes in brackets: [M→HM→H→H]
+- Lyrics aligned below
+- Open right edges (no closing border)
+- Dynamics and expression markings in header
+
+### Pages Updated
+- ✅ sheet-music-act1-p1.html - Enhanced 5-line staff (KEPT AS-IS)
+- ✅ sheet-music-act1-p2.html - Converted to simple format (Scenes 3-5)
+- ✅ sheet-music-act2.html - Converted to simple format (Scenes 1-2)
+- ✅ sheet-music-act3-p1.html - Converted to simple format (Scenes 1-2)
+- ✅ sheet-music-act3-p2.html - Converted to simple format (Scenes 3-5 FINALE)
+
+### VRN Codes Reference
+- C = Chest voice
+- CM = Chest-Mixed
+- M = Mixed voice
+- HM = Head-Mixed
+- H = Head voice
+
+### All Pages Now Feature
+- Audio playback with Tone.js
+- Auto-scroll to active measures
+- Play Full Opera continuous mode
+- Floating controls with progress bar
+- Climax section highlighting (pink)
+- Ultimate climax styling for finale (gold)
+- Opera Complete overlay at end
+
+---
+
 *Implementation by Claude (Anthropic) - January 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

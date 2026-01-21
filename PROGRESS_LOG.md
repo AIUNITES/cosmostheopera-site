@@ -556,4 +556,21 @@ Created `words.html` — a dedicated page displaying the complete prose poetry a
 
 ---
 
-*Last updated: January 20, 2026*
+### 2026-01-21 - Session 9
+
+**SHEET MUSIC FORMATTING CONSISTENCY FIX** ✅
+
+Fixed `sheet-music-act3-p2.html` to match the open-right border style used in other sheet music pages.
+
+**Issue:** Act III Part 2 used closed boxes with right borders (`┐`, `│`, `┤`, `┘`) while other pages (Act I Part 1, etc.) used open-right boxes without closing characters.
+
+**Resolution:** Removed all right-side box border characters from all staff notation blocks in:
+- Scene 3: "Transcend" (6 boxes)
+- Scene 4: "Return" (7 boxes)  
+- Scene 5: "COSMOS" Grand Finale (8 boxes)
+
+All sheet music pages now consistently use the open-ended box style for ASCII staff notation.
+
+---
+
+*Last updated: January 21, 2026*

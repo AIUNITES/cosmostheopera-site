@@ -522,5 +522,103 @@ const voicePresets = {
 
 ---
 
+## Session 18: Mobile UI Improvements (January 22, 2026)
+
+### Issue 1: Generate Button Hidden
+The Generate button on composer.html was hidden behind a scroll constraint on the left panel.
+
+**Solution:**
+Modified CSS to differentiate left and right panels in landing composer:
+```css
+.landing-composer-container .panel:first-child .panel-content { max-height: none; overflow-y: visible; }
+.landing-composer-container .panel:last-child .panel-content { max-height: 500px; overflow-y: auto; }
+```
+
+### Issue 2: Mobile Score Too Small
+Sheet music pages and composer had 9px font size on mobile - unreadable.
+
+**Solution:**
+Enhanced mobile media queries (@max-width: 768px):
+- Score output font: 9px → **14px** (55% increase)
+- Line height: increased to 1.5-1.6
+- Touch targets enlarged: buttons/checkboxes padding 10-12px, font 1rem
+- Added smooth scrolling: `-webkit-overflow-scrolling: touch`
+
+### Files Updated
+- **composer.html** - Left panel scroll fix + mobile enhancements
+- **sheet-music-act1-p1.html** - Mobile score 14px
+- **sheet-music-act1-p2.html** - Mobile score 14px
+- **sheet-music-act2.html** - Mobile score 14px
+- **sheet-music-act3-p1.html** - Mobile score 14px
+- **sheet-music-act3-p2.html** - Mobile score 14px
+- **sheet-music-act1.html** (legacy) - Mobile score 14px
+- **sheet-music-act3.html** (legacy) - Mobile score 14px
+- **sheet-music-audio-prototype.html** - Mobile score 14px
+
+---
+
+## Session 19: Broken Images Fix (January 22, 2026)
+
+### Issue
+Homepage and Gallery had broken images:
+- **Homepage**: 10 broken images (Wikipedia blocked hotlinking)
+- **Gallery**: 12 broken images (`/images/` folder not deployed to GitHub)
+
+### Root Cause
+The `images/` folder existed locally with 15 Hubble images but wasn't pushed to GitHub. Wikipedia also blocks direct image hotlinking.
+
+### Solution
+1. Updated **index.html** to use local images instead of Wikipedia URLs
+2. Pushed the `images/` folder to GitHub
+
+### Image Mapping (index.html)
+| Character | Old Source | New Source |
+|-----------|------------|------------|
+| Observer/Soul | Wikipedia NGC_7293.png | images/01-helix-nebula.jpg |
+| Light/Universe | Wikipedia NGC_6302.jpg | images/02-butterfly-nebula.jpg |
+| Sun/Seeker | Wikipedia V838_Monocerotis.jpg | images/03-v838-monocerotis.jpg |
+| Twin/Mirror | Wikipedia Antennae_galaxies.jpg | images/12-antennae-galaxies.jpg |
+| Cosmos/We Come | Wikipedia Pillars_of_creation.jpg | images/05-pillars-creation.jpg |
+| Waves | Wikipedia Messier51.jpg | images/06-whirlpool-galaxy.jpg |
+| Dark | Wikipedia Barnard_33.jpg | images/07-horsehead-nebula.jpg |
+| Colors | Wikipedia Orion_Nebula.jpg | images/08-orion-nebula.jpg |
+| Journey | Wikipedia Carina_Nebula.jpg | images/09-mystic-mountain.jpg |
+| Infinity/Stars | Wikipedia HubbleDeepField.jpg | images/10-hubble-deep-field.jpg |
+| Window/Face | Wikipedia Catseye-big.jpg | images/11-cats-eye-nebula.jpg |
+| Feeling Again | Wikipedia Southern_Ring_Nebula.png | images/13-southern-ring-nebula.jpg |
+| You're A Star | Wikipedia Eta_Carinae.png | images/14-eta-carinae.jpg |
+| Eternal Return | Wikipedia M57_Ring_Nebula.JPG | images/15-ring-nebula.jpg |
+
+### Also Updated
+- Open Graph `og:image` meta tag now uses local image
+
+### Results
+| Page | Before | After |
+|------|--------|-------|
+| Homepage | 10 broken | **14/14 working** ✅ |
+| Gallery | 12 broken | **15/15 working** ✅ |
+
+### Local Images Folder
+```
+images/
+├── 01-helix-nebula.jpg
+├── 02-butterfly-nebula.jpg
+├── 03-v838-monocerotis.jpg
+├── 04-arp-madore-twins.jpg
+├── 05-pillars-creation.jpg
+├── 06-whirlpool-galaxy.jpg
+├── 07-horsehead-nebula.jpg
+├── 08-orion-nebula.jpg
+├── 09-mystic-mountain.jpg
+├── 10-hubble-deep-field.jpg
+├── 11-cats-eye-nebula.jpg
+├── 12-antennae-galaxies.jpg
+├── 13-southern-ring-nebula.jpg
+├── 14-eta-carinae.jpg
+└── 15-ring-nebula.jpg
+```
+
+---
+
 *Implementation by Claude (Anthropic) - January 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

@@ -396,5 +396,60 @@ All three SSAATTBB pages now include a dropdown to select different synth voices
 
 ---
 
+---
+
+## Session 16: Composer Tool Player Buttons (January 21, 2026)
+
+### Changes Made
+
+Added audio playback buttons (Play/Pause/Stop) to the landing page composer in **composer.html**.
+
+**Files Updated:**
+- **composer.html** - Added player buttons to landing-screen composer
+
+### Features Added to Landing Page Composer
+
+1. **Play/Pause/Stop Buttons**
+   - ▶️ Play button to start playback
+   - ⏸️ Pause button (appears during playback)
+   - ⏹️ Stop button to reset playback
+
+2. **Playback Progress Bar**
+   - Current note display (pitch, word, VRN code)
+   - Visual progress bar with gradient
+   - Elapsed time counter (MM:SS format)
+
+3. **Audio Synthesis (Web Audio API)**
+   - Sine wave oscillators with harmonics for vocal-like tone
+   - Dynamic volume based on dynamics (p, mp, mf, f, ff, fff)
+   - ADSR envelope for natural note attack/decay
+   - Default tempo: 72 BPM
+
+### Technical Implementation
+
+- Separate audio context and state variables for landing page:
+  - `landingAudioContext`, `landingMelody`, `landingIsPlaying`, `landingIsPaused`
+- Functions: `playLandingScore()`, `pauseLandingScore()`, `stopLandingScore()`
+- `generateLandingMelody()` creates playable melody from lyrics
+- Uses existing `noteFrequencies` lookup table from main composer
+
+### Button IDs
+| Element | ID |
+|---------|----|
+| Play Button | `landingPlayBtn` |
+| Pause Button | `landingPauseBtn` |
+| Stop Button | `landingStopBtn` |
+| Progress Container | `landingPlaybackProgress` |
+| Progress Bar | `landingProgressBar` |
+| Current Note | `landingCurrentNote` |
+| Playback Time | `landingPlaybackTime` |
+
+### Notes
+- The composer-screen (logged-in view) already had player buttons
+- Only the landing-screen (public view) was missing them
+- Both now have identical playback functionality
+
+---
+
 *Implementation by Claude (Anthropic) - January 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

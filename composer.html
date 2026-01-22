@@ -467,9 +467,22 @@ an infinite number of stars"></textarea>
             <div class="panel-header">
               <h2>📜 Generated Score</h2>
               <div class="output-actions">
+                <button class="output-btn play-btn" id="landingPlayBtn" onclick="playLandingScore()">▶️ Play</button>
+                <button class="output-btn" id="landingPauseBtn" onclick="pauseLandingScore()" style="display:none;">⏸️ Pause</button>
+                <button class="output-btn" id="landingStopBtn" onclick="stopLandingScore()">⏹️ Stop</button>
                 <button class="output-btn" onclick="copyLandingScore()">📋 Copy</button>
                 <button class="output-btn" onclick="downloadLandingScore()">💾 Download</button>
                 <button class="output-btn save-btn" onclick="promptLoginToSave()">✨ Save</button>
+              </div>
+            </div>
+            <!-- Playback Progress -->
+            <div id="landingPlaybackProgress" style="display:none; padding: 10px 20px; background: rgba(157,78,221,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <div style="display: flex; align-items: center; gap: 15px;">
+                <span id="landingCurrentNote" style="color: var(--accent-cyan); font-weight: 600;">Ready</span>
+                <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                  <div id="landingProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
+                </div>
+                <span id="landingPlaybackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
               </div>
             </div>
             <div class="panel-content">
@@ -817,9 +830,22 @@ an infinite number of stars"></textarea>
           <div class="panel-header">
             <h2>📜 Generated Score</h2>
             <div class="output-actions">
+              <button class="output-btn play-btn" id="playBtn" onclick="playScore()">▶️ Play</button>
+              <button class="output-btn" id="pauseBtn" onclick="pauseScore()" style="display:none;">⏸️ Pause</button>
+              <button class="output-btn" id="stopBtn" onclick="stopScore()">⏹️ Stop</button>
               <button class="output-btn" onclick="copyScore()">📋 Copy</button>
               <button class="output-btn" onclick="downloadScore()">💾 Download</button>
               <button class="output-btn save-btn" id="saveScoreBtn" onclick="showSaveModal()">✨ Save</button>
+            </div>
+          </div>
+          <!-- Playback Progress -->
+          <div id="playbackProgress" style="display:none; padding: 10px 20px; background: rgba(157,78,221,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <span id="currentNote" style="color: var(--accent-cyan); font-weight: 600;">Ready</span>
+              <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
+              </div>
+              <span id="playbackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
             </div>
           </div>
           <div class="panel-content">
@@ -1134,17 +1160,35 @@ an infinite number of stars"></textarea>
         </div>
         
         <div class="changelog-version-badge">
-          <span class="version-number">v1.2.0</span>
+          <span class="version-number">v1.3.0</span>
           <span class="version-date">January 2026</span>
         </div>
         
         <div class="changelog-content">
+          <!-- Version 1.3.0 -->
+          <div class="changelog-entry">
+            <div class="changelog-entry-header">
+              <h3>v1.3.0</h3>
+              <span class="changelog-date">January 21, 2026</span>
+              <span class="changelog-tag new">Latest</span>
+            </div>
+            <div class="changelog-section">
+              <h4>✨ New Features</h4>
+              <ul>
+                <li><strong>Audio Playback</strong> - Play generated scores with Web Audio synthesis</li>
+                <li><strong>Playback Controls</strong> - Play, Pause, Stop buttons with progress bar</li>
+                <li><strong>Dynamic Volume</strong> - Volume adjusts based on dynamics (pp to fff)</li>
+                <li><strong>Rich Vocal Tone</strong> - Harmonics for realistic vocal-like sound</li>
+                <li><strong>Live Note Display</strong> - See current note, word, and VRN code during playback</li>
+              </ul>
+            </div>
+          </div>
+          
           <!-- Version 1.2.0 -->
           <div class="changelog-entry">
             <div class="changelog-entry-header">
               <h3>v1.2.0</h3>
               <span class="changelog-date">January 21, 2026</span>
-              <span class="changelog-tag new">Latest</span>
             </div>
             <div class="changelog-section">
               <h4>✨ New Features</h4>
@@ -1219,12 +1263,12 @@ an infinite number of stars"></textarea>
             <div class="changelog-section">
               <h4>🚀 Planned Features</h4>
               <ul>
-                <li>Audio playback of generated scores</li>
                 <li>MIDI export functionality</li>
                 <li>PDF score generation</li>
                 <li>Collaboration features</li>
                 <li>Custom VRN code editor</li>
                 <li>Score sharing and public gallery</li>
+                <li>Multi-voice playback</li>
               </ul>
             </div>
           </div>
@@ -1888,14 +1932,19 @@ function generateScore() {
   const words = parseLyrics(lyrics);
   if (words.length === 0) { showToast('No valid words found', true); return; }
   
-  const melody = generateMelody(words, voice, style);
-  let output;
-  
-  // For simplicity, using piano-roll for all in this demo
-  output = generatePianoRollNotation(melody);
+  // Generate and store melody for playback
+  currentMelody = generateMelody(words, voice, style);
+  let output = generatePianoRollNotation(currentMelody);
   
   document.getElementById('scoreOutput').textContent = output;
   currentGeneratedOutput = output;
+  
+  // Reset playback state
+  stopScore();
+  document.getElementById('playbackProgress').style.display = 'block';
+  document.getElementById('currentNote').textContent = `Ready - ${currentMelody.length} notes`;
+  
+  showToast('Score generated! Click Play to hear it.');
 }
 
 function switchTab(tab) {
@@ -1938,6 +1987,194 @@ function downloadScore() {
   a.href = URL.createObjectURL(blob);
   a.download = 'cosmos-score.txt';
   a.click();
+}
+
+// ==================== AUDIO PLAYBACK ====================
+let audioContext = null;
+let currentMelody = [];
+let isPlaying = false;
+let isPaused = false;
+let playbackIndex = 0;
+let playbackTimeout = null;
+let startTime = 0;
+let pausedAt = 0;
+
+// Note frequencies (A4 = 440Hz)
+const noteFrequencies = {
+  'C2': 65.41, 'C#2': 69.30, 'D2': 73.42, 'D#2': 77.78, 'E2': 82.41, 'F2': 87.31, 'F#2': 92.50, 'G2': 98.00, 'G#2': 103.83, 'A2': 110.00, 'A#2': 116.54, 'B2': 123.47,
+  'C3': 130.81, 'C#3': 138.59, 'D3': 146.83, 'D#3': 155.56, 'E3': 164.81, 'F3': 174.61, 'F#3': 185.00, 'G3': 196.00, 'G#3': 207.65, 'A3': 220.00, 'A#3': 233.08, 'B3': 246.94,
+  'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
+  'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46, 'F#5': 739.99, 'G5': 783.99, 'G#5': 830.61, 'A5': 880.00, 'A#5': 932.33, 'B5': 987.77,
+  'C6': 1046.50, 'C#6': 1108.73, 'D6': 1174.66, 'D#6': 1244.51, 'E6': 1318.51, 'F6': 1396.91, 'F#6': 1479.98, 'G6': 1567.98, 'G#6': 1661.22, 'A6': 1760.00, 'A#6': 1864.66, 'B6': 1975.53
+};
+
+function initAudio() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+}
+
+function playNote(frequency, duration, startTime, volume = 0.3) {
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(frequency, startTime);
+  
+  const oscillator2 = audioContext.createOscillator();
+  oscillator2.type = 'sine';
+  oscillator2.frequency.setValueAtTime(frequency * 2, startTime);
+  const gain2 = audioContext.createGain();
+  gain2.gain.setValueAtTime(volume * 0.3, startTime);
+  
+  const oscillator3 = audioContext.createOscillator();
+  oscillator3.type = 'sine';
+  oscillator3.frequency.setValueAtTime(frequency * 3, startTime);
+  const gain3 = audioContext.createGain();
+  gain3.gain.setValueAtTime(volume * 0.1, startTime);
+  
+  gainNode.gain.setValueAtTime(0, startTime);
+  gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.05);
+  gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.1);
+  gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.1);
+  gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
+  
+  oscillator.connect(gainNode);
+  oscillator2.connect(gain2);
+  gain2.connect(gainNode);
+  oscillator3.connect(gain3);
+  gain3.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  
+  oscillator.start(startTime);
+  oscillator2.start(startTime);
+  oscillator3.start(startTime);
+  oscillator.stop(startTime + duration);
+  oscillator2.stop(startTime + duration);
+  oscillator3.stop(startTime + duration);
+}
+
+function playScore() {
+  if (currentMelody.length === 0) {
+    showToast('Generate a score first', true);
+    return;
+  }
+
+  initAudio();
+  
+  if (isPaused) {
+    isPaused = false;
+    isPlaying = true;
+    updatePlaybackUI();
+    playFromIndex(playbackIndex);
+    return;
+  }
+
+  stopScore();
+  isPlaying = true;
+  playbackIndex = 0;
+  startTime = Date.now();
+  
+  document.getElementById('playbackProgress').style.display = 'block';
+  updatePlaybackUI();
+  playFromIndex(0);
+}
+
+function playFromIndex(index) {
+  if (!isPlaying || index >= currentMelody.length) {
+    if (index >= currentMelody.length) {
+      stopScore();
+      showToast('Playback complete');
+    }
+    return;
+  }
+
+  const note = currentMelody[index];
+  const tempo = parseInt(document.getElementById('tempoSelect').value) || 72;
+  const beatDuration = 60 / tempo;
+  const noteDuration = beatDuration * 0.8;
+  
+  const freq = noteFrequencies[note.pitch];
+  if (freq) {
+    const dynamicVolumes = { 'ppp': 0.1, 'pp': 0.15, 'p': 0.2, 'mp': 0.25, 'mf': 0.3, 'f': 0.4, 'ff': 0.5, 'fff': 0.6 };
+    const volume = dynamicVolumes[note.dynamic] || 0.3;
+    playNote(freq, noteDuration, audioContext.currentTime, volume);
+  }
+
+  playbackIndex = index;
+  updateProgressUI(index, currentMelody.length, note);
+
+  const nextDelay = beatDuration * 1000;
+  playbackTimeout = setTimeout(() => {
+    playFromIndex(index + 1);
+  }, nextDelay);
+}
+
+function pauseScore() {
+  if (isPlaying && !isPaused) {
+    isPaused = true;
+    isPlaying = false;
+    pausedAt = playbackIndex;
+    if (playbackTimeout) {
+      clearTimeout(playbackTimeout);
+      playbackTimeout = null;
+    }
+    updatePlaybackUI();
+    showToast('Paused');
+  }
+}
+
+function stopScore() {
+  isPlaying = false;
+  isPaused = false;
+  playbackIndex = 0;
+  pausedAt = 0;
+  
+  if (playbackTimeout) {
+    clearTimeout(playbackTimeout);
+    playbackTimeout = null;
+  }
+  
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('currentNote').textContent = 'Ready';
+  document.getElementById('playbackTime').textContent = '0:00';
+  updatePlaybackUI();
+}
+
+function updatePlaybackUI() {
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  
+  if (isPlaying) {
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = 'inline-block';
+    stopBtn.style.background = 'rgba(255,107,157,0.3)';
+  } else if (isPaused) {
+    playBtn.innerHTML = '▶️ Resume';
+    playBtn.style.display = 'inline-block';
+    pauseBtn.style.display = 'none';
+    stopBtn.style.background = '';
+  } else {
+    playBtn.innerHTML = '▶️ Play';
+    playBtn.style.display = 'inline-block';
+    pauseBtn.style.display = 'none';
+    stopBtn.style.background = '';
+  }
+}
+
+function updateProgressUI(current, total, note) {
+  const progress = ((current + 1) / total) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+  document.getElementById('currentNote').textContent = `♪ ${note.pitch} - "${note.word}" ${note.vrn}`;
+  
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+  document.getElementById('playbackTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 // ==================== USER PROFILE ====================
@@ -2764,6 +3001,285 @@ function promptLoginToSave() {
   showToast('Log in to save your score!');
   showScreen('auth');
 }
+
+// ==================== LANDING PAGE AUDIO PLAYBACK ====================
+let landingAudioContext = null;
+let landingMelody = [];
+let landingIsPlaying = false;
+let landingIsPaused = false;
+let landingPlaybackIndex = 0;
+let landingPlaybackTimeout = null;
+let landingStartTime = 0;
+
+function initLandingAudio() {
+  if (!landingAudioContext) {
+    landingAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (landingAudioContext.state === 'suspended') {
+    landingAudioContext.resume();
+  }
+}
+
+function playLandingNote(frequency, duration, startTime, volume = 0.3) {
+  const oscillator = landingAudioContext.createOscillator();
+  const gainNode = landingAudioContext.createGain();
+  
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(frequency, startTime);
+  
+  const oscillator2 = landingAudioContext.createOscillator();
+  oscillator2.type = 'sine';
+  oscillator2.frequency.setValueAtTime(frequency * 2, startTime);
+  const gain2 = landingAudioContext.createGain();
+  gain2.gain.setValueAtTime(volume * 0.3, startTime);
+  
+  const oscillator3 = landingAudioContext.createOscillator();
+  oscillator3.type = 'sine';
+  oscillator3.frequency.setValueAtTime(frequency * 3, startTime);
+  const gain3 = landingAudioContext.createGain();
+  gain3.gain.setValueAtTime(volume * 0.1, startTime);
+  
+  gainNode.gain.setValueAtTime(0, startTime);
+  gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.05);
+  gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.1);
+  gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.1);
+  gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
+  
+  oscillator.connect(gainNode);
+  oscillator2.connect(gain2);
+  gain2.connect(gainNode);
+  oscillator3.connect(gain3);
+  gain3.connect(gainNode);
+  gainNode.connect(landingAudioContext.destination);
+  
+  oscillator.start(startTime);
+  oscillator2.start(startTime);
+  oscillator3.start(startTime);
+  oscillator.stop(startTime + duration);
+  oscillator2.stop(startTime + duration);
+  oscillator3.stop(startTime + duration);
+}
+
+function generateLandingMelody(lyrics, voice, style) {
+  const voiceRanges = {
+    soprano: { scale: ['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5','B5','C6'] },
+    mezzo: { scale: ['A3','B3','C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5'] },
+    tenor: { scale: ['C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4','B4','C5'] },
+    baritone: { scale: ['A2','B2','C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4'] }
+  };
+  
+  const stylePatterns = {
+    operatic: { intervals: [2,3,4,5,7], dynamics: ['p','mp','mf','f','ff','fff'] },
+    hypnotic: { intervals: [1,2,3], dynamics: ['p','mp','mf'] },
+    trance: { intervals: [2,3,5], dynamics: ['p','mf','f','ff'] },
+    classical: { intervals: [2,3,4,5], dynamics: ['p','mp','mf','f'] }
+  };
+  
+  const range = voiceRanges[voice] || voiceRanges.mezzo;
+  const pattern = stylePatterns[style] || stylePatterns.operatic;
+  
+  const words = [];
+  lyrics.trim().split('\n').filter(l => l.trim()).forEach((line, lineIdx) => {
+    line.trim().split(/\s+/).forEach((word, wordIdx, arr) => {
+      if (word) words.push({ text: word.toLowerCase(), isLineStart: wordIdx === 0, isLineEnd: wordIdx === arr.length - 1, lineNum: lineIdx });
+    });
+  });
+  
+  const melody = [];
+  let currentIdx = Math.floor(range.scale.length / 2);
+  
+  words.forEach((word, i) => {
+    const progress = i / words.length;
+    const emotion = progress > 0.7 ? 'powerful' : (progress < 0.3 ? 'tender' : 'building');
+    const intensity = Math.ceil(progress * 3);
+    let interval = pattern.intervals[Math.floor(Math.random() * pattern.intervals.length)];
+    let direction = Math.random() > 0.5 ? 1 : -1;
+    if (progress > 0.5) direction = 1;
+    if (word.isLineStart && i > 0) currentIdx = Math.max(currentIdx - 2, 2);
+    currentIdx = Math.max(0, Math.min(range.scale.length - 1, currentIdx + (direction * interval)));
+    if (progress > 0.8 && progress < 0.9) currentIdx = Math.min(currentIdx + 3, range.scale.length - 2);
+    
+    const noteNum = parseInt(range.scale[currentIdx].slice(-1));
+    let code = noteNum <= 3 ? 'C' : (noteNum === 4 ? 'M' : 'H');
+    const vrn = `[${code}${'+'.repeat(Math.min(3, intensity))}]`;
+    
+    melody.push({
+      word: word.text, 
+      pitch: range.scale[currentIdx], 
+      vrn: vrn,
+      dynamic: pattern.dynamics[Math.min(Math.floor(progress * pattern.dynamics.length), pattern.dynamics.length - 1)],
+      isLineStart: word.isLineStart, 
+      isLineEnd: word.isLineEnd
+    });
+  });
+  
+  return melody;
+}
+
+function playLandingScore() {
+  if (landingMelody.length === 0) {
+    // Generate melody from current lyrics
+    const lyrics = document.getElementById('landingLyricsInput').value.trim();
+    if (!lyrics) {
+      showToast('Generate a score first', true);
+      return;
+    }
+    const voice = document.getElementById('landingVoiceSelect').value;
+    const style = document.querySelector('#landingStyleOptions .option-item.selected')?.dataset.value || 'operatic';
+    landingMelody = generateLandingMelody(lyrics, voice, style);
+  }
+
+  initLandingAudio();
+  
+  if (landingIsPaused) {
+    landingIsPaused = false;
+    landingIsPlaying = true;
+    updateLandingPlaybackUI();
+    playLandingFromIndex(landingPlaybackIndex);
+    return;
+  }
+
+  stopLandingScore();
+  landingIsPlaying = true;
+  landingPlaybackIndex = 0;
+  landingStartTime = Date.now();
+  
+  document.getElementById('landingPlaybackProgress').style.display = 'block';
+  updateLandingPlaybackUI();
+  playLandingFromIndex(0);
+}
+
+function playLandingFromIndex(index) {
+  if (!landingIsPlaying || index >= landingMelody.length) {
+    if (index >= landingMelody.length) {
+      stopLandingScore();
+      showToast('Playback complete');
+    }
+    return;
+  }
+
+  const note = landingMelody[index];
+  const tempo = 72; // Default tempo for landing page
+  const beatDuration = 60 / tempo;
+  const noteDuration = beatDuration * 0.8;
+  
+  const freq = noteFrequencies[note.pitch];
+  if (freq) {
+    const dynamicVolumes = { 'ppp': 0.1, 'pp': 0.15, 'p': 0.2, 'mp': 0.25, 'mf': 0.3, 'f': 0.4, 'ff': 0.5, 'fff': 0.6 };
+    const volume = dynamicVolumes[note.dynamic] || 0.3;
+    playLandingNote(freq, noteDuration, landingAudioContext.currentTime, volume);
+  }
+
+  landingPlaybackIndex = index;
+  updateLandingProgressUI(index, landingMelody.length, note);
+
+  const nextDelay = beatDuration * 1000;
+  landingPlaybackTimeout = setTimeout(() => {
+    playLandingFromIndex(index + 1);
+  }, nextDelay);
+}
+
+function pauseLandingScore() {
+  if (landingIsPlaying && !landingIsPaused) {
+    landingIsPaused = true;
+    landingIsPlaying = false;
+    if (landingPlaybackTimeout) {
+      clearTimeout(landingPlaybackTimeout);
+      landingPlaybackTimeout = null;
+    }
+    updateLandingPlaybackUI();
+    showToast('Paused');
+  }
+}
+
+function stopLandingScore() {
+  landingIsPlaying = false;
+  landingIsPaused = false;
+  landingPlaybackIndex = 0;
+  
+  if (landingPlaybackTimeout) {
+    clearTimeout(landingPlaybackTimeout);
+    landingPlaybackTimeout = null;
+  }
+  
+  document.getElementById('landingProgressBar').style.width = '0%';
+  document.getElementById('landingCurrentNote').textContent = 'Ready';
+  document.getElementById('landingPlaybackTime').textContent = '0:00';
+  updateLandingPlaybackUI();
+}
+
+function updateLandingPlaybackUI() {
+  const playBtn = document.getElementById('landingPlayBtn');
+  const pauseBtn = document.getElementById('landingPauseBtn');
+  const stopBtn = document.getElementById('landingStopBtn');
+  
+  if (landingIsPlaying) {
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = 'inline-block';
+    stopBtn.style.background = 'rgba(255,107,157,0.3)';
+  } else if (landingIsPaused) {
+    playBtn.innerHTML = '▶️ Resume';
+    playBtn.style.display = 'inline-block';
+    pauseBtn.style.display = 'none';
+    stopBtn.style.background = '';
+  } else {
+    playBtn.innerHTML = '▶️ Play';
+    playBtn.style.display = 'inline-block';
+    pauseBtn.style.display = 'none';
+    stopBtn.style.background = '';
+  }
+}
+
+function updateLandingProgressUI(current, total, note) {
+  const progress = ((current + 1) / total) * 100;
+  document.getElementById('landingProgressBar').style.width = progress + '%';
+  document.getElementById('landingCurrentNote').textContent = `♪ ${note.pitch} - "${note.word}" ${note.vrn}`;
+  
+  const elapsed = Math.floor((Date.now() - landingStartTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+  document.getElementById('landingPlaybackTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Update generateLandingScore to store melody for playback
+const originalGenerateLandingScore = generateLandingScore;
+generateLandingScore = function() {
+  const lyrics = document.getElementById('landingLyricsInput').value.trim();
+  
+  if (!lyrics) {
+    showToast('Please enter some lyrics first', true);
+    return;
+  }
+  
+  const notation = document.querySelector('#landingNotationOptions .option-item.selected')?.dataset.value || 'piano-roll';
+  const style = document.querySelector('#landingStyleOptions .option-item.selected')?.dataset.value || 'operatic';
+  const key = document.getElementById('landingKeySelect').value;
+  const voice = document.getElementById('landingVoiceSelect').value;
+  
+  // Generate melody for playback
+  landingMelody = generateLandingMelody(lyrics, voice, style);
+  
+  const options = {
+    lyrics,
+    notation,
+    style,
+    key,
+    voice,
+    dynamics: ['traditional', 'vrn'],
+    tempo: '72',
+    time: '4/4'
+  };
+  
+  landingGeneratedScore = generateScoreFromOptions(options);
+  document.getElementById('landingScoreOutput').textContent = landingGeneratedScore;
+  
+  // Reset and show playback
+  stopLandingScore();
+  document.getElementById('landingPlaybackProgress').style.display = 'block';
+  document.getElementById('landingCurrentNote').textContent = `Ready - ${landingMelody.length} notes`;
+  
+  showToast('Score generated! Click Play to hear it.');
+};
 
 // Initialize landing page options on load
 document.addEventListener('DOMContentLoaded', function() {

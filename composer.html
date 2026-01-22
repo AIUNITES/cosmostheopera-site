@@ -321,6 +321,16 @@
     .cta-section h2 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 15px; }
     .cta-section p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 25px; }
     
+    /* Voice Selector Checkboxes */
+    .voice-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .voice-checkbox { display: flex; align-items: center; gap: 4px; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+    .voice-checkbox:hover { border-color: var(--accent-cyan); }
+    .voice-checkbox input { display: none; }
+    .voice-checkbox input:checked + span { color: var(--accent-green); }
+    .voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
+    .loop-btn { background: rgba(157,78,221,0.2); border: 1px solid var(--accent-purple); color: var(--accent-purple); }
+    .loop-btn.active { background: rgba(255,215,0,0.2); border-color: var(--accent-gold); color: var(--accent-gold); }
+    
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 15px; }
       .options-grid { grid-template-columns: 1fr 1fr; }
@@ -477,11 +487,19 @@ an infinite number of stars"></textarea>
             </div>
             <!-- Playback Progress -->
             <div id="landingPlaybackProgress" style="display:none; padding: 10px 20px; background: rgba(157,78,221,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
-              <div style="display: flex; align-items: center; gap: 15px;">
-                <span id="landingCurrentNote" style="color: var(--accent-cyan); font-weight: 600;">Ready</span>
-                <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+              <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <span id="landingCurrentNote" style="color: var(--accent-cyan); font-weight: 600; min-width: 50px;">Ready</span>
+                <div style="flex: 1; min-width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
                   <div id="landingProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
                 </div>
+                <div class="voice-options" id="landingVoiceOptions">
+                  <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeLandingVoice()"><span>🎵</span></label>
+                  <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeLandingVoice()"><span>🎙️</span></label>
+                  <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeLandingVoice()"><span>🎹</span></label>
+                  <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeLandingVoice()"><span>🎻</span></label>
+                  <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeLandingVoice()"><span>✨</span></label>
+                </div>
+                <button class="output-btn loop-btn" id="landingLoopBtn" onclick="toggleLandingLoop()">↻ Loop</button>
                 <span id="landingPlaybackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
               </div>
             </div>
@@ -840,11 +858,19 @@ an infinite number of stars"></textarea>
           </div>
           <!-- Playback Progress -->
           <div id="playbackProgress" style="display:none; padding: 10px 20px; background: rgba(157,78,221,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <div style="display: flex; align-items: center; gap: 15px;">
-              <span id="currentNote" style="color: var(--accent-cyan); font-weight: 600;">Ready</span>
-              <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+              <span id="currentNote" style="color: var(--accent-cyan); font-weight: 600; min-width: 50px;">Ready</span>
+              <div style="flex: 1; min-width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
                 <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
               </div>
+              <div class="voice-options" id="voiceOptions">
+                <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵</span></label>
+                <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎙️</span></label>
+                <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹</span></label>
+                <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻</span></label>
+                <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨</span></label>
+              </div>
+              <button class="output-btn loop-btn" id="loopBtn" onclick="toggleLoop()">↻ Loop</button>
               <span id="playbackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
             </div>
           </div>
@@ -3021,43 +3047,8 @@ function initLandingAudio() {
 }
 
 function playLandingNote(frequency, duration, startTime, volume = 0.3) {
-  const oscillator = landingAudioContext.createOscillator();
-  const gainNode = landingAudioContext.createGain();
-  
-  oscillator.type = 'sine';
-  oscillator.frequency.setValueAtTime(frequency, startTime);
-  
-  const oscillator2 = landingAudioContext.createOscillator();
-  oscillator2.type = 'sine';
-  oscillator2.frequency.setValueAtTime(frequency * 2, startTime);
-  const gain2 = landingAudioContext.createGain();
-  gain2.gain.setValueAtTime(volume * 0.3, startTime);
-  
-  const oscillator3 = landingAudioContext.createOscillator();
-  oscillator3.type = 'sine';
-  oscillator3.frequency.setValueAtTime(frequency * 3, startTime);
-  const gain3 = landingAudioContext.createGain();
-  gain3.gain.setValueAtTime(volume * 0.1, startTime);
-  
-  gainNode.gain.setValueAtTime(0, startTime);
-  gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.05);
-  gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.1);
-  gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.1);
-  gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
-  
-  oscillator.connect(gainNode);
-  oscillator2.connect(gain2);
-  gain2.connect(gainNode);
-  oscillator3.connect(gain3);
-  gain3.connect(gainNode);
-  gainNode.connect(landingAudioContext.destination);
-  
-  oscillator.start(startTime);
-  oscillator2.start(startTime);
-  oscillator3.start(startTime);
-  oscillator.stop(startTime + duration);
-  oscillator2.stop(startTime + duration);
-  oscillator3.stop(startTime + duration);
+  // Use voice presets
+  playNoteWithVoices(landingAudioContext, frequency, duration, startTime, volume, landingSelectedVoices);
 }
 
 function generateLandingMelody(lyrics, voice, style) {
@@ -3152,6 +3143,14 @@ function playLandingScore() {
 function playLandingFromIndex(index) {
   if (!landingIsPlaying || index >= landingMelody.length) {
     if (index >= landingMelody.length) {
+      if (landingLoopEnabled) {
+        // Loop back to beginning
+        landingPlaybackIndex = 0;
+        landingStartTime = Date.now();
+        showToast('Looping...');
+        playLandingFromIndex(0);
+        return;
+      }
       stopLandingScore();
       showToast('Playback complete');
     }
@@ -3280,6 +3279,100 @@ generateLandingScore = function() {
   
   showToast('Score generated! Click Play to hear it.');
 };
+
+// ==================== VOICE PRESETS ====================
+const voicePresets = {
+  pure: { type: 'sine', harmonics: [1, 0, 0], attack: 0.05, decay: 0.1, sustain: 0.7, release: 0.2 },
+  choir: { type: 'triangle', harmonics: [1, 0.5, 0.25], attack: 0.1, decay: 0.15, sustain: 0.6, release: 0.3 },
+  organ: { type: 'square', harmonics: [1, 0.3, 0.1], attack: 0.02, decay: 0.05, sustain: 0.8, release: 0.1 },
+  strings: { type: 'sawtooth', harmonics: [1, 0.7, 0.4], attack: 0.15, decay: 0.2, sustain: 0.5, release: 0.4 },
+  rich: { type: 'sine', harmonics: [1, 0.6, 0.3, 0.15], attack: 0.08, decay: 0.12, sustain: 0.65, release: 0.25 }
+};
+
+// Landing page voice and loop state
+let landingSelectedVoices = ['pure'];
+let landingLoopEnabled = false;
+
+// Main composer voice and loop state
+let selectedVoices = ['pure'];
+let loopEnabled = false;
+
+function getSelectedVoices(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return ['pure'];
+  const checkboxes = container.querySelectorAll('input[type="checkbox"]:checked');
+  return Array.from(checkboxes).map(cb => cb.value);
+}
+
+function changeLandingVoice() {
+  landingSelectedVoices = getSelectedVoices('landingVoiceOptions');
+  if (landingSelectedVoices.length === 0) landingSelectedVoices = ['pure'];
+}
+
+function changeVoice() {
+  selectedVoices = getSelectedVoices('voiceOptions');
+  if (selectedVoices.length === 0) selectedVoices = ['pure'];
+}
+
+function toggleLandingLoop() {
+  landingLoopEnabled = !landingLoopEnabled;
+  const btn = document.getElementById('landingLoopBtn');
+  if (landingLoopEnabled) {
+    btn.classList.add('active');
+    btn.innerHTML = '\u21bb Loop On';
+    showToast('Loop enabled');
+  } else {
+    btn.classList.remove('active');
+    btn.innerHTML = '\u21bb Loop';
+    showToast('Loop disabled');
+  }
+}
+
+function toggleLoop() {
+  loopEnabled = !loopEnabled;
+  const btn = document.getElementById('loopBtn');
+  if (loopEnabled) {
+    btn.classList.add('active');
+    btn.innerHTML = '\u21bb Loop On';
+    showToast('Loop enabled');
+  } else {
+    btn.classList.remove('active');
+    btn.innerHTML = '\u21bb Loop';
+    showToast('Loop disabled');
+  }
+}
+
+// Enhanced note playback with voice presets
+function playNoteWithVoices(audioContext, frequency, duration, startTime, volume, voices) {
+  voices.forEach(voiceName => {
+    const preset = voicePresets[voiceName] || voicePresets.pure;
+    const gainNode = audioContext.createGain();
+    
+    preset.harmonics.forEach((harmonic, i) => {
+      if (harmonic <= 0) return;
+      const osc = audioContext.createOscillator();
+      osc.type = preset.type;
+      osc.frequency.setValueAtTime(frequency * (i + 1), startTime);
+      
+      const oscGain = audioContext.createGain();
+      oscGain.gain.setValueAtTime(harmonic * volume / voices.length, startTime);
+      
+      osc.connect(oscGain);
+      oscGain.connect(gainNode);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    });
+    
+    // ADSR envelope
+    gainNode.gain.setValueAtTime(0, startTime);
+    gainNode.gain.linearRampToValueAtTime(volume / voices.length, startTime + preset.attack);
+    gainNode.gain.linearRampToValueAtTime(volume * preset.sustain / voices.length, startTime + preset.attack + preset.decay);
+    gainNode.gain.setValueAtTime(volume * preset.sustain / voices.length, startTime + duration - preset.release);
+    gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
+    
+    gainNode.connect(audioContext.destination);
+  });
+}
 
 // Initialize landing page options on load
 document.addEventListener('DOMContentLoaded', function() {

@@ -687,7 +687,6 @@
       <a href="#musical-overview" style="color: var(--accent-gold); text-decoration: none; padding: 10px 18px; background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.3); border-radius: 25px; font-size: 0.9rem; transition: all 0.3s;">🎵 Musical Overview</a>
       <a href="#ai-sheet-music" style="color: var(--accent-cyan); text-decoration: none; padding: 10px 18px; background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); border-radius: 25px; font-size: 0.9rem; transition: all 0.3s;">🤖 AI Sheet Music</a>
       <a href="#composer-tool" style="color: var(--accent-pink); text-decoration: none; padding: 10px 18px; background: rgba(255,107,157,0.15); border: 1px solid rgba(255,107,157,0.3); border-radius: 25px; font-size: 0.9rem; transition: all 0.3s;">🎼 Composer Tool</a>
-      <a href="composer.html" style="color: #fff; text-decoration: none; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: 1px solid var(--accent-purple); border-radius: 25px; font-size: 0.9rem; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(157,78,221,0.4);">✨ Open Composer</a>
     </nav>
   </section>
 
@@ -1617,18 +1616,197 @@ Voice type: [SOPRANO/MEZZO/TENOR/BASS]</div>
         and various musical styles inspired by the opera.
       </p>
       
-      <div style="margin: 30px 0; border-radius: 15px; overflow: hidden; border: 2px solid rgba(157,78,221,0.5); background: var(--bg-card); box-shadow: 0 10px 40px rgba(157,78,221,0.3);">
-        <div style="background: linear-gradient(135deg, rgba(157,78,221,0.4), rgba(255,107,157,0.3)); padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-          <div>
-            <span style="color: var(--accent-gold); font-weight: 700; font-size: 1.2rem; display: block;">✨ COSMOS Music Composer</span>
-            <span style="color: var(--text-secondary); font-size: 0.85rem;">Transform your words into captivating sheet music</span>
+      <!-- Embedded Composer -->
+      <div class="composer-container" style="max-height: none;">
+        <!-- Input Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>✏️ Your Words & Options</h3>
           </div>
-          <a href="composer.html" target="_blank" style="color: #fff; text-decoration: none; font-size: 0.9rem; padding: 12px 24px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; border-radius: 25px; font-weight: 600; box-shadow: 0 4px 15px rgba(157,78,221,0.4); transition: all 0.3s;">Open Full Page ↗</a>
+          <div class="panel-content" style="max-height: none;">
+            <textarea class="lyrics-input" id="lyricsInput" placeholder="Enter your lyrics or words here...
+
+Example:
+do you see
+what do you see
+when you close your eyes
+i see the light
+an infinite number of stars"></textarea>
+            
+            <!-- Notation Format -->
+            <div class="options-section">
+              <h4>📋 Notation Format</h4>
+              <div class="options-grid" id="notationOptions">
+                <label class="option-item option-radio selected" data-value="piano-roll">
+                  <span class="icon">🎹</span>
+                  <span class="label">Piano Roll</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="treble-bass">
+                  <span class="icon">🎼</span>
+                  <span class="label">Treble/Bass</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="ssaattbb">
+                  <span class="icon">🎭</span>
+                  <span class="label">SSAATTBB</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="lead-sheet">
+                  <span class="icon">📄</span>
+                  <span class="label">Lead Sheet</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Dynamics -->
+            <div class="options-section">
+              <h4>🔊 Dynamics & Expression</h4>
+              <div class="options-grid" id="dynamicsOptions">
+                <label class="option-item selected" data-value="traditional">
+                  <span class="icon">🎵</span>
+                  <span class="label">Traditional</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item selected" data-value="vrn">
+                  <span class="icon">🗣️</span>
+                  <span class="label">VRN Codes</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item" data-value="expressive">
+                  <span class="icon">💫</span>
+                  <span class="label">Expressive</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Musical Style -->
+            <div class="options-section">
+              <h4>🎨 Musical Style</h4>
+              <div class="options-grid" id="styleOptions">
+                <label class="option-item option-radio selected" data-value="operatic">
+                  <span class="icon">🎭</span>
+                  <span class="label">Operatic</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="hypnotic">
+                  <span class="icon">🌀</span>
+                  <span class="label">Hypnotic</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="trance">
+                  <span class="icon">✨</span>
+                  <span class="label">Trance</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="classical">
+                  <span class="icon">🏛️</span>
+                  <span class="label">Classical</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="jazz">
+                  <span class="icon">🎷</span>
+                  <span class="label">Jazz</span>
+                  <span class="check"></span>
+                </label>
+                <label class="option-item option-radio" data-value="folk">
+                  <span class="icon">🪕</span>
+                  <span class="label">Folk</span>
+                  <span class="check"></span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Parameters -->
+            <div class="options-section">
+              <h4>⚙️ Parameters</h4>
+              <div class="select-row">
+                <div class="select-group">
+                  <label>Key</label>
+                  <select id="keySelect">
+                    <option value="C">C Major</option>
+                    <option value="G">G Major</option>
+                    <option value="D">D Major</option>
+                    <option value="F">F Major</option>
+                    <option value="Am">A Minor</option>
+                    <option value="Em">E Minor</option>
+                  </select>
+                </div>
+                <div class="select-group">
+                  <label>Tempo</label>
+                  <select id="tempoSelect">
+                    <option value="60">Largo (60)</option>
+                    <option value="72" selected>Andante (72)</option>
+                    <option value="90">Moderato (90)</option>
+                    <option value="120">Allegro (120)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="select-row">
+                <div class="select-group">
+                  <label>Time</label>
+                  <select id="timeSelect">
+                    <option value="4/4">4/4</option>
+                    <option value="3/4">3/4</option>
+                    <option value="6/8">6/8</option>
+                  </select>
+                </div>
+                <div class="select-group">
+                  <label>Voice</label>
+                  <select id="voiceSelect">
+                    <option value="soprano">Soprano</option>
+                    <option value="mezzo" selected>Mezzo</option>
+                    <option value="tenor">Tenor</option>
+                    <option value="baritone">Baritone</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <button class="generate-btn" onclick="generateScore()">
+              <span>🎵</span> Generate Sheet Music
+            </button>
+          </div>
         </div>
-        <iframe src="composer.html" style="width: 100%; height: calc(100vh - 100px); min-height: 900px; border: none; background: var(--bg-dark);" title="COSMOS Music Composer Tool"></iframe>
+        
+        <!-- Output Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>📜 Generated Score</h3>
+            <div class="output-actions">
+              <button class="output-btn play-btn" id="playBtn" onclick="playScore()">▶️ Play</button>
+              <button class="output-btn" id="pauseBtn" onclick="pauseScore()" style="display:none;">⏸️ Pause</button>
+              <button class="output-btn" id="stopBtn" onclick="stopScore()">⏹️ Stop</button>
+              <button class="output-btn" onclick="copyScore()">📋 Copy</button>
+              <button class="output-btn" onclick="downloadScore()">💾 Download</button>
+            </div>
+          </div>
+          <!-- Playback Progress -->
+          <div id="playbackProgress" style="display:none; padding: 10px 20px; background: rgba(157,78,221,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <span id="currentNote" style="color: var(--accent-cyan); font-weight: 600;">Ready</span>
+              <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
+              </div>
+              <span id="playbackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
+            </div>
+          </div>
+          <div class="panel-content" style="max-height: none;">
+            <div class="output-tabs">
+              <button class="tab-btn active" onclick="switchTab('score')">Score</button>
+              <button class="tab-btn" onclick="switchTab('vrn')">VRN Guide</button>
+            </div>
+            <div class="score-output" id="scoreOutput" style="min-height: 500px;">Enter lyrics and click Generate to create sheet music...</div>
+          </div>
+        </div>
       </div>
       
-      <div class="performance-note">
+      <!-- Toast -->
+      <div class="toast" id="toast"></div>
+      
+      <div class="performance-note" style="margin-top: 30px;">
         <h4>💡 Composer Features</h4>
         <ul style="color: var(--text-secondary); padding-left: 20px;">
           <li><strong>Multiple Notation Formats:</strong> Piano Roll, Treble/Bass, SSAATTBB, Lead Sheet</li>
@@ -1675,5 +1853,448 @@ Voice type: [SOPRANO/MEZZO/TENOR/BASS]</div>
       <a href="#ai-sheet-music">AI Sheet Music Creation</a>
     </p>
   </footer>
+
+  <script>
+    // ==================== OPTION HANDLING ====================
+    document.querySelectorAll('.option-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const parent = this.parentElement;
+        const isRadio = this.classList.contains('option-radio');
+        if (isRadio) {
+          parent.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
+        }
+        this.classList.toggle('selected', isRadio || !this.classList.contains('selected'));
+      });
+    });
+
+    function getSelectedOptions(containerId) {
+      return [...document.getElementById(containerId).querySelectorAll('.option-item.selected')].map(i => i.dataset.value);
+    }
+
+    function getSelectedRadio(containerId) {
+      const sel = document.getElementById(containerId).querySelector('.option-item.selected');
+      return sel ? sel.dataset.value : null;
+    }
+
+    // ==================== TOAST ====================
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ==================== COMPOSER ENGINE ====================
+    const voiceRanges = {
+      soprano: { scale: ['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5','B5','C6'] },
+      mezzo: { scale: ['A3','B3','C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5'] },
+      tenor: { scale: ['C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4','B4','C5'] },
+      baritone: { scale: ['A2','B2','C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4'] }
+    };
+
+    const stylePatterns = {
+      operatic: { intervals: [2,3,4,5,7], dynamics: ['p','mp','mf','f','ff','fff'] },
+      hypnotic: { intervals: [1,2,3], dynamics: ['p','mp','mf'] },
+      trance: { intervals: [2,3,5], dynamics: ['p','mf','f','ff'] },
+      classical: { intervals: [2,3,4,5], dynamics: ['p','mp','mf','f'] },
+      jazz: { intervals: [1,2,3,4,6,7], dynamics: ['mp','mf','f'] },
+      folk: { intervals: [2,3,5], dynamics: ['mp','mf'] }
+    };
+
+    function getVRNCode(pitch, emotion, intensity) {
+      const noteNum = parseInt(pitch.slice(-1));
+      let code = noteNum <= 3 ? 'C' : (noteNum === 4 ? 'M' : 'H');
+      return `[${code}${'+'.repeat(Math.min(3, intensity))}]`;
+    }
+
+    function parseLyrics(text) {
+      const lines = text.trim().split('\n').filter(l => l.trim());
+      const words = [];
+      lines.forEach((line, lineIdx) => {
+        line.trim().split(/\s+/).forEach((word, wordIdx, arr) => {
+          if (word) words.push({ text: word.toLowerCase(), isLineStart: wordIdx === 0, isLineEnd: wordIdx === arr.length - 1, lineNum: lineIdx });
+        });
+      });
+      return words;
+    }
+
+    function generateMelody(words, voice, style) {
+      const range = voiceRanges[voice];
+      const pattern = stylePatterns[style];
+      const melody = [];
+      let currentIdx = Math.floor(range.scale.length / 2);
+      
+      words.forEach((word, i) => {
+        const progress = i / words.length;
+        const emotion = progress > 0.7 ? 'powerful' : (progress < 0.3 ? 'tender' : 'building');
+        const intensity = Math.ceil(progress * 3);
+        let interval = pattern.intervals[Math.floor(Math.random() * pattern.intervals.length)];
+        let direction = Math.random() > 0.5 ? 1 : -1;
+        if (progress > 0.5) direction = 1;
+        if (word.isLineStart && i > 0) currentIdx = Math.max(currentIdx - 2, 2);
+        currentIdx = Math.max(0, Math.min(range.scale.length - 1, currentIdx + (direction * interval)));
+        if (progress > 0.8 && progress < 0.9) currentIdx = Math.min(currentIdx + 3, range.scale.length - 2);
+        
+        melody.push({
+          word: word.text, pitch: range.scale[currentIdx], vrn: getVRNCode(range.scale[currentIdx], emotion, intensity),
+          dynamic: pattern.dynamics[Math.min(Math.floor(progress * pattern.dynamics.length), pattern.dynamics.length - 1)],
+          isLineStart: word.isLineStart, isLineEnd: word.isLineEnd, lineNum: word.lineNum, emotion
+        });
+      });
+      return melody;
+    }
+
+    function generatePianoRollNotation(melody) {
+      const key = document.getElementById('keySelect').value;
+      const time = document.getElementById('timeSelect').value;
+      const tempo = document.getElementById('tempoSelect').value;
+      const voice = document.getElementById('voiceSelect').value;
+      const style = getSelectedRadio('styleOptions');
+      const dynamics = getSelectedOptions('dynamicsOptions');
+      
+      const lines = [];
+      let currentLineNotes = [], currentLineNum = -1;
+      melody.forEach(note => {
+        if (note.lineNum !== currentLineNum) {
+          if (currentLineNotes.length > 0) lines.push(currentLineNotes);
+          currentLineNotes = [];
+          currentLineNum = note.lineNum;
+        }
+        currentLineNotes.push(note);
+      });
+      if (currentLineNotes.length > 0) lines.push(currentLineNotes);
+      
+      let output = `┌${'\u2500'.repeat(78)}\n\u2502  PIANO ROLL SCORE\n\u2502  Key: ${key}  Time: ${time}  Tempo: \u2669=${tempo}  Voice: ${voice}  Style: ${style}\n\u251c${'\u2500'.repeat(78)}\n`;
+      
+      let measureNum = 1;
+      const noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+      
+      lines.forEach(lineNotes => {
+        const pitchNums = lineNotes.map(n => {
+          const note = n.pitch.slice(0,-1), octave = parseInt(n.pitch.slice(-1));
+          return octave * 12 + noteNames.indexOf(note);
+        });
+        const minP = Math.min(...pitchNums), maxP = Math.max(...pitchNums);
+        const pitchLabels = [];
+        for (let p = maxP + 1; p >= minP - 1; p--) {
+          pitchLabels.push({ name: noteNames[p % 12] + Math.floor(p / 12), num: p });
+        }
+        
+        const lyricsPreview = lineNotes.map(n => n.word).join(' ');
+        output += `\u2502\n\u2502  MEASURES ${measureNum}-${measureNum + 15}: "${lyricsPreview.substring(0,40)}"  ${lineNotes[lineNotes.length-1].dynamic}\n\u2502\n\u2502  ${voice.toUpperCase()}:\n`;
+        
+        pitchLabels.forEach(pi => {
+          let line = `\u2502  ${pi.name.padEnd(4)} `;
+          lineNotes.forEach(note => {
+            const np = parseInt(note.pitch.slice(-1)) * 12 + noteNames.indexOf(note.pitch.slice(0,-1));
+            line += np === pi.num ? (note.isLineEnd ? `${'\u2500'.repeat(6)}\u25cf~~~~~~~` : `${'\u2500'.repeat(6)}\u266a${'\u2500'.repeat(7)}`) : `${'\u2500'.repeat(14)}`;
+          });
+          output += line + '\n';
+        });
+        
+        if (dynamics.includes('vrn')) {
+          output += `\u2502\n\u2502       `;
+          lineNotes.forEach(n => output += n.vrn.padEnd(14));
+          output += '\n';
+        }
+        output += `\u2502       `;
+        lineNotes.forEach(n => output += `"${n.word}" `.padEnd(14));
+        output += `\n\u2502\n\u251c${'\u2500'.repeat(78)}\n`;
+        measureNum += 16;
+      });
+      
+      return output + `\u2514${'\u2500'.repeat(78)}\n`;
+    }
+
+    let currentGeneratedOutput = '';
+
+    function generateScore() {
+      const lyrics = document.getElementById('lyricsInput').value.trim();
+      if (!lyrics) { showToast('Enter lyrics first', true); return; }
+      
+      const voice = document.getElementById('voiceSelect').value;
+      const style = getSelectedRadio('styleOptions');
+      const words = parseLyrics(lyrics);
+      if (words.length === 0) { showToast('No valid words found', true); return; }
+      
+      const melody = generateMelody(words, voice, style);
+      let output = generatePianoRollNotation(melody);
+      
+      document.getElementById('scoreOutput').textContent = output;
+      currentGeneratedOutput = output;
+      showToast('Score generated!');
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(tab)));
+      const output = document.getElementById('scoreOutput');
+      if (tab === 'vrn') {
+        output.textContent = `
+VRN (Vocal Resonance Notation) Quick Guide:
+
+PRIMARY CODES:
+[C]  = Chest Voice    - Full chest resonance
+[H]  = Head Voice     - Upper resonance, light
+[M]  = Mix Voice      - Balanced chest/head
+
+INTENSITY:
++    = Slight
+++   = Moderate  
++++  = Maximum
+
+MIXED:
+[CM] = Chest-Mix
+[HM] = Head-Mix
+
+EXTENDED:
+[N]  = Nasal (forward, bright)
+[O]  = Oral (open throat)
+[Oc] = Occipital (back resonance)
+[SP] = Soft Palate (raised)`;
+      } else if (currentGeneratedOutput) {
+        output.textContent = currentGeneratedOutput;
+      }
+    }
+
+    function copyScore() {
+      const text = document.getElementById('scoreOutput').textContent;
+      navigator.clipboard.writeText(text);
+      showToast('Copied!');
+    }
+
+    function downloadScore() {
+      const blob = new Blob([document.getElementById('scoreOutput').textContent], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'cosmos-score.txt';
+      a.click();
+      showToast('Downloaded!');
+    }
+
+    // ==================== AUDIO PLAYBACK ====================
+    let audioContext = null;
+    let currentMelody = [];
+    let isPlaying = false;
+    let isPaused = false;
+    let playbackIndex = 0;
+    let playbackTimeout = null;
+    let startTime = 0;
+    let pausedAt = 0;
+
+    // Note frequencies (A4 = 440Hz)
+    const noteFrequencies = {
+      'C2': 65.41, 'C#2': 69.30, 'D2': 73.42, 'D#2': 77.78, 'E2': 82.41, 'F2': 87.31, 'F#2': 92.50, 'G2': 98.00, 'G#2': 103.83, 'A2': 110.00, 'A#2': 116.54, 'B2': 123.47,
+      'C3': 130.81, 'C#3': 138.59, 'D3': 146.83, 'D#3': 155.56, 'E3': 164.81, 'F3': 174.61, 'F#3': 185.00, 'G3': 196.00, 'G#3': 207.65, 'A3': 220.00, 'A#3': 233.08, 'B3': 246.94,
+      'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
+      'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46, 'F#5': 739.99, 'G5': 783.99, 'G#5': 830.61, 'A5': 880.00, 'A#5': 932.33, 'B5': 987.77,
+      'C6': 1046.50, 'C#6': 1108.73, 'D6': 1174.66, 'D#6': 1244.51, 'E6': 1318.51, 'F6': 1396.91, 'F#6': 1479.98, 'G6': 1567.98, 'G#6': 1661.22, 'A6': 1760.00, 'A#6': 1864.66, 'B6': 1975.53
+    };
+
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    }
+
+    function playNote(frequency, duration, startTime, volume = 0.3) {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      // Use sine wave for vocal-like tone
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency, startTime);
+      
+      // Add harmonics for richer sound
+      const oscillator2 = audioContext.createOscillator();
+      oscillator2.type = 'sine';
+      oscillator2.frequency.setValueAtTime(frequency * 2, startTime); // Octave
+      const gain2 = audioContext.createGain();
+      gain2.gain.setValueAtTime(volume * 0.3, startTime);
+      
+      const oscillator3 = audioContext.createOscillator();
+      oscillator3.type = 'sine';
+      oscillator3.frequency.setValueAtTime(frequency * 3, startTime); // Fifth
+      const gain3 = audioContext.createGain();
+      gain3.gain.setValueAtTime(volume * 0.1, startTime);
+      
+      // ADSR envelope
+      gainNode.gain.setValueAtTime(0, startTime);
+      gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.05); // Attack
+      gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.1); // Decay
+      gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.1); // Sustain
+      gainNode.gain.linearRampToValueAtTime(0, startTime + duration); // Release
+      
+      oscillator.connect(gainNode);
+      oscillator2.connect(gain2);
+      gain2.connect(gainNode);
+      oscillator3.connect(gain3);
+      gain3.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.start(startTime);
+      oscillator2.start(startTime);
+      oscillator3.start(startTime);
+      oscillator.stop(startTime + duration);
+      oscillator2.stop(startTime + duration);
+      oscillator3.stop(startTime + duration);
+    }
+
+    function playScore() {
+      if (currentMelody.length === 0) {
+        showToast('Generate a score first', true);
+        return;
+      }
+
+      initAudio();
+      
+      if (isPaused) {
+        // Resume from paused position
+        isPaused = false;
+        isPlaying = true;
+        updatePlaybackUI();
+        playFromIndex(playbackIndex);
+        return;
+      }
+
+      // Start fresh
+      stopScore();
+      isPlaying = true;
+      playbackIndex = 0;
+      startTime = Date.now();
+      
+      document.getElementById('playbackProgress').style.display = 'block';
+      updatePlaybackUI();
+      playFromIndex(0);
+    }
+
+    function playFromIndex(index) {
+      if (!isPlaying || index >= currentMelody.length) {
+        if (index >= currentMelody.length) {
+          // Playback complete
+          stopScore();
+          showToast('Playback complete');
+        }
+        return;
+      }
+
+      const note = currentMelody[index];
+      const tempo = parseInt(document.getElementById('tempoSelect').value) || 72;
+      const beatDuration = 60 / tempo; // Duration of one beat in seconds
+      const noteDuration = beatDuration * 0.8; // Note length (slightly shorter than beat)
+      
+      // Get frequency
+      const freq = noteFrequencies[note.pitch];
+      if (freq) {
+        // Volume based on dynamics
+        const dynamicVolumes = { 'ppp': 0.1, 'pp': 0.15, 'p': 0.2, 'mp': 0.25, 'mf': 0.3, 'f': 0.4, 'ff': 0.5, 'fff': 0.6 };
+        const volume = dynamicVolumes[note.dynamic] || 0.3;
+        
+        playNote(freq, noteDuration, audioContext.currentTime, volume);
+      }
+
+      // Update UI
+      playbackIndex = index;
+      updateProgressUI(index, currentMelody.length, note);
+
+      // Schedule next note
+      const nextDelay = beatDuration * 1000;
+      playbackTimeout = setTimeout(() => {
+        playFromIndex(index + 1);
+      }, nextDelay);
+    }
+
+    function pauseScore() {
+      if (isPlaying && !isPaused) {
+        isPaused = true;
+        isPlaying = false;
+        pausedAt = playbackIndex;
+        if (playbackTimeout) {
+          clearTimeout(playbackTimeout);
+          playbackTimeout = null;
+        }
+        updatePlaybackUI();
+        showToast('Paused');
+      }
+    }
+
+    function stopScore() {
+      isPlaying = false;
+      isPaused = false;
+      playbackIndex = 0;
+      pausedAt = 0;
+      
+      if (playbackTimeout) {
+        clearTimeout(playbackTimeout);
+        playbackTimeout = null;
+      }
+      
+      document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('currentNote').textContent = 'Ready';
+      document.getElementById('playbackTime').textContent = '0:00';
+      updatePlaybackUI();
+    }
+
+    function updatePlaybackUI() {
+      const playBtn = document.getElementById('playBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      
+      if (isPlaying) {
+        playBtn.style.display = 'none';
+        pauseBtn.style.display = 'inline-block';
+        stopBtn.style.background = 'rgba(255,107,157,0.3)';
+      } else if (isPaused) {
+        playBtn.innerHTML = '▶️ Resume';
+        playBtn.style.display = 'inline-block';
+        pauseBtn.style.display = 'none';
+        stopBtn.style.background = '';
+      } else {
+        playBtn.innerHTML = '▶️ Play';
+        playBtn.style.display = 'inline-block';
+        pauseBtn.style.display = 'none';
+        stopBtn.style.background = '';
+      }
+    }
+
+    function updateProgressUI(current, total, note) {
+      const progress = ((current + 1) / total) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+      document.getElementById('currentNote').textContent = `♪ ${note.pitch} - "${note.word}" ${note.vrn}`;
+      
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = elapsed % 60;
+      document.getElementById('playbackTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Override generateScore to store melody for playback
+    const originalGenerateScore = generateScore;
+    generateScore = function() {
+      const lyrics = document.getElementById('lyricsInput').value.trim();
+      if (!lyrics) { showToast('Enter lyrics first', true); return; }
+      
+      const voice = document.getElementById('voiceSelect').value;
+      const style = getSelectedRadio('styleOptions');
+      const words = parseLyrics(lyrics);
+      if (words.length === 0) { showToast('No valid words found', true); return; }
+      
+      // Generate and store melody for playback
+      currentMelody = generateMelody(words, voice, style);
+      let output = generatePianoRollNotation(currentMelody);
+      
+      document.getElementById('scoreOutput').textContent = output;
+      currentGeneratedOutput = output;
+      
+      // Reset playback state
+      stopScore();
+      document.getElementById('playbackProgress').style.display = 'block';
+      document.getElementById('currentNote').textContent = `Ready - ${currentMelody.length} notes`;
+      
+      showToast('Score generated! Click Play to hear it.');
+    };
+  </script>
 </body>
 </html>

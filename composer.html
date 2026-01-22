@@ -336,8 +336,30 @@
       .nav { flex-direction: column; gap: 15px; }
       .options-grid { grid-template-columns: 1fr 1fr; }
       .select-row { grid-template-columns: 1fr; }
-      .score-output { font-size: 9px; }
       .hero-buttons { flex-direction: column; }
+      
+      /* Mobile Score Output - Larger and more readable */
+      .score-output { 
+        font-size: 14px; 
+        line-height: 1.6; 
+        padding: 15px; 
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .landing-composer-container .score-output { 
+        min-height: 250px; 
+        font-size: 14px;
+      }
+      
+      /* Playback controls - larger touch targets */
+      .output-btn { padding: 10px 16px; font-size: 1rem; }
+      .voice-checkbox { padding: 8px 12px; font-size: 1rem; }
+      .loop-btn { padding: 10px 16px; font-size: 1rem; }
+      
+      /* Panel adjustments */
+      .panel-content { padding: 15px; }
+      .panel-header { padding: 12px 15px; }
+      .panel-header h2 { font-size: 1rem; }
     }
   </style>
 </head>

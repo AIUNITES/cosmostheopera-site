@@ -92,7 +92,15 @@
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 15px; }
       .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
-      .score-block pre { font-size: 11px; }
+      
+      /* Mobile Score - Larger and readable */
+      .score-block pre { font-size: 14px; line-height: 1.5; }
+      .score-block { padding: 15px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      
+      /* Header adjustments */
+      .score-header { padding: 15px; }
+      .score-header h3 { font-size: 1.1rem; }
+      .score-meta span { font-size: 0.8rem; }
     }
   </style>
 </head>

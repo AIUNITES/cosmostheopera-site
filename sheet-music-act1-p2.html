@@ -87,7 +87,26 @@
     .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer p { color: var(--text-secondary); font-size: 0.85rem; }
     .footer a { color: var(--accent-purple); text-decoration: none; }
-    @media (max-width: 768px) { .nav { flex-direction: column; gap: 15px; } .measure-block { font-size: 9px; } .audio-banner { flex-direction: column; text-align: center; } .floating-controls { padding: 10px 15px; width: 95%; flex-wrap: wrap; justify-content: center; } }
+    @media (max-width: 768px) { 
+      .nav { flex-direction: column; gap: 15px; } 
+      .audio-banner { flex-direction: column; text-align: center; } 
+      .floating-controls { padding: 10px 15px; width: 95%; flex-wrap: wrap; justify-content: center; } 
+      
+      /* Mobile Score - Larger and readable */
+      .measure-block { font-size: 14px; line-height: 1.5; padding: 15px; }
+      .score-block { padding: 15px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      
+      /* Larger touch targets */
+      .voice-checkbox { padding: 8px 12px; font-size: 1rem; }
+      .floating-btn { padding: 10px 16px; font-size: 1rem; }
+      .play-btn { padding: 12px 20px; font-size: 1rem; }
+      .loop-btn { padding: 10px 16px; font-size: 1rem; }
+      
+      /* Header adjustments */
+      .score-header { padding: 15px; }
+      .score-header h3 { font-size: 1.1rem; }
+      .score-meta span { font-size: 0.8rem; }
+    }
   </style>
 </head>
 <body>

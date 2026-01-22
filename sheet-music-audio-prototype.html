@@ -57,7 +57,17 @@
     .score-annotation { background: rgba(255,215,0,0.1); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary); border-left: 3px solid var(--accent-gold); }
     .footer { background: var(--bg-card); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.85rem; }
     
-    @media (max-width: 768px) { .measure-block { font-size: 9px; } .floating-controls { flex-wrap: wrap; justify-content: center; padding: 10px 15px; bottom: 10px; width: 95%; } }
+    @media (max-width: 768px) { 
+      /* Mobile Score - Larger and readable */
+      .measure-block { font-size: 14px; line-height: 1.5; padding: 15px; } 
+      .score-block { padding: 15px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      
+      /* Floating controls */
+      .floating-controls { flex-wrap: wrap; justify-content: center; padding: 10px 15px; bottom: 10px; width: 95%; } 
+      
+      /* Larger touch targets */
+      .play-btn, .stop-btn { padding: 12px 20px; font-size: 1rem; }
+    }
   </style>
 </head>
 <body>

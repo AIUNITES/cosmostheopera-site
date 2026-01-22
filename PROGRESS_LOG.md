@@ -451,5 +451,76 @@ Added audio playback buttons (Play/Pause/Stop) to the landing page composer in *
 
 ---
 
+## Session 17: Composer Voice Selector & Loop Controls (January 22, 2026)
+
+### Changes Made
+
+Added voice selector checkboxes and Loop button to both landing page and logged-in composer views in **composer.html**, matching the functionality from sheet music pages.
+
+**Files Updated:**
+- **composer.html** - Voice options and loop controls added to both composers
+
+### Features Added
+
+1. **Voice Selector Checkboxes (Multi-Select)**
+   - 🎵 Pure Tone (sine wave, clean)
+   - 🎙️ Choir Pad (triangle wave, warm)
+   - 🎹 Organ (square wave, sustained)
+   - 🎻 Strings (sawtooth wave, expressive)
+   - ✨ Rich Harmonics (full, warm)
+
+2. **Loop Button**
+   - ↻ Loop - toggles looping of generated score
+   - Visual active state with gold border
+   - Toast notification on toggle
+
+3. **Voice Preset System**
+   - Each voice has unique oscillator type, harmonics, and ADSR envelope
+   - Multiple voices can be selected for layered sound
+   - Plays all selected voices simultaneously with volume normalization
+
+### Technical Implementation
+
+**Voice Presets Object:**
+```javascript
+const voicePresets = {
+  pure: { type: 'sine', harmonics: [1, 0, 0], attack: 0.05, decay: 0.1, sustain: 0.7, release: 0.2 },
+  choir: { type: 'triangle', harmonics: [1, 0.5, 0.25], attack: 0.1, decay: 0.15, sustain: 0.6, release: 0.3 },
+  organ: { type: 'square', harmonics: [1, 0.3, 0.1], attack: 0.02, decay: 0.05, sustain: 0.8, release: 0.1 },
+  strings: { type: 'sawtooth', harmonics: [1, 0.7, 0.4], attack: 0.15, decay: 0.2, sustain: 0.5, release: 0.4 },
+  rich: { type: 'sine', harmonics: [1, 0.6, 0.3, 0.15], attack: 0.08, decay: 0.12, sustain: 0.65, release: 0.25 }
+};
+```
+
+**New Functions:**
+- `playNoteWithVoices(audioContext, frequency, duration, startTime, volume, voices)` - Plays note with selected voice presets
+- `changeVoice()` / `changeLandingVoice()` - Updates selected voices from checkboxes
+- `toggleLoop()` / `toggleLandingLoop()` - Toggles loop mode with visual feedback
+- `getSelectedVoices(containerId)` - Gets array of checked voice values
+
+### CSS Added
+
+```css
+.voice-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.voice-checkbox { display: flex; align-items: center; gap: 4px; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; cursor: pointer; }
+.voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(0,255,136,0.1); }
+.loop-btn.active { background: rgba(255,215,0,0.2); border-color: var(--accent-gold); color: var(--accent-gold); }
+```
+
+### Element IDs
+
+| Element | Landing Page | Composer Screen |
+|---------|-------------|----------------|
+| Voice Options Container | `landingVoiceOptions` | `voiceOptions` |
+| Loop Button | `landingLoopBtn` | `loopBtn` |
+
+### Notes
+- Matches voice selector implementation from sheet music pages (sheet-music-act1-p1.html, etc.)
+- Both landing page and composer screen now have identical audio playback features
+- Loop functionality restarts from beginning when reaching end of score
+- Voice selection can be changed during playback
+
+---
+
 *Implementation by Claude (Anthropic) - January 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

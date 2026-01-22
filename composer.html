@@ -313,7 +313,8 @@
     /* Landing Composer */
     .landing-composer-container { padding: 20px; background: linear-gradient(180deg, rgba(157,78,221,0.1) 0%, transparent 100%); }
     .landing-composer-container .composer-container { min-height: auto; }
-    .landing-composer-container .panel-content { max-height: 500px; overflow-y: auto; }
+    .landing-composer-container .panel:first-child .panel-content { max-height: none; overflow-y: visible; }
+    .landing-composer-container .panel:last-child .panel-content { max-height: 500px; overflow-y: auto; }
     .landing-composer-container .score-output { min-height: 300px; }
     
     /* CTA Section */
@@ -2044,43 +2045,8 @@ function initAudio() {
 }
 
 function playNote(frequency, duration, startTime, volume = 0.3) {
-  const oscillator = audioContext.createOscillator();
-  const gainNode = audioContext.createGain();
-  
-  oscillator.type = 'sine';
-  oscillator.frequency.setValueAtTime(frequency, startTime);
-  
-  const oscillator2 = audioContext.createOscillator();
-  oscillator2.type = 'sine';
-  oscillator2.frequency.setValueAtTime(frequency * 2, startTime);
-  const gain2 = audioContext.createGain();
-  gain2.gain.setValueAtTime(volume * 0.3, startTime);
-  
-  const oscillator3 = audioContext.createOscillator();
-  oscillator3.type = 'sine';
-  oscillator3.frequency.setValueAtTime(frequency * 3, startTime);
-  const gain3 = audioContext.createGain();
-  gain3.gain.setValueAtTime(volume * 0.1, startTime);
-  
-  gainNode.gain.setValueAtTime(0, startTime);
-  gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.05);
-  gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.1);
-  gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.1);
-  gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
-  
-  oscillator.connect(gainNode);
-  oscillator2.connect(gain2);
-  gain2.connect(gainNode);
-  oscillator3.connect(gain3);
-  gain3.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-  
-  oscillator.start(startTime);
-  oscillator2.start(startTime);
-  oscillator3.start(startTime);
-  oscillator.stop(startTime + duration);
-  oscillator2.stop(startTime + duration);
-  oscillator3.stop(startTime + duration);
+  // Use voice presets
+  playNoteWithVoices(audioContext, frequency, duration, startTime, volume, selectedVoices);
 }
 
 function playScore() {
@@ -2112,6 +2078,14 @@ function playScore() {
 function playFromIndex(index) {
   if (!isPlaying || index >= currentMelody.length) {
     if (index >= currentMelody.length) {
+      if (loopEnabled) {
+        // Loop back to beginning
+        playbackIndex = 0;
+        startTime = Date.now();
+        showToast('Looping...');
+        playFromIndex(0);
+        return;
+      }
       stopScore();
       showToast('Playback complete');
     }

@@ -564,6 +564,29 @@
       color: var(--accent-green);
     }
     
+    .output-actions-wrapper { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .output-actions { display: flex; gap: 8px; }
+    .voice-actions { display: flex; gap: 8px; align-items: center; }
+    
+    /* Voice Selector Checkboxes */
+    .voice-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .voice-checkbox { display: flex; align-items: center; gap: 4px; background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+    .voice-checkbox:hover { border-color: var(--accent-cyan); }
+    .voice-checkbox input { display: none; }
+    .voice-checkbox input:checked + span { color: var(--accent-green); }
+    .voice-checkbox:has(input:checked) { border-color: var(--accent-green); background: rgba(74,222,128,0.1); }
+    .loop-btn { background: rgba(157,78,221,0.2); border: 1px solid var(--accent-purple); color: var(--accent-purple); }
+    .loop-btn.active { background: rgba(255,215,0,0.2); border-color: var(--accent-gold); color: var(--accent-gold); }
+    
+    /* Lyrics Input with Mic */
+    .lyrics-input-wrapper { position: relative; margin-bottom: 20px; }
+    .lyrics-input-wrapper .lyrics-input { margin-bottom: 0; padding-right: 50px; }
+    .mic-btn { position: absolute; right: 10px; top: 10px; width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .mic-btn:hover { border-color: var(--accent-cyan); background: rgba(0,212,255,0.1); }
+    .mic-btn.recording { border-color: #ff4444; background: rgba(255,68,68,0.2); animation: pulse-recording 1s infinite; }
+    .mic-btn .mic-icon { font-size: 1.2rem; }
+    @keyframes pulse-recording { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    
     .score-output {
       background: #1a1a24;
       border-radius: 10px;
@@ -1624,7 +1647,8 @@ Voice type: [SOPRANO/MEZZO/TENOR/BASS]</div>
             <h3>✏️ Your Words & Options</h3>
           </div>
           <div class="panel-content" style="max-height: none;">
-            <textarea class="lyrics-input" id="lyricsInput" placeholder="Enter your lyrics or words here...
+            <div class="lyrics-input-wrapper">
+              <textarea class="lyrics-input" id="lyricsInput" placeholder="Enter your lyrics or words here...
 
 Example:
 do you see
@@ -1632,6 +1656,10 @@ what do you see
 when you close your eyes
 i see the light
 an infinite number of stars"></textarea>
+              <button class="mic-btn" id="micBtn" onclick="toggleSpeechRecognition()" title="Click to record voice">
+                <span class="mic-icon">🎙️</span>
+              </button>
+            </div>
             
             <!-- Notation Format -->
             <div class="options-section">
@@ -1775,19 +1803,31 @@ an infinite number of stars"></textarea>
         <div class="panel">
           <div class="panel-header">
             <h3>📜 Generated Score</h3>
-            <div class="output-actions">
-              <button class="output-btn play-btn" id="playBtn" onclick="playScore()">▶️ Play</button>
-              <button class="output-btn" id="pauseBtn" onclick="pauseScore()" style="display:none;">⏸️ Pause</button>
-              <button class="output-btn" id="stopBtn" onclick="stopScore()">⏹️ Stop</button>
-              <button class="output-btn" onclick="copyScore()">📋 Copy</button>
-              <button class="output-btn" onclick="downloadScore()">💾 Download</button>
+            <div class="output-actions-wrapper">
+              <div class="output-actions">
+                <button class="output-btn play-btn" id="playBtn" onclick="playScore()">▶️ Play</button>
+                <button class="output-btn" id="pauseBtn" onclick="pauseScore()" style="display:none;">⏸️ Pause</button>
+                <button class="output-btn" id="stopBtn" onclick="stopScore()">⏹️ Stop</button>
+                <button class="output-btn" onclick="copyScore()">📋 Copy</button>
+                <button class="output-btn" onclick="downloadScore()">💾 Download</button>
+              </div>
+              <div class="voice-actions">
+                <div class="voice-options" id="voiceOptions">
+                  <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵</span></label>
+                  <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎙️</span></label>
+                  <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹</span></label>
+                  <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻</span></label>
+                  <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨</span></label>
+                </div>
+                <button class="output-btn loop-btn" id="loopBtn" onclick="toggleLoop()">↻ Loop</button>
+              </div>
             </div>
           </div>
           <!-- Playback Progress -->
           <div id="playbackProgress" style="display:none; padding: 10px 20px; background: rgba(157,78,221,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <div style="display: flex; align-items: center; gap: 15px;">
-              <span id="currentNote" style="color: var(--accent-cyan); font-weight: 600;">Ready</span>
-              <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+              <span id="currentNote" style="color: var(--accent-cyan); font-weight: 600; min-width: 50px;">Ready</span>
+              <div style="flex: 1; min-width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
                 <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
               </div>
               <span id="playbackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
@@ -2099,47 +2139,77 @@ EXTENDED:
       }
     }
 
+    // ==================== VOICE PRESETS ====================
+    const voicePresets = {
+      pure: { type: 'sine', harmonics: [1, 0, 0], attack: 0.05, decay: 0.1, sustain: 0.7, release: 0.2 },
+      choir: { type: 'triangle', harmonics: [1, 0.5, 0.25], attack: 0.1, decay: 0.15, sustain: 0.6, release: 0.3 },
+      organ: { type: 'square', harmonics: [1, 0.3, 0.1], attack: 0.02, decay: 0.05, sustain: 0.8, release: 0.1 },
+      strings: { type: 'sawtooth', harmonics: [1, 0.7, 0.4], attack: 0.15, decay: 0.2, sustain: 0.5, release: 0.4 },
+      rich: { type: 'sine', harmonics: [1, 0.6, 0.3, 0.15], attack: 0.08, decay: 0.12, sustain: 0.65, release: 0.25 }
+    };
+
+    let selectedVoices = ['pure'];
+    let loopEnabled = false;
+
+    function getSelectedVoices(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return ['pure'];
+      const checkboxes = container.querySelectorAll('input[type="checkbox"]:checked');
+      return Array.from(checkboxes).map(cb => cb.value);
+    }
+
+    function changeVoice() {
+      selectedVoices = getSelectedVoices('voiceOptions');
+      if (selectedVoices.length === 0) selectedVoices = ['pure'];
+    }
+
+    function toggleLoop() {
+      loopEnabled = !loopEnabled;
+      const btn = document.getElementById('loopBtn');
+      if (loopEnabled) {
+        btn.classList.add('active');
+        btn.innerHTML = '↻ Loop On';
+        showToast('Loop enabled');
+      } else {
+        btn.classList.remove('active');
+        btn.innerHTML = '↻ Loop';
+        showToast('Loop disabled');
+      }
+    }
+
+    function playNoteWithVoices(frequency, duration, startTime, volume) {
+      selectedVoices.forEach(voiceName => {
+        const preset = voicePresets[voiceName] || voicePresets.pure;
+        const gainNode = audioContext.createGain();
+        
+        preset.harmonics.forEach((harmonic, i) => {
+          if (harmonic <= 0) return;
+          const osc = audioContext.createOscillator();
+          osc.type = preset.type;
+          osc.frequency.setValueAtTime(frequency * (i + 1), startTime);
+          
+          const oscGain = audioContext.createGain();
+          oscGain.gain.setValueAtTime(harmonic * volume / selectedVoices.length, startTime);
+          
+          osc.connect(oscGain);
+          oscGain.connect(gainNode);
+          osc.start(startTime);
+          osc.stop(startTime + duration);
+        });
+        
+        // ADSR envelope
+        gainNode.gain.setValueAtTime(0, startTime);
+        gainNode.gain.linearRampToValueAtTime(volume / selectedVoices.length, startTime + preset.attack);
+        gainNode.gain.linearRampToValueAtTime(volume * preset.sustain / selectedVoices.length, startTime + preset.attack + preset.decay);
+        gainNode.gain.setValueAtTime(volume * preset.sustain / selectedVoices.length, startTime + duration - preset.release);
+        gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
+        
+        gainNode.connect(audioContext.destination);
+      });
+    }
+
     function playNote(frequency, duration, startTime, volume = 0.3) {
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      
-      // Use sine wave for vocal-like tone
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(frequency, startTime);
-      
-      // Add harmonics for richer sound
-      const oscillator2 = audioContext.createOscillator();
-      oscillator2.type = 'sine';
-      oscillator2.frequency.setValueAtTime(frequency * 2, startTime); // Octave
-      const gain2 = audioContext.createGain();
-      gain2.gain.setValueAtTime(volume * 0.3, startTime);
-      
-      const oscillator3 = audioContext.createOscillator();
-      oscillator3.type = 'sine';
-      oscillator3.frequency.setValueAtTime(frequency * 3, startTime); // Fifth
-      const gain3 = audioContext.createGain();
-      gain3.gain.setValueAtTime(volume * 0.1, startTime);
-      
-      // ADSR envelope
-      gainNode.gain.setValueAtTime(0, startTime);
-      gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.05); // Attack
-      gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.1); // Decay
-      gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.1); // Sustain
-      gainNode.gain.linearRampToValueAtTime(0, startTime + duration); // Release
-      
-      oscillator.connect(gainNode);
-      oscillator2.connect(gain2);
-      gain2.connect(gainNode);
-      oscillator3.connect(gain3);
-      gain3.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      oscillator.start(startTime);
-      oscillator2.start(startTime);
-      oscillator3.start(startTime);
-      oscillator.stop(startTime + duration);
-      oscillator2.stop(startTime + duration);
-      oscillator3.stop(startTime + duration);
+      playNoteWithVoices(frequency, duration, startTime, volume);
     }
 
     function playScore() {
@@ -2173,6 +2243,14 @@ EXTENDED:
     function playFromIndex(index) {
       if (!isPlaying || index >= currentMelody.length) {
         if (index >= currentMelody.length) {
+          if (loopEnabled) {
+            // Loop back to beginning
+            playbackIndex = 0;
+            startTime = Date.now();
+            showToast('Looping...');
+            playFromIndex(0);
+            return;
+          }
           // Playback complete
           stopScore();
           showToast('Playback complete');

@@ -147,6 +147,9 @@
     .output-btn:hover { background: rgba(0,212,255,0.3); }
     .output-btn.save-btn { background: rgba(0,255,136,0.2); border-color: var(--accent-green); color: var(--accent-green); }
     
+    .output-actions-wrapper { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .voice-actions { display: flex; gap: 8px; align-items: center; }
+    
     .score-output { background: var(--bg-input); border-radius: 10px; padding: 20px; font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.4; white-space: pre; overflow-x: auto; min-height: 400px; color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.05); }
     
     .output-tabs { display: flex; gap: 5px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -499,13 +502,25 @@ an infinite number of stars"></textarea>
           <div class="panel">
             <div class="panel-header">
               <h2>📜 Generated Score</h2>
-              <div class="output-actions">
-                <button class="output-btn play-btn" id="landingPlayBtn" onclick="playLandingScore()">▶️ Play</button>
-                <button class="output-btn" id="landingPauseBtn" onclick="pauseLandingScore()" style="display:none;">⏸️ Pause</button>
-                <button class="output-btn" id="landingStopBtn" onclick="stopLandingScore()">⏹️ Stop</button>
-                <button class="output-btn" onclick="copyLandingScore()">📋 Copy</button>
-                <button class="output-btn" onclick="downloadLandingScore()">💾 Download</button>
-                <button class="output-btn save-btn" onclick="promptLoginToSave()">✨ Save</button>
+              <div class="output-actions-wrapper">
+                <div class="output-actions">
+                  <button class="output-btn play-btn" id="landingPlayBtn" onclick="playLandingScore()">▶️ Play</button>
+                  <button class="output-btn" id="landingPauseBtn" onclick="pauseLandingScore()" style="display:none;">⏸️ Pause</button>
+                  <button class="output-btn" id="landingStopBtn" onclick="stopLandingScore()">⏹️ Stop</button>
+                  <button class="output-btn" onclick="copyLandingScore()">📋 Copy</button>
+                  <button class="output-btn" onclick="downloadLandingScore()">💾 Download</button>
+                  <button class="output-btn save-btn" onclick="promptLoginToSave()">✨ Save</button>
+                </div>
+                <div class="voice-actions">
+                  <div class="voice-options" id="landingVoiceOptions">
+                    <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeLandingVoice()"><span>🎵</span></label>
+                    <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeLandingVoice()"><span>🎙️</span></label>
+                    <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeLandingVoice()"><span>🎹</span></label>
+                    <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeLandingVoice()"><span>🎻</span></label>
+                    <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeLandingVoice()"><span>✨</span></label>
+                  </div>
+                  <button class="output-btn loop-btn" id="landingLoopBtn" onclick="toggleLandingLoop()">↻ Loop</button>
+                </div>
               </div>
             </div>
             <!-- Playback Progress -->
@@ -515,14 +530,6 @@ an infinite number of stars"></textarea>
                 <div style="flex: 1; min-width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
                   <div id="landingProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
                 </div>
-                <div class="voice-options" id="landingVoiceOptions">
-                  <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeLandingVoice()"><span>🎵</span></label>
-                  <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeLandingVoice()"><span>🎙️</span></label>
-                  <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeLandingVoice()"><span>🎹</span></label>
-                  <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeLandingVoice()"><span>🎻</span></label>
-                  <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeLandingVoice()"><span>✨</span></label>
-                </div>
-                <button class="output-btn loop-btn" id="landingLoopBtn" onclick="toggleLandingLoop()">↻ Loop</button>
                 <span id="landingPlaybackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
               </div>
             </div>
@@ -870,13 +877,25 @@ an infinite number of stars"></textarea>
         <div class="panel">
           <div class="panel-header">
             <h2>📜 Generated Score</h2>
-            <div class="output-actions">
-              <button class="output-btn play-btn" id="playBtn" onclick="playScore()">▶️ Play</button>
-              <button class="output-btn" id="pauseBtn" onclick="pauseScore()" style="display:none;">⏸️ Pause</button>
-              <button class="output-btn" id="stopBtn" onclick="stopScore()">⏹️ Stop</button>
-              <button class="output-btn" onclick="copyScore()">📋 Copy</button>
-              <button class="output-btn" onclick="downloadScore()">💾 Download</button>
-              <button class="output-btn save-btn" id="saveScoreBtn" onclick="showSaveModal()">✨ Save</button>
+            <div class="output-actions-wrapper">
+              <div class="output-actions">
+                <button class="output-btn play-btn" id="playBtn" onclick="playScore()">▶️ Play</button>
+                <button class="output-btn" id="pauseBtn" onclick="pauseScore()" style="display:none;">⏸️ Pause</button>
+                <button class="output-btn" id="stopBtn" onclick="stopScore()">⏹️ Stop</button>
+                <button class="output-btn" onclick="copyScore()">📋 Copy</button>
+                <button class="output-btn" onclick="downloadScore()">💾 Download</button>
+                <button class="output-btn save-btn" id="saveScoreBtn" onclick="showSaveModal()">✨ Save</button>
+              </div>
+              <div class="voice-actions">
+                <div class="voice-options" id="voiceOptions">
+                  <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵</span></label>
+                  <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎙️</span></label>
+                  <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹</span></label>
+                  <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻</span></label>
+                  <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨</span></label>
+                </div>
+                <button class="output-btn loop-btn" id="loopBtn" onclick="toggleLoop()">↻ Loop</button>
+              </div>
             </div>
           </div>
           <!-- Playback Progress -->
@@ -886,14 +905,6 @@ an infinite number of stars"></textarea>
               <div style="flex: 1; min-width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
                 <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); transition: width 0.1s;"></div>
               </div>
-              <div class="voice-options" id="voiceOptions">
-                <label class="voice-checkbox" title="Pure tone"><input type="checkbox" value="pure" checked onchange="changeVoice()"><span>🎵</span></label>
-                <label class="voice-checkbox" title="Choir pad"><input type="checkbox" value="choir" onchange="changeVoice()"><span>🎙️</span></label>
-                <label class="voice-checkbox" title="Organ"><input type="checkbox" value="organ" onchange="changeVoice()"><span>🎹</span></label>
-                <label class="voice-checkbox" title="Strings"><input type="checkbox" value="strings" onchange="changeVoice()"><span>🎻</span></label>
-                <label class="voice-checkbox" title="Rich harmonics"><input type="checkbox" value="rich" onchange="changeVoice()"><span>✨</span></label>
-              </div>
-              <button class="output-btn loop-btn" id="loopBtn" onclick="toggleLoop()">↻ Loop</button>
               <span id="playbackTime" style="color: var(--text-secondary); font-size: 0.85rem;">0:00</span>
             </div>
           </div>

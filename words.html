@@ -71,10 +71,19 @@
       to { transform: translateY(-250px); }
     }
     
+    /* AIUNITES Webring - added space */
+    .aiunites-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+    
     /* Navigation */
     .nav {
       position: fixed;
-      top: 0;
+      top: 32px; /* Account for webring bar */
       left: 0;
       right: 0;
       background: rgba(5, 5, 10, 0.9);
@@ -123,7 +132,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 120px 40px 80px;
+      padding: 150px 40px 80px; /* Adjusted for webring + nav */
       position: relative;
       z-index: 1;
     }
@@ -323,7 +332,7 @@
       }
       
       .hero {
-        padding: 140px 30px 80px;
+        padding: 160px 30px 80px; /* Adjusted for webring + nav */
       }
       
       .poem {
@@ -344,11 +353,12 @@
   <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
 
   <nav class="nav">
-    <a href="index.html" class="nav-logo">COSMOS</a>
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="notation.html">Notation</a>
-      <a href="gallery.html">Gallery</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
       <a href="sheet-music.html">Sheet Music</a>
       <a href="words.html" class="active">Words</a>
       <a href="composer.html">Composer</a>

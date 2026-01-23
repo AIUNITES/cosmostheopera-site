@@ -335,6 +335,15 @@
     .loop-btn { background: rgba(157,78,221,0.2); border: 1px solid var(--accent-purple); color: var(--accent-purple); }
     .loop-btn.active { background: rgba(255,215,0,0.2); border-color: var(--accent-gold); color: var(--accent-gold); }
     
+    /* Lyrics Input with Mic */
+    .lyrics-input-wrapper { position: relative; margin-bottom: 20px; }
+    .lyrics-input-wrapper .lyrics-input { margin-bottom: 0; padding-right: 50px; }
+    .mic-btn { position: absolute; right: 10px; top: 10px; width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .mic-btn:hover { border-color: var(--accent-cyan); background: rgba(0,212,255,0.1); }
+    .mic-btn.recording { border-color: #ff4444; background: rgba(255,68,68,0.2); animation: pulse-recording 1s infinite; }
+    .mic-btn .mic-icon { font-size: 1.2rem; }
+    @keyframes pulse-recording { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 15px; }
       .options-grid { grid-template-columns: 1fr 1fr; }
@@ -374,8 +383,11 @@
         <a href="index.html" class="nav-logo">🌌 COSMOS</a>
         <div class="nav-links">
           <a href="index.html">Home</a>
-          <a href="notation.html">Notation</a>
+          <a href="notation.html">Vocal Notation</a>
+          <a href="composition.html">AI Composition</a>
+          <a href="gallery.html">Hubble Gallery</a>
           <a href="sheet-music.html">Sheet Music</a>
+          <a href="words.html">Words</a>
           <a href="composer.html" class="active">Composer</a>
           <button class="nav-btn nav-btn-secondary" onclick="showScreen('auth')">Log In</button>
         </div>
@@ -404,6 +416,7 @@
               <h2>✏️ Your Words & Options</h2>
             </div>
             <div class="panel-content">
+              <div class="lyrics-input-wrapper">
               <textarea class="lyrics-input" id="landingLyricsInput" placeholder="Enter your lyrics or words here...
 
 Example:
@@ -412,17 +425,21 @@ what do you see
 when you close your eyes
 i see the light
 an infinite number of stars"></textarea>
+              <button class="mic-btn" id="landingMicBtn" onclick="toggleLandingSpeechRecognition()" title="Click to record voice">
+                <span class="mic-icon">🎙️</span>
+              </button>
+            </div>
               
               <!-- Notation Format -->
               <div class="options-section">
                 <h3>📋 Notation Format</h3>
                 <div class="options-grid" id="landingNotationOptions">
-                  <label class="option-item option-radio selected" data-value="piano-roll">
+                  <label class="option-item option-radio" data-value="piano-roll">
                     <span class="icon">🎹</span>
                     <span class="label">Piano Roll</span>
                     <span class="check"></span>
                   </label>
-                  <label class="option-item option-radio" data-value="treble-bass">
+                  <label class="option-item option-radio selected" data-value="treble-bass">
                     <span class="icon">🎼</span>
                     <span class="label">Treble/Bass</span>
                     <span class="check"></span>
@@ -652,8 +669,11 @@ an infinite number of stars"></textarea>
         <a href="index.html" class="nav-logo">🌌 COSMOS</a>
         <div class="nav-links">
           <a href="index.html">Home</a>
-          <a href="notation.html">Notation</a>
+          <a href="notation.html">Vocal Notation</a>
+          <a href="composition.html">AI Composition</a>
+          <a href="gallery.html">Hubble Gallery</a>
           <a href="sheet-music.html">Sheet Music</a>
+          <a href="words.html">Words</a>
           <a href="composer.html" class="active">Composer</a>
           <div class="user-menu" onclick="toggleUserMenu(event)">
             <span id="user-display-name">User</span>
@@ -701,8 +721,11 @@ an infinite number of stars"></textarea>
         <div class="nav-links">
           <a href="#" onclick="goBackFromComposer(); return false;">← Back</a>
           <a href="index.html">Home</a>
-          <a href="notation.html">Notation</a>
+          <a href="notation.html">Vocal Notation</a>
+          <a href="composition.html">AI Composition</a>
+          <a href="gallery.html">Hubble Gallery</a>
           <a href="sheet-music.html">Sheet Music</a>
+          <a href="words.html">Words</a>
           <a href="composer.html" class="active">Composer</a>
           <div class="user-menu" onclick="toggleUserMenu(event)">
             <span id="composer-user-display-name">User</span>
@@ -726,6 +749,7 @@ an infinite number of stars"></textarea>
             <h2>✏️ Your Words & Options</h2>
           </div>
           <div class="panel-content">
+            <div class="lyrics-input-wrapper">
             <textarea class="lyrics-input" id="lyricsInput" placeholder="Enter your lyrics or words here...
 
 Example:
@@ -734,17 +758,21 @@ what do you see
 when you close your eyes
 i see the light
 an infinite number of stars"></textarea>
+            <button class="mic-btn" id="micBtn" onclick="toggleSpeechRecognition()" title="Click to record voice">
+              <span class="mic-icon">🎙️</span>
+            </button>
+          </div>
             
             <!-- Notation Format -->
             <div class="options-section">
               <h3>📋 Notation Format</h3>
               <div class="options-grid" id="notationOptions">
-                <label class="option-item option-radio selected" data-value="piano-roll">
+                <label class="option-item option-radio" data-value="piano-roll">
                   <span class="icon">🎹</span>
                   <span class="label">Piano Roll</span>
                   <span class="check"></span>
                 </label>
-                <label class="option-item option-radio" data-value="treble-bass">
+                <label class="option-item option-radio selected" data-value="treble-bass">
                   <span class="icon">🎼</span>
                   <span class="label">Treble/Bass</span>
                   <span class="check"></span>
@@ -3385,6 +3413,156 @@ function playNoteWithVoices(audioContext, frequency, duration, startTime, volume
 document.addEventListener('DOMContentLoaded', function() {
   setupLandingPageOptions();
 });
+
+// ==================== SPEECH RECOGNITION ====================
+let recognition = null;
+let isRecording = false;
+let landingRecognition = null;
+let landingIsRecording = false;
+
+function initSpeechRecognition(textareaId) {
+  let rec;
+  if ('webkitSpeechRecognition' in window) {
+    rec = new webkitSpeechRecognition();
+  } else if ('SpeechRecognition' in window) {
+    rec = new SpeechRecognition();
+  } else {
+    return null;
+  }
+  
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.lang = 'en-US';
+  
+  rec.onresult = function(event) {
+    const textarea = document.getElementById(textareaId);
+    let finalTranscript = '';
+    
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const transcript = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalTranscript += transcript;
+      }
+    }
+    
+    if (finalTranscript) {
+      const currentText = textarea.value;
+      const newText = currentText ? currentText + '\n' + finalTranscript.trim() : finalTranscript.trim();
+      textarea.value = newText;
+    }
+  };
+  
+  rec.onerror = function(event) {
+    console.error('Speech recognition error:', event.error);
+    if (event.error === 'not-allowed') {
+      showToast('Microphone access denied. Please allow microphone access.', true);
+    } else {
+      showToast('Speech recognition error: ' + event.error, true);
+    }
+  };
+  
+  return rec;
+}
+
+// Main composer speech recognition
+function toggleSpeechRecognition() {
+  if (isRecording) {
+    stopRecording();
+  } else {
+    startRecording();
+  }
+}
+
+function startRecording() {
+  if (!recognition) {
+    recognition = initSpeechRecognition('lyricsInput');
+    if (recognition) {
+      recognition.onend = function() {
+        if (isRecording) recognition.start();
+      };
+    }
+  }
+  
+  if (!recognition) {
+    showToast('Speech recognition not supported in this browser', true);
+    return;
+  }
+  
+  try {
+    recognition.start();
+    isRecording = true;
+    const micBtn = document.getElementById('micBtn');
+    micBtn.classList.add('recording');
+    micBtn.title = 'Click to stop recording';
+    showToast('Recording... Speak your lyrics');
+  } catch (e) {
+    console.error('Error starting speech recognition:', e);
+    showToast('Could not start recording', true);
+  }
+}
+
+function stopRecording() {
+  if (recognition) {
+    isRecording = false;
+    recognition.stop();
+  }
+  const micBtn = document.getElementById('micBtn');
+  if (micBtn) {
+    micBtn.classList.remove('recording');
+    micBtn.title = 'Click to record voice';
+  }
+  showToast('Recording stopped');
+}
+
+// Landing page speech recognition
+function toggleLandingSpeechRecognition() {
+  if (landingIsRecording) {
+    stopLandingRecording();
+  } else {
+    startLandingRecording();
+  }
+}
+
+function startLandingRecording() {
+  if (!landingRecognition) {
+    landingRecognition = initSpeechRecognition('landingLyricsInput');
+    if (landingRecognition) {
+      landingRecognition.onend = function() {
+        if (landingIsRecording) landingRecognition.start();
+      };
+    }
+  }
+  
+  if (!landingRecognition) {
+    showToast('Speech recognition not supported in this browser', true);
+    return;
+  }
+  
+  try {
+    landingRecognition.start();
+    landingIsRecording = true;
+    const micBtn = document.getElementById('landingMicBtn');
+    micBtn.classList.add('recording');
+    micBtn.title = 'Click to stop recording';
+    showToast('Recording... Speak your lyrics');
+  } catch (e) {
+    console.error('Error starting speech recognition:', e);
+    showToast('Could not start recording', true);
+  }
+}
+
+function stopLandingRecording() {
+  if (landingRecognition) {
+    landingIsRecording = false;
+    landingRecognition.stop();
+  }
+  const micBtn = document.getElementById('landingMicBtn');
+  if (micBtn) {
+    micBtn.classList.remove('recording');
+    micBtn.title = 'Click to record voice';
+  }
+  showToast('Recording stopped');
+}
   </script>
 </body>
 </html>

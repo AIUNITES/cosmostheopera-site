@@ -1665,12 +1665,12 @@ an infinite number of stars"></textarea>
             <div class="options-section">
               <h4>📋 Notation Format</h4>
               <div class="options-grid" id="notationOptions">
-                <label class="option-item option-radio selected" data-value="piano-roll">
+                <label class="option-item option-radio" data-value="piano-roll">
                   <span class="icon">🎹</span>
                   <span class="label">Piano Roll</span>
                   <span class="check"></span>
                 </label>
-                <label class="option-item option-radio" data-value="treble-bass">
+                <label class="option-item option-radio selected" data-value="treble-bass">
                   <span class="icon">🎼</span>
                   <span class="label">Treble/Bass</span>
                   <span class="check"></span>
@@ -2373,6 +2373,107 @@ EXTENDED:
       
       showToast('Score generated! Click Play to hear it.');
     };
+
+    // ==================== SPEECH RECOGNITION ====================
+    let recognition = null;
+    let isRecording = false;
+
+    function initSpeechRecognition() {
+      if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+      } else if ('SpeechRecognition' in window) {
+        recognition = new SpeechRecognition();
+      } else {
+        return null;
+      }
+      
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+      
+      recognition.onresult = function(event) {
+        const textarea = document.getElementById('lyricsInput');
+        let interimTranscript = '';
+        let finalTranscript = '';
+        
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript;
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+        
+        if (finalTranscript) {
+          // Add final transcript to textarea
+          const currentText = textarea.value;
+          const newText = currentText ? currentText + '\n' + finalTranscript.trim() : finalTranscript.trim();
+          textarea.value = newText;
+        }
+      };
+      
+      recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+        if (event.error === 'not-allowed') {
+          showToast('Microphone access denied. Please allow microphone access.', true);
+        } else {
+          showToast('Speech recognition error: ' + event.error, true);
+        }
+        stopRecording();
+      };
+      
+      recognition.onend = function() {
+        if (isRecording) {
+          // Restart if still supposed to be recording
+          recognition.start();
+        }
+      };
+      
+      return recognition;
+    }
+
+    function toggleSpeechRecognition() {
+      if (isRecording) {
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    }
+
+    function startRecording() {
+      if (!recognition) {
+        recognition = initSpeechRecognition();
+      }
+      
+      if (!recognition) {
+        showToast('Speech recognition not supported in this browser', true);
+        return;
+      }
+      
+      try {
+        recognition.start();
+        isRecording = true;
+        const micBtn = document.getElementById('micBtn');
+        micBtn.classList.add('recording');
+        micBtn.title = 'Click to stop recording';
+        showToast('Recording... Speak your lyrics');
+      } catch (e) {
+        console.error('Error starting speech recognition:', e);
+        showToast('Could not start recording', true);
+      }
+    }
+
+    function stopRecording() {
+      if (recognition) {
+        isRecording = false;
+        recognition.stop();
+      }
+      const micBtn = document.getElementById('micBtn');
+      micBtn.classList.remove('recording');
+      micBtn.title = 'Click to record voice';
+      showToast('Recording stopped');
+    }
   </script>
 </body>
 </html>

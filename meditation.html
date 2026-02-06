@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BE FREE — A Meditation | COSMOS the OPERA</title>
+  <meta name="description" content="BE FREE — a guided meditation by Tom Sans. Breath, Everything, Free, Realize, Eye, Enter. Quiet your mind and disassociate from pain through Tibetan yoga-inspired practice.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-deep: #05050a;
+      --bg-card: #0c0c16;
+      --bg-scene: #10101c;
+      --text-glow: #ffffff;
+      --text-soft: #c0c0d0;
+      --text-dim: #707090;
+      --accent-gold: #ffd700;
+      --accent-cyan: #00d4ff;
+      --accent-pink: #ff6b9d;
+      --accent-purple: #9d4edd;
+      --accent-green: #4ecdc4;
+      --accent-orange: #ff9f43;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--bg-deep);
+      color: var(--text-soft);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    
+    /* Subtle starfield */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 80% 40%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(2px 2px at 15% 45%, rgba(255,215,0,0.3), transparent),
+        radial-gradient(2px 2px at 85% 15%, rgba(0,212,255,0.2), transparent);
+      background-size: 250px 250px;
+      animation: drift 120s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-250px); }
+    }
+    
+    /* Breathing animation for meditation */
+    @keyframes breathe {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+    
+    /* AIUNITES Webring */
+    .aiunites-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 1001; }
+    
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 32px;
+      left: 0; right: 0;
+      background: rgba(5, 5, 10, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .nav-logo {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    
+    .nav-links { display: flex; gap: 25px; }
+    
+    .nav-links a {
+      font-family: 'Quicksand', sans-serif;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--accent-cyan); }
+    .nav-links a.active { color: var(--accent-green); }
+    
+    /* Hero */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 120px 20px 50px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 50%, rgba(78,205,196,0.06) 0%, transparent 60%);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--accent-green);
+      text-shadow: 0 0 60px rgba(78,205,196,0.2);
+      margin-bottom: 10px;
+    }
+    .hero .subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    .hero .byline {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    
+    /* Breathing circle */
+    .breath-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,196,0.2);
+      margin: 40px auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathe 6s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(78,205,196,0.05), transparent);
+    }
+    .breath-circle span {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      opacity: 0.6;
+    }
+
+    /* Main Content */
+    .content {
+      position: relative; z-index: 1;
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+    
+    /* About Section */
+    .about {
+      margin-bottom: 50px;
+      padding: 30px;
+      background: rgba(12,12,22,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+    }
+    .about h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .about p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+    .about p:last-child { margin-bottom: 0; }
+    
+    /* Meditation Text */
+    .meditation-block {
+      margin-bottom: 50px;
+      padding: 40px 35px;
+      background: rgba(16,16,28,0.6);
+      border: 1px solid rgba(78,205,196,0.08);
+      border-radius: 16px;
+      position: relative;
+    }
+    .meditation-block::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 20%; right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(78,205,196,0.3), transparent);
+    }
+    
+    .meditation-header {
+      text-align: center;
+      margin-bottom: 35px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .meditation-label {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+    }
+    .meditation-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-glow);
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+    }
+    
+    .meditation-text {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 300;
+      line-height: 2.4;
+      color: var(--text-soft);
+    }
+    
+    .meditation-text .line {
+      display: block;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+    }
+    .meditation-text .line:hover { opacity: 1; color: var(--text-glow); }
+    
+    .meditation-text .emphasis {
+      font-weight: 400;
+      color: var(--text-glow);
+    }
+    
+    .meditation-text .gentle {
+      color: var(--accent-green);
+      font-style: italic;
+    }
+    
+    .meditation-text .mantra {
+      font-size: 1.1em;
+      font-weight: 400;
+      color: var(--accent-green);
+      letter-spacing: 0.05em;
+    }
+    
+    .meditation-text .sound {
+      font-style: italic;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+    }
+    
+    .meditation-text .transcend {
+      font-size: 1.15em;
+      color: var(--text-glow);
+      letter-spacing: 0.05em;
+    }
+    
+    .stanza-break { height: 1.5em; }
+    
+    /* BE FREE Acronym */
+    .acronym-block {
+      margin: 50px 0;
+      padding: 40px 35px;
+      background: rgba(16,16,28,0.8);
+      border: 1px solid rgba(255,215,0,0.1);
+      border-radius: 16px;
+      text-align: center;
+    }
+    .acronym-block h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: var(--accent-gold);
+      text-shadow: 0 0 40px rgba(255,215,0,0.15);
+      margin-bottom: 20px;
+    }
+    .acronym-full {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-bottom: 30px;
+    }
+    .acronym-full .letter {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+    
+    .acronym-lines {
+      text-align: left;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .acronym-line {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .acronym-line .letter-col {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      color: var(--accent-gold);
+      min-width: 25px;
+      font-size: 1.2rem;
+    }
+    .acronym-line .desc {
+      color: var(--text-soft);
+      font-style: italic;
+    }
+    
+    /* Dividers */
+    .divider {
+      text-align: center;
+      margin: 40px auto;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      letter-spacing: 0.8em;
+      opacity: 0.2;
+    }
+    
+    /* Practice Notes */
+    .practice-notes {
+      padding: 30px;
+      background: rgba(12,12,22,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      margin-top: 50px;
+    }
+    .practice-notes h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .practice-notes p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    .practice-notes p:last-child { margin-bottom: 0; }
+    .practice-notes .highlight {
+      color: var(--accent-green);
+    }
+    
+    /* Footer */
+    .footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 60px 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer p {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+    .copyright {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      opacity: 0.6;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 12px; padding: 12px 20px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .hero { padding: 130px 20px 40px; }
+      .meditation-block { padding: 25px 20px; }
+      .acronym-block { padding: 30px 20px; }
+      .breath-circle { width: 90px; height: 90px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AIUNITES Webring -->
+  <style>.aiunites-bar{background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);padding:8px 0;font-size:12px}.aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}.aiunites-bar-content::-webkit-scrollbar{display:none}.aiunites-bar a{color:rgba(255,255,255,.7);text-decoration:none;white-space:nowrap;transition:color .2s}.aiunites-bar a:hover{color:#fff}.aiunites-bar-brand{color:#6366f1!important;font-weight:600}.aiunites-bar-brand:hover{color:#818cf8!important}.aiunites-bar-divider{color:rgba(255,255,255,.2)}</style>
+  <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html">Sheet Music</a>
+      <a href="words.html">Words</a>
+      <a href="meditation.html" class="active">Meditation</a>
+      <a href="composer.html">Composer</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>BE FREE</h1>
+    <p class="subtitle">a meditation</p>
+    <p class="byline">by Tom Sans</p>
+    
+    <div class="breath-circle">
+      <span>breathe</span>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- About This Meditation -->
+    <div class="about">
+      <h2>About This Practice</h2>
+      <p>This is a meditation I wrote that lets you quiet your mind and disassociate from pain. I learned something similar from an instructor and wrote it into prose. It's rooted in Tibetan yoga — your brain can recover from exhaustion with just a 15 minute rest, unlike your body which takes 7 or 8 hours. It's a good practice if you take in a lot of information during the day.</p>
+      <p>There are also six yoga poses that go with it that stimulate areas in your body to release stress and let you sleep.</p>
+      <p>If you're reading it yourself you are active and not able to disconnect, so you need someone to read it to you in a calm, hypnotic voice, or record yourself and play it back.</p>
+      <p>When I meditate it moves me to the out of body, and the words come.</p>
+    </div>
+
+    <div class="divider">· · · · ·</div>
+
+    <!-- The Meditation -->
+    <div class="meditation-block">
+      <div class="meditation-header">
+        <div class="meditation-label">a meditation</div>
+        <div class="meditation-title">"Be Free"</div>
+      </div>
+
+      <div class="meditation-text">
+        <span class="line gentle">join me on a journey</span>
+        <span class="line">sit back where you are</span>
+        <span class="line">your arms stretched out and down</span>
+        <span class="line">your back rested and your head at ease</span>
+        
+        <div class="stanza-break"></div>
+
+        <span class="line emphasis">begin to breathe</span>
+        <span class="line">and focus on the experience of breathing</span>
+        <span class="line gentle">let it be everything</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">let go of your tension</span>
+        <span class="line">so that your breathing becomes effortless</span>
+        <span class="line gentle">let your soul be free</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">focus on the experience of breathing</span>
+        <span class="line">so that you are centered</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">now as the thoughts in your mind</span>
+        <span class="line">bubble up from your subconscious</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line emphasis">realize each of everything</span>
+        <span class="line">recognize each thought</span>
+        <span class="line">and then accept what your mind's eye sees</span>
+        <span class="line">and then let go of the thought</span>
+        <span class="line">and enter into the next thing</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">as you do this you will neutralize</span>
+        <span class="line">the thoughts that consume your mind</span>
+
+        <div class="stanza-break"></div>
+        <div class="divider" style="margin: 20px auto; font-size: 0.8rem;">· · ·</div>
+
+        <span class="line mantra">the vibrations</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">as you continue to breathe</span>
+        <span class="line">notice the sound of your breathing</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">as you breathe in your breathing sounds like <span class="sound">so</span></span>
+        <span class="line">as you breathe out your breathing sounds like <span class="sound">hum</span></span>
+        <span class="line">as you breathe in and out</span>
+        <span class="line">and feel the vibrations of your breathing</span>
+        <span class="line">and the sound <span class="sound">so hum</span></span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line gentle">then let your mind be freed</span>
+        <span class="line gentle">and your body fall to rest</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line transcend">slip away to</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">as the vibrations of your song</span>
+        <span class="line">touch your body and soul</span>
+        <span class="line">you will realize the walls and shells</span>
+        <span class="line">that we live in with the physical world</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">as they unfold and slip away</span>
+        <span class="line">and leave your soul</span>
+        <span class="line emphasis">for you to see your mind's eye</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line">the bubble that you feel is your mind's eye</span>
+        <span class="line">and will expand as you need</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line transcend">and you will begin your travel to infinity</span>
+
+        <div class="stanza-break"></div>
+
+        <span class="line gentle">let it be everything</span>
+        <span class="line gentle">let it be everything</span>
+        
+        <div class="stanza-break"></div>
+
+        <span class="line">these are the thoughts</span>
+        <span class="line">that come to my page</span>
+        <span class="line emphasis">it is the age of the soul</span>
+      </div>
+    </div>
+
+    <!-- BE FREE Acronym -->
+    <div class="acronym-block">
+      <h2>BE FREE</h2>
+      <div class="acronym-full">
+        <span class="letter">B</span>reath · <span class="letter">E</span>verything · <span class="letter">F</span>ree · <span class="letter">R</span>ealize · <span class="letter">E</span>ye · <span class="letter">E</span>nter
+      </div>
+      
+      <div class="acronym-lines">
+        <div class="acronym-line">
+          <span class="letter-col">B</span>
+          <span class="desc">let your spirit Breath</span>
+        </div>
+        <div class="acronym-line">
+          <span class="letter-col">E</span>
+          <span class="desc">let it become Everything</span>
+        </div>
+        <div class="acronym-line">
+          <span class="letter-col">F</span>
+          <span class="desc">let your soul be Free</span>
+        </div>
+        <div class="acronym-line">
+          <span class="letter-col">R</span>
+          <span class="desc">Realize each of everything</span>
+        </div>
+        <div class="acronym-line">
+          <span class="letter-col">E</span>
+          <span class="desc">accept all that your mind's Eye sees</span>
+        </div>
+        <div class="acronym-line">
+          <span class="letter-col">E</span>
+          <span class="desc">Enter into the next thing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practice Notes -->
+    <div class="practice-notes">
+      <h2>Practice Notes</h2>
+      <p>This meditation is rooted in <span class="highlight">Tibetan yoga</span>. Your brain can recover from exhaustion with just 15 minutes of this practice, unlike the body which requires 7–8 hours of sleep.</p>
+      <p>For best results, have someone read this to you in a <span class="highlight">calm, hypnotic voice</span>, or record yourself reading it slowly and play it back. Reading it yourself keeps you active and unable to fully disconnect.</p>
+      <p>There are <span class="highlight">six yoga poses</span> that accompany this meditation. They stimulate areas in your body to release stress and prepare you for sleep.</p>
+      <p>The mantra <span class="highlight">so hum</span> means "I am that" — connecting your individual breath to the universal vibration.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Original words by <strong>Tom Sans</strong></p>
+    <p class="copyright">
+      © 2002–2026 COSMOS the OPERA · All Rights Reserved · DMCA Protected<br>
+      <a href="index.html">Home</a> · <a href="lyrics.html">Libretto</a> · <a href="words.html">Words</a> · <a href="sheet-music.html">Sheet Music</a>
+    </p>
+  </footer>
+
+</body>
+</html>

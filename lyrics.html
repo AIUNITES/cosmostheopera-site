@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libretto — Lyrics | COSMOS the OPERA</title>
+  <meta name="description" content="Complete libretto and lyrics for COSMOS the OPERA — all sung text from the SATB and SSAATTBB scores, organized by act and scene.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-deep: #05050a;
+      --bg-card: #0c0c16;
+      --bg-scene: #10101c;
+      --text-glow: #ffffff;
+      --text-soft: #c0c0d0;
+      --text-dim: #707090;
+      --accent-gold: #ffd700;
+      --accent-cyan: #00d4ff;
+      --accent-pink: #ff6b9d;
+      --accent-purple: #9d4edd;
+      --accent-green: #4ecdc4;
+      --accent-orange: #ff9f43;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--bg-deep);
+      color: var(--text-soft);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    
+    /* Subtle starfield */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 80% 40%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(2px 2px at 15% 45%, rgba(255,215,0,0.3), transparent),
+        radial-gradient(2px 2px at 85% 15%, rgba(0,212,255,0.2), transparent);
+      background-size: 250px 250px;
+      animation: drift 120s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-250px); }
+    }
+    
+    /* AIUNITES Webring */
+    .aiunites-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 1001; }
+    
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 32px;
+      left: 0; right: 0;
+      background: rgba(5, 5, 10, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .nav-logo {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    
+    .nav-links { display: flex; gap: 25px; }
+    
+    .nav-links a {
+      font-family: 'Quicksand', sans-serif;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--accent-cyan); }
+    .nav-links a.active { color: var(--accent-cyan); }
+    
+    /* Sheet Music Sub-Nav */
+    .sheet-nav {
+      position: relative; z-index: 1;
+      background: rgba(12,12,22,0.95);
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-top: 85px; /* account for webring + nav */
+    }
+    .sheet-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex; flex-wrap: wrap;
+      gap: 10px; justify-content: center; align-items: center;
+    }
+    .sheet-nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 15px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.82rem;
+      transition: all 0.3s;
+    }
+    .sheet-nav a:hover { background: rgba(157,78,221,0.2); color: var(--accent-purple); }
+    .sheet-nav a.active-lyrics { background: rgba(255,107,157,0.25); color: var(--accent-pink); }
+    .sheet-nav .label { font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 0.78rem; margin-right: 5px; }
+    .sheet-nav .divider { color: rgba(255,255,255,0.2); margin: 0 5px; }
+    .sheet-nav a.climax { background: rgba(255,107,157,0.15); color: var(--accent-pink); }
+    .sheet-nav a.active-gold { background: rgba(255,215,0,0.2); color: var(--accent-gold); }
+    
+    /* Hero */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 60px 20px 40px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 50%, rgba(157,78,221,0.06) 0%, transparent 60%);
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--text-glow);
+      text-shadow: 0 0 40px rgba(255,255,255,0.15);
+      margin-bottom: 10px;
+    }
+    .hero .subtitle {
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    .hero .byline {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    
+    /* Table of Contents */
+    .toc {
+      position: relative; z-index: 1;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      padding: 25px 30px;
+      background: rgba(12,12,22,0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+    }
+    .toc h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .toc-col h3 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .toc-col.act-i h3 { color: var(--accent-cyan); }
+    .toc-col.act-ii h3 { color: var(--accent-purple); }
+    .toc-col.act-iii h3 { color: var(--accent-gold); }
+    .toc-col a {
+      display: block;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-style: italic;
+      padding: 2px 0;
+      transition: color 0.3s;
+    }
+    .toc-col a:hover { color: var(--text-soft); }
+    
+    /* Character Legend */
+    .legend {
+      position: relative; z-index: 1;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      padding: 20px 30px;
+      background: rgba(12,12,22,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .legend h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px 25px;
+    }
+    .legend-item {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.82rem;
+    }
+    .char-light { color: var(--accent-gold); }
+    .char-observer { color: var(--accent-cyan); }
+    .char-seeker { color: var(--accent-green); }
+    .char-chorus { color: var(--accent-purple); }
+    .char-all { color: var(--accent-pink); }
+    .char-baritone { color: var(--accent-orange); }
+    
+    /* Main Content */
+    .content {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+    
+    /* Act Headers */
+    .act-header {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+    .act-header h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    .act-header .act-name {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+    }
+    .act-header .act-desc {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-dim);
+      margin-top: 8px;
+    }
+    .act-i-header .act-name { color: var(--accent-cyan); text-shadow: 0 0 30px rgba(0,212,255,0.2); }
+    .act-ii-header .act-name { color: var(--accent-purple); text-shadow: 0 0 30px rgba(157,78,221,0.2); }
+    .act-iii-header .act-name { color: var(--accent-gold); text-shadow: 0 0 30px rgba(255,215,0,0.2); }
+    
+    /* Scene Blocks */
+    .scene {
+      margin-bottom: 60px;
+      padding: 30px;
+      background: rgba(16,16,28,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+    }
+    .scene-header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .scene-number {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .scene-title {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-soft);
+      letter-spacing: 0.08em;
+      margin-top: 5px;
+    }
+    .scene-voices {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+    
+    /* Lyric Lines */
+    .lyric-block { margin-bottom: 20px; }
+    
+    .lyric-block:last-child { margin-bottom: 0; }
+    
+    .speaker {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .speaker.light { color: var(--accent-gold); }
+    .speaker.observer { color: var(--accent-cyan); }
+    .speaker.seeker { color: var(--accent-green); }
+    .speaker.chorus { color: var(--accent-purple); }
+    .speaker.all { color: var(--accent-pink); }
+    .speaker.baritone { color: var(--accent-orange); }
+    
+    .lyrics {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      font-weight: 300;
+      line-height: 2;
+      padding-left: 20px;
+      border-left: 2px solid rgba(255,255,255,0.04);
+    }
+    
+    .lyrics .line {
+      display: block;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+    }
+    .lyrics .line:hover { opacity: 1; color: var(--text-glow); }
+    
+    .lyrics .emphasis {
+      font-weight: 400;
+      color: var(--text-glow);
+      font-size: 1.05em;
+    }
+    
+    .lyrics .whisper {
+      font-size: 0.88em;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+    
+    .lyrics .crescendo {
+      font-size: 1.2em;
+      font-weight: 400;
+      color: var(--text-glow);
+      letter-spacing: 0.08em;
+    }
+    
+    .lyrics .stage-dir {
+      font-style: italic;
+      font-size: 0.82em;
+      color: var(--text-dim);
+      opacity: 0.7;
+    }
+    
+    .stanza-break { height: 1em; }
+    
+    /* Dividers */
+    .act-divider {
+      text-align: center;
+      margin: 40px auto;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      letter-spacing: 0.8em;
+      opacity: 0.25;
+    }
+    
+    /* Instrumental note */
+    .instrumental {
+      text-align: center;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-style: italic;
+      letter-spacing: 0.1em;
+      padding: 15px 0;
+      opacity: 0.7;
+    }
+    
+    /* Footer */
+    .footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 60px 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer p {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+    .copyright {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      opacity: 0.6;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 12px; padding: 12px 20px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .sheet-nav { margin-top: 110px; }
+      .sheet-nav a { font-size: 0.7rem; padding: 4px 8px; }
+      .hero { padding: 40px 20px 30px; }
+      .toc-grid { grid-template-columns: 1fr; gap: 15px; }
+      .scene { padding: 20px; }
+      .lyrics { padding-left: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AIUNITES Webring -->
+  <style>.aiunites-bar{background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);padding:8px 0;font-size:12px}.aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}.aiunites-bar-content::-webkit-scrollbar{display:none}.aiunites-bar a{color:rgba(255,255,255,.7);text-decoration:none;white-space:nowrap;transition:color .2s}.aiunites-bar a:hover{color:#fff}.aiunites-bar-brand{color:#6366f1!important;font-weight:600}.aiunites-bar-brand:hover{color:#818cf8!important}.aiunites-bar-divider{color:rgba(255,255,255,.2)}</style>
+  <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="composition.html">AI Composition</a>
+      <a href="gallery.html">Hubble Gallery</a>
+      <a href="sheet-music.html" class="active">Sheet Music</a>
+      <a href="words.html">Words</a>
+      <a href="composer.html">Composer</a>
+    </div>
+  </nav>
+
+  <!-- Sheet Music Navigation -->
+  <div class="sheet-nav">
+    <div class="sheet-nav-inner">
+      <span class="label" style="color: var(--accent-cyan);">SATB:</span>
+      <a href="sheet-music.html">Index</a>
+      <a href="sheet-music-act1-p1.html">I:1-2</a>
+      <a href="sheet-music-act1-p2.html">I:3-5</a>
+      <a href="sheet-music-act2.html">II</a>
+      <a href="sheet-music-act3-p1.html">III:1-2</a>
+      <a href="sheet-music-act3-p2.html" class="climax">III:3-5★</a>
+      <span class="divider">|</span>
+      <span class="label" style="color: var(--accent-gold);">SSAATTBB:</span>
+      <a href="ssaattbb-index.html">Index</a>
+      <a href="ssaattbb-act1.html">Act I</a>
+      <a href="ssaattbb-act2.html">Act II</a>
+      <a href="ssaattbb-act3.html">Act III</a>
+      <span class="divider">|</span>
+      <a href="lyrics.html" class="active-lyrics">📜 Lyrics</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>LIBRETTO</h1>
+    <p class="subtitle">the complete sung text</p>
+    <p class="byline">words by Tom Sans · 2002–2026</p>
+  </header>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <h2>Contents</h2>
+    <div class="toc-grid">
+      <div class="toc-col act-i">
+        <h3>Act I — We Come</h3>
+        <a href="#i-overture">Overture: "Genesis"</a>
+        <a href="#i-1">1. "Do You See"</a>
+        <a href="#i-2">2. "Look"</a>
+        <a href="#i-3">3. "A Window"</a>
+        <a href="#i-4">4. "I Sing"</a>
+        <a href="#i-5">5. "We Come"</a>
+      </div>
+      <div class="toc-col act-ii">
+        <h3>Act II — Into</h3>
+        <a href="#ii-entracte">Entr'acte: "Stellar Winds"</a>
+        <a href="#ii-1">1. "The Colors"</a>
+        <a href="#ii-2">2. "The Waves"</a>
+      </div>
+      <div class="toc-col act-iii">
+        <h3>Act III — Beings</h3>
+        <a href="#iii-prelude">Prelude: "Stellar Dance"</a>
+        <a href="#iii-1">1. "I the Sun"</a>
+        <a href="#iii-2">2. "My Twin"</a>
+        <a href="#iii-3">3. "Feeling Again"</a>
+        <a href="#iii-4">4. "You're A Star"</a>
+        <a href="#iii-finale">Finale: "The Eternal Return"</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CHARACTER LEGEND -->
+  <div class="legend">
+    <h2>Characters</h2>
+    <div class="legend-items">
+      <span class="legend-item char-light">● Light — Soprano</span>
+      <span class="legend-item char-observer">● Observer — Mezzo-Soprano</span>
+      <span class="legend-item char-seeker">● Seeker — Tenor</span>
+      <span class="legend-item char-baritone">● Baritone — Bass-Baritone</span>
+      <span class="legend-item char-chorus">● SSAATTBB Chorus</span>
+      <span class="legend-item char-all">● All Voices</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- ═══════════════ ACT I ═══════════════ -->
+    <div class="act-header act-i-header" id="act-i">
+      <h2>Act I</h2>
+      <div class="act-name">We Come</div>
+      <div class="act-desc">"The Awakening of Consciousness" — ~35 minutes</div>
+    </div>
+
+    <!-- Overture -->
+    <div class="scene" id="i-overture">
+      <div class="scene-header">
+        <div class="scene-number">Overture</div>
+        <div class="scene-title">"Genesis"</div>
+      </div>
+      <div class="instrumental">Instrumental — 5 minutes</div>
+    </div>
+
+    <!-- Scene 1: Do You See -->
+    <div class="scene" id="i-1">
+      <div class="scene-header">
+        <div class="scene-number">Scene 1</div>
+        <div class="scene-title">"Do You See"</div>
+        <div class="scene-voices">Observer (Mezzo-Soprano) with SSAATTBB Chorus</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">do you see</span>
+          <span class="line">what do you see</span>
+          <span class="line">when you close your eyes</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line whisper">some don't see they sleep</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">some don't see</span>
+          <span class="line">they sleep</span>
+          <div class="stanza-break"></div>
+          <span class="line emphasis">what i see is the light</span>
+          <div class="stanza-break"></div>
+          <span class="line">an infinite number of stars</span>
+          <span class="line">swirling around in a cloud</span>
+          <div class="stanza-break"></div>
+          <span class="line">some see the dark</span>
+          <span class="line emphasis">i see the light</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">some say it is the snow</span>
+          <span class="line">captured by the vacuum that they see</span>
+          <span class="line whisper">what is it</span>
+          <span class="line">the echo of all from the start</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line whisper">what is it</span>
+          <span class="line whisper">the echo</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">i see the light and the stars</span>
+          <span class="line crescendo">i see the universe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 2: Look -->
+    <div class="scene" id="i-2">
+      <div class="scene-header">
+        <div class="scene-number">Scene 2</div>
+        <div class="scene-title">"Look"</div>
+        <div class="scene-voices">Seeker (Tenor) with Light (Soprano)</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line crescendo">look as far as you can see</span>
+          <div class="stanza-break"></div>
+          <span class="line">this life is a journey</span>
+          <span class="line">both endless and so brief</span>
+          <span class="line">both finite and with infinity</span>
+          <div class="stanza-break"></div>
+          <span class="line">i have found the greatest way to see</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">you can only hear the waves that reach the ear</span>
+          <div class="stanza-break"></div>
+          <span class="line">you can only feel as much as your heart can bleed</span>
+          <div class="stanza-break"></div>
+          <span class="line emphasis">i have found the greatest way to see</span>
+          <span class="line emphasis">is in the eye of my mind</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line whisper">waves</span>
+          <span class="line whisper">feel... bleed...</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">it can see through all space and time</span>
+          <span class="line">through this journey that is mine</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line whisper">through all space...</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line whisper">space and time... space and time...</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">i hope you find your eye</span>
+          <span class="line">you can only look as far as you can see</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3: A Window -->
+    <div class="scene" id="i-3">
+      <div class="scene-header">
+        <div class="scene-number">Scene 3</div>
+        <div class="scene-title">"A Window"</div>
+        <div class="scene-voices">Observer (Mezzo-Soprano) with Women's Chorus</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">my face is now a window</span>
+          <span class="line">in this world</span>
+          <div class="stanza-break"></div>
+          <span class="line">that hangs here for a place</span>
+          <span class="line">to hold these eyes and peer</span>
+          <div class="stanza-break"></div>
+          <span class="line">and looks at you and wonders</span>
+          <span class="line">if you know where i am</span>
+          <span class="line">and if i am here</span>
+          <span class="line">and if i am there</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line whisper">where... here... there...</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">a mirror in a face that hangs here</span>
+          <span class="line">like a mirror in a frame</span>
+          <div class="stanza-break"></div>
+          <span class="line emphasis">looking for you</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 4: I Sing -->
+    <div class="scene" id="i-4">
+      <div class="scene-header">
+        <div class="scene-number">Scene 4</div>
+        <div class="scene-title">"I Sing"</div>
+        <div class="scene-voices">Full SSAATTBB Chorus with Light (Soprano) Solo</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line crescendo">i sing to your soul</span>
+          <span class="line">we want to be free</span>
+          <div class="stanza-break"></div>
+          <span class="line">we want to see beauty</span>
+          <span class="line">we want to feel peace</span>
+          <span class="line">we want to be in love</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">free to love</span>
+          <span class="line">free to see</span>
+          <span class="line">free to feel</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line">and only love there is only</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line crescendo">one</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">All</div>
+        <div class="lyrics">
+          <span class="line crescendo">LOVE!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: We Come -->
+    <div class="scene" id="i-5">
+      <div class="scene-header">
+        <div class="scene-number">Scene 5 — Act I Finale</div>
+        <div class="scene-title">"We Come"</div>
+        <div class="scene-voices">All Soloists and Full SSAATTBB Chorus</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">All Soloists + Chorus</div>
+        <div class="lyrics">
+          <span class="line crescendo">we come into being</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line">we are beautiful</span>
+          <span class="line">we are lovely</span>
+          <span class="line">we are infinite</span>
+          <span class="line">we come into being</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line">we touch we feel we share</span>
+          <span class="line emphasis">we take you there</span>
+          <div class="stanza-break"></div>
+          <span class="line">our peace will fill you</span>
+          <span class="line emphasis">and find you whole</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-divider">· · · · ·</div>
+
+    <!-- ═══════════════ ACT II ═══════════════ -->
+    <div class="act-header act-ii-header" id="act-ii">
+      <h2>Act II</h2>
+      <div class="act-name">Into</div>
+      <div class="act-desc">"The Journey Through Light and Wave" — ~25 minutes</div>
+    </div>
+
+    <!-- Entr'acte -->
+    <div class="scene" id="ii-entracte">
+      <div class="scene-header">
+        <div class="scene-number">Entr'acte</div>
+        <div class="scene-title">"Stellar Winds"</div>
+      </div>
+      <div class="instrumental">Instrumental — 3 minutes</div>
+    </div>
+
+    <!-- Scene 1: The Colors -->
+    <div class="scene" id="ii-1">
+      <div class="scene-header">
+        <div class="scene-number">Scene 1</div>
+        <div class="scene-title">"The Colors"</div>
+        <div class="scene-voices">Light (Soprano) with Full SSAATTBB Chorus</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the colors of your love</span>
+          <span class="line">can be seen in all you do</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the red of passion</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">red... passion...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the orange of warmth</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">orange... warmth...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the yellow of joy</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">yellow... joy...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the green of life</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">green... life...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the blue of peace</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">blue... peace...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the indigo of mystery</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">indigo... mystery...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">the violet of transcendence</span>
+        </div>
+      </div>
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line whisper">violet... transcendence...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">love is the light that shows us the way</span>
+          <span class="line emphasis">the colors of your love</span>
+          <div class="stanza-break"></div>
+          <span class="line">and i can see you</span>
+          <span class="line crescendo">shining like a star</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics"><span class="line emphasis">love... love...</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line crescendo">LIGHT!</span>
+          <span class="line stage-dir">(High C — C7)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 2: The Waves -->
+    <div class="scene" id="ii-2">
+      <div class="scene-header">
+        <div class="scene-number">Scene 2</div>
+        <div class="scene-title">"The Waves"</div>
+        <div class="scene-voices">Full SSAATTBB Chorus with Observer (Mezzo-Soprano)</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">the waves are all around us everywhere</span>
+          <div class="stanza-break"></div>
+          <span class="line">waves of light waves of sound</span>
+          <span class="line">waves that touch the ground</span>
+          <div class="stanza-break"></div>
+          <span class="line">waves in the air and sea</span>
+          <span class="line">waves that flow through you and me</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line whisper">waves... waves... waves...</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">we are made of the same stuff</span>
+          <span class="line emphasis">we are all connected</span>
+          <span class="line">to everything that is</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker chorus">Chorus</div>
+        <div class="lyrics">
+          <span class="line emphasis">same... same... same...</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">Observer + Chorus</div>
+        <div class="lyrics">
+          <span class="line crescendo">everything is one</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">All — The Mantra (×3)</div>
+        <div class="lyrics">
+          <span class="line emphasis">we are the waves we are the light</span>
+          <span class="line emphasis">we are everything tonight</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">and so the waves roll on</span>
+          <span class="line">carrying us home</span>
+          <div class="stanza-break"></div>
+          <span class="line emphasis">all is one and one is all</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-divider">· · · · ·</div>
+
+    <!-- ═══════════════ ACT III ═══════════════ -->
+    <div class="act-header act-iii-header" id="act-iii">
+      <h2>Act III</h2>
+      <div class="act-name">Beings</div>
+      <div class="act-desc">"The Connection Between Souls" — ~40 minutes</div>
+    </div>
+
+    <!-- Prelude -->
+    <div class="scene" id="iii-prelude">
+      <div class="scene-header">
+        <div class="scene-number">Prelude</div>
+        <div class="scene-title">"Stellar Dance"</div>
+      </div>
+      <div class="instrumental">Instrumental — Two Solo Violins — 4 minutes</div>
+    </div>
+
+    <!-- Scene 1: I the Sun -->
+    <div class="scene" id="iii-1">
+      <div class="scene-header">
+        <div class="scene-number">Scene 1</div>
+        <div class="scene-title">"I the Sun"</div>
+        <div class="scene-voices">Light (Soprano) &amp; Seeker (Tenor) Duet</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">did you say that i could be the sun to you</span>
+          <span class="line">so warm and so bright</span>
+          <span class="line">one truth in your life</span>
+          <div class="stanza-break"></div>
+          <span class="line">and then yet so far from you</span>
+          <span class="line whisper">the sun to you</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">how could i be the sun to you</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">when you are the sun to me</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">so warm and so infinite and so bright</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">my reason to be in this life</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line crescendo">you are the sun</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">you are the sun to me as well</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics"><span class="line">my universe</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics"><span class="line emphasis">and my infinity</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light &amp; Seeker</div>
+        <div class="lyrics">
+          <span class="line">how long will it be before we meet</span>
+          <div class="stanza-break"></div>
+          <span class="line whisper">if we could only see the sun as one</span>
+          <span class="line">with me next to you</span>
+          <div class="stanza-break"></div>
+          <span class="line">but we can only see as two</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line whisper">i am so far from you</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 2: My Twin -->
+    <div class="scene" id="iii-2">
+      <div class="scene-header">
+        <div class="scene-number">Scene 2</div>
+        <div class="scene-title">"My Twin"</div>
+        <div class="scene-voices">Light (Soprano) &amp; Seeker (Tenor) Duet</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">when i am near you</span>
+          <span class="line emphasis">i feel that way again</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">like i found my best friend</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light &amp; Seeker</div>
+        <div class="lyrics">
+          <span class="line">like i am holding myself</span>
+          <span class="line emphasis">like i am holding my twin</span>
+          <span class="line whisper">just the touch of you</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line emphasis">you move me in so many ways</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light &amp; Seeker</div>
+        <div class="lyrics">
+          <span class="line">how would it be if we were to gaze together</span>
+          <div class="stanza-break"></div>
+          <span class="line">as we orbit in our galaxy</span>
+          <span class="line">and throb to the waves</span>
+          <span class="line whisper">for a time or for an eternity</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">are you my twin burning together</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light &amp; Seeker</div>
+        <div class="lyrics">
+          <span class="line">were we once two bright suns</span>
+          <span class="line">roaming the galaxy</span>
+          <span class="line">together orbiting each other</span>
+          <div class="stanza-break"></div>
+          <span class="line">only to be trapped on this planet</span>
+          <span class="line whisper">for this short time</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3: Feeling Again -->
+    <div class="scene" id="iii-3">
+      <div class="scene-header">
+        <div class="scene-number">Scene 3 — Supreme Climax</div>
+        <div class="scene-title">"Feeling Again"</div>
+        <div class="scene-voices">Seeker (Tenor) &amp; Light (Soprano) Duet with Full SSAATTBB</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics">
+          <span class="line">you make me feel that feeling again</span>
+          <span class="line">like i am holding my best friend</span>
+          <span class="line">and like you could be here to the end</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics">
+          <span class="line">you make me feel like it can be real</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light &amp; Seeker</div>
+        <div class="lyrics">
+          <span class="line">if i could only hold you night and day</span>
+          <span class="line">and through space and time</span>
+          <div class="stanza-break"></div>
+          <span class="line">as we travel to some other place</span>
+          <div class="stanza-break"></div>
+          <span class="line emphasis">if i could be there with you now</span>
+          <div class="stanza-break"></div>
+          <span class="line">to feel you</span>
+          <span class="line">to hold you</span>
+          <span class="line">to love you</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">Light &amp; Seeker + Chorus</div>
+        <div class="lyrics">
+          <span class="line emphasis">i would make the world go away</span>
+          <div class="stanza-break"></div>
+          <span class="line">i would make the rain stay in the sky</span>
+          <div class="stanza-break"></div>
+          <span class="line">i would turn the dark days to light</span>
+          <div class="stanza-break"></div>
+          <span class="line emphasis">i would be there for you</span>
+          <div class="stanza-break"></div>
+          <span class="line crescendo">and show you what love can do</span>
+          <span class="line stage-dir">(Supreme Climax — Soprano A7, Tenor E7)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 4: You're A Star -->
+    <div class="scene" id="iii-4">
+      <div class="scene-header">
+        <div class="scene-number">Scene 4 — Dismissal</div>
+        <div class="scene-title">"You're A Star"</div>
+        <div class="scene-voices">Observer (Mezzo-Soprano) with All Soloists &amp; SSAATTBB</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line crescendo">you're a star</span>
+          <span class="line">everybody loves you</span>
+          <span class="line">the first time they see you</span>
+          <div class="stanza-break"></div>
+          <span class="line">your smile you're beautiful</span>
+          <span class="line emphasis">all the way through</span>
+          <span class="line whisper">what you've been through</span>
+          <div class="stanza-break"></div>
+          <span class="line">a heart of gold</span>
+          <span class="line">eyes so full of love for everyone</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line crescendo">you're a star</span>
+          <span class="line">everybody loves you</span>
+          <div class="stanza-break"></div>
+          <span class="line">everybody wants to see you</span>
+          <span class="line emphasis">in heaven</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">All Soloists</div>
+        <div class="lyrics">
+          <span class="line">reach out for the stars</span>
+          <span class="line">show them the love you have</span>
+          <div class="stanza-break"></div>
+          <span class="line">they love you so much</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics">
+          <span class="line">just touch the stars</span>
+          <span class="line">and show them your heart</span>
+          <div class="stanza-break"></div>
+          <span class="line">a heart full of gold</span>
+          <span class="line emphasis">that's what the universe told</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finale -->
+    <div class="scene" id="iii-finale">
+      <div class="scene-header">
+        <div class="scene-number">Finale</div>
+        <div class="scene-title">"The Eternal Return"</div>
+        <div class="scene-voices">All Soloists, Baritone, and Full SSAATTBB Chorus</div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker observer">Observer</div>
+        <div class="lyrics"><span class="line">i see the light</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker light">Light</div>
+        <div class="lyrics"><span class="line">the colors of your love</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker seeker">Seeker</div>
+        <div class="lyrics"><span class="line">you are the sun to me</span></div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker baritone">Baritone</div>
+        <div class="lyrics">
+          <span class="line emphasis">we are all the same</span>
+          <span class="line stage-dir">(First appearance)</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">All Voices — Three Phrases Simultaneously</div>
+        <div class="lyrics">
+          <span class="line emphasis">we come into being</span>
+          <span class="line emphasis">we are the waves</span>
+          <span class="line emphasis">we are the stars</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">The Great Convergence</div>
+        <div class="lyrics">
+          <span class="line stage-dir">All voices converge on Middle C — the note that began the opera</span>
+        </div>
+      </div>
+
+      <div class="lyric-block">
+        <div class="speaker all">The Great Expansion</div>
+        <div class="lyrics">
+          <span class="line stage-dir">From unity, a full C major chord expands across all registers</span>
+          <span class="line stage-dir">fff — sustained — then voices and instruments fade one by one</span>
+          <span class="line stage-dir">until only a solo piccolo and soprano remain on C</span>
+          <span class="line stage-dir">fading like a distant star into silence</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Original words by <strong>Tom Sans</strong></p>
+    <p class="copyright">
+      © 2002–2026 COSMOS the OPERA · All Rights Reserved · DMCA Protected<br>
+      <a href="index.html">Home</a> · <a href="words.html">Words (Prose Poetry)</a> · <a href="sheet-music.html">Sheet Music</a> · <a href="gallery.html">Gallery</a>
+    </p>
+  </footer>
+
+</body>
+</html>

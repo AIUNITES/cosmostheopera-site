@@ -654,5 +654,63 @@ words.html had outdated navigation missing "AI Composition" link and incorrect l
 
 ---
 
-*Implementation by Claude (Anthropic) - January 2026*
+---
+
+## Session 21: VSV c06 - Extended Vocal Resonance Notation Systems (February 8, 2026)
+
+### Changes Made
+
+Expanded the Vocal Resonance Notation page (`notation.html`) from 7 sections to 16 sections, adding 8 complete new notation systems under VSV c06 (Character series version 06).
+
+**Files Updated:**
+- **notation.html** - 8 new notation system sections, updated hero subtitle, version history table, renumbered sections
+
+### New Notation Systems Added (Sections 7-14)
+
+| Section | System | New Symbols | Description |
+|---------|--------|-------------|-------------|
+| 7 | Breath & Airflow | `[D]`, `[IC]`, `[PF]`, `[Ap]`, `Sp1-Sp5`, `Af→/↑/↓` | Diaphragm, intercostal, pelvic floor, appoggio, subglottic pressure, airflow rate |
+| 8 | Vocal Fold Behavior & Phonation | `[Th]`, `[Tn]`, `[Zp]`, `[Prs]`, `[Fl]`, `[Br]`, `[Gl]`, `[As]`, `[Co]` | Fold mass (thick/thin/zip), phonation quality (pressed/flow/breathy), onset type (glottal/aspirate/coordinated) |
+| 9 | Vowel Modification & Formant Tracking | `[F1↑/↓]`, `[F2↑/↓]`, `[Vow: X→Y]`, `[Cov]`, `[Ag]` | Formant tuning, vowel modification notation, copertura, aggiustamento |
+| 10 | Register Transition Markers | `[Pz1]`, `[Pz2]`, `[Bl]`, `[Sh]`, `[Mv: X→Y]`, `[Vce: M1/M2]` | Passaggio zones, blending, shift points, register movement direction, laryngeal mechanism |
+| 11 | Vibrato & Oscillation | `[Vib]`, `[Str]`, `Vib.r4-r7`, `Vib.w+/w-`, `[Mes]`, `[Trm]` | Vibrato on/off, rate, width, messa di voce, tremolo |
+| 12 | Jaw & Embouchure | `[Jw↓/→/~]`, `[Lp]`, `[Lp+/→]`, `[Zy]` | Jaw position, lip shaping, zygomatic lift (inner smile) |
+| 13 | Sinus Sub-Region & Squillo | `[Sf]`, `[Sm]`, `[Ss]`, `[Sq]`, `Sq+/Sq-` | Frontal/maxillary/sphenoid sinus, singer's formant (2800-3200 Hz) |
+| 14 | Emotional & Timbral Color | `[Ch]`, `[Sc]`, `[Ch+]`, `[Sob]`, `[Cr]`, `[Met]`, `[Vl]`, `[Ang]` | Chiaroscuro, scuro, chiaro, sob quality, cry quality, metallic edge, velvety, angelic |
+
+### Section Renumbering
+- Sections 1-6: Unchanged (original VRN systems)
+- Sections 7-14: NEW VSV c06 systems
+- Section 15: Version History (was 7)
+- Section 16: Using This System (was unnumbered conclusion)
+
+### Version History Table Updated
+Added row for VSV c06:
+- **VSV a04** - Core System (primary resonance areas)
+- **VSV c04** - Characters/Genres (ventricular folds, falsetto, whistle register)
+- **VSV s05** - Symbols (Unicode directional symbols)
+- **VSV c06** - Extended Character Systems (all 8 new notation systems)
+
+### Hero Subtitle Updated
+Now reads: "The world's first notation system for indicating vocal resonance locations, muscular engagement, breath support, phonation type, formant tracking, and timbral color in operatic performance. Now at VSV c06 with 8 complete notation systems."
+
+### Example Notations Added
+- Breath & Airflow: Sustained operatic phrase with appoggio markings
+- Vowel Modification: Tenor navigating passaggio (E4-F#4) with copertura
+- Vibrato: Aria climax building from straight tone to messa di voce
+- Full VSV c06 Combined: "Do You See" passage using all 8 systems simultaneously
+
+### Total VRN Symbol Count
+- Original (VSV a04/c04/s05): ~20 symbols
+- New (VSV c06): ~55 symbols
+- **Total: ~75 unique notation symbols**
+
+### VSV Versioning Convention
+- **a** series = Core/foundational notation
+- **c** series = Character/extended notation systems
+- **s** series = Symbol/Unicode notation
+
+---
+
+*Implementation by Claude (Anthropic) - January-February 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

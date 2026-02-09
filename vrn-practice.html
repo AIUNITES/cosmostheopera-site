@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VRN Practice — Learn Vocal Resonance Notation | COSMOS the OPERA</title>
+  <meta name="description" content="Interactive lessons to learn Vocal Resonance Notation. Practice resonance placement, hear examples, and get real-time feedback on your vocal production.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-lesson: #0e0e18;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #00d4ff;
+      --accent-gold: #ffd700;
+      --accent-pink: #ff6b9d;
+      --accent-green: #4ade80;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    /* === WEBRING === */
+    .aiunites-bar{background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);padding:8px 0;font-size:12px}
+    .aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}
+    .aiunites-bar-content::-webkit-scrollbar{display:none}
+    .aiunites-bar a{color:rgba(255,255,255,.7);text-decoration:none;white-space:nowrap;transition:color .2s}
+    .aiunites-bar a:hover{color:#fff}
+    .aiunites-bar-brand{color:#6366f1!important;font-weight:600}
+    .aiunites-bar-divider{color:rgba(255,255,255,.2)}
+
+    /* === NAV === */
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; flex-wrap: wrap; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+
+    /* === HERO === */
+    .hero {
+      padding: 60px 20px 40px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 30%, rgba(157, 78, 221, 0.2) 0%, transparent 60%), var(--bg-dark);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #fff, var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto 25px; }
+
+    /* === PROGRESS BAR === */
+    .progress-wrap { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+    .progress-bar-bg { background: rgba(255,255,255,0.06); border-radius: 20px; height: 10px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan)); transition: width 0.6s ease; width: 0%; }
+    .progress-label { font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px; text-align: center; }
+
+    /* === MAIN LAYOUT === */
+    .main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    /* === LESSON CARD === */
+    .lesson {
+      background: var(--bg-lesson);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .lesson.active { border-color: var(--accent-purple); }
+    .lesson.completed { border-color: var(--accent-green); }
+
+    .lesson-header {
+      padding: 20px 25px;
+      display: flex; align-items: center; gap: 15px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .lesson-header:hover { background: rgba(255,255,255,0.02); }
+
+    .lesson-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem;
+      background: rgba(157, 78, 221, 0.2);
+      color: var(--accent-purple);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .lesson.active .lesson-num { background: var(--accent-purple); color: #fff; }
+    .lesson.completed .lesson-num { background: var(--accent-green); color: #000; }
+    .lesson.completed .lesson-num::after { content: "✓"; }
+    .lesson.completed .lesson-num span { display: none; }
+
+    .lesson-title-wrap { flex: 1; }
+    .lesson-title { font-size: 1.15rem; font-weight: 700; }
+    .lesson-subtitle { font-size: 0.85rem; color: var(--text-secondary); }
+
+    .lesson-symbol {
+      font-family: 'Courier New', monospace;
+      font-size: 1.8rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .lesson-body { display: none; padding: 0 25px 25px; }
+    .lesson.active .lesson-body { display: block; }
+
+    /* === BODY DIAGRAM === */
+    .diagram-wrap {
+      display: flex; gap: 30px; align-items: flex-start; margin: 20px 0;
+    }
+    .body-svg { flex-shrink: 0; }
+    .diagram-info { flex: 1; }
+    .diagram-info h4 { color: var(--accent-gold); margin-bottom: 10px; font-size: 1.1rem; }
+    .diagram-info p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    .feel-box {
+      background: rgba(157, 78, 221, 0.1);
+      border-left: 3px solid var(--accent-purple);
+      border-radius: 0 10px 10px 0;
+      padding: 15px 18px;
+      margin-top: 15px;
+    }
+    .feel-box strong { color: var(--accent-cyan); }
+
+    /* === AUDIO DEMO === */
+    .audio-demo {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .audio-demo h4 { color: var(--accent-cyan); margin-bottom: 12px; font-size: 1rem; }
+    .demo-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .demo-btn {
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      color: var(--accent-cyan);
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .demo-btn:hover { background: rgba(0, 212, 255, 0.2); transform: translateY(-1px); }
+    .demo-btn.playing { background: var(--accent-cyan); color: #000; }
+
+    /* === PRACTICE SECTION === */
+    .practice-box {
+      background: rgba(74, 222, 128, 0.05);
+      border: 1px solid rgba(74, 222, 128, 0.15);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .practice-box h4 { color: var(--accent-green); margin-bottom: 12px; }
+
+    .mic-btn {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      border: none;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .mic-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(157, 78, 221, 0.4); }
+    .mic-btn.recording { background: linear-gradient(135deg, var(--accent-red), var(--accent-orange)); animation: pulse 1.5s infinite; }
+
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); } 50% { box-shadow: 0 0 0 12px rgba(239,68,68,0); } }
+
+    /* === VISUALIZER === */
+    .visualizer-wrap {
+      margin-top: 15px;
+      background: #0a0a14;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .visualizer-label { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px; }
+    canvas.viz { width: 100%; height: 100px; border-radius: 8px; display: block; }
+    .pitch-display {
+      display: flex; justify-content: space-between; margin-top: 10px;
+      font-size: 0.85rem; color: var(--text-secondary);
+    }
+    .pitch-val { color: var(--accent-gold); font-family: 'Courier New', monospace; font-weight: 700; font-size: 1rem; }
+
+    /* === QUIZ === */
+    .quiz-section { margin: 20px 0; }
+    .quiz-q { font-size: 1.05rem; margin-bottom: 15px; color: var(--text-primary); }
+    .quiz-options { display: flex; flex-wrap: wrap; gap: 10px; }
+    .quiz-opt {
+      background: var(--bg-card);
+      border: 2px solid rgba(255,255,255,0.1);
+      color: var(--text-primary);
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+      transition: all 0.2s;
+    }
+    .quiz-opt:hover { border-color: var(--accent-purple); background: rgba(157, 78, 221, 0.1); }
+    .quiz-opt.correct { border-color: var(--accent-green); background: rgba(74, 222, 128, 0.15); color: var(--accent-green); }
+    .quiz-opt.wrong { border-color: var(--accent-red); background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+    .quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+
+    .quiz-result {
+      margin-top: 12px; padding: 12px 16px;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 600;
+      display: none;
+    }
+    .quiz-result.show { display: block; }
+    .quiz-result.pass { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); border: 1px solid rgba(74, 222, 128, 0.2); }
+    .quiz-result.fail { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+    .next-btn {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+      border: none; color: #000; padding: 12px 28px;
+      border-radius: 12px; cursor: pointer;
+      font-size: 0.95rem; font-weight: 800;
+      margin-top: 20px; transition: all 0.2s;
+      font-family: inherit;
+    }
+    .next-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3); }
+
+    /* === FOOTER === */
+    .footer { background: var(--bg-card); padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.9rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .diagram-wrap { flex-direction: column; align-items: center; }
+      .demo-row { flex-direction: column; }
+      .demo-btn { width: 100%; text-align: center; }
+      .quiz-options { flex-direction: column; }
+      .quiz-opt { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Webring -->
+  <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="vrn-practice.html" class="active">VRN Practice</a>
+      <a href="pitch-trainer.html">Pitch Trainer</a>
+      <a href="sight-reading.html">Sight Reading</a>
+      <a href="sheet-music.html">Sheet Music</a>
+      <a href="composer.html">Composer</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🎓 Learn VRN</h1>
+    <p class="hero-sub">Interactive lessons to learn Vocal Resonance Notation from the ground up. Listen to examples, practice with your microphone, and test your knowledge.</p>
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">Lesson 0 of 8 complete</div>
+    </div>
+  </section>
+
+  <!-- Lessons -->
+  <main class="main" id="lessonsContainer">
+
+    <!-- ======================== LESSON 1: CHEST [C] ======================== -->
+    <div class="lesson active" id="lesson1" data-lesson="1">
+      <div class="lesson-header" onclick="toggleLesson(1)">
+        <div class="lesson-num"><span>1</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Chest Resonance</div>
+          <div class="lesson-subtitle">The foundation — where power lives</div>
+        </div>
+        <div class="lesson-symbol">[C]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="130" rx="32" ry="25" fill="rgba(239, 68, 68, 0.25)" stroke="var(--accent-red)" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="135" text-anchor="middle" fill="var(--accent-gold)" font-size="18" font-weight="800" font-family="Courier New">[C]</text>
+          </svg>
+          <div class="diagram-info">
+            <h4>What is Chest Resonance?</h4>
+            <p>Chest resonance is the vibration you feel in your sternum and ribcage when you speak or sing in your lower range. Place your hand flat on your chest and say "HUH" at a low pitch — you'll feel the bones buzzing. That's chest resonance.</p>
+            <p>It's the foundation of vocal power and the easiest resonance to feel physically, which is why we start here.</p>
+            <div class="feel-box">
+              <strong>How to feel it:</strong> Put your palm on your sternum. Say "MAH" at a comfortable low pitch. Feel the vibration under your hand. Now say it louder — the buzz gets stronger. That's [C+] → [C++] → [C+++].
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Chest Resonance Examples</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Hear the difference between levels of chest engagement.</p>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playDemo('C', 1, this)">▶ [C+] Light chest</button>
+            <button class="demo-btn" onclick="playDemo('C', 2, this)">▶ [C++] Moderate chest</button>
+            <button class="demo-btn" onclick="playDemo('C', 3, this)">▶ [C+++] Full chest</button>
+          </div>
+        </div>
+
+        <div class="practice-box">
+          <h4>🎤 Practice: Feel Your Chest Resonance</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Click the microphone button and sing a low "MAH" or "HUH." Watch the spectrum — chest resonance shows strong energy in the lower frequencies (below 500 Hz).</p>
+          <button class="mic-btn" id="mic1" onclick="toggleMic('viz1', 'mic1', 'pitch1')">🎤 Start Microphone</button>
+          <div class="visualizer-wrap" style="display:none;" id="vizWrap1">
+            <div class="visualizer-label">Frequency Spectrum — look for strong energy on the LEFT (low frequencies = chest)</div>
+            <canvas class="viz" id="viz1" height="100"></canvas>
+            <div class="pitch-display">
+              <span>Detected pitch: <span class="pitch-val" id="pitch1">—</span></span>
+              <span>Lower pitch = more <span style="color:var(--accent-gold)">[C]</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">Quick check: You place your hand on your sternum and feel strong vibration while singing a low note. What VRN symbol describes this?</div>
+          <div class="quiz-options" id="q1opts">
+            <button class="quiz-opt" onclick="answer(1, this, '[H]')">[H]</button>
+            <button class="quiz-opt" onclick="answer(1, this, '[C]')">[C]</button>
+            <button class="quiz-opt" onclick="answer(1, this, '[N]')">[N]</button>
+            <button class="quiz-opt" onclick="answer(1, this, '[P]')">[P]</button>
+          </div>
+          <div class="quiz-result" id="q1result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(2)">Next: Head Resonance [H] →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 2: HEAD [H] ======================== -->
+    <div class="lesson" id="lesson2" data-lesson="2">
+      <div class="lesson-header" onclick="toggleLesson(2)">
+        <div class="lesson-num"><span>2</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Head Resonance</div>
+          <div class="lesson-subtitle">The ring — where brilliance lives</div>
+        </div>
+        <div class="lesson-symbol">[H]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="30" rx="24" ry="20" fill="rgba(0, 212, 255, 0.25)" stroke="var(--accent-cyan)" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="36" text-anchor="middle" fill="var(--accent-gold)" font-size="18" font-weight="800" font-family="Courier New">[H]</text>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          </svg>
+          <div class="diagram-info">
+            <h4>What is Head Resonance?</h4>
+            <p>Head resonance is the vibration you feel in the bones of your skull — your forehead, the crown, and the sinuses. It creates the bright, ringing quality that lets opera singers project over an orchestra.</p>
+            <div class="feel-box">
+              <strong>How to feel it:</strong> Hum on "MMMMM" at a comfortable medium-high pitch. Gently touch your forehead and the bridge of your nose. Feel the buzz? That's [H]. Slide the hum higher — the buzz moves upward. That's [H++] → [H+++].
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Head Resonance Examples</h4>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playDemo('H', 1, this)">▶ [H+] Light head</button>
+            <button class="demo-btn" onclick="playDemo('H', 2, this)">▶ [H++] Moderate head</button>
+            <button class="demo-btn" onclick="playDemo('H', 3, this)">▶ [H+++] Full head</button>
+          </div>
+        </div>
+
+        <div class="practice-box">
+          <h4>🎤 Practice: Find Your Head Resonance</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Hum a high "MMMMM" or sing "NEE." Head resonance shows energy shifted to the RIGHT of the spectrum (higher harmonics, 2000–4000 Hz).</p>
+          <button class="mic-btn" id="mic2" onclick="toggleMic('viz2', 'mic2', 'pitch2')">🎤 Start Microphone</button>
+          <div class="visualizer-wrap" style="display:none;" id="vizWrap2">
+            <div class="visualizer-label">Frequency Spectrum — look for energy on the RIGHT (high harmonics = head)</div>
+            <canvas class="viz" id="viz2" height="100"></canvas>
+            <div class="pitch-display">
+              <span>Detected pitch: <span class="pitch-val" id="pitch2">—</span></span>
+              <span>Higher harmonics = more <span style="color:var(--accent-gold)">[H]</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">You hum and feel buzzing in your forehead and sinuses. The sound is bright and ringy. Which VRN symbol?</div>
+          <div class="quiz-options" id="q2opts">
+            <button class="quiz-opt" onclick="answer(2, this, '[L]')">[L]</button>
+            <button class="quiz-opt" onclick="answer(2, this, '[C]')">[C]</button>
+            <button class="quiz-opt" onclick="answer(2, this, '[H]')">[H]</button>
+            <button class="quiz-opt" onclick="answer(2, this, '[O]')">[O]</button>
+          </div>
+          <div class="quiz-result" id="q2result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(3)">Next: Nasal Resonance [N] →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 3: NASAL [N] ======================== -->
+    <div class="lesson" id="lesson3" data-lesson="3">
+      <div class="lesson-header" onclick="toggleLesson(3)">
+        <div class="lesson-num"><span>3</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Nasal Resonance</div>
+          <div class="lesson-subtitle">The buzz — mask placement</div>
+        </div>
+        <div class="lesson-symbol">[N]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="42" rx="12" ry="10" fill="rgba(74, 222, 128, 0.3)" stroke="var(--accent-green)" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="47" text-anchor="middle" fill="var(--accent-gold)" font-size="16" font-weight="800" font-family="Courier New">[N]</text>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          </svg>
+          <div class="diagram-info">
+            <h4>What is Nasal Resonance?</h4>
+            <p>Nasal resonance is the vibration through the nasal passages and the "mask" area — the bridge of the nose, the cheekbones, the area around your eyes.</p>
+            <p><strong>Important:</strong> Nasal resonance ≠ a "nasal" sound. A nasal <em>sound</em> (honky, pinched) means too much air through the nose. Nasal <em>resonance</em> means the bones are vibrating sympathetically.</p>
+            <div class="feel-box">
+              <strong>How to feel it:</strong> Pinch your nose shut and say "MING MING MING." Release on the M — feel the buzz rush into your nose. Touch the sides of your nose and cheekbones while humming. That buzz is [N].
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Nasal Resonance Examples</h4>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playDemo('N', 1, this)">▶ [N+] Light nasal</button>
+            <button class="demo-btn" onclick="playDemo('N', 2, this)">▶ [N++] Moderate nasal</button>
+            <button class="demo-btn" onclick="playDemo('N', 3, this)">▶ [N+++] Full mask buzz</button>
+          </div>
+        </div>
+
+        <div class="practice-box">
+          <h4>🎤 Practice: Find Your Nasal Resonance</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Sing "NEE" or "MING" at a medium pitch. Touch the bridge of your nose — feel the buzz.</p>
+          <button class="mic-btn" id="mic3" onclick="toggleMic('viz3', 'mic3', 'pitch3')">🎤 Start Microphone</button>
+          <div class="visualizer-wrap" style="display:none;" id="vizWrap3">
+            <div class="visualizer-label">Frequency Spectrum — nasal resonance shows mid-range energy peaks</div>
+            <canvas class="viz" id="viz3" height="100"></canvas>
+            <div class="pitch-display">
+              <span>Detected pitch: <span class="pitch-val" id="pitch3">—</span></span>
+              <span>Mask buzz = <span style="color:var(--accent-gold)">[N]</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">You feel buzzing around the bridge of your nose and cheekbones while singing "MING." This is:</div>
+          <div class="quiz-options" id="q3opts">
+            <button class="quiz-opt" onclick="answer(3, this, '[P]')">[P]</button>
+            <button class="quiz-opt" onclick="answer(3, this, '[N]')">[N]</button>
+            <button class="quiz-opt" onclick="answer(3, this, '[H]')">[H]</button>
+            <button class="quiz-opt" onclick="answer(3, this, '[C]')">[C]</button>
+          </div>
+          <div class="quiz-result" id="q3result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(4)">Next: Oral Resonance [O] →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 4: ORAL [O] ======================== -->
+    <div class="lesson" id="lesson4" data-lesson="4">
+      <div class="lesson-header" onclick="toggleLesson(4)">
+        <div class="lesson-num"><span>4</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Oral / Overtone Resonance</div>
+          <div class="lesson-subtitle">The space — where vowels are shaped</div>
+        </div>
+        <div class="lesson-symbol">[O]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="54" rx="14" ry="8" fill="rgba(255, 215, 0, 0.25)" stroke="var(--accent-gold)" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="59" text-anchor="middle" fill="var(--accent-cyan)" font-size="16" font-weight="800" font-family="Courier New">[O]</text>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          </svg>
+          <div class="diagram-info">
+            <h4>What is Oral / Overtone Resonance?</h4>
+            <p>Oral resonance is the amplification in your mouth cavity — the space between your tongue, palate, cheeks, and lips. It's where vowels get their identity and overtones are shaped.</p>
+            <div class="feel-box">
+              <strong>How to feel it:</strong> Say "AH" with a wide-open mouth. Now say "OO" with rounded lips. Feel how the space changes? Say "AH" again and notice the vibrations on your hard palate. That forward, spacious feeling is [O].
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Oral Resonance Examples</h4>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playDemo('O', 1, this)">▶ [O+] Light oral</button>
+            <button class="demo-btn" onclick="playDemo('O', 2, this)">▶ [O++] Forward, open</button>
+            <button class="demo-btn" onclick="playDemo('O', 3, this)">▶ [O+++] Full overtone bloom</button>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">A singer opens their mouth wider and lifts the soft palate. The sound becomes rounder with richer overtones. This primarily changes:</div>
+          <div class="quiz-options" id="q4opts">
+            <button class="quiz-opt" onclick="answer(4, this, '[N]')">[N] Nasal</button>
+            <button class="quiz-opt" onclick="answer(4, this, '[O]')">[O] Oral</button>
+            <button class="quiz-opt" onclick="answer(4, this, '[C]')">[C] Chest</button>
+            <button class="quiz-opt" onclick="answer(4, this, '[L]')">[L] Low</button>
+          </div>
+          <div class="quiz-result" id="q4result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(5)">Next: Pharyngeal Resonance [P] →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 5: PHARYNGEAL [P] ======================== -->
+    <div class="lesson" id="lesson5" data-lesson="5">
+      <div class="lesson-header" onclick="toggleLesson(5)">
+        <div class="lesson-num"><span>5</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Pharyngeal Resonance</div>
+          <div class="lesson-subtitle">The depth — the "open throat"</div>
+        </div>
+        <div class="lesson-symbol">[P]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="78" rx="10" ry="14" fill="rgba(157, 78, 221, 0.3)" stroke="var(--accent-purple)" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="83" text-anchor="middle" fill="var(--accent-gold)" font-size="14" font-weight="800" font-family="Courier New">[P]</text>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          </svg>
+          <div class="diagram-info">
+            <h4>What is Pharyngeal Resonance?</h4>
+            <p>The pharynx is the tube at the back of your throat. It's where the Italian concept of <em>gola aperta</em> (open throat) lives. A well-opened pharynx adds depth, warmth, and carrying power.</p>
+            <div class="feel-box">
+              <strong>How to feel it:</strong> Yawn — feel the back of your throat open wide? That's your pharynx expanding. Sustain an "AH" while keeping that yawn-like openness. That deep, warm amplification is [P].
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Pharyngeal Resonance Examples</h4>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playDemo('P', 1, this)">▶ [P+] Slight opening</button>
+            <button class="demo-btn" onclick="playDemo('P', 2, this)">▶ [P++] Open throat</button>
+            <button class="demo-btn" onclick="playDemo('P', 3, this)">▶ [P+++] Full gola aperta</button>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">An opera singer "yawns" to open the back of the throat before a sustained phrase. This engages:</div>
+          <div class="quiz-options" id="q5opts">
+            <button class="quiz-opt" onclick="answer(5, this, '[O]')">[O] Oral</button>
+            <button class="quiz-opt" onclick="answer(5, this, '[N]')">[N] Nasal</button>
+            <button class="quiz-opt" onclick="answer(5, this, '[P]')">[P] Pharyngeal</button>
+            <button class="quiz-opt" onclick="answer(5, this, '[H]')">[H] Head</button>
+          </div>
+          <div class="quiz-result" id="q5result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(6)">Next: Low Body Resonance [L] →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 6: LOW [L] ======================== -->
+    <div class="lesson" id="lesson6" data-lesson="6">
+      <div class="lesson-header" onclick="toggleLesson(6)">
+        <div class="lesson-num"><span>6</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Low Body Resonance</div>
+          <div class="lesson-subtitle">The anchor — deep body connection</div>
+        </div>
+        <div class="lesson-symbol">[L]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="175" rx="28" ry="18" fill="rgba(245, 158, 11, 0.25)" stroke="var(--accent-orange)" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="180" text-anchor="middle" fill="var(--accent-gold)" font-size="18" font-weight="800" font-family="Courier New">[L]</text>
+          </svg>
+          <div class="diagram-info">
+            <h4>What is Low Body Resonance?</h4>
+            <p>Low body resonance is the sensation of vibration in your abdomen, lower back, and pelvic floor. Bass singers know this well — when they hit their lowest notes, the whole torso buzzes.</p>
+            <div class="feel-box">
+              <strong>How to feel it:</strong> Place your hands on your lower belly. Take a deep breath and let the belly expand. Now say "BUHM" at the lowest pitch you can. Feel the vibration deep in the torso? That's [L].
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Low Body Resonance</h4>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playDemo('L', 1, this)">▶ [L+] Light grounding</button>
+            <button class="demo-btn" onclick="playDemo('L', 2, this)">▶ [L++] Deep anchor</button>
+            <button class="demo-btn" onclick="playDemo('L', 3, this)">▶ [L+++] Full body bass</button>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">A bass singer feels vibration deep in their abdomen and lower back while sustaining a low C2. This is:</div>
+          <div class="quiz-options" id="q6opts">
+            <button class="quiz-opt" onclick="answer(6, this, '[C]')">[C] Chest</button>
+            <button class="quiz-opt" onclick="answer(6, this, '[H]')">[H] Head</button>
+            <button class="quiz-opt" onclick="answer(6, this, '[L]')">[L] Low Body</button>
+            <button class="quiz-opt" onclick="answer(6, this, '[P]')">[P] Pharyngeal</button>
+          </div>
+          <div class="quiz-result" id="q6result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(7)">Next: Combining Symbols →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 7: COMBINATIONS ======================== -->
+    <div class="lesson" id="lesson7" data-lesson="7">
+      <div class="lesson-header" onclick="toggleLesson(7)">
+        <div class="lesson-num"><span>7</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Combining Resonances</div>
+          <div class="lesson-subtitle">The real power — multiple areas at once</div>
+        </div>
+        <div class="lesson-symbol">[C++,H+]</div>
+      </div>
+      <div class="lesson-body">
+        <div class="diagram-wrap">
+          <svg class="body-svg" width="140" height="220" viewBox="0 0 140 220">
+            <ellipse cx="70" cy="40" rx="30" ry="35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="30" rx="20" ry="16" fill="rgba(0, 212, 255, 0.15)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+            <text x="70" y="35" text-anchor="middle" fill="var(--accent-cyan)" font-size="11" font-weight="800" font-family="Courier New">H+</text>
+            <rect x="58" y="72" width="24" height="20" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <path d="M35 92 Q35 88 58 88 L82 88 Q105 88 105 92 L110 190 Q110 200 70 200 Q30 200 30 190 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <ellipse cx="70" cy="130" rx="30" ry="22" fill="rgba(239, 68, 68, 0.3)" stroke="var(--accent-red)" stroke-width="2">
+              <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <text x="70" y="135" text-anchor="middle" fill="var(--accent-gold)" font-size="12" font-weight="800" font-family="Courier New">C++</text>
+          </svg>
+          <div class="diagram-info">
+            <h4>Real Singing = Multiple Resonances</h4>
+            <p>No one sings with just one resonance area. Real vocal production is always a <em>blend</em>. VRN's power is in combining symbols to describe exactly what that blend is.</p>
+            <div style="font-family: 'Courier New', monospace; color: var(--accent-gold); margin: 15px 0; font-size: 1rem; line-height: 2;">
+              [C++, H+] = Strong chest, light head (belting)<br>
+              [H+++, N++, O+] = Dominant head, strong mask (classical soprano)<br>
+              [C+, P++, L+] = Light chest, deep throat, grounded (bass warmth)
+            </div>
+            <div class="feel-box">
+              <strong>Try it:</strong> Sing "MAH" at a medium pitch. Feel your chest AND your forehead buzzing simultaneously? Describe what you feel: Which area is stronger? That's your natural VRN signature at that pitch.
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-demo">
+          <h4>🔊 Listen: Combined Resonance Patterns</h4>
+          <div class="demo-row">
+            <button class="demo-btn" onclick="playCombo('chest-belt', this)">▶ [C++, H+] Belt</button>
+            <button class="demo-btn" onclick="playCombo('classical', this)">▶ [H+++, N++, P+] Classical</button>
+            <button class="demo-btn" onclick="playCombo('mixed', this)">▶ [C+, H++, O++] Mixed</button>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">A Broadway belter produces a powerful, bright sound with strong chest vibration and some forehead ring. The best VRN notation would be:</div>
+          <div class="quiz-options" id="q7opts">
+            <button class="quiz-opt" onclick="answer(7, this, '[H+++, N++]')">[H+++, N++]</button>
+            <button class="quiz-opt" onclick="answer(7, this, '[C++, H+]')">[C++, H+]</button>
+            <button class="quiz-opt" onclick="answer(7, this, '[L++, P+]')">[L++, P+]</button>
+            <button class="quiz-opt" onclick="answer(7, this, '[N+, O++]')">[N+, O++]</button>
+          </div>
+          <div class="quiz-result" id="q7result"></div>
+        </div>
+        <button class="next-btn" onclick="advanceLesson(8)">Next: Final Challenge →</button>
+      </div>
+    </div>
+
+    <!-- ======================== LESSON 8: FINAL CHALLENGE ======================== -->
+    <div class="lesson" id="lesson8" data-lesson="8">
+      <div class="lesson-header" onclick="toggleLesson(8)">
+        <div class="lesson-num"><span>8</span></div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Final Challenge</div>
+          <div class="lesson-subtitle">Read a full VRN score passage</div>
+        </div>
+        <div class="lesson-symbol">★</div>
+      </div>
+      <div class="lesson-body">
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">Read this VRN-annotated passage from COSMOS the OPERA and answer the questions:</p>
+
+        <div style="background: #1a1a2e; border-radius: 12px; padding: 25px; font-family: 'Courier New', monospace; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px;">
+          <div style="color: var(--accent-green); margin-bottom: 8px;">// Scene 1: "Do You See" — Observer (Mezzo-Soprano)</div>
+          <div style="color: var(--accent-gold);">[C+, O++, H+]</div>
+          <div style="color: var(--text-secondary);">"do you see..."</div>
+          <div style="color: var(--accent-green); margin-top: 12px;">// Rising through the passaggio</div>
+          <div style="color: var(--accent-gold);">[H++, N++, P+, O+]</div>
+          <div style="color: var(--text-secondary);">"what i see is the LIGHT..."</div>
+          <div style="color: var(--accent-green); margin-top: 12px;">// Climax — full operatic sound</div>
+          <div style="color: var(--accent-gold);">[H+++, N+++, P++, O++]</div>
+          <div style="color: var(--text-secondary);">"I SEE THE UNIVERSE!" (fff)</div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-q">How does the resonance change from the beginning to the climax?</div>
+          <div class="quiz-options" id="q8aopts">
+            <button class="quiz-opt" onclick="answer('8a', this, 'chest→head')" style="font-family: inherit;">Chest-dominant → Head-dominant with full mask</button>
+            <button class="quiz-opt" onclick="answer('8a', this, 'head→chest')" style="font-family: inherit;">Head-dominant → Chest-dominant</button>
+            <button class="quiz-opt" onclick="answer('8a', this, 'same')" style="font-family: inherit;">It stays the same throughout</button>
+          </div>
+          <div class="quiz-result" id="q8aresult"></div>
+        </div>
+
+        <div class="quiz-section" style="margin-top: 25px;">
+          <div class="quiz-q">At the climax, the singer has [H+++, N+++]. What would they physically feel?</div>
+          <div class="quiz-options" id="q8bopts">
+            <button class="quiz-opt" onclick="answer('8b', this, 'skull-mask')" style="font-family: inherit;">Strong buzzing in skull + intense mask vibration</button>
+            <button class="quiz-opt" onclick="answer('8b', this, 'chest-belly')" style="font-family: inherit;">Deep vibration in chest and belly</button>
+            <button class="quiz-opt" onclick="answer('8b', this, 'throat')" style="font-family: inherit;">Tightness in the throat</button>
+          </div>
+          <div class="quiz-result" id="q8bresult"></div>
+        </div>
+
+        <div id="completionMsg" style="display:none; text-align:center; padding: 30px; margin-top: 25px; background: linear-gradient(135deg, rgba(157, 78, 221, 0.15), rgba(0, 212, 255, 0.1)); border-radius: 16px; border: 1px solid var(--accent-gold);">
+          <div style="font-size: 2.5rem; margin-bottom: 10px;">🎓✨</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: var(--accent-gold); margin-bottom: 10px;">VRN Foundations Complete!</div>
+          <p style="color: var(--text-secondary);">You can now read the 6 primary resonance symbols and understand degree notation. Ready to go deeper?</p>
+          <div style="margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <a href="notation.html" style="display: inline-block; background: var(--accent-purple); color: #fff; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700;">📖 Full VRN Reference</a>
+            <a href="sheet-music.html" style="display: inline-block; background: var(--accent-cyan); color: #000; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700;">🎵 See VRN in Sheet Music</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+      <a href="index.html">Back to Home</a> | 
+      <a href="notation.html">Full VRN Reference</a> |
+      <a href="pitch-trainer.html">Pitch Trainer</a> |
+      <a href="sight-reading.html">Sight Reading</a>
+    </p>
+  </footer>
+
+  <script>
+    // ==================== STATE ====================
+    const TOTAL_LESSONS = 8;
+    let completedLessons = new Set();
+    let activeLesson = 1;
+
+    const CORRECT_ANSWERS = {
+      1: '[C]', 2: '[H]', 3: '[N]', 4: '[O]', 5: '[P]', 6: '[L]', 7: '[C++, H+]',
+      '8a': 'chest→head', '8b': 'skull-mask'
+    };
+
+    // ==================== LESSON NAVIGATION ====================
+    function toggleLesson(num) {
+      const el = document.getElementById('lesson' + num);
+      if (el.classList.contains('active')) {
+        el.classList.remove('active');
+      } else {
+        document.querySelectorAll('.lesson.active').forEach(l => l.classList.remove('active'));
+        el.classList.add('active');
+        activeLesson = num;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function advanceLesson(num) {
+      completedLessons.add(num - 1);
+      document.getElementById('lesson' + (num - 1)).classList.add('completed');
+      document.getElementById('lesson' + (num - 1)).classList.remove('active');
+      toggleLesson(num);
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const pct = Math.round((completedLessons.size / TOTAL_LESSONS) * 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressLabel').textContent = 'Lesson ' + completedLessons.size + ' of ' + TOTAL_LESSONS + ' complete';
+    }
+
+    // ==================== QUIZ ====================
+    function answer(qNum, btn, value) {
+      const correct = CORRECT_ANSWERS[qNum];
+      const resultEl = document.getElementById('q' + qNum + 'result');
+      const optsId = 'q' + qNum + 'opts';
+      document.querySelectorAll('#' + optsId + ' .quiz-opt').forEach(function(o) { o.classList.add('disabled'); });
+
+      if (value === correct) {
+        btn.classList.add('correct');
+        resultEl.className = 'quiz-result show pass';
+        resultEl.textContent = '✓ Correct! ' + getExplanation(qNum);
+      } else {
+        btn.classList.add('wrong');
+        resultEl.className = 'quiz-result show fail';
+        resultEl.textContent = '✗ Not quite. The answer is ' + correct + '. ' + getExplanation(qNum);
+        document.querySelectorAll('#' + optsId + ' .quiz-opt').forEach(function(o) {
+          if (o.getAttribute('onclick') && o.getAttribute('onclick').indexOf("'" + correct + "'") !== -1) {
+            o.classList.add('correct');
+          }
+        });
+      }
+
+      if (qNum === '8b') {
+        completedLessons.add(8);
+        document.getElementById('lesson8').classList.add('completed');
+        document.getElementById('completionMsg').style.display = 'block';
+        updateProgress();
+      }
+    }
+
+    function getExplanation(q) {
+      var exps = {
+        1: 'Sternum vibration on low notes = Chest [C].',
+        2: 'Forehead and sinus buzzing = Head [H].',
+        3: 'Nose bridge and cheekbone buzz = Nasal [N].',
+        4: 'Changing mouth shape affects Oral [O] resonance.',
+        5: 'Opening the back of the throat = Pharyngeal [P].',
+        6: 'Deep abdominal vibration on low pitches = Low body [L].',
+        7: 'Strong chest + light head ring = the classic belt combination.',
+        '8a': 'The passage moves from [C+, O++, H+] to [H+++, N+++] — fully head-dominant with maximum mask.',
+        '8b': '[H+++] = intense skull vibration, [N+++] = maximum mask buzz.'
+      };
+      return exps[q] || '';
+    }
+
+    // ==================== AUDIO DEMOS ====================
+    var audioCtx = null;
+    var currentOsc = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    function stopCurrent() {
+      if (currentOsc) { try { currentOsc.stop(); } catch(e){} currentOsc = null; }
+      document.querySelectorAll('.demo-btn.playing').forEach(function(b) { b.classList.remove('playing'); });
+    }
+
+    function playDemo(type, level, btn) {
+      stopCurrent();
+      btn.classList.add('playing');
+      var ctx = getAudioCtx();
+      var configs = {
+        'C': { base: [130.81, 146.83, 164.81][level-1], type: 'sawtooth', gain: [0.15, 0.25, 0.4][level-1], filterFreq: [400, 600, 900][level-1] },
+        'H': { base: [392, 440, 523.25][level-1], type: 'sine', gain: [0.12, 0.18, 0.25][level-1], filterFreq: [3000, 4000, 5000][level-1] },
+        'N': { base: [293.66, 329.63, 349.23][level-1], type: 'triangle', gain: [0.12, 0.18, 0.22][level-1], filterFreq: [1200, 1800, 2500][level-1] },
+        'O': { base: [261.63, 293.66, 329.63][level-1], type: 'sine', gain: [0.15, 0.22, 0.3][level-1], filterFreq: [800, 1200, 2000][level-1] },
+        'P': { base: [196, 220, 246.94][level-1], type: 'sawtooth', gain: [0.1, 0.18, 0.28][level-1], filterFreq: [600, 900, 1400][level-1] },
+        'L': { base: [82.41, 98, 110][level-1], type: 'sawtooth', gain: [0.2, 0.3, 0.45][level-1], filterFreq: [300, 450, 700][level-1] }
+      };
+      var cfg = configs[type];
+      var osc = ctx.createOscillator();
+      osc.type = cfg.type; osc.frequency.value = cfg.base;
+      var filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass'; filter.frequency.value = cfg.filterFreq; filter.Q.value = type === 'N' ? 5 : 1;
+      if (type === 'H') { filter.type = 'highpass'; filter.frequency.value = [1500, 2000, 2500][level-1]; }
+      if (type === 'N') { filter.type = 'bandpass'; filter.Q.value = 6; }
+      var gain = ctx.createGain();
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(cfg.gain, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(cfg.gain, ctx.currentTime + 2.5);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 3);
+      osc.connect(filter).connect(gain).connect(ctx.destination);
+      osc.start(); osc.stop(ctx.currentTime + 3);
+      currentOsc = osc;
+      setTimeout(function() { btn.classList.remove('playing'); currentOsc = null; }, 3000);
+    }
+
+    function playCombo(type, btn) {
+      stopCurrent();
+      btn.classList.add('playing');
+      var ctx = getAudioCtx();
+      var combos = {
+        'chest-belt': [
+          { freq: 293.66, type: 'sawtooth', gain: 0.25, filter: 800 },
+          { freq: 587.33, type: 'sine', gain: 0.08, filter: 4000 }
+        ],
+        'classical': [
+          { freq: 523.25, type: 'sine', gain: 0.2, filter: 5000 },
+          { freq: 523.25, type: 'triangle', gain: 0.1, filter: 2000 },
+          { freq: 261.63, type: 'sawtooth', gain: 0.06, filter: 900 }
+        ],
+        'mixed': [
+          { freq: 329.63, type: 'sawtooth', gain: 0.12, filter: 700 },
+          { freq: 659.25, type: 'sine', gain: 0.15, filter: 4000 },
+          { freq: 329.63, type: 'sine', gain: 0.1, filter: 1500 }
+        ]
+      };
+      var tones = combos[type];
+      tones.forEach(function(t) {
+        var osc = ctx.createOscillator();
+        osc.type = t.type; osc.frequency.value = t.freq;
+        var filt = ctx.createBiquadFilter();
+        filt.type = 'lowpass'; filt.frequency.value = t.filter;
+        var g = ctx.createGain();
+        g.gain.setValueAtTime(0, ctx.currentTime);
+        g.gain.linearRampToValueAtTime(t.gain, ctx.currentTime + 0.2);
+        g.gain.setValueAtTime(t.gain, ctx.currentTime + 2.8);
+        g.gain.linearRampToValueAtTime(0, ctx.currentTime + 3.2);
+        osc.connect(filt).connect(g).connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime + 3.2);
+      });
+      setTimeout(function() { btn.classList.remove('playing'); }, 3200);
+    }
+
+    // ==================== MICROPHONE & VISUALIZER ====================
+    var micStreams = {};
+
+    async function toggleMic(canvasId, btnId, pitchId) {
+      var btn = document.getElementById(btnId);
+      var wrap = document.getElementById('vizWrap' + canvasId.replace('viz', ''));
+
+      if (micStreams[canvasId]) {
+        micStreams[canvasId].stream.getTracks().forEach(function(t) { t.stop(); });
+        cancelAnimationFrame(micStreams[canvasId].raf);
+        delete micStreams[canvasId];
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Start Microphone';
+        wrap.style.display = 'none';
+        return;
+      }
+
+      try {
+        var stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        btn.classList.add('recording');
+        btn.textContent = '⏹ Stop Microphone';
+        wrap.style.display = 'block';
+
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var src = ctx.createMediaStreamSource(stream);
+        var analyser = ctx.createAnalyser();
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.8;
+        src.connect(analyser);
+
+        var canvas = document.getElementById(canvasId);
+        var cctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth * 2;
+        canvas.height = 200;
+        cctx.scale(2, 2);
+
+        var bufLen = analyser.frequencyBinCount;
+        var data = new Uint8Array(bufLen);
+        var pitchEl = document.getElementById(pitchId);
+
+        function draw() {
+          var raf = requestAnimationFrame(draw);
+          if (!micStreams[canvasId]) return;
+          micStreams[canvasId].raf = raf;
+          analyser.getByteFrequencyData(data);
+          var w = canvas.offsetWidth, h = 100;
+          cctx.clearRect(0, 0, w, h);
+          var barCount = 80, barW = w / barCount;
+          for (var i = 0; i < barCount; i++) {
+            var idx = Math.floor((i / barCount) * bufLen * 0.5);
+            var val = data[idx] / 255;
+            var barH = val * h * 0.9;
+            var hue = (i / barCount) * 180;
+            cctx.fillStyle = 'hsl(' + hue + ', 80%, ' + (40 + val * 30) + '%)';
+            cctx.fillRect(i * barW, h - barH, barW - 1, barH);
+          }
+          cctx.fillStyle = 'rgba(255,255,255,0.3)';
+          cctx.font = '10px sans-serif';
+          cctx.fillText('← LOW (Chest)', 4, 12);
+          cctx.fillText('HIGH (Head) →', w - 90, 12);
+
+          var timeData = new Float32Array(analyser.fftSize);
+          analyser.getFloatTimeDomainData(timeData);
+          var pitch = detectPitch(timeData, ctx.sampleRate);
+          if (pitch > 0) {
+            pitchEl.textContent = Math.round(pitch) + ' Hz (' + freqToNote(pitch) + ')';
+          }
+        }
+
+        micStreams[canvasId] = { stream: stream, ctx: ctx, raf: requestAnimationFrame(draw) };
+        draw();
+      } catch (e) {
+        alert('Microphone access denied. Please allow microphone access to use this feature.');
+      }
+    }
+
+    function detectPitch(buf, sampleRate) {
+      var maxVal = 0;
+      for (var i = 0; i < buf.length; i++) if (Math.abs(buf[i]) > maxVal) maxVal = Math.abs(buf[i]);
+      if (maxVal < 0.01) return -1;
+      var norm = new Float32Array(buf.length);
+      for (var i = 0; i < buf.length; i++) norm[i] = buf[i] / maxVal;
+      var minPeriod = Math.floor(sampleRate / 1000);
+      var maxPeriod = Math.floor(sampleRate / 60);
+      var bestCorr = 0, bestPeriod = 0;
+      for (var p = minPeriod; p < maxPeriod && p < norm.length / 2; p++) {
+        var corr = 0;
+        for (var i = 0; i < norm.length / 2; i++) corr += norm[i] * norm[i + p];
+        if (corr > bestCorr) { bestCorr = corr; bestPeriod = p; }
+      }
+      if (bestCorr < norm.length * 0.01) return -1;
+      return sampleRate / bestPeriod;
+    }
+
+    function freqToNote(freq) {
+      var notes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+      var midi = 12 * Math.log2(freq / 440) + 69;
+      var note = notes[Math.round(midi) % 12];
+      var octave = Math.floor(Math.round(midi) / 12) - 1;
+      return note + octave;
+    }
+  </script>
+</body>
+</html>

@@ -712,5 +712,49 @@ Now reads: "The world's first notation system for indicating vocal resonance loc
 
 ---
 
+## Session 22 — February 8, 2026 — Music Learning Hub
+
+### Changes Made
+
+#### notation.html — Hero Action Buttons
+- Added 3 learning hub buttons below the hero subtitle
+- 🎓 Learn VRN → vrn-practice.html (purple gradient)
+- 🎤 Practice Pitch → pitch-trainer.html (cyan gradient)
+- 👁 Sight Reading → sight-reading.html (gold gradient)
+- New CSS: `.hero-actions`, `.hero-btn`, `.hero-btn--purple/--cyan/--gold`
+- Hover effects with translateY and box-shadow glow
+- Mobile responsive (flex-wrap)
+
+#### pitch-trainer.html — NEW PAGE
+Interactive pitch training tool with 3 modes:
+1. **Free Pitch** — Open microphone, real-time pitch detection showing note name, Hz, cents sharp/flat, visual needle meter
+2. **Match Pitch** — Random target note played via Web Audio, user sings it back, held-pitch detection (~0.5s hold), scoring with streak counter, configurable range (Easy C3-C4 / Medium A2-A4 / Hard E2-E5)
+3. **Intervals** — Plays two notes, user identifies the interval from multiple choice. Difficulty levels: Basic (2nds, 3rds, 5ths, octave with song hints), Intermediate (all diatonic), Advanced (chromatic). Scoring with streak.
+- Autocorrelation pitch detection algorithm
+- Visual tuning meter with center line and glowing needle
+- Color-coded cents display (green=in tune, red=sharp, orange=flat)
+
+#### sight-reading.html — NEW PAGE
+Interactive sight reading trainer with 3 modes:
+1. **Learn** — Visual lessons teaching staff, treble clef (EGBDF / FACE mnemonics), bass clef (GBDFA / ACEG), ledger lines, sharps/flats. Canvas-rendered labeled staff diagrams.
+2. **Identify Notes** — Random note drawn on staff canvas with clef symbol, user clicks note name button. Treble/bass/both clef options. Optional sharps/flats. Scoring with streak.
+3. **Speed Drill** — Timed drill (15/30/60 seconds), rapid-fire note identification, calculates notes-per-minute speed score. Performance grades from 💪 to 🏆.
+- Canvas-rendered music staff with proper note heads, stems, ledger lines, accidentals
+- "Hear this note" button plays the displayed note via Web Audio
+- Treble and bass clef support with accurate staff position mapping
+
+### Files Created
+- `pitch-trainer.html` — Pitch training page
+- `sight-reading.html` — Sight reading page
+
+### Files Modified
+- `notation.html` — Added hero action buttons CSS + HTML
+
+### Navigation Update
+All new pages include consistent nav links:
+Home | Vocal Notation | VRN Practice | Pitch Trainer | Sight Reading | Sheet Music | Composer
+
+---
+
 *Implementation by Claude (Anthropic) - January-February 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

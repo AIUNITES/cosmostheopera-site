@@ -100,6 +100,50 @@
       margin: 0 auto;
     }
     
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #fff;
+    }
+    
+    .hero-btn:hover {
+      transform: translateY(-3px);
+    }
+    
+    .hero-btn--purple {
+      background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+      box-shadow: 0 4px 20px rgba(157, 78, 221, 0.3);
+    }
+    .hero-btn--purple:hover { box-shadow: 0 8px 30px rgba(157, 78, 221, 0.5); }
+    
+    .hero-btn--cyan {
+      background: linear-gradient(135deg, #0891b2, var(--accent-cyan));
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.25);
+    }
+    .hero-btn--cyan:hover { box-shadow: 0 8px 30px rgba(0, 212, 255, 0.45); }
+    
+    .hero-btn--gold {
+      background: linear-gradient(135deg, #d97706, var(--accent-gold));
+      color: #000;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25);
+    }
+    .hero-btn--gold:hover { box-shadow: 0 8px 30px rgba(255, 215, 0, 0.45); }
+    
     /* Main Content */
     .content {
       max-width: 1000px;
@@ -356,6 +400,11 @@
       breath support, phonation type, formant tracking, and timbral color in operatic performance. 
       Now at VSV c06 with 8 complete notation systems. A breakthrough innovation from COSMOS the OPERA.
     </p>
+    <div class="hero-actions">
+      <a href="vrn-practice.html" class="hero-btn hero-btn--purple">🎓 Learn VRN</a>
+      <a href="pitch-trainer.html" class="hero-btn hero-btn--cyan">🎤 Practice Pitch</a>
+      <a href="sight-reading.html" class="hero-btn hero-btn--gold">👁 Sight Reading</a>
+    </div>
   </section>
 
   <!-- Main Content -->

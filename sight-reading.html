@@ -23,6 +23,7 @@
     }
     body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.7; }
 
+    /* Webring */
     .aiunites-bar{background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);padding:8px 0;font-size:12px}
     .aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}
     .aiunites-bar-content::-webkit-scrollbar{display:none}
@@ -31,28 +32,41 @@
     .aiunites-bar-brand{color:#6366f1!important;font-weight:600}
     .aiunites-bar-divider{color:rgba(255,255,255,.2)}
 
+    /* Nav */
     .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
     .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
     .nav-links { display: flex; gap: 25px; flex-wrap: wrap; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
     .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
 
+    /* Hero */
     .hero { padding: 50px 20px 30px; text-align: center; background: radial-gradient(ellipse at 50% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 60%), var(--bg-dark); }
     .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 12px; background: linear-gradient(135deg, var(--accent-gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero-sub { font-size: 1.05rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
 
     .main { max-width: 850px; margin: 0 auto; padding: 30px 20px 80px; }
 
+    /* Mode Tabs */
     .mode-tabs { display: flex; gap: 0; margin-bottom: 30px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-    .mode-tab { flex: 1; padding: 14px; text-align: center; cursor: pointer; background: var(--bg-card); color: var(--text-secondary); font-weight: 700; font-size: 0.95rem; border: none; transition: all 0.2s; font-family: inherit; }
+    .mode-tab {
+      flex: 1; padding: 14px; text-align: center; cursor: pointer;
+      background: var(--bg-card); color: var(--text-secondary);
+      font-weight: 700; font-size: 0.95rem; border: none; transition: all 0.2s; font-family: inherit;
+    }
     .mode-tab:hover { background: rgba(255,255,255,0.04); }
     .mode-tab.active { background: var(--accent-gold); color: #000; }
 
     .panel { display: none; }
     .panel.active { display: block; }
 
-    .staff-wrap { background: var(--bg-card); border-radius: 20px; padding: 30px 20px; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 25px; text-align: center; }
+    /* Staff Canvas */
+    .staff-wrap {
+      background: var(--bg-card); border-radius: 20px; padding: 30px 20px;
+      border: 1px solid rgba(255,255,255,0.06); margin-bottom: 25px; text-align: center;
+    }
+    canvas.staff { display: block; margin: 0 auto; background: transparent; }
 
+    /* Answer Buttons */
     .answer-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
     .note-btn {
       width: 60px; height: 60px; border-radius: 14px;
@@ -66,12 +80,16 @@
     .note-btn.disabled { pointer-events: none; opacity: 0.5; }
     .note-btn.sharp { font-size: 1rem; width: 65px; }
 
+    /* Score */
     .score-bar { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
     .score-item { text-align: center; }
     .score-num { font-size: 2rem; font-weight: 900; font-family: 'Courier New', monospace; }
     .score-label { font-size: 0.8rem; color: var(--text-secondary); }
 
-    .result-msg { text-align: center; padding: 15px; border-radius: 12px; margin: 15px 0; font-size: 1rem; font-weight: 700; display: none; }
+    .result-msg {
+      text-align: center; padding: 15px; border-radius: 12px; margin: 15px 0;
+      font-size: 1rem; font-weight: 700; display: none;
+    }
     .result-msg.show { display: block; }
     .result-msg.pass { background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.3); color: var(--accent-green); }
     .result-msg.fail { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--accent-red); }
@@ -92,21 +110,40 @@
     }
     .hear-btn:hover { background: rgba(0, 212, 255, 0.25); }
 
-    .settings-row { display: flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    /* Settings */
+    .settings-row {
+      display: flex; align-items: center; gap: 15px; padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
     .settings-row label { flex: 1; color: var(--text-secondary); font-size: 0.9rem; }
-    .settings-row select { background: var(--bg-card); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 8px; font-family: inherit; }
+    .settings-row select {
+      background: var(--bg-card); color: var(--text-primary);
+      border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 8px; font-family: inherit;
+    }
 
-    .lesson-card { background: var(--bg-card); border-radius: 16px; padding: 25px; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 20px; }
+    /* Lesson cards */
+    .lesson-card {
+      background: var(--bg-card); border-radius: 16px; padding: 25px;
+      border: 1px solid rgba(255,255,255,0.06); margin-bottom: 20px;
+    }
     .lesson-card h3 { color: var(--accent-gold); margin-bottom: 10px; }
     .lesson-card p { color: var(--text-secondary); font-size: 0.95rem; }
-
-    .mnemonic { font-family: 'Courier New', monospace; font-size: 1.3rem; color: var(--accent-cyan); margin: 15px 0; letter-spacing: 2px; }
+    .mnemonic {
+      font-family: 'Courier New', monospace; font-size: 1.3rem;
+      color: var(--accent-cyan); margin: 15px 0; letter-spacing: 2px;
+    }
     .mnemonic span { color: var(--accent-gold); font-weight: 900; font-size: 1.5rem; }
 
-    .speed-display { text-align: center; padding: 15px; background: rgba(157, 78, 221, 0.08); border-radius: 12px; border: 1px solid rgba(157, 78, 221, 0.15); margin: 15px 0; }
+    /* Speed display */
+    .speed-display {
+      text-align: center; padding: 15px;
+      background: rgba(157, 78, 221, 0.08); border-radius: 12px;
+      border: 1px solid rgba(157, 78, 221, 0.15); margin: 15px 0;
+    }
     .speed-val { font-size: 2rem; font-weight: 900; color: var(--accent-purple); font-family: 'Courier New', monospace; }
     .speed-label { font-size: 0.8rem; color: var(--text-secondary); }
 
+    /* Footer */
     .footer { background: var(--bg-card); padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer p { color: var(--text-secondary); font-size: 0.9rem; }
     .footer a { color: var(--accent-purple); text-decoration: none; }
@@ -116,11 +153,13 @@
       .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
       .mode-tabs { flex-direction: column; }
       .note-btn { width: 50px; height: 50px; font-size: 1.1rem; }
+      .note-btn.sharp { width: 55px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Webring -->
   <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
 
   <nav class="nav">
@@ -149,7 +188,7 @@
       <button class="mode-tab" onclick="switchMode('speed')">⚡ Speed Drill</button>
     </div>
 
-    <!-- ==================== LEARN MODE ==================== -->
+    <!-- LEARN MODE -->
     <div class="panel active" id="panel-learn">
       <div class="lesson-card">
         <h3>The Staff</h3>
@@ -158,36 +197,36 @@
 
       <div class="lesson-card">
         <h3>🎼 Treble Clef (G Clef)</h3>
-        <p>The treble clef is used for higher voices and most instruments. The clef symbol curls around the second line, which is <strong>G</strong>.</p>
+        <p>The treble clef is used for higher voices (soprano, mezzo, tenor) and most instruments. The clef symbol curls around the second line, which is <strong>G</strong>.</p>
         <p style="margin-top: 10px;"><strong>Lines</strong> (bottom to top):</p>
         <div class="mnemonic"><span>E</span>very <span>G</span>ood <span>B</span>oy <span>D</span>oes <span>F</span>ine</div>
         <p><strong>Spaces</strong> (bottom to top) spell:</p>
         <div class="mnemonic"><span>F</span> — <span>A</span> — <span>C</span> — <span>E</span></div>
         <div style="text-align: center; margin-top: 15px;">
-          <canvas id="learnTreble" width="500" height="160" style="max-width: 100%;"></canvas>
+          <canvas id="learnTreble" width="500" height="160" style="max-width:100%;"></canvas>
         </div>
       </div>
 
       <div class="lesson-card">
         <h3>🎼 Bass Clef (F Clef)</h3>
-        <p>The bass clef is used for lower voices and left-hand piano. The two dots sit on either side of the fourth line, which is <strong>F</strong>.</p>
+        <p>The bass clef is used for lower voices (baritone, bass) and left-hand piano. The two dots sit on either side of the fourth line, which is <strong>F</strong>.</p>
         <p style="margin-top: 10px;"><strong>Lines</strong> (bottom to top):</p>
         <div class="mnemonic"><span>G</span>ood <span>B</span>oys <span>D</span>o <span>F</span>ine <span>A</span>lways</div>
         <p><strong>Spaces</strong> (bottom to top):</p>
         <div class="mnemonic"><span>A</span>ll <span>C</span>ows <span>E</span>at <span>G</span>rass</div>
         <div style="text-align: center; margin-top: 15px;">
-          <canvas id="learnBass" width="500" height="160" style="max-width: 100%;"></canvas>
+          <canvas id="learnBass" width="500" height="160" style="max-width:100%;"></canvas>
         </div>
       </div>
 
       <div class="lesson-card">
         <h3>Ledger Lines</h3>
-        <p>Notes above or below the staff use short extra lines called <strong>ledger lines</strong>. Middle C (C4) sits on a ledger line — one below treble or one above bass.</p>
+        <p>Notes above or below the staff are written on short extra lines called <strong>ledger lines</strong>. Middle C (C4) sits on a ledger line — one line below the treble staff or one line above the bass staff.</p>
       </div>
 
       <div class="lesson-card">
         <h3>🎵 Sharps and Flats</h3>
-        <p>A <strong>sharp (♯)</strong> raises a note by one half-step. A <strong>flat (♭)</strong> lowers it. These appear just left of the note head on the staff.</p>
+        <p>A <strong>sharp (♯)</strong> raises a note by one half-step. A <strong>flat (♭)</strong> lowers it by one half-step. These symbols appear just to the left of the note head on the staff.</p>
       </div>
 
       <p style="text-align: center; margin-top: 20px;">
@@ -195,7 +234,7 @@
       </p>
     </div>
 
-    <!-- ==================== IDENTIFY MODE ==================== -->
+    <!-- IDENTIFY MODE -->
     <div class="panel" id="panel-identify">
       <div class="score-bar">
         <div class="score-item"><div class="score-num" style="color: var(--accent-green);" id="idCorrect">0</div><div class="score-label">Correct</div></div>
@@ -204,8 +243,7 @@
       </div>
 
       <div class="staff-wrap">
-        <canvas id="idStaff" width="400" height="200" style="max-width: 100%;"></canvas>
-        <br>
+        <canvas class="staff" id="idStaff" width="400" height="200" style="max-width:100%;"></canvas>
         <button class="hear-btn" onclick="hearCurrentNote()">🔊 Hear this note</button>
       </div>
 
@@ -235,7 +273,7 @@
       </div>
     </div>
 
-    <!-- ==================== SPEED DRILL MODE ==================== -->
+    <!-- SPEED DRILL MODE -->
     <div class="panel" id="panel-speed">
       <div class="speed-display">
         <div class="speed-val" id="speedVal">—</div>
@@ -249,7 +287,7 @@
       </div>
 
       <div class="staff-wrap">
-        <canvas id="spStaff" width="400" height="200" style="max-width: 100%;"></canvas>
+        <canvas class="staff" id="spStaff" width="400" height="200" style="max-width:100%;"></canvas>
       </div>
 
       <div class="answer-row" id="spAnswers"></div>
@@ -275,17 +313,18 @@
   </main>
 
   <footer class="footer">
-    <p>© 2002-2026 COSMOS the OPERA. All Rights Reserved.<br>
-      <a href="notation.html">VRN Reference</a> | <a href="pitch-trainer.html">Pitch Trainer</a> | <a href="vrn-practice.html">Learn VRN</a>
+    <p>
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved.<br>
+      <a href="notation.html">VRN Reference</a> |
+      <a href="pitch-trainer.html">Pitch Trainer</a> |
+      <a href="vrn-practice.html">Learn VRN</a>
     </p>
   </footer>
 
   <script>
     var GOLD = '#ffd700';
-    var A4 = 440;
 
-    function midiToFreq(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
-
+    // Note pools
     function getTrebleNotes(acc) {
       var notes = [
         { name: 'C4', display: 'C', midi: 60, staffPos: -2, ledger: 1 },
@@ -342,89 +381,97 @@
     // ==================== DRAWING ====================
     function drawStaff(canvas, clef, note, showLabel) {
       var ctx = canvas.getContext('2d');
-      var w = canvas.width, h = canvas.height;
+      var w = 400, h = 200;
       var dpr = window.devicePixelRatio || 1;
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, w, h);
 
-      var lineGap = 14;
+      var lineGap = 16;
       var staffTop = h / 2 - 2 * lineGap;
       var cx = w / 2;
 
+      // Draw 5 lines
       ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1.5;
       for (var i = 0; i < 5; i++) {
         var y = staffTop + i * lineGap;
         ctx.beginPath(); ctx.moveTo(40, y); ctx.lineTo(w - 40, y); ctx.stroke();
       }
 
-      ctx.font = '48px serif'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
-      if (clef === 'treble') ctx.fillText('\uD834\uDD1E', 48, staffTop + 3.8 * lineGap);
-      else ctx.fillText('\uD834\uDD22', 48, staffTop + 2.2 * lineGap);
+      // Clef
+      ctx.font = '52px serif'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      if (clef === 'treble') ctx.fillText('𝄞', 48, staffTop + 3.8 * lineGap);
+      else ctx.fillText('𝄢', 48, staffTop + 2.2 * lineGap);
 
       if (!note) return;
 
       var bottomLineY = staffTop + 4 * lineGap;
       var noteY = bottomLineY - note.staffPos * (lineGap / 2);
 
+      // Ledger lines
       ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1.5;
       if (note.staffPos < 0) {
         for (var p = -2; p >= note.staffPos - 1; p -= 2) {
           var ly = bottomLineY - p * (lineGap / 2);
-          ctx.beginPath(); ctx.moveTo(cx - 20, ly); ctx.lineTo(cx + 20, ly); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(cx - 22, ly); ctx.lineTo(cx + 22, ly); ctx.stroke();
         }
       }
       if (note.staffPos > 8) {
         for (var p = 10; p <= note.staffPos + 1; p += 2) {
           var ly = bottomLineY - p * (lineGap / 2);
-          ctx.beginPath(); ctx.moveTo(cx - 20, ly); ctx.lineTo(cx + 20, ly); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(cx - 22, ly); ctx.lineTo(cx + 22, ly); ctx.stroke();
         }
       }
 
+      // Accidental
       if (note.accidental) {
-        ctx.font = '20px serif'; ctx.fillStyle = GOLD;
-        ctx.fillText(note.accidental === '#' ? '♯' : '♭', cx - 22, noteY + 6);
+        ctx.font = '22px serif'; ctx.fillStyle = GOLD;
+        ctx.fillText(note.accidental === '#' ? '♯' : '♭', cx - 24, noteY + 7);
       }
 
+      // Note head
       ctx.fillStyle = GOLD;
-      ctx.beginPath(); ctx.ellipse(cx, noteY, 9, 7, -0.2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cx, noteY, 10, 8, -0.2, 0, Math.PI * 2); ctx.fill();
 
-      ctx.strokeStyle = GOLD; ctx.lineWidth = 2; ctx.beginPath();
-      if (note.staffPos >= 4) { ctx.moveTo(cx - 8.5, noteY); ctx.lineTo(cx - 8.5, noteY + 40); }
-      else { ctx.moveTo(cx + 8.5, noteY); ctx.lineTo(cx + 8.5, noteY - 40); }
+      // Stem
+      ctx.strokeStyle = GOLD; ctx.lineWidth = 2;
+      ctx.beginPath();
+      if (note.staffPos >= 4) { ctx.moveTo(cx - 9, noteY); ctx.lineTo(cx - 9, noteY + 44); }
+      else { ctx.moveTo(cx + 9, noteY); ctx.lineTo(cx + 9, noteY - 44); }
       ctx.stroke();
 
+      // Label
       if (showLabel) {
         ctx.font = 'bold 16px Courier New'; ctx.fillStyle = '#00d4ff'; ctx.textAlign = 'center';
-        ctx.fillText(note.name, cx, noteY > staffTop + 2 * lineGap ? noteY - 18 : noteY + 28);
+        ctx.fillText(note.name, cx, noteY > staffTop + 2 * lineGap ? noteY - 20 : noteY + 30);
         ctx.textAlign = 'start';
       }
     }
 
     // ==================== LEARN MODE ====================
     function drawLearnStaves() {
+      var dpr = window.devicePixelRatio || 1;
+      var lineGap = 14, staffTop = 40;
+
+      // Treble
       var tc = document.getElementById('learnTreble');
       var ctx = tc.getContext('2d');
-      var dpr = window.devicePixelRatio || 1;
       tc.width = 500 * dpr; tc.height = 160 * dpr;
       tc.style.width = '500px'; tc.style.height = '160px';
       ctx.scale(dpr, dpr);
-      var lineGap = 14, staffTop = 40;
       ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1.5;
       for (var i = 0; i < 5; i++) { var y = staffTop + i * lineGap; ctx.beginPath(); ctx.moveTo(20, y); ctx.lineTo(480, y); ctx.stroke(); }
-      ctx.font = '44px serif'; ctx.fillStyle = 'rgba(255,255,255,0.4)';
-      ctx.fillText('\uD834\uDD1E', 24, staffTop + 3.8 * lineGap);
-      var lineNotes = ['E','G','B','D','F'];
+      ctx.font = '44px serif'; ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.fillText('𝄞', 24, staffTop + 3.8 * lineGap);
       var bottomY = staffTop + 4 * lineGap;
-      lineNotes.forEach(function(n, i) {
+      ['E','G','B','D','F'].forEach(function(n, i) {
         var x = 100 + i * 80, y = bottomY - i * lineGap;
         ctx.fillStyle = GOLD; ctx.beginPath(); ctx.ellipse(x, y, 8, 6, -0.2, 0, Math.PI * 2); ctx.fill();
-        ctx.font = 'bold 13px Courier New'; ctx.fillStyle = '#00d4ff'; ctx.textAlign = 'center';
-        ctx.fillText(n, x, y + 22);
+        ctx.font = 'bold 13px Courier New'; ctx.fillStyle = '#00d4ff'; ctx.textAlign = 'center'; ctx.fillText(n, x, y + 22);
       });
       ctx.textAlign = 'start';
 
+      // Bass
       var bc = document.getElementById('learnBass');
       var bctx = bc.getContext('2d');
       bc.width = 500 * dpr; bc.height = 160 * dpr;
@@ -432,14 +479,11 @@
       bctx.scale(dpr, dpr);
       bctx.strokeStyle = 'rgba(255,255,255,0.25)'; bctx.lineWidth = 1.5;
       for (var i = 0; i < 5; i++) { var y = staffTop + i * lineGap; bctx.beginPath(); bctx.moveTo(20, y); bctx.lineTo(480, y); bctx.stroke(); }
-      bctx.font = '44px serif'; bctx.fillStyle = 'rgba(255,255,255,0.4)';
-      bctx.fillText('\uD834\uDD22', 24, staffTop + 2.2 * lineGap);
-      var bassNotes = ['G','B','D','F','A'];
-      bassNotes.forEach(function(n, i) {
+      bctx.font = '44px serif'; bctx.fillStyle = 'rgba(255,255,255,0.4)'; bctx.fillText('𝄢', 24, staffTop + 2.2 * lineGap);
+      ['G','B','D','F','A'].forEach(function(n, i) {
         var x = 100 + i * 80, y = bottomY - i * lineGap;
         bctx.fillStyle = GOLD; bctx.beginPath(); bctx.ellipse(x, y, 8, 6, -0.2, 0, Math.PI * 2); bctx.fill();
-        bctx.font = 'bold 13px Courier New'; bctx.fillStyle = '#00d4ff'; bctx.textAlign = 'center';
-        bctx.fillText(n, x, y + 22);
+        bctx.font = 'bold 13px Courier New'; bctx.fillStyle = '#00d4ff'; bctx.textAlign = 'center'; bctx.fillText(n, x, y + 22);
       });
       bctx.textAlign = 'start';
     }
@@ -453,18 +497,20 @@
       var clef = clefSel === 'both' ? (Math.random() > 0.5 ? 'treble' : 'bass') : clefSel;
       var pool = clef === 'treble' ? getTrebleNotes(acc) : getBassNotes(acc);
       var note = pool[Math.floor(Math.random() * pool.length)];
-      idCurrent = { name: note.name, display: note.display, midi: note.midi, staffPos: note.staffPos, ledger: note.ledger, accidental: note.accidental, clef: clef };
+      idCurrent = { name: note.name, display: note.display, midi: note.midi, staffPos: note.staffPos, accidental: note.accidental, ledger: note.ledger, clef: clef };
       drawStaff(document.getElementById('idStaff'), clef, note, false);
-      var el = document.getElementById('idAnswers'); el.innerHTML = '';
-      var btns = acc ? ['C','C#','D','E♭','E','F','F#','G','A','B♭','B'] : ['C','D','E','F','G','A','B'];
-      btns.forEach(function(n) {
+      var answersEl = document.getElementById('idAnswers');
+      answersEl.innerHTML = '';
+      var baseNotes = acc ? ['C','C#','D','E♭','E','F','F#','G','A','B♭','B'] : ['C','D','E','F','G','A','B'];
+      baseNotes.forEach(function(n) {
         var btn = document.createElement('button');
         btn.className = 'note-btn' + (n.length > 1 ? ' sharp' : '');
         btn.textContent = n;
         btn.onclick = function() { answerIdent(n, btn); };
-        el.appendChild(btn);
+        answersEl.appendChild(btn);
       });
-      document.getElementById('idResult').className = 'result-msg'; document.getElementById('idResult').style.display = 'none';
+      document.getElementById('idResult').className = 'result-msg';
+      document.getElementById('idResult').style.display = 'none';
       document.getElementById('idNextBtn').style.display = 'none';
     }
 
@@ -488,18 +534,20 @@
     }
 
     // ==================== SPEED DRILL ====================
-    var spActive = false, spTimer = null, spScore = { correct: 0, wrong: 0 }, spStartTime = 0, spCurrent = null;
+    var spActive = false, spTimerInterval = null, spScore = { correct: 0, wrong: 0 }, spStartTime = 0, spCurrent = null;
 
     function startSpeedDrill() {
       var dur = parseInt(document.getElementById('spDuration').value);
       spScore = { correct: 0, wrong: 0 }; spActive = true; spStartTime = Date.now();
-      document.getElementById('spCorrect').textContent = '0'; document.getElementById('spWrong').textContent = '0';
+      document.getElementById('spCorrect').textContent = '0';
+      document.getElementById('spWrong').textContent = '0';
       document.getElementById('spTimer').textContent = dur;
-      document.getElementById('spFinalResult').className = 'result-msg'; document.getElementById('spFinalResult').style.display = 'none';
+      document.getElementById('spFinalResult').className = 'result-msg';
+      document.getElementById('spFinalResult').style.display = 'none';
       document.getElementById('spStartBtn').style.display = 'none';
       document.getElementById('speedVal').textContent = '—';
       newSpeedNote();
-      spTimer = setInterval(function() {
+      spTimerInterval = setInterval(function() {
         var elapsed = Math.floor((Date.now() - spStartTime) / 1000);
         var remaining = dur - elapsed;
         document.getElementById('spTimer').textContent = Math.max(0, remaining);
@@ -513,13 +561,15 @@
       var clef = clefSel === 'both' ? (Math.random() > 0.5 ? 'treble' : 'bass') : clefSel;
       var pool = clef === 'treble' ? getTrebleNotes(false) : getBassNotes(false);
       var note = pool[Math.floor(Math.random() * pool.length)];
-      spCurrent = { name: note.name, display: note.display, midi: note.midi, staffPos: note.staffPos, ledger: note.ledger, clef: clef };
+      spCurrent = { display: note.display, clef: clef };
       drawStaff(document.getElementById('spStaff'), clef, note, false);
-      var el = document.getElementById('spAnswers'); el.innerHTML = '';
+      var answersEl = document.getElementById('spAnswers');
+      answersEl.innerHTML = '';
       ['C','D','E','F','G','A','B'].forEach(function(n) {
-        var btn = document.createElement('button'); btn.className = 'note-btn'; btn.textContent = n;
+        var btn = document.createElement('button');
+        btn.className = 'note-btn'; btn.textContent = n;
         btn.onclick = function() { answerSpeed(n, btn); };
-        el.appendChild(btn);
+        answersEl.appendChild(btn);
       });
     }
 
@@ -538,7 +588,7 @@
     }
 
     function endSpeedDrill() {
-      spActive = false; clearInterval(spTimer);
+      spActive = false; clearInterval(spTimerInterval);
       var dur = parseInt(document.getElementById('spDuration').value);
       var npm = Math.round((spScore.correct / dur) * 60);
       document.getElementById('speedVal').textContent = npm;
@@ -559,7 +609,7 @@
       if (!idCurrent) return;
       var ctx = getCtx();
       var osc = ctx.createOscillator(); var gain = ctx.createGain();
-      osc.type = 'sine'; osc.frequency.value = midiToFreq(idCurrent.midi);
+      osc.type = 'sine'; osc.frequency.value = 440 * Math.pow(2, (idCurrent.midi - 69) / 12);
       gain.gain.setValueAtTime(0, ctx.currentTime);
       gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.05);
       gain.gain.setValueAtTime(0.2, ctx.currentTime + 1.2);
@@ -578,6 +628,7 @@
       if (mode === 'identify' && !idCurrent) newIdQuestion();
     }
 
+    // Init
     drawLearnStaves();
     newIdQuestion();
   </script>

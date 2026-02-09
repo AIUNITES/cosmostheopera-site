@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Voice Has 5 Gears — Learn the Gear Shifts | COSMOS the OPERA</title>
+  <meta name="description" content="Most singers are stuck in 2nd gear. Learn how to shift through all 5 vocal registers using Vocal Resonance Notation — the first system that maps every transition in your voice.">
+  <meta name="keywords" content="vocal range, singing 5 octaves, vocal registers, passaggio, chest voice, head voice, mixed voice, VRN, vocal technique">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Your Voice Has 5 Gears. You've Been Stuck in 2nd.">
+  <meta property="og:description" content="Learn how to shift through all 5 vocal registers using Vocal Resonance Notation.">
+  <meta property="og:type" content="article">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-gear: #0e0e18;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #00d4ff;
+      --accent-gold: #ffd700;
+      --accent-green: #4ade80;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-pink: #ff6b9d;
+    }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.8; }
+
+    /* Webring */
+    .aiunites-bar{background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);padding:8px 0;font-size:12px}
+    .aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}
+    .aiunites-bar-content::-webkit-scrollbar{display:none}
+    .aiunites-bar a{color:rgba(255,255,255,.7);text-decoration:none;white-space:nowrap;transition:color .2s}
+    .aiunites-bar a:hover{color:#fff}
+    .aiunites-bar-brand{color:#6366f1!important;font-weight:600}
+    .aiunites-bar-divider{color:rgba(255,255,255,.2)}
+
+    /* Nav */
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; flex-wrap: wrap; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 20px 60px; text-align: center;
+      background: radial-gradient(ellipse at 40% 20%, rgba(239, 68, 68, 0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at 60% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                  var(--bg-dark);
+    }
+    .hero-back { display: inline-block; margin-bottom: 18px; color: var(--accent-cyan); text-decoration: none; font-size: 0.95rem; opacity: 0.8; transition: opacity .2s; }
+    .hero-back:hover { opacity: 1; }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-orange), var(--accent-gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero h1 .dim { color: var(--text-secondary); -webkit-text-fill-color: var(--text-secondary); }
+    .hero-tagline {
+      font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 800; margin-bottom: 20px;
+      color: var(--accent-cyan);
+    }
+    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto 30px; }
+    .hero-cta {
+      display: inline-block; padding: 16px 36px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+      color: #fff; text-decoration: none; font-weight: 800; font-size: 1.1rem;
+      transition: all 0.2s; box-shadow: 0 4px 25px rgba(239, 68, 68, 0.3);
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(239, 68, 68, 0.5); }
+
+    /* Content */
+    .content { max-width: 850px; margin: 0 auto; padding: 0 20px 80px; }
+
+    /* Problem Section */
+    .problem {
+      padding: 50px 0; text-align: center;
+    }
+    .problem h2 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 20px; }
+    .problem p { color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; margin: 0 auto 15px; }
+    .crack-moment {
+      background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 16px; padding: 25px 30px; margin: 30px auto; max-width: 600px; text-align: left;
+    }
+    .crack-moment p { margin: 0; font-size: 1rem; }
+    .crack-moment .red { color: var(--accent-red); font-weight: 700; }
+
+    /* Gear Section */
+    .gears-section { padding: 40px 0 50px; }
+    .gears-section h2 {
+      font-size: 1.8rem; text-align: center; margin-bottom: 40px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .gear-card {
+      display: flex; gap: 25px; align-items: flex-start;
+      background: var(--bg-gear); border-radius: 20px; padding: 28px;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 18px; transition: border-color 0.3s;
+    }
+    .gear-card:hover { border-color: rgba(255,255,255,0.12); }
+
+    .gear-num {
+      width: 70px; height: 70px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-size: 1.6rem; font-weight: 900;
+    }
+    .gear-1 .gear-num { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+    .gear-2 .gear-num { background: rgba(245, 158, 11, 0.2); color: var(--accent-orange); }
+    .gear-3 .gear-num { background: rgba(255, 215, 0, 0.2); color: var(--accent-gold); }
+    .gear-4 .gear-num { background: rgba(0, 212, 255, 0.2); color: var(--accent-cyan); }
+    .gear-5 .gear-num { background: rgba(157, 78, 221, 0.2); color: var(--accent-purple); }
+
+    .gear-info { flex: 1; }
+    .gear-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+    .gear-range { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+    .gear-vrn {
+      font-family: 'Courier New', monospace; font-size: 1.15rem; font-weight: 800;
+      color: var(--accent-gold); margin-bottom: 8px;
+    }
+    .gear-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+    .gear-feel {
+      margin-top: 10px; padding: 10px 14px; border-radius: 10px;
+      background: rgba(255,255,255,0.03); font-size: 0.9rem;
+    }
+    .gear-feel strong { color: var(--accent-cyan); }
+
+    /* Shift Section */
+    .shifts-section { padding: 40px 0; }
+    .shifts-section h2 {
+      font-size: 1.8rem; text-align: center; margin-bottom: 15px; color: var(--accent-cyan);
+    }
+    .shifts-section > p { text-align: center; color: var(--text-secondary); margin-bottom: 35px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+    .shift-card {
+      background: linear-gradient(135deg, rgba(157, 78, 221, 0.08), rgba(0, 212, 255, 0.05));
+      border: 1px solid rgba(157, 78, 221, 0.15); border-radius: 16px;
+      padding: 25px; margin-bottom: 18px;
+    }
+    .shift-label { font-size: 1.05rem; font-weight: 800; color: var(--accent-purple); margin-bottom: 8px; }
+    .shift-arrow {
+      font-family: 'Courier New', monospace; font-size: 1.1rem; color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+    .shift-desc { font-size: 0.95rem; color: var(--text-secondary); }
+    .shift-tip { margin-top: 10px; font-size: 0.9rem; color: var(--accent-green); }
+
+    /* Comparison */
+    .comparison { padding: 50px 0; text-align: center; }
+    .comparison h2 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 30px; }
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 700px; margin: 0 auto; }
+    .comp-card { border-radius: 16px; padding: 25px; text-align: left; }
+    .comp-before {
+      background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.15);
+    }
+    .comp-after {
+      background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.15);
+    }
+    .comp-label { font-weight: 800; font-size: 1.1rem; margin-bottom: 12px; }
+    .comp-before .comp-label { color: var(--accent-red); }
+    .comp-after .comp-label { color: var(--accent-green); }
+    .comp-card li {
+      color: var(--text-secondary); font-size: 0.95rem;
+      margin-bottom: 8px; list-style: none; padding-left: 24px; position: relative;
+    }
+    .comp-before li::before { content: '✗'; position: absolute; left: 0; color: var(--accent-red); font-weight: 700; }
+    .comp-after li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-green); font-weight: 700; }
+
+    /* CTA Bottom */
+    .cta-bottom {
+      text-align: center; padding: 60px 20px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(157, 78, 221, 0.12) 0%, transparent 70%);
+      border-radius: 24px; margin: 40px 0;
+    }
+    .cta-bottom h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 12px; }
+    .cta-bottom p { color: var(--text-secondary); margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-link {
+      display: inline-block; padding: 14px 28px; border-radius: 14px;
+      text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.2s;
+    }
+    .cta-link:hover { transform: translateY(-3px); }
+    .cta-link--primary {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      color: #fff; box-shadow: 0 4px 20px rgba(157, 78, 221, 0.3);
+    }
+    .cta-link--primary:hover { box-shadow: 0 8px 30px rgba(157, 78, 221, 0.5); }
+    .cta-link--secondary {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-primary);
+    }
+    .cta-link--secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* Quote */
+    .quote-block {
+      text-align: center; padding: 40px 30px; margin: 40px 0;
+      border-left: 4px solid var(--accent-gold); border-right: 4px solid var(--accent-gold);
+    }
+    .quote-text { font-size: 1.3rem; font-style: italic; color: var(--text-primary); max-width: 600px; margin: 0 auto 12px; }
+    .quote-attr { font-size: 0.9rem; color: var(--text-secondary); }
+
+    /* Footer */
+    .footer { background: var(--bg-card); padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.9rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .gear-card { flex-direction: column; align-items: center; text-align: center; }
+      .comp-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Webring -->
+  <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="vrn-practice.html">VRN Practice</a>
+      <a href="pitch-trainer.html">Pitch Trainer</a>
+      <a href="sight-reading.html">Sight Reading</a>
+      <a href="sheet-music.html">Sheet Music</a>
+      <a href="composer.html">Composer</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <a href="notation.html" class="hero-back">← Back to Vocal Notation</a>
+    <h1><span class="highlight">Your Voice Has 5 Gears.</span><br><span class="dim">You've Been Stuck in 2nd.</span></h1>
+    <div class="hero-tagline">Learn the gear shifts. Unlock your full range.</div>
+    <p class="hero-sub">Most people think their vocal range is fixed. It's not. You've just never been taught how to shift between registers. VRN maps every transition so you can train them one by one.</p>
+    <a href="vrn-practice.html" class="hero-cta">🎓 Start Learning VRN Free →</a>
+  </section>
+
+  <div class="content">
+
+    <!-- The Problem -->
+    <section class="problem">
+      <h2>Why Your Voice Cracks</h2>
+      <p>You're singing comfortably in your chest voice. The melody rises. You push harder. Then — it happens. The crack. The break. The embarrassing moment that makes you think "I just can't sing that high."</p>
+      <p>But here's the truth:</p>
+      <div class="crack-moment">
+        <p><span class="red">That crack isn't your limit.</span> It's an unmanaged gear shift. Your voice tried to transition from one register to another and you didn't know it was coming, didn't know how to manage it, and had no system for learning it. So it ground the gears.</p>
+      </div>
+      <p>Imagine driving a manual transmission car but nobody told you there were other gears. You'd redline in 2nd, the engine would scream, and you'd conclude the car just can't go faster. That's what most singers do with their voice.</p>
+    </section>
+
+    <!-- The Quote -->
+    <div class="quote-block">
+      <div class="quote-text">"Singing through five octaves is like driving manual transmission. You have to know more technique than people who sing one or two octaves."</div>
+      <div class="quote-attr">— José Simerilla Romero, 5-octave range</div>
+    </div>
+
+    <!-- The 5 Gears -->
+    <section class="gears-section">
+      <h2>The 5 Gears of Your Voice</h2>
+
+      <div class="gear-card gear-1">
+        <div class="gear-num">1</div>
+        <div class="gear-info">
+          <div class="gear-name">Chest / Low Body</div>
+          <div class="gear-range">Your lowest octave — the rumble zone</div>
+          <div class="gear-vrn">[C+++, L++, P+]</div>
+          <div class="gear-desc">Maximum chest wall vibration, deep body resonance, open throat. This is where bass singers live. You feel it in your sternum, your ribs, your lower back. It's the most physical register — the one everyone starts with.</div>
+          <div class="gear-feel"><strong>Feel it:</strong> Place your hand on your chest. Say "HUH" at your lowest comfortable pitch. The buzz under your palm — that's Gear 1.</div>
+        </div>
+      </div>
+
+      <div class="gear-card gear-2">
+        <div class="gear-num">2</div>
+        <div class="gear-info">
+          <div class="gear-name">Upper Chest / Mix</div>
+          <div class="gear-range">Your speaking range to the first break — where most people live</div>
+          <div class="gear-vrn">[C++, H+, P++, O+]</div>
+          <div class="gear-desc">Chest is still the primary driver but head resonance starts contributing. The throat opens wider. The mouth shapes vowels more actively. This is where pop, rock, and musical theater belting happens. Most untrained singers never leave this gear.</div>
+          <div class="gear-feel"><strong>Feel it:</strong> Sing "MAH" at a comfortable medium pitch. Chest still buzzing, but touch your forehead — slight tingle? That's the head resonance mixing in. That's Gear 2.</div>
+        </div>
+      </div>
+
+      <div class="gear-card gear-3">
+        <div class="gear-num">3</div>
+        <div class="gear-info">
+          <div class="gear-name">Head Dominant</div>
+          <div class="gear-range">Above the first passaggio — where classical singers shine</div>
+          <div class="gear-vrn">[H+++, N++, O++]</div>
+          <div class="gear-desc">Head resonance takes over as the primary driver. The nasal mask is fully engaged — cheekbones, bridge of nose, sinuses all buzzing. Oral space is wide open for maximum overtone bloom. This is the operatic high range, the soprano money zone, the sound that fills a concert hall.</div>
+          <div class="gear-feel"><strong>Feel it:</strong> Hum "NEEEE" as high as you comfortably can. Feel your forehead and cheekbones buzzing intensely while your chest goes quiet? That's Gear 3.</div>
+        </div>
+      </div>
+
+      <div class="gear-card gear-4">
+        <div class="gear-num">4</div>
+        <div class="gear-info">
+          <div class="gear-name">Light Head / Falsetto</div>
+          <div class="gear-range">Above the second passaggio — the light, airy upper range</div>
+          <div class="gear-vrn">[H+++, N+]</div>
+          <div class="gear-desc">The vocal folds thin out. Only the edges vibrate. The sound becomes lighter, breathier, ethereal. Mask resonance reduces to a shimmer. This is the countertenor range, the male falsetto, the female head voice above the staff. Less power, more precision.</div>
+          <div class="gear-feel"><strong>Feel it:</strong> Let your voice float up into that light, hooty sound above your normal range. Almost no chest sensation. Just a gentle hum in your skull. That's Gear 4.</div>
+        </div>
+      </div>
+
+      <div class="gear-card gear-5">
+        <div class="gear-num">5</div>
+        <div class="gear-info">
+          <div class="gear-name">Whistle / Flageolet</div>
+          <div class="gear-range">The extreme upper register — Mariah territory</div>
+          <div class="gear-vrn">[H+++]</div>
+          <div class="gear-desc">The vocal folds barely vibrate. Sound is produced by air whistling through a tiny opening. Pure head resonance, no body engagement. This register sounds superhuman because almost no one trains it. But it's a gear that exists in most voices — it just needs the technique to access it.</div>
+          <div class="gear-feel"><strong>Feel it:</strong> This one takes practice. Start from a high falsetto and gently squeeze the pitch higher without pushing air harder. When it suddenly "flips" into a whistle-like tone — that's Gear 5.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Shifts -->
+    <section class="shifts-section">
+      <h2>The Gear Shifts (Passaggi)</h2>
+      <p>The gears aren't the hard part. The <em>shifts between them</em> are where voices break — and where VRN gives you the map.</p>
+
+      <div class="shift-card">
+        <div class="shift-label">Shift 1→2 — Primo Passaggio</div>
+        <div class="shift-arrow">[C+++, L++] → [C++, H+, P++]</div>
+        <div class="shift-desc">Chest releases its grip. Head resonance enters. Pharynx opens wider. This is where most men's voices "break" around E4–F4 and women's around A4–B4. The key is not to fight it — let the chest dial down as the head dials up.</div>
+        <div class="shift-tip">💡 Think of it like easing off the gas as you push the clutch. Smooth, not sudden.</div>
+      </div>
+
+      <div class="shift-card">
+        <div class="shift-label">Shift 2→3 — Secondo Passaggio</div>
+        <div class="shift-arrow">[C++, H+, P++] → [H+++, N++, O++]</div>
+        <div class="shift-desc">Head takes over completely. The nasal mask fully activates. The oral space expands for overtone amplification. This is the classical singer's main event — navigating the secondo passaggio cleanly is what separates trained from untrained voices.</div>
+        <div class="shift-tip">💡 Like shifting from 2nd to 3rd at speed — momentum carries you if you don't brake.</div>
+      </div>
+
+      <div class="shift-card">
+        <div class="shift-label">Shift 3→4 — Into Falsetto</div>
+        <div class="shift-arrow">[H+++, N++, O++] → [H+++, N+]</div>
+        <div class="shift-desc">The vocal fold configuration changes fundamentally. Full-cord vibration gives way to edge vibration. The mask resonance thins out. The sound becomes lighter. Many singers fear this shift because it feels like "losing" the voice. It's not loss — it's a gear designed for different terrain.</div>
+        <div class="shift-tip">💡 Like shifting into overdrive on the highway. Less power, more efficiency.</div>
+      </div>
+
+      <div class="shift-card">
+        <div class="shift-label">Shift 4→5 — Into Whistle</div>
+        <div class="shift-arrow">[H+++, N+] → [H+++]</div>
+        <div class="shift-desc">Everything simplifies to pure head resonance. The nasal component drops away. The sound becomes laser-focused. This shift is the rarest to train because so few people know it exists as a distinct register with its own technique.</div>
+        <div class="shift-tip">💡 Like engaging a hidden 6th gear you didn't know the car had. Effortless once you find it.</div>
+      </div>
+    </section>
+
+    <!-- Before/After -->
+    <section class="comparison">
+      <h2>Before VRN vs. After VRN</h2>
+      <div class="comp-grid">
+        <div class="comp-card comp-before">
+          <div class="comp-label">❌ Without the Map</div>
+          <ul>
+            <li>Voice cracks at the passaggio</li>
+            <li>Stuck in 1-2 octave comfort zone</li>
+            <li>"I just can't sing that high"</li>
+            <li>Teacher says "feel it forward" — feel what?</li>
+            <li>Each practice session is guesswork</li>
+            <li>Progress is slow and inconsistent</li>
+          </ul>
+        </div>
+        <div class="comp-card comp-after">
+          <div class="comp-label">✅ With VRN Gear Map</div>
+          <ul>
+            <li>Smooth transitions between registers</li>
+            <li>Systematic access to 3-5 octaves</li>
+            <li>"I know exactly what shifts at E4"</li>
+            <li>[C++→H+, P++] — clear, repeatable target</li>
+            <li>Each session has specific VRN targets</li>
+            <li>Measurable progress with notation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-bottom">
+      <h2>Ready to Find Your Other Gears?</h2>
+      <p>Start with the free VRN lessons. Learn each resonance zone. Then practice the shifts between them. Your voice already has 5 gears — you just need the manual.</p>
+      <div class="cta-links">
+        <a href="vrn-practice.html" class="cta-link cta-link--primary">🎓 Learn VRN — Free Lessons</a>
+        <a href="notation.html" class="cta-link cta-link--secondary">📖 Full VRN Reference</a>
+        <a href="pitch-trainer.html" class="cta-link cta-link--secondary">🎤 Pitch Trainer</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+      <a href="index.html">Home</a> |
+      <a href="notation.html">Vocal Notation</a> |
+      <a href="vocal-bodybuilding.html">Bodybuilding for the Voice</a> |
+      <a href="sheet-music.html">Sheet Music</a>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bodybuilding for the Voice — Train Every Resonance Zone | COSMOS the OPERA</title>
+  <meta name="description" content="Your voice has muscle groups just like your body. Train chest resonance, head resonance, nasal placement, and more with the same precision athletes use in the gym. VRN is your training program.">
+  <meta name="keywords" content="vocal training, voice exercise, resonance training, VRN, vocal technique, singing workout, voice bodybuilding, vocal muscle groups">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+
+  <meta property="og:title" content="Bodybuilding for the Voice — Train Every Resonance Zone">
+  <meta property="og:description" content="Your voice has muscle groups. Train them with the same precision athletes use in the gym.">
+  <meta property="og:type" content="article">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-zone: #0e0e18;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #00d4ff;
+      --accent-gold: #ffd700;
+      --accent-green: #4ade80;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-pink: #ff6b9d;
+    }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.8; }
+
+    /* Webring */
+    .aiunites-bar{background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);padding:8px 0;font-size:12px}
+    .aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}
+    .aiunites-bar-content::-webkit-scrollbar{display:none}
+    .aiunites-bar a{color:rgba(255,255,255,.7);text-decoration:none;white-space:nowrap;transition:color .2s}
+    .aiunites-bar a:hover{color:#fff}
+    .aiunites-bar-brand{color:#6366f1!important;font-weight:600}
+    .aiunites-bar-divider{color:rgba(255,255,255,.2)}
+
+    /* Nav */
+    .nav { background: var(--bg-card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; flex-wrap: wrap; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 20px 60px; text-align: center;
+      background: radial-gradient(ellipse at 30% 30%, rgba(74, 222, 128, 0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 70%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
+                  var(--bg-dark);
+    }
+    .hero-back { display: inline-block; margin-bottom: 18px; color: var(--accent-cyan); text-decoration: none; font-size: 0.95rem; opacity: 0.8; transition: opacity .2s; }
+    .hero-back:hover { opacity: 1; }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-tagline { font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: 800; color: var(--accent-gold); margin-bottom: 20px; }
+    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 660px; margin: 0 auto 30px; }
+    .hero-cta {
+      display: inline-block; padding: 16px 36px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      color: #000; text-decoration: none; font-weight: 800; font-size: 1.1rem;
+      transition: all 0.2s; box-shadow: 0 4px 25px rgba(74, 222, 128, 0.3);
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(74, 222, 128, 0.5); }
+
+    .content { max-width: 850px; margin: 0 auto; padding: 0 20px 80px; }
+
+    /* Analogy Section */
+    .analogy { padding: 50px 0; }
+    .analogy h2 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 25px; text-align: center; }
+    .analogy-text { color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; margin: 0 auto 20px; text-align: center; }
+    .analogy-box {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center;
+      max-width: 700px; margin: 30px auto;
+    }
+    .analogy-side { background: var(--bg-card); border-radius: 16px; padding: 22px; border: 1px solid rgba(255,255,255,0.06); }
+    .analogy-side h3 { font-size: 1rem; font-weight: 800; margin-bottom: 12px; }
+    .analogy-left h3 { color: var(--accent-green); }
+    .analogy-right h3 { color: var(--accent-cyan); }
+    .analogy-side li { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 6px; list-style: none; padding-left: 18px; position: relative; }
+    .analogy-left li::before { content: '💪'; position: absolute; left: 0; font-size: 0.75rem; }
+    .analogy-right li::before { content: '🎤'; position: absolute; left: 0; font-size: 0.75rem; }
+    .analogy-equals { font-size: 2rem; color: var(--accent-gold); font-weight: 900; text-align: center; }
+
+    /* Muscle Groups */
+    .zones { padding: 40px 0 50px; }
+    .zones h2 {
+      font-size: 1.8rem; text-align: center; margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .zones > p { text-align: center; color: var(--text-secondary); margin-bottom: 35px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+    .zone-card {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: var(--bg-zone); border-radius: 20px; padding: 25px;
+      border: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px;
+      transition: border-color 0.3s;
+    }
+    .zone-card:hover { border-color: rgba(255,255,255,0.12); }
+
+    .zone-icon {
+      width: 80px; height: 80px; border-radius: 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex-shrink: 0; font-weight: 900;
+    }
+    .zone-icon .vrn { font-family: 'Courier New', monospace; font-size: 1.3rem; }
+    .zone-icon .emoji { font-size: 1.6rem; margin-bottom: 2px; }
+
+    .zone-chest .zone-icon { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+    .zone-head .zone-icon { background: rgba(0, 212, 255, 0.15); color: var(--accent-cyan); }
+    .zone-nasal .zone-icon { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); }
+    .zone-oral .zone-icon { background: rgba(255, 215, 0, 0.15); color: var(--accent-gold); }
+    .zone-pharyngeal .zone-icon { background: rgba(157, 78, 221, 0.15); color: var(--accent-purple); }
+    .zone-low .zone-icon { background: rgba(245, 158, 11, 0.15); color: var(--accent-orange); }
+
+    .zone-info { flex: 1; }
+    .zone-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 3px; }
+    .zone-gym { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; font-style: italic; }
+    .zone-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; }
+    .zone-exercises {
+      background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px 15px;
+    }
+    .zone-exercises strong { color: var(--accent-gold); font-size: 0.85rem; display: block; margin-bottom: 6px; }
+    .zone-exercises p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+
+    /* Program Section */
+    .program { padding: 40px 0; }
+    .program h2 { font-size: 1.8rem; text-align: center; color: var(--accent-cyan); margin-bottom: 35px; }
+
+    .split-card {
+      background: var(--bg-card); border-radius: 18px; padding: 25px;
+      border: 1px solid rgba(255,255,255,0.06); margin-bottom: 16px;
+    }
+    .split-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .split-day {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      color: #fff;
+    }
+    .split-title { font-size: 1.1rem; font-weight: 800; }
+    .split-subtitle { font-size: 0.85rem; color: var(--text-secondary); }
+    .split-body { display: flex; flex-direction: column; gap: 10px; }
+    .split-set {
+      display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+      background: rgba(255,255,255,0.02); border-radius: 10px;
+    }
+    .split-vrn { font-family: 'Courier New', monospace; color: var(--accent-gold); font-weight: 800; min-width: 140px; }
+    .split-exercise { color: var(--text-secondary); font-size: 0.9rem; flex: 1; }
+    .split-reps { color: var(--accent-green); font-weight: 700; font-size: 0.85rem; white-space: nowrap; }
+
+    /* Mindset */
+    .mindset { padding: 50px 0; text-align: center; }
+    .mindset h2 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 20px; }
+    .mindset p { color: var(--text-secondary); font-size: 1.05rem; max-width: 650px; margin: 0 auto 20px; }
+    .mindset-highlight {
+      font-size: 1.4rem; font-weight: 800; color: var(--accent-green);
+      margin: 30px 0 10px;
+    }
+
+    /* Comparison */
+    .comp-section { padding: 40px 0; }
+    .comp-section h2 { font-size: 1.8rem; text-align: center; color: var(--accent-gold); margin-bottom: 30px; }
+    .comp-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;
+    }
+    .comp-cell {
+      padding: 14px 18px; border-radius: 12px; font-size: 0.95rem;
+    }
+    .comp-gym { background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.12); color: var(--accent-green); }
+    .comp-voice { background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.12); color: var(--accent-cyan); }
+    .comp-header .comp-cell { font-weight: 800; font-size: 1rem; }
+
+    /* CTA */
+    .cta-bottom {
+      text-align: center; padding: 60px 20px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(74, 222, 128, 0.1) 0%, transparent 70%);
+      border-radius: 24px; margin: 40px 0;
+    }
+    .cta-bottom h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 12px; }
+    .cta-bottom p { color: var(--text-secondary); margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-link {
+      display: inline-block; padding: 14px 28px; border-radius: 14px;
+      text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.2s;
+    }
+    .cta-link:hover { transform: translateY(-3px); }
+    .cta-link--primary {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      color: #000; box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+    }
+    .cta-link--primary:hover { box-shadow: 0 8px 30px rgba(74, 222, 128, 0.5); }
+    .cta-link--secondary {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-primary);
+    }
+    .cta-link--secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* Footer */
+    .footer { background: var(--bg-card); padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { color: var(--text-secondary); font-size: 0.9rem; }
+    .footer a { color: var(--accent-purple); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .zone-card { flex-direction: column; align-items: center; text-align: center; }
+      .analogy-box { grid-template-columns: 1fr; }
+      .analogy-equals { transform: rotate(90deg); }
+      .comp-row { grid-template-columns: 1fr; }
+      .split-set { flex-direction: column; align-items: flex-start; }
+      .split-vrn { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Webring -->
+  <div class="aiunites-bar"><div class="aiunites-bar-content"><a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span class="aiunites-bar-divider">|</span><a href="https://aiunites.github.io/aizines-app/">AIZines</a><a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a><a href="https://aiunites.github.io/redomy-demo/">Redomy</a><a href="https://aiunites.github.io/videobate-site/">VideoBate</a><a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a><a href="https://aiunites.github.io/bizstry-site/">BizStry</a><a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a><a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a><a href="https://aiunites.github.io/gameatica-site/">Gameatica</a><a href="https://aiunites.github.io/uptownit-site/">UptownIT</a><a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a><a href="https://aiunites.github.io/erpise-site/">ERPise</a><a href="https://aiunites.github.io/erpize-site/">ERPize</a><a href="https://aiunites.github.io/cosmostheopera-site/">🌌 COSMOS</a></div></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🌌 COSMOS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notation.html">Vocal Notation</a>
+      <a href="vrn-practice.html">VRN Practice</a>
+      <a href="pitch-trainer.html">Pitch Trainer</a>
+      <a href="sight-reading.html">Sight Reading</a>
+      <a href="sheet-music.html">Sheet Music</a>
+      <a href="composer.html">Composer</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <a href="notation.html" class="hero-back">← Back to Vocal Notation</a>
+    <h1><span class="highlight">Bodybuilding<br>for the Voice</span></h1>
+    <div class="hero-tagline">Your voice has muscle groups. Train them.</div>
+    <p class="hero-sub">Nobody walks into a gym and lifts randomly. You follow a program. You target specific muscles. You track progressive overload. Your voice deserves the same precision — and now it has it.</p>
+    <a href="vrn-practice.html" class="hero-cta">💪 Start Your Voice Training →</a>
+  </section>
+
+  <div class="content">
+
+    <!-- The Analogy -->
+    <section class="analogy">
+      <h2>Same Principle. Different Muscles.</h2>
+      <p class="analogy-text">A bodybuilder doesn't just "work out." They target the chest on Monday, back on Tuesday, legs on Wednesday. Each muscle group gets isolated attention, specific exercises, progressive intensity. VRN lets you do exactly the same thing with your voice.</p>
+
+      <div class="analogy-box">
+        <div class="analogy-side analogy-left">
+          <h3>In the Gym</h3>
+          <ul>
+            <li>Chest press — 3×12</li>
+            <li>Incline fly — 3×10</li>
+            <li>Cable crossover — 3×15</li>
+            <li>Progressive overload</li>
+            <li>Training log tracks sets</li>
+          </ul>
+        </div>
+        <div class="analogy-equals">=</div>
+        <div class="analogy-side analogy-right">
+          <h3>In the Voice</h3>
+          <ul>
+            <li>[C++] Chest resonance drills</li>
+            <li>[H++] Head placement scales</li>
+            <li>[N+] Mask buzzing exercises</li>
+            <li>Progressive intensity (+, ++, +++)</li>
+            <li>VRN score tracks resonance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 6 Muscle Groups -->
+    <section class="zones">
+      <h2>The 6 Vocal Muscle Groups</h2>
+      <p>Just like your body, your voice has distinct zones you can isolate and train. Here's the split.</p>
+
+      <div class="zone-card zone-chest">
+        <div class="zone-icon"><span class="emoji">🫁</span><span class="vrn">[C]</span></div>
+        <div class="zone-info">
+          <div class="zone-name">Chest Resonance</div>
+          <div class="zone-gym">Gym equivalent: Chest & pecs — the power base</div>
+          <div class="zone-desc">The vibration in your sternum and ribcage. This is your foundation, your bench press. Everything else builds on top of a solid chest resonance. Low notes live here. Power comes from here.</div>
+          <div class="zone-exercises">
+            <strong>Exercises:</strong>
+            <p>Low "MAH" descending scales. Speak "HUH" at increasing volume. Place hand on sternum — feel the buzz increase from [C+] to [C++] to [C+++].</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone-card zone-head">
+        <div class="zone-icon"><span class="emoji">🧠</span><span class="vrn">[H]</span></div>
+        <div class="zone-info">
+          <div class="zone-name">Head Resonance</div>
+          <div class="zone-gym">Gym equivalent: Shoulders & traps — the frame that projects</div>
+          <div class="zone-desc">The vibration in your skull, forehead, and crown. This gives your voice brilliance, carrying power, and the "ring" that opera singers use to project over an orchestra without a microphone.</div>
+          <div class="zone-exercises">
+            <strong>Exercises:</strong>
+            <p>High humming on "MMMMM." Ascending "NEE-NEE-NEE" scales. Touch forehead while singing — feel the buzz increase with pitch.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone-card zone-nasal">
+        <div class="zone-icon"><span class="emoji">👃</span><span class="vrn">[N]</span></div>
+        <div class="zone-info">
+          <div class="zone-name">Nasal / Mask Resonance</div>
+          <div class="zone-gym">Gym equivalent: Core — the connector that makes everything work together</div>
+          <div class="zone-desc">The vibration in the bridge of your nose, cheekbones, and "mask" area. This is the resonance that bridges chest and head. Without it, your registers don't blend. It's the core of your voice.</div>
+          <div class="zone-exercises">
+            <strong>Exercises:</strong>
+            <p>"MING-MING-MING" at medium pitch. Pinch nose, release on M, feel the buzz. "NYAH" scales focusing on cheekbone vibration.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone-card zone-oral">
+        <div class="zone-icon"><span class="emoji">👄</span><span class="vrn">[O]</span></div>
+        <div class="zone-info">
+          <div class="zone-name">Oral / Overtone Resonance</div>
+          <div class="zone-gym">Gym equivalent: Arms — the visible, shapeable muscles</div>
+          <div class="zone-desc">The amplification in your mouth cavity — tongue position, palate height, lip shape. This is where vowels get their identity and overtones bloom. It's the most consciously controllable zone.</div>
+          <div class="zone-exercises">
+            <strong>Exercises:</strong>
+            <p>Sustain "AH" and slowly morph to "OO" then "EE" — feel the space change. Open jaw wide, lift soft palate (pre-yawn position), sustain tone.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone-card zone-pharyngeal">
+        <div class="zone-icon"><span class="emoji">🫧</span><span class="vrn">[P]</span></div>
+        <div class="zone-info">
+          <div class="zone-name">Pharyngeal Resonance</div>
+          <div class="zone-gym">Gym equivalent: Back — the deep muscle group nobody sees but everyone needs</div>
+          <div class="zone-desc">The open throat — the pharyngeal tube at the back. Italian <em>gola aperta</em>. This adds depth, warmth, and the carrying power that separates trained from untrained voices. Most people never train this directly.</div>
+          <div class="zone-exercises">
+            <strong>Exercises:</strong>
+            <p>Yawn and sustain "AH" at the peak of openness. "KAH" scales keeping the back of the throat wide. Imagine swallowing a golf ball — that's the space you want.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone-card zone-low">
+        <div class="zone-icon"><span class="emoji">🦵</span><span class="vrn">[L]</span></div>
+        <div class="zone-info">
+          <div class="zone-name">Low Body Resonance</div>
+          <div class="zone-gym">Gym equivalent: Legs — the foundation everyone skips</div>
+          <div class="zone-desc">The vibration in your abdomen, lower back, and pelvic floor. This is your grounding, your anchor. Bass singers depend on it. Everyone else ignores it. Don't skip leg day — don't skip low body resonance.</div>
+          <div class="zone-exercises">
+            <strong>Exercises:</strong>
+            <p>Lowest possible "BUHM" with hands on lower belly. Deep diaphragmatic breathing with vocalized exhale. Sustain lowest comfortable note and feel the torso vibrate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Comparison Table -->
+    <section class="comp-section">
+      <h2>The Translation Guide</h2>
+      <div class="comp-row comp-header">
+        <div class="comp-cell comp-gym">💪 Gym Concept</div>
+        <div class="comp-cell comp-voice">🎤 Voice Equivalent</div>
+      </div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Muscle group isolation</div><div class="comp-cell comp-voice">Resonance zone focus [C], [H], [N]</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Progressive overload</div><div class="comp-cell comp-voice">Intensity increase [+] → [++] → [+++]</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Training split</div><div class="comp-cell comp-voice">Session focus: chest day, head day, mask day</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Mind-muscle connection</div><div class="comp-cell comp-voice">Resonance placement awareness</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Compound lifts</div><div class="comp-cell comp-voice">Combined VRN: [C++, H+, N+]</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Training log / tracker</div><div class="comp-cell comp-voice">VRN-annotated score</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Personal trainer</div><div class="comp-cell comp-voice">Voice teacher writing VRN prescriptions</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Rep range (8-12 reps)</div><div class="comp-cell comp-voice">Scale repetitions at target intensity</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Deload week</div><div class="comp-cell comp-voice">Lighter resonance work [+] after heavy sessions</div></div>
+      <div class="comp-row"><div class="comp-cell comp-gym">Warm-up sets</div><div class="comp-cell comp-voice">Gentle humming, lip trills, [C+, H+]</div></div>
+    </section>
+
+    <!-- Sample Program -->
+    <section class="program">
+      <h2>Sample 3-Day Voice Split</h2>
+
+      <div class="split-card">
+        <div class="split-header">
+          <div class="split-day">D1</div>
+          <div><div class="split-title">Chest & Low Body Day</div><div class="split-subtitle">Power & Foundation</div></div>
+        </div>
+        <div class="split-body">
+          <div class="split-set"><span class="split-vrn">[C+] warm-up</span><span class="split-exercise">Gentle low humming, descending 5-note scales</span><span class="split-reps">3 min</span></div>
+          <div class="split-set"><span class="split-vrn">[C++] main work</span><span class="split-exercise">"MAH" at moderate volume, octave descents</span><span class="split-reps">5 × 8 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[C+++, L+]</span><span class="split-exercise">Full chest + low body engagement, sustain lowest note</span><span class="split-reps">4 × 10 sec holds</span></div>
+          <div class="split-set"><span class="split-vrn">[L++]</span><span class="split-exercise">Deep diaphragmatic pulses on "BUH"</span><span class="split-reps">3 × 12 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[C+, P+] cooldown</span><span class="split-exercise">Gentle open-throat "AH," descending</span><span class="split-reps">2 min</span></div>
+        </div>
+      </div>
+
+      <div class="split-card">
+        <div class="split-header">
+          <div class="split-day">D2</div>
+          <div><div class="split-title">Head & Mask Day</div><div class="split-subtitle">Brilliance & Projection</div></div>
+        </div>
+        <div class="split-body">
+          <div class="split-set"><span class="split-vrn">[H+] warm-up</span><span class="split-exercise">Light humming, ascending by half-steps</span><span class="split-reps">3 min</span></div>
+          <div class="split-set"><span class="split-vrn">[H++, N+]</span><span class="split-exercise">"NEE" scales into upper range, feel forehead buzz</span><span class="split-reps">5 × 8 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[N++]</span><span class="split-exercise">"MING" sustained, focus on cheekbone vibration</span><span class="split-reps">4 × 10 sec holds</span></div>
+          <div class="split-set"><span class="split-vrn">[H+++, N++]</span><span class="split-exercise">Full head + mask engagement, high sustained vowels</span><span class="split-reps">3 × 8 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[H+, N+] cooldown</span><span class="split-exercise">Gentle descending hums</span><span class="split-reps">2 min</span></div>
+        </div>
+      </div>
+
+      <div class="split-card">
+        <div class="split-header">
+          <div class="split-day">D3</div>
+          <div><div class="split-title">Compound Day — Full Voice</div><div class="split-subtitle">Blending All Zones</div></div>
+        </div>
+        <div class="split-body">
+          <div class="split-set"><span class="split-vrn">[C+, H+] warm-up</span><span class="split-exercise">Mid-range humming, feel both chest and head</span><span class="split-reps">3 min</span></div>
+          <div class="split-set"><span class="split-vrn">[C++, H+, P+]</span><span class="split-exercise">Belt zone: "MAH" scales through passaggio</span><span class="split-reps">5 × 6 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[H++, N++, O++]</span><span class="split-exercise">Classical zone: open "AH" in upper register</span><span class="split-reps">4 × 6 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[C+→H+++]</span><span class="split-exercise">Full-range sirens: bottom to top in one breath</span><span class="split-reps">3 × 4 reps</span></div>
+          <div class="split-set"><span class="split-vrn">[C+, O+] cooldown</span><span class="split-exercise">Gentle speaking-voice "MAH," let everything release</span><span class="split-reps">2 min</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mindset -->
+    <section class="mindset">
+      <h2>The Mind-Muscle Connection</h2>
+      <p>Bodybuilders talk about it constantly — consciously directing attention to the target muscle during a lift to maximize activation. Singers do the identical thing with resonance placement.</p>
+      <p>"Put it in the mask" is literally mind-muscle connection for the face. "Sing from the diaphragm" is mind-muscle connection for the core. Every great singer uses this instinctively.</p>
+      <p>The difference? Bodybuilders have a language for it. Singers didn't. Until VRN.</p>
+      <div class="mindset-highlight">VRN is the training log for your voice.</div>
+      <p>Every set, every rep, every target zone — documented, repeatable, progressive. No more guessing what your teacher meant. No more forgetting what worked last session. Your voice gets the same systematic attention your body gets.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-bottom">
+      <h2>Ready to Start Training?</h2>
+      <p>Learn the 6 resonance zones. Start isolating them. Build your voice the same way you'd build your body — one targeted session at a time.</p>
+      <div class="cta-links">
+        <a href="vrn-practice.html" class="cta-link cta-link--primary">💪 Learn VRN — Free Lessons</a>
+        <a href="vocal-gearshift.html" class="cta-link cta-link--secondary">🔄 The 5 Gears of Your Voice</a>
+        <a href="notation.html" class="cta-link cta-link--secondary">📖 Full VRN Reference</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      © 2002-2026 COSMOS the OPERA. All Rights Reserved. DMCA Protected.<br>
+      <a href="index.html">Home</a> |
+      <a href="notation.html">Vocal Notation</a> |
+      <a href="vocal-gearshift.html">5 Gears of Your Voice</a> |
+      <a href="sheet-music.html">Sheet Music</a>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -756,5 +756,33 @@ Home | Vocal Notation | VRN Practice | Pitch Trainer | Sight Reading | Sheet Mus
 
 ---
 
+## Session 23: VRN Promotional Pages (February 8, 2026)
+
+### New Pages Created
+- `vocal-gearshift.html` — "Your Voice Has 5 Gears" promo page
+  - Maps vocal registers to manual transmission gears (1-5)
+  - VRN recipes for each gear and each gear shift (passaggio)
+  - Before/After comparison section
+  - José Simerilla Romero quote on 5-octave technique
+  - CTAs to VRN practice and notation pages
+
+- `vocal-bodybuilding.html` — "Bodybuilding for the Voice" promo page
+  - Maps 6 VRN resonance zones to gym muscle groups
+  - Gym-to-voice translation comparison table (10 concepts)
+  - Sample 3-day voice training split with VRN-annotated exercises
+  - Mind-muscle connection section
+  - Exercises for each resonance zone
+  - CTAs to VRN practice and gear shift pages
+
+### Bug Fixes
+- Added "← Back to Vocal Notation" links to vrn-practice.html, pitch-trainer.html, sight-reading.html
+- Rewrote vrn-practice.html, pitch-trainer.html, sight-reading.html via MCP filesystem (previous session wrote to container sandbox only)
+
+### Cross-linking
+- vocal-gearshift.html ↔ vocal-bodybuilding.html (footer links)
+- Both pages link to vrn-practice.html, notation.html, pitch-trainer.html
+
+---
+
 *Implementation by Claude (Anthropic) - January-February 2026*
 *COSMOS the OPERA © 2002-2026 Tom. All Rights Reserved.*

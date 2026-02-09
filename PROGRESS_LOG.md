@@ -782,6 +782,30 @@ Home | Vocal Notation | VRN Practice | Pitch Trainer | Sight Reading | Sheet Mus
 - vocal-gearshift.html ↔ vocal-bodybuilding.html (footer links)
 - Both pages link to vrn-practice.html, notation.html, pitch-trainer.html
 
+### Domain Acquisition & VoiceStry Planning
+- Acquired **vrnmethod.com** — professional/educational entry point for VRN
+- Acquired **voicestry.com** — consumer/creator entry point (AIUNITES site #19)
+- VoiceStry double reading: "VoiceStry" (craft/foundry) + "VoicesTry" (invitation)
+- Matches AIUNITES naming pattern (BizStry)
+
+### VoiceStry Site Plan (Next Session)
+**Migrate from COSMOS to VoiceStry:**
+- notation.html → VRN Method reference page
+- vrn-practice.html → 8-lesson VRN learning hub
+- pitch-trainer.html → Pitch training tool
+- sight-reading.html → Sight reading tool
+- vocal-gearshift.html → "5 Gears" promo page
+- vocal-bodybuilding.html → "Bodybuilding for Voice" promo page
+
+**New content planned:**
+- VoiceStry landing/home page
+- VRN Method overview page
+- Vocal games (gamified VRN learning)
+
+**COSMOS retains:** Opera content, libretto, sheet music, music player, composer, Hubble gallery, meditation, words. Links to VoiceStry for VRN reference.
+
+**Architecture:** VoiceStry = brand/platform, VRN = notation system within it
+
 ---
 
 *Implementation by Claude (Anthropic) - January-February 2026*

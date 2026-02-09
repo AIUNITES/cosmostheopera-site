@@ -107,7 +107,7 @@
     .start-btn.recording { background: linear-gradient(135deg, var(--accent-red), var(--accent-orange)); animation: pulse 1.5s infinite; }
     @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); } 50% { box-shadow: 0 0 0 14px rgba(239,68,68,0); } }
 
-    /* === MATCH MODE === */
+    /* Match mode */
     .match-target {
       text-align: center; padding: 25px;
       background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(0, 212, 255, 0.05));
@@ -146,7 +146,7 @@
     }
     .next-note-btn:hover { transform: translateY(-2px); }
 
-    /* === INTERVAL MODE === */
+    /* Interval mode */
     .interval-card {
       background: var(--bg-card); border-radius: 16px; padding: 25px;
       border: 1px solid rgba(255,255,255,0.06); margin-bottom: 20px; text-align: center;
@@ -224,16 +224,15 @@
 
   <main class="main">
 
-    <!-- Mode Tabs -->
     <div class="mode-tabs">
       <button class="mode-tab active" onclick="switchMode('free')">🎙 Free Pitch</button>
       <button class="mode-tab" onclick="switchMode('match')">🎯 Match Pitch</button>
       <button class="mode-tab" onclick="switchMode('interval')">🎵 Intervals</button>
     </div>
 
-    <!-- ==================== FREE PITCH MODE ==================== -->
+    <!-- FREE PITCH MODE -->
     <div class="panel active" id="panel-free">
-      <div class="pitch-hero" id="freePitchHero">
+      <div class="pitch-hero">
         <div class="pitch-note" id="freeNote">—</div>
         <div class="pitch-freq" id="freeFreq">Sing or hum to begin</div>
         <div class="pitch-cents" id="freeCents">&nbsp;</div>
@@ -247,7 +246,7 @@
       <p style="text-align:center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 12px;">Sing any note — the display shows your pitch, note name, and how many cents sharp or flat you are.</p>
     </div>
 
-    <!-- ==================== MATCH PITCH MODE ==================== -->
+    <!-- MATCH PITCH MODE -->
     <div class="panel" id="panel-match">
       <div class="score-bar">
         <div class="score-item"><div class="score-num" style="color: var(--accent-green);" id="matchCorrect">0</div><div class="score-label">Correct</div></div>
@@ -258,10 +257,10 @@
       <div class="match-target">
         <div class="match-label">Sing this note:</div>
         <div class="match-note" id="matchTargetNote">C4</div>
-        <button class="match-play" id="matchPlayBtn" onclick="playMatchTarget()">▶ Hear the note</button>
+        <button class="match-play" onclick="playMatchTarget()">▶ Hear the note</button>
       </div>
 
-      <div class="pitch-hero" id="matchPitchHero" style="padding: 25px;">
+      <div class="pitch-hero" style="padding: 25px;">
         <div class="pitch-note" id="matchYourNote" style="font-size: 3rem;">—</div>
         <div class="pitch-cents" id="matchCents">&nbsp;</div>
         <div class="meter-wrap">
@@ -272,7 +271,6 @@
       </div>
 
       <div class="match-result" id="matchResult"></div>
-
       <button class="start-btn" id="matchStartBtn" onclick="toggleMatchMic()">🎤 Start Singing</button>
       <button class="next-note-btn" id="nextNoteBtn" onclick="nextMatchNote()" style="display:none;">Next Note →</button>
 
@@ -288,7 +286,7 @@
       </div>
     </div>
 
-    <!-- ==================== INTERVAL MODE ==================== -->
+    <!-- INTERVAL MODE -->
     <div class="panel" id="panel-interval">
       <div class="score-bar">
         <div class="score-item"><div class="score-num" style="color: var(--accent-green);" id="intCorrect">0</div><div class="score-label">Correct</div></div>
@@ -349,8 +347,7 @@
       var ctx = getCtx();
       var osc = ctx.createOscillator();
       var gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
+      osc.type = 'sine'; osc.frequency.value = freq;
       gain.gain.setValueAtTime(0, ctx.currentTime);
       gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.08);
       gain.gain.setValueAtTime(0.2, ctx.currentTime + duration - 0.3);
@@ -469,8 +466,7 @@
       document.getElementById('matchYourNote').textContent = '—';
       document.getElementById('matchCents').innerHTML = '&nbsp;';
       document.getElementById('matchNeedle').style.left = 'calc(50% - 5px)';
-      matchHeldFrames = 0;
-      matchLocked = false;
+      matchHeldFrames = 0; matchLocked = false;
     }
 
     function playMatchTarget() {
@@ -512,8 +508,9 @@
       var freq = detectPitch(buf, getCtx().sampleRate);
       if (freq < 0) { matchHeldFrames = 0; return; }
       var midi = freqToMidi(freq);
+      var nearestMidi = Math.round(midi);
       var centsFromTarget = Math.round((midi - matchTarget) * 100);
-      document.getElementById('matchYourNote').textContent = midiToName(Math.round(midi));
+      document.getElementById('matchYourNote').textContent = midiToName(nearestMidi);
       var centsEl = document.getElementById('matchCents');
       if (Math.abs(centsFromTarget) <= 10) {
         centsEl.textContent = '✓ On target!';
@@ -526,6 +523,7 @@
       document.getElementById('matchNeedle').style.left = 'calc(' + Math.max(2, Math.min(98, pct)) + '% - 5px)';
       if (Math.abs(centsFromTarget) <= 15) matchHeldFrames++;
       else matchHeldFrames = Math.max(0, matchHeldFrames - 2);
+
       if (matchHeldFrames >= 30) {
         matchLocked = true;
         matchScore.total++;
@@ -594,16 +592,16 @@
       document.getElementById('intResult').className = 'match-result';
       document.getElementById('intResult').style.display = 'none';
       document.getElementById('nextIntBtn').style.display = 'none';
+
       var opts = document.getElementById('intOpts');
       opts.innerHTML = '';
-      var options = [interval.name];
+      var options = new Set(); options.add(interval.name);
       var allNames = pool.map(function(i) { return i.name; });
-      while (options.length < Math.min(4, pool.length)) {
-        var pick = allNames[Math.floor(Math.random() * allNames.length)];
-        if (options.indexOf(pick) === -1) options.push(pick);
+      while (options.size < Math.min(4, pool.length)) {
+        options.add(allNames[Math.floor(Math.random() * allNames.length)]);
       }
-      options.sort(function() { return Math.random() - 0.5; });
-      options.forEach(function(name) {
+      var shuffled = Array.from(options).sort(function() { return Math.random() - 0.5; });
+      shuffled.forEach(function(name) {
         var btn = document.createElement('button');
         btn.className = 'quiz-opt';
         btn.textContent = name;

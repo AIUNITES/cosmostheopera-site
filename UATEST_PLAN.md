@@ -7,8 +7,8 @@
 | **Repository** | cosmostheopera-site |
 | **Live URL** | https://aiunites.github.io/cosmostheopera-site/ |
 | **Local Path** | C:/Users/Tom/Documents/GitHub/cosmostheopera-site |
-| **Last Updated** | January 24, 2026 |
-| **Version** | 1.0.0 |
+| **Last Updated** | February 22, 2026 |
+| **Version** | 1.1.0 |
 | **Type** | Content Site (Opera/Music) |
 | **Project Span** | 2002-2026 |
 
@@ -38,6 +38,13 @@
 | Hubble Preview | hubble-preview.html | Space imagery | ✅ Active |
 | Composer | composer.html | Composer information | ✅ Active |
 | Composition | composition.html | Composition details | ✅ Active |
+| Lyrics | lyrics.html | Opera lyrics/libretto display | ✅ Active |
+| Meditation | meditation.html | Meditation/trance experience | ✅ Active |
+| Pitch Trainer | pitch-trainer.html | Real-time pitch detection tool | ✅ Active |
+| Sight Reading | sight-reading.html | Staff notation training | ✅ Active |
+| Vocal Bodybuilding | vocal-bodybuilding.html | Voice muscle training guide | ✅ Active |
+| Vocal Gearshift | vocal-gearshift.html | Register transition training | ✅ Active |
+| VRN Practice | vrn-practice.html | Interactive VRN lessons | ✅ Active |
 
 ---
 
@@ -74,12 +81,24 @@
 | Hubble Images | ✅ | Space imagery |
 | Composer Bio | ✅ | About the composer |
 
+### 🎤 VRN & Vocal Training Tools
+| Feature | Status | Notes |
+|---------|--------|-------|
+| VRN Practice Lessons | ✅ | 8 progressive lessons (vrn-practice.html) |
+| Pitch Trainer | ✅ | Real-time pitch detection (pitch-trainer.html) |
+| Sight Reading | ✅ | Staff notation training (sight-reading.html) |
+| Vocal Bodybuilding | ✅ | Voice muscle training guide (vocal-bodybuilding.html) |
+| Vocal Gearshift | ✅ | Register transition training (vocal-gearshift.html) |
+| Meditation | ✅ | Trance/meditation experience (meditation.html) |
+| VRN Three-Method Framework | ✅ | CD (Character Digit), CS (Character Signs), SY (Symbols) |
+| VRN Version History | ✅ | Tracks VSV versions through SY05 in notation.html |
+
 ### 🎨 UI Features
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Dark Theme | ✅ | Space-themed |
 | Responsive Design | ✅ | Mobile-friendly |
-| AIUNITES Webring | ✅ | Navigation bar |
+| AIUNITES Webring | ✅ | Navigation bar with .aiunites-bar-active highlight |
 | Navigation Menu | ✅ | Multi-level |
 
 ### 👤 User System (NOT PRESENT)
@@ -159,6 +178,8 @@
 | Add audio synthesis to all pages | Medium | 🔲 TODO |
 | Complete Act 3 audio | Medium | 🔲 TODO |
 | Add search functionality | Low | 🔲 TODO |
+| Run webring highlight fix script | Medium | 🔲 TODO |
+| Update hero/section VRN version refs (c06→CD04/CS04/SY05) | Low | 🔲 TODO |
 
 ---
 
@@ -166,11 +187,12 @@
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | Feb 22, 2026 | UATEST: Added 7 missing pages (lyrics, meditation, pitch-trainer, sight-reading, vocal-bodybuilding, vocal-gearshift, vrn-practice). Added VRN training tools section. Updated VRN version history row (s05→SY05) in notation.html. Webring highlight fix pending. |
 | 1.0.0 | Jan 2026 | Multi-act implementation |
 | 0.9.0 | 2024 | Sheet music system |
 | 0.1.0 | 2002 | Project inception |
 
 ---
 
-*Last tested: January 24, 2026*
+*Last tested: February 22, 2026*
 *Note: This is a content site - no user authentication required*

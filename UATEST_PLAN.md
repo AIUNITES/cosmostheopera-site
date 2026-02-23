@@ -178,7 +178,7 @@
 | Add audio synthesis to all pages | Medium | 🔲 TODO |
 | Complete Act 3 audio | Medium | 🔲 TODO |
 | Add search functionality | Low | 🔲 TODO |
-| Run webring highlight fix script | Medium | 🔲 TODO |
+| Run webring highlight fix script | Medium | ✅ Complete Feb 22 |
 | Update hero/section VRN version refs (c06→CD04/CS04/SY05) | Low | 🔲 TODO |
 
 ---
@@ -187,7 +187,8 @@
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.1.0 | Feb 22, 2026 | UATEST: Added 7 missing pages (lyrics, meditation, pitch-trainer, sight-reading, vocal-bodybuilding, vocal-gearshift, vrn-practice). Added VRN training tools section. Updated VRN version history row (s05→SY05) in notation.html. Webring highlight fix pending. |
+| 1.1.0 | Feb 22, 2026 | UATEST: Added 7 missing pages (lyrics, meditation, pitch-trainer, sight-reading, vocal-bodybuilding, vocal-gearshift, vrn-practice). Added VRN training tools section. Updated VRN version history row (s05→SY05) in notation.html. |
+| 1.1.1 | Feb 22, 2026 | Webring highlight fix: standardized to .aiunites-bar-active class with white (#fff) + underline styling across all pages. |
 | 1.0.0 | Jan 2026 | Multi-act implementation |
 | 0.9.0 | 2024 | Sheet music system |
 | 0.1.0 | 2002 | Project inception |

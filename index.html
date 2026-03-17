@@ -603,18 +603,18 @@
       box-shadow: 0 6px 30px rgba(255, 51, 102, 0.5);
     }
     
+    /* Hamburger */
+    .site-nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;color:#fff;z-index:200;flex-shrink:0}
+    .site-nav-hamburger span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:all .25s}
+    .site-nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .site-nav-hamburger.open span:nth-child(2){opacity:0}
+    .site-nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     /* Responsive */
     @media (max-width: 768px) {
-      .site-nav {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      .site-nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-      }
+      .site-nav { flex-direction: row; }
+      .site-nav-hamburger{display:flex}
+      .site-nav-links{display:none!important;position:absolute;top:100%;left:0;right:0;background:rgba(18,18,26,0.98);backdrop-filter:blur(10px);flex-direction:column!important;padding:1rem 1.5rem;gap:1rem!important;border-bottom:1px solid rgba(157,78,221,0.15);z-index:99}
+      .site-nav-links.open{display:flex!important}
       
       .hero {
         min-height: auto;
@@ -650,17 +650,19 @@
   <!-- Site Navigation -->
   <nav class="site-nav">
     <a href="index.html" class="site-nav-logo">🌌 COSMOS</a>
-    <div class="site-nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="notation.html">Vocal Notation</a>
-      <a href="composition.html">AI Composition</a>
-      <a href="gallery.html">Hubble Gallery</a>
-      <a href="sheet-music.html">Sheet Music</a>
-      <a href="words.html">Words</a>
-      <a href="meditation.html">Meditation</a>
-      <a href="composer.html">Composer</a>
+    <div class="site-nav-links" id="cosmos-nav">
+      <a href="index.html" class="active" onclick="cosmosClose()">Home</a>
+      <a href="notation.html" onclick="cosmosClose()">Vocal Notation</a>
+      <a href="composition.html" onclick="cosmosClose()">AI Composition</a>
+      <a href="gallery.html" onclick="cosmosClose()">Hubble Gallery</a>
+      <a href="sheet-music.html" onclick="cosmosClose()">Sheet Music</a>
+      <a href="words.html" onclick="cosmosClose()">Words</a>
+      <a href="meditation.html" onclick="cosmosClose()">Meditation</a>
+      <a href="composer.html" onclick="cosmosClose()">Composer</a>
     </div>
+    <button class="site-nav-hamburger" id="cosmos-hbg" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('cosmos-nav').classList.toggle('open')"><span></span><span></span><span></span></button>
   </nav>
+  <script>function cosmosClose(){document.getElementById('cosmos-nav').classList.remove('open');document.getElementById('cosmos-hbg').classList.remove('open');}</script>
 
   <!-- Hero Section -->
   <section class="hero">

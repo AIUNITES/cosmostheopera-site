@@ -399,10 +399,13 @@
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 12px; padding: 12px 20px; }
       .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
-      .hero { padding: 130px 20px 40px; }
+      .hero { padding: 240px 20px 40px; }
       .meditation-block { padding: 25px 20px; }
       .acronym-block { padding: 30px 20px; }
       .breath-circle { width: 90px; height: 90px; }
+    }
+    @media (max-width: 400px) {
+      .hero { padding: 270px 20px 40px; }
     }
   </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP15KRLV6P"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VP15KRLV6P');</script><link rel="canonical" href="https://cosmostheopera.com/meditation.html"><meta property="og:image" content="https://aiunites.github.io/cosmostheopera-site/images/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicEvent","name":"COSMOS the OPERA","description":"COSMOS the OPERA is an original opera project featuring personified cosmic beings. Experience a unique blend of classical music, science, and storytelling.","url":"https://cosmostheopera.com/"}</script></head>
@@ -606,6 +609,24 @@
     </div>
 
   </main>
+
+  <!-- Dynamic hero padding to clear fixed nav on any mobile width -->
+  <script>
+    function adjustHeroPadding() {
+      var bar = document.querySelector('.aiunites-bar');
+      var nav = document.querySelector('.nav');
+      var hero = document.querySelector('.hero');
+      if (!bar || !nav || !hero) return;
+      var totalNav = bar.getBoundingClientRect().height + nav.getBoundingClientRect().height;
+      if (window.innerWidth <= 768) {
+        hero.style.paddingTop = (totalNav + 40) + 'px';
+      } else {
+        hero.style.paddingTop = '';
+      }
+    }
+    window.addEventListener('load', adjustHeroPadding);
+    window.addEventListener('resize', adjustHeroPadding);
+  </script>
 
   <!-- FOOTER -->
   <footer class="footer">

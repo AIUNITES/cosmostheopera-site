@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP15KRLV6P"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VP15KRLV6P');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4573596965267859" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — COSMOS the OPERA</title>
+  <meta name="description" content="Search across all COSMOS the OPERA pages and score files.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://cosmostheopera.com/search.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg-dark:#0a0a0f;--bg-card:#12121a;--bg-result:#0f0f1a;
+      --text-primary:#ffffff;--text-secondary:#a0a0b0;
+      --accent-purple:#9d4edd;--accent-cyan:#00d4ff;
+      --accent-gold:#ffd700;--accent-pink:#ff6b9d;
+      --border:rgba(255,255,255,0.1);
+    }
+    html,body{min-height:100vh;background:var(--bg-dark);color:var(--text-primary);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+
+    /* Webring */
+    .aiunites-bar{position:fixed;top:0;left:0;right:0;z-index:10000;background:linear-gradient(90deg,#0a0a0f,#1a1a2e);border-bottom:1px solid rgba(99,102,241,.3);height:33px;font-size:12px;line-height:33px}
+    .aiunites-bar-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none}
+    .aiunites-bar-content::-webkit-scrollbar{display:none}
+    .aiunites-bar a{color:rgba(255,255,255,.7);text-decoration:none;white-space:nowrap;transition:color .2s}
+    .aiunites-bar a:hover{color:#fff}
+    .aiunites-bar-brand{color:#6366f1!important;font-weight:600}
+    body{padding-top:36px}
+
+    /* Nav */
+    .site-nav{background:var(--bg-card);padding:15px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:36px;z-index:100}
+    .site-nav-logo{font-size:1.5rem;font-weight:800;color:var(--accent-gold);text-decoration:none}
+    .site-nav-links{display:flex;gap:25px}
+    .site-nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.95rem;transition:color .3s}
+    .site-nav-links a:hover,.site-nav-links a.active{color:var(--accent-cyan)}
+    .site-nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;color:#fff;z-index:200;flex-shrink:0;margin-left:auto}
+    .site-nav-hamburger span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:all .25s}
+    .site-nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .site-nav-hamburger.open span:nth-child(2){opacity:0}
+    .site-nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* Layout */
+    .page-wrap{max-width:900px;margin:0 auto;padding:60px 24px 80px}
+    .page-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#fff,var(--accent-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-sub{color:var(--text-secondary);margin-bottom:40px;font-size:1rem}
+
+    /* Search box */
+    .search-wrap{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .search-input{flex:1;min-width:200px;padding:14px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;color:var(--text-primary);font-size:1.1rem;font-family:inherit;outline:none;transition:border-color .2s}
+    .search-input:focus{border-color:var(--accent-purple)}
+    .search-input::placeholder{color:var(--text-secondary)}
+    .search-btn{padding:14px 28px;background:linear-gradient(135deg,var(--accent-purple),var(--accent-cyan));border:none;border-radius:12px;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
+    .search-btn:hover{opacity:.9;transform:translateY(-1px)}
+    .search-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+    /* Source toggles */
+    .source-wrap{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;align-items:center}
+    .source-label{font-size:.8rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+    .source-toggle{display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:.82rem;color:var(--text-secondary);background:none;font-family:inherit;transition:all .2s;user-select:none}
+    .source-toggle.active{border-color:var(--accent-purple);color:var(--accent-cyan);background:rgba(157,78,221,.12)}
+    .source-toggle input{display:none}
+
+    /* Status */
+    .search-status{font-size:.85rem;color:var(--text-secondary);margin-bottom:20px;min-height:22px}
+    .search-status .count{color:var(--accent-gold);font-weight:700}
+    .search-status .spin{display:inline-block;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Results */
+    .results-section{margin-bottom:32px}
+    .results-section-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .results-section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+    .result-card{background:var(--bg-result);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:10px;transition:border-color .2s}
+    .result-card:hover{border-color:rgba(157,78,221,.4)}
+    .result-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+    .result-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+    .result-title{font-size:1rem;font-weight:600;color:var(--text-primary);text-decoration:none;transition:color .2s}
+    .result-title:hover{color:var(--accent-cyan)}
+    .result-file{font-size:.75rem;color:var(--text-secondary);font-family:monospace;margin-top:2px}
+    .result-source-badge{margin-left:auto;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0}
+    .badge-local{background:rgba(0,212,255,.12);color:var(--accent-cyan);border:1px solid rgba(0,212,255,.25)}
+    .badge-github{background:rgba(157,78,221,.12);color:#c4b5fd;border:1px solid rgba(157,78,221,.25)}
+    .result-snippets{display:flex;flex-direction:column;gap:5px}
+    .result-snippet{font-size:.82rem;color:var(--text-secondary);line-height:1.6;padding:5px 10px;border-left:2px solid rgba(157,78,221,.3);background:rgba(255,255,255,.02);border-radius:0 6px 6px 0}
+    .result-snippet mark{background:rgba(255,215,0,.25);color:var(--accent-gold);border-radius:2px;padding:0 2px}
+
+    /* No results */
+    .no-results{text-align:center;padding:60px 20px;color:var(--text-secondary)}
+    .no-results h3{font-size:1.4rem;color:var(--text-primary);margin-bottom:10px}
+
+    /* Tips */
+    .search-tips{background:rgba(157,78,221,.07);border:1px solid rgba(157,78,221,.2);border-radius:12px;padding:18px 20px;margin-top:32px;font-size:.83rem;color:var(--text-secondary);line-height:1.7}
+    .search-tips strong{color:var(--accent-purple)}
+
+    /* Footer */
+    .footer{background:var(--bg-card);padding:40px 20px 24px;text-align:center;border-top:1px solid var(--border);margin-top:60px}
+    .footer a{color:var(--accent-purple);text-decoration:none}
+    .footer p{color:var(--text-secondary);font-size:.85rem}
+
+    /* Mobile */
+    @media(max-width:768px){
+      .site-nav{flex-direction:row}
+      .site-nav-hamburger{display:flex}
+      .site-nav-links{display:none!important;position:fixed;left:0!important;right:0!important;background:rgba(18,18,26,.98);backdrop-filter:blur(10px);flex-direction:column!important;padding:1rem 1.5rem;gap:1rem!important;border-bottom:1px solid rgba(157,78,221,.15);z-index:10001}
+      .site-nav-links.open{display:flex!important}
+      .search-wrap{flex-direction:column}
+      .search-btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Webring -->
+<style>.wb-arrow{display:none;position:fixed;top:0;width:36px;height:33px;align-items:center;justify-content:center;cursor:pointer;z-index:10001;border:none;padding:0;font-size:16px;color:rgba(255,255,255,.8);transition:color .2s,opacity .2s}.wb-arrow:hover{color:#fff}.wb-left{left:0;background:linear-gradient(90deg,#0d0d1a 55%,transparent)}.wb-right{right:0;background:linear-gradient(270deg,#0d0d1a 55%,transparent)}@media (hover:hover) and (pointer:fine){.wb-arrow{display:flex}}</style>
+<button class="wb-arrow wb-left" id="wb-left" aria-label="Scroll webring left">&#8249;</button>
+<div class="aiunites-bar"><div class="aiunites-bar-content" id="wb-content">
+  <a href="https://aiunites.github.io/aiunites-site/" class="aiunites-bar-brand">◆ AIUNITES</a><span style="color:rgba(255,255,255,.2)">|</span>
+  <a href="https://aiunites.github.io/aizines-app/">AIZines</a>
+  <a href="https://aiunites.github.io/aibyjob-demo/">AIByJob</a>
+  <a href="https://aiunites.github.io/redomy-demo/">Redomy</a>
+  <a href="https://aiunites.github.io/videobate-site/">VideoBate</a>
+  <a href="https://aiunites.github.io/voicestry-site/">VoiceStry</a>
+  <a href="https://aiunites.github.io/furnishthings-site/">FurnishThings</a>
+  <a href="https://aiunites.github.io/bizstry-site/">BizStry</a>
+  <a href="https://aiunites.github.io/aiyhwh-site/">AI YHWH</a>
+  <a href="https://aiunites.github.io/cloudsion-site/">Cloudsion</a>
+  <a href="https://aiunites.github.io/gameatica-site/">Gameatica</a>
+  <a href="https://aiunites.github.io/uptownit-site/">UptownIT</a>
+  <a href="https://aiunites.github.io/inthisworld-site/">InThisWorld</a>
+  <a href="https://aiunites.github.io/erpise-site/">ERPise</a>
+  <a href="https://aiunites.github.io/erpize-site/">ERPize</a>
+  <a href="https://aiunites.github.io/aitsql-site/">AITSQL</a>
+  <a href="https://aiunites.github.io/cosmostheopera-site/" class="current">🌌 COSMOS</a>
+</div></div>
+<button class="wb-arrow wb-right" id="wb-right" aria-label="Scroll webring right">&#8250;</button>
+<script>(function(){var c=document.getElementById('wb-content'),l=document.getElementById('wb-left'),r=document.getElementById('wb-right');if(!c||!l||!r)return;function upd(){var atL=c.scrollLeft<8,atR=c.scrollLeft>=c.scrollWidth-c.clientWidth-8;l.style.opacity=atL?'0':'1';l.style.pointerEvents=atL?'none':'auto';r.style.opacity=atR?'0':'1';r.style.pointerEvents=atR?'none':'auto';}l.onclick=function(){c.scrollBy({left:-220,behavior:'smooth'});};r.onclick=function(){c.scrollBy({left:220,behavior:'smooth'});};c.addEventListener('scroll',upd,{passive:true});upd();})()</script>
+
+<!-- Nav -->
+<nav class="site-nav">
+  <a href="index.html" class="site-nav-logo">🌌 COSMOS</a>
+  <div class="site-nav-links" id="cosmos-nav">
+    <a href="index.html" onclick="cosmosClose()">Home</a>
+    <a href="notation.html" onclick="cosmosClose()">Vocal Notation</a>
+    <a href="composition.html" onclick="cosmosClose()">AI Composition</a>
+    <a href="gallery.html" onclick="cosmosClose()">Hubble Gallery</a>
+    <a href="sheet-music.html" onclick="cosmosClose()">Sheet Music</a>
+    <a href="words.html" onclick="cosmosClose()">Words</a>
+    <a href="meditation.html" onclick="cosmosClose()">Meditation</a>
+    <a href="composer.html" onclick="cosmosClose()">Composer</a>
+    <a href="search.html" class="active" onclick="cosmosClose()">🔍 Search</a>
+  </div>
+  <button class="site-nav-hamburger" id="cosmos-hbg" aria-label="Menu" onclick="var m=document.getElementById('cosmos-nav');m.style.top=this.closest('nav').getBoundingClientRect().bottom+'px';this.classList.toggle('open');m.classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+<script>function cosmosClose(){document.getElementById('cosmos-nav').classList.remove('open');document.getElementById('cosmos-hbg').classList.remove('open');}</script>
+
+<div class="page-wrap">
+  <h1 class="page-title">🔍 Search</h1>
+  <p class="page-sub">Search across all COSMOS pages and score files — or check GitHub for any version of a word.</p>
+
+  <div class="search-wrap">
+    <input class="search-input" id="search-input" type="text" placeholder="e.g. atom, galaxy, resonance…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="search-btn" id="search-btn" onclick="doSearch()">Search</button>
+  </div>
+
+  <div class="source-wrap">
+    <span class="source-label">Search in:</span>
+    <label class="source-toggle active" id="tog-pages">
+      <input type="checkbox" id="chk-pages" checked onchange="updateToggle('tog-pages',this)">
+      📄 Pages (live content)
+    </label>
+    <label class="source-toggle active" id="tog-md">
+      <input type="checkbox" id="chk-md" checked onchange="updateToggle('tog-md',this)">
+      🎼 Score files (.md)
+    </label>
+    <label class="source-toggle active" id="tog-github">
+      <input type="checkbox" id="chk-github" checked onchange="updateToggle('tog-github',this)">
+      🐙 GitHub (all versions)
+    </label>
+  </div>
+
+  <div class="search-status" id="search-status">Enter a word above and click Search.</div>
+  <div id="results-wrap"></div>
+
+  <div class="search-tips">
+    <strong>Tips:</strong> Search is case-insensitive. <strong>Pages</strong> fetches each page live and searches the visible text. <strong>Score files</strong> searches the raw markdown scores. <strong>GitHub</strong> uses the GitHub code search API to find the term anywhere in the repo's history — useful for finding older versions or deleted content. Try: <em>atom</em> · <em>resonance</em> · <em>[C]</em> · <em>twin</em> · <em>galaxy</em>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>🌌 COSMOS the OPERA &mdash; <a href="index.html">Home</a> · <a href="sheet-music.html">Sheet Music</a> · <a href="notation.html">Notation</a></p>
+  <p style="margin-top:8px;font-size:.75rem;color:rgba(255,255,255,.25)">© 2002–2026 Tom Sans / AIUNITES</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// PAGE INDEX — all searchable pages on the site
+// ═══════════════════════════════════════════════════════
+var PAGES = [
+  { file:'index.html',           title:'Home — COSMOS the OPERA',                emoji:'🏠' },
+  { file:'lyrics.html',          title:'Lyrics',                                  emoji:'📜' },
+  { file:'words.html',           title:'Words / Libretto',                        emoji:'✍️' },
+  { file:'composition.html',     title:'AI Composition Guide',                    emoji:'🎼' },
+  { file:'notation.html',        title:'Vocal Resonance Notation',                emoji:'🎵' },
+  { file:'sheet-music.html',     title:'Sheet Music — Overview',                  emoji:'🎶' },
+  { file:'sheet-music-act1.html',title:'Sheet Music — Act I',                     emoji:'🎶' },
+  { file:'sheet-music-act1-p1.html',title:'Sheet Music — Act I Part 1',           emoji:'🎶' },
+  { file:'sheet-music-act1-p2.html',title:'Sheet Music — Act I Part 2',           emoji:'🎶' },
+  { file:'sheet-music-act2.html',title:'Sheet Music — Act II',                    emoji:'🎶' },
+  { file:'sheet-music-act3.html',title:'Sheet Music — Act III',                   emoji:'🎶' },
+  { file:'sheet-music-act3-p1.html',title:'Sheet Music — Act III Part 1',         emoji:'🎶' },
+  { file:'sheet-music-act3-p2.html',title:'Sheet Music — Act III Part 2',         emoji:'🎶' },
+  { file:'ssaattbb-index.html',  title:'SSAATTBB Score — Index',                  emoji:'🎭' },
+  { file:'ssaattbb-act1.html',   title:'SSAATTBB — Act I',                        emoji:'🎭' },
+  { file:'ssaattbb-act2.html',   title:'SSAATTBB — Act II',                       emoji:'🎭' },
+  { file:'ssaattbb-act3.html',   title:'SSAATTBB — Act III',                      emoji:'🎭' },
+  { file:'meditation.html',      title:'Meditation',                               emoji:'🧘' },
+  { file:'gallery.html',         title:'Hubble Gallery',                           emoji:'🔭' },
+  { file:'composer.html',        title:'Composer',                                 emoji:'👤' },
+  { file:'sight-reading.html',   title:'Sight Reading',                            emoji:'👁️' },
+  { file:'pitch-trainer.html',   title:'Pitch Trainer',                            emoji:'🎙️' },
+  { file:'vrn-practice.html',    title:'VRN Practice',                             emoji:'🎤' },
+  { file:'vocal-bodybuilding.html',title:'Vocal Bodybuilding',                     emoji:'💪' },
+  { file:'vocal-gearshift.html', title:'Vocal Gearshift',                          emoji:'⚙️' },
+  { file:'hubble-preview.html',  title:'Hubble Preview',                           emoji:'🔭' },
+];
+
+var MD_FILES = [
+  { file:'COSMOS-COMPLETE-SCORE.md',             title:'Complete Score (MD)',          emoji:'📖' },
+  { file:'COSMOS-VOCAL-SCORE-COMPLETE.md',       title:'Vocal Score Complete (MD)',    emoji:'📖' },
+  { file:'COSMOS-SSAATTBB-ACT1.md',             title:'SSAATTBB Act I (MD)',          emoji:'📖' },
+  { file:'COSMOS-SSAATTBB-ACT2.md',             title:'SSAATTBB Act II (MD)',         emoji:'📖' },
+  { file:'COSMOS-SSAATTBB-ACT3.md',             title:'SSAATTBB Act III (MD)',        emoji:'📖' },
+  { file:'COSMOS-SSAATTBB-ORCHESTRAL-SCORE.md', title:'Orchestral Score (MD)',        emoji:'📖' },
+];
+
+var GITHUB_REPO = 'aiunites/cosmostheopera-site';
+var BASE_URL = (function() {
+  var loc = location.href;
+  if (loc.indexOf('localhost') !== -1 || loc.indexOf('127.0.0.1') !== -1) {
+    return '';  // relative — will resolve from current dir
+  }
+  return 'https://aiunites.github.io/cosmostheopera-site';
+})();
+
+function updateToggle(id, cb) {
+  document.getElementById(id).classList.toggle('active', cb.checked);
+}
+
+// ═══════════════════════════════════════════════════════
+// Extract visible text from an HTML string
+// ═══════════════════════════════════════════════════════
+function htmlToText(html) {
+  // Remove scripts, styles, and HTML tags
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,' ')
+    .replace(/\s+/g, ' ').trim();
+}
+
+// ═══════════════════════════════════════════════════════
+// Find all occurrences with context snippets
+// ═══════════════════════════════════════════════════════
+function findSnippets(text, term, maxSnippets) {
+  maxSnippets = maxSnippets || 4;
+  var lower = text.toLowerCase();
+  var lterm = term.toLowerCase();
+  var snippets = [], idx = 0, seen = [];
+  while ((idx = lower.indexOf(lterm, idx)) !== -1) {
+    // Deduplicate nearby hits
+    var tooClose = seen.some(function(s){ return Math.abs(s - idx) < 60; });
+    if (!tooClose) {
+      var start = Math.max(0, idx - 70);
+      var end = Math.min(text.length, idx + lterm.length + 70);
+      // Expand to word boundaries
+      while (start > 0 && text[start] !== ' ') start--;
+      while (end < text.length && text[end] !== ' ') end++;
+      var snippet = (start > 0 ? '…' : '') + text.slice(start, end).trim() + (end < text.length ? '…' : '');
+      // Highlight the term
+      var re = new RegExp('(' + lterm.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+      snippet = snippet.replace(re, '<mark>$1</mark>');
+      snippets.push(snippet);
+      seen.push(idx);
+    }
+    idx += lterm.length;
+    if (snippets.length >= maxSnippets) break;
+  }
+  return snippets;
+}
+
+// ═══════════════════════════════════════════════════════
+// Search a single file
+// ═══════════════════════════════════════════════════════
+async function searchFile(fileInfo, term, isMd) {
+  var url = BASE_URL + '/' + fileInfo.file + (BASE_URL ? '' : '');
+  try {
+    var resp = await fetch(url + '?_=' + Date.now());
+    if (!resp.ok) return null;
+    var raw = await resp.text();
+    var text = isMd ? raw : htmlToText(raw);
+    if (text.toLowerCase().indexOf(term.toLowerCase()) === -1) return null;
+    return {
+      title: fileInfo.title,
+      file: fileInfo.file,
+      emoji: fileInfo.emoji,
+      url: fileInfo.file,
+      snippets: findSnippets(text, term, 3),
+      source: 'local'
+    };
+  } catch(e) { return null; }
+}
+
+// ═══════════════════════════════════════════════════════
+// GitHub code search
+// ═══════════════════════════════════════════════════════
+async function searchGitHub(term) {
+  var query = encodeURIComponent(term + ' repo:' + GITHUB_REPO);
+  var url = 'https://api.github.com/search/code?q=' + query + '&per_page=30';
+  try {
+    var resp = await fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+    if (!resp.ok) {
+      var remaining = resp.headers.get('X-RateLimit-Remaining');
+      if (remaining === '0') return { error: 'GitHub API rate limit reached. Try again in 60 seconds.' };
+      return { error: 'GitHub search returned ' + resp.status };
+    }
+    var data = await resp.json();
+    return { items: data.items || [], total: data.total_count || 0 };
+  } catch(e) {
+    return { error: 'Could not reach GitHub API: ' + e.message };
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Render results
+// ═══════════════════════════════════════════════════════
+function renderResultCard(r) {
+  var snippetsHtml = r.snippets && r.snippets.length
+    ? '<div class="result-snippets">' + r.snippets.map(function(s){ return '<div class="result-snippet">' + s + '</div>'; }).join('') + '</div>'
+    : '';
+  var badge = r.source === 'local'
+    ? '<span class="result-source-badge badge-local">Local</span>'
+    : '<span class="result-source-badge badge-github">GitHub</span>';
+  return '<div class="result-card">' +
+    '<div class="result-header">' +
+      '<span class="result-icon">' + (r.emoji || '📄') + '</span>' +
+      '<div style="flex:1;min-width:0">' +
+        '<a class="result-title" href="' + r.url + '" target="' + (r.source==='github'?'_blank':'_self') + '">' + r.title + '</a>' +
+        '<div class="result-file">' + r.file + '</div>' +
+      '</div>' +
+      badge +
+    '</div>' +
+    snippetsHtml +
+  '</div>';
+}
+
+function setStatus(msg) {
+  document.getElementById('search-status').innerHTML = msg;
+}
+
+// ═══════════════════════════════════════════════════════
+// Main search
+// ═══════════════════════════════════════════════════════
+async function doSearch() {
+  var term = document.getElementById('search-input').value.trim();
+  if (!term) { setStatus('Please enter a search term.'); return; }
+
+  var doPages  = document.getElementById('chk-pages').checked;
+  var doMd     = document.getElementById('chk-md').checked;
+  var doGithub = document.getElementById('chk-github').checked;
+
+  var btn = document.getElementById('search-btn');
+  btn.disabled = true;
+  btn.textContent = 'Searching…';
+  document.getElementById('results-wrap').innerHTML = '';
+
+  setStatus('<span class="spin">⟳</span> Searching for <strong>"' + term.replace(/</g,'&lt;') + '"</strong>…');
+
+  var localResults = [], ghResults = [], ghError = null;
+
+  // Search pages
+  if (doPages) {
+    setStatus('<span class="spin">⟳</span> Scanning ' + PAGES.length + ' pages…');
+    var pagePromises = PAGES.map(function(p){ return searchFile(p, term, false); });
+    var pageFound = await Promise.all(pagePromises);
+    localResults = localResults.concat(pageFound.filter(Boolean));
+  }
+
+  // Search MD files
+  if (doMd) {
+    setStatus('<span class="spin">⟳</span> Scanning score files…');
+    var mdPromises = MD_FILES.map(function(f){ return searchFile(f, term, true); });
+    var mdFound = await Promise.all(mdPromises);
+    localResults = localResults.concat(mdFound.filter(Boolean));
+  }
+
+  // GitHub search
+  if (doGithub) {
+    setStatus('<span class="spin">⟳</span> Searching GitHub…');
+    var ghData = await searchGitHub(term);
+    if (ghData.error) {
+      ghError = ghData.error;
+    } else {
+      ghResults = (ghData.items || []).map(function(item) {
+        return {
+          title: item.name,
+          file: item.path,
+          emoji: item.name.endsWith('.md') ? '📖' : item.name.endsWith('.html') ? '📄' : '📁',
+          url: 'https://github.com/' + GITHUB_REPO + '/blob/' + (item.sha || 'main') + '/' + item.path,
+          snippets: [],
+          source: 'github',
+          sha: item.sha
+        };
+      });
+    }
+  }
+
+  // Render
+  var wrap = document.getElementById('results-wrap');
+  var total = localResults.length + ghResults.length;
+
+  if (total === 0 && !ghError) {
+    wrap.innerHTML = '<div class="no-results"><h3>No results for "' + term.replace(/</g,'&lt;') + '"</h3><p>Try a different word, or check GitHub for historical versions.</p></div>';
+    setStatus('No results found.');
+  } else {
+    var html = '';
+
+    if (localResults.length) {
+      html += '<div class="results-section">';
+      html += '<div class="results-section-title">📄 Found in ' + localResults.length + ' local page' + (localResults.length!==1?'s':'') + '</div>';
+      html += localResults.map(renderResultCard).join('');
+      html += '</div>';
+    }
+
+    if (ghResults.length) {
+      html += '<div class="results-section">';
+      html += '<div class="results-section-title">🐙 Found in ' + ghResults.length + ' file' + (ghResults.length!==1?'s':'') + ' on GitHub';
+      if (ghResults.length >= 30) html += ' (showing top 30)';
+      html += '</div>';
+      html += ghResults.map(renderResultCard).join('');
+      html += '</div>';
+    }
+
+    if (ghError) {
+      html += '<div class="results-section">';
+      html += '<div class="results-section-title">🐙 GitHub search</div>';
+      html += '<div class="result-card" style="border-color:rgba(255,107,157,.3);color:var(--accent-pink)">⚠️ ' + ghError + '</div>';
+      html += '</div>';
+    }
+
+    wrap.innerHTML = html;
+    setStatus('Found <span class="count">' + total + ' result' + (total!==1?'s':'') + '</span> for <strong>"' + term.replace(/</g,'&lt;') + '"</strong>' + (ghError ? ' (GitHub unavailable)' : '') + '.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Search';
+}
+
+// Enter key triggers search
+document.getElementById('search-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+
+// Pre-fill from URL param ?q=
+(function() {
+  var params = new URLSearchParams(location.search);
+  var q = params.get('q');
+  if (q) {
+    document.getElementById('search-input').value = q;
+    doSearch();
+  } else {
+    // Default hint
+    document.getElementById('search-input').value = 'atom';
+  }
+})();
+</script>
+</body>
+</html>

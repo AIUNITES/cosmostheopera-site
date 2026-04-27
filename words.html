@@ -23,6 +23,7 @@
       --accent-cyan: #00d4ff;
       --accent-pink: #ff6b9d;
       --accent-purple: #9d4edd;
+      --accent-orange: #ff9f43;
     }
     
     html {
@@ -272,6 +273,20 @@
       font-style: italic;
     }
     
+    .ai-words {
+      color: var(--accent-orange);
+      opacity: 0.9;
+    }
+    .ai-words-note {
+      display: inline-block;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
     .poem-body .crescendo {
       font-size: 1.3em;
       font-weight: 400;
@@ -808,6 +823,10 @@
         </div>
         <div class="stanza">
           <span class="line crescendo">the same</span>
+        </div>
+        <div class="stanza" style="margin-top:2em">
+          <span class="ai-words-note">&#9670; words by Claude</span><br>
+          <span class="line ai-words">atoms and energy are all that we are</span>
         </div>
       </div>
     </article>
